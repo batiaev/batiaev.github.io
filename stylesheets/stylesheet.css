@@ -231,22 +231,11 @@ hr {
   background: url('../images/bg_hr.png') repeat-x center;
 }
 
-table {
-  border: 1px solid #373737;
-  margin-bottom: 20px;
-  text-align: left;
- }
-
 th {
   font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 10px;
   background: #373737;
   color: #fff;
- }
-
-td {
-  padding: 10px;
-  border: 1px solid #373737;
  }
 
 form {
@@ -269,6 +258,18 @@ Full-Width Styles
   margin: 0 auto;
 }
 
+img#my_photo {
+border-radius: 80px;
+heigth: 128px;
+width: 128px;
+margin-bottom: -100px;
+}
+
+img#social_button {
+border-radius: 80px;
+heigth: 32px;
+width: 32px;
+}
 
 a#forkme_banner {
   left: 0;
