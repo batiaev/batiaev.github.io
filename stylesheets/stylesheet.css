@@ -203,6 +203,7 @@ ul, ol, dl {
 ul {
   list-style: inside;
   padding-left: 20px;
+  list-style-type: none;
 }
 
 ol {
@@ -301,20 +302,22 @@ a#forkme_banner:hover {
   padding: 20px 10px 5px 10px;
 }
 
-#project_title {
+#page_title {
   margin: 0;
   color: #fff;
   font-size: 42px;
   font-weight: 700;
   text-shadow: #111 0px 0px 10px;
+  margin-bottom: -20px;
 }
 
-#project_tagline {
+#page_subtitle {
   color: #fff;
   font-size: 24px;
   font-weight: 300;
   background: none;
   text-shadow: #111 0px 0px 10px;
+  margin-bottom: -15px;
 }
 
 #downloads {
@@ -390,7 +393,7 @@ Small Device Styles
     max-width: 480px;
   }
 
-  #project_title {
+  #page_title {
   font-size: 32px;
   }
 
@@ -426,6 +429,23 @@ Small Device Styles
 
 }
 
+#title_font {
+font-family: Helvetica,Arial,sans-serif;
+font-style: italic;
+}
+
+.keySkills {
+  list-style-type: none;
+  column-count:3;
+  -moz-column-count: 3;
+  -webkit-column-count:3;"
+}
+
+img.previewPicture {
+  width: 460px;
+  heigth: 425px;
+}
+
 .korpus > div, .korpus > input {
 display: none; 
 padding: 5px;
@@ -445,6 +465,7 @@ background: #fff;
 
 .korpus input[type="radio"]:checked + label {
 border-bottom: 2px solid #aaf;
+background: #eef;
 }
 
 .korpus > input:nth-of-type(1):checked ~ div:nth-of-type(1),
