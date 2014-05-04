@@ -485,7 +485,7 @@ display: block;
 .post pre {
   border: 1px solid #ddd;
   background-color: #eef;
-  padding: 0 .4em;
+  padding: 0.4em;
 }
 
 .post ul, .post ol {
@@ -495,7 +495,7 @@ display: block;
 .post code {
   border: 1px solid #ddd;
   background-color: #eef;
-  padding: 0 .2em;
+  padding: 0.2em;
 }
 
 .post pre code {
