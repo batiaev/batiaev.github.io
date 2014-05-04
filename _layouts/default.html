@@ -40,11 +40,7 @@
 							<a href="http://plus.google.com/109685251794521131731"><img src="/images/googleplus.png" alt="Google" id="social_button"></img></a>
 							<a href="mailto:a.batyaev@gmail.com"><img src="/images/mail.png" alt="Email" id="social_button"></img></a>
 							<a href="skype://a_batyaev"><img src="/images/skype.png" alt="Skype" id="social_button"></img></a>
-							{% if page.title contain "Batyaev" %}
 							<a href="/ru/"><img src="/images/russia.png" alt="Russian Language" id="social_button"></img></a>
-							{% endif %}{% if page.title contain "Батяев" %}
-							<a href="/"><img src="/images/usa.png" alt="English Language" id="social_button"></img></a>
-							{% endif %}
 						</li>
 					</ul>
 				</td>
@@ -61,11 +57,11 @@
 
 		<div class="korpus">
 		  <input type="radio" name="menuList" checked="checked" id="MainData"/>
-		  <label for="MainData">{% if page.title contain "Batyaev" %} Personal Profile {% endif %}{% if page.title contain "Батяев" %} Резюме {% endif %}</label>
+		  <label for="MainData">Personal Profile</label>
 		  <input type="radio" name="menuList" id="Projects"/>
-		  <label for="Projects">{% if page.title contain "Batyaev" %} Projects {% endif %}{% if page.title contain "Батяев" %} Проекты {% endif %}</label>
+		  <label for="Projects">Projects</label>
 		  <input type="radio" name="menuList" id="СoursesAndСertificates"/>
-		  <label for="СoursesAndСertificates">{% if page.title contain "Batyaev" %} Сourses and Сertificates {% endif %}{% if page.title contain "Батяев" %} Курсы и Сертификаты {% endif %}</label>
+		  <label for="СoursesAndСertificates">Сourses and Сertificates</label>
 		<div>
 
 		{{ content }}
