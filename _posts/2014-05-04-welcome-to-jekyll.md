@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  Anton Batyaev | "Welcome to Jekyll!"
 date:   2014-05-04 15:34:21
 categories: jekyll update
 ---
