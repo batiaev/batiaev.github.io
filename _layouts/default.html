@@ -42,7 +42,7 @@
 							<a href="skype://a_batyaev"><img src="/images/skype.png" alt="Skype" id="social_button"></img></a>
 							{% if page.title contain "Batyaev" %}
 							<a href="/ru/"><img src="/images/russia.png" alt="Russian Language" id="social_button"></img></a>
-							{% else %}
+							{% endif %}{% if page.title contain "Батяев" %}
 							<a href="/"><img src="/images/usa.png" alt="English Language" id="social_button"></img></a>
 							{% endif %}
 						</li>
@@ -61,11 +61,11 @@
 
 		<div class="korpus">
 		  <input type="radio" name="menuList" checked="checked" id="MainData"/>
-		  <label for="MainData">{% if page.title contain "Batyaev" %} Personal Profile {% else %} Резюме {% endif %}</label>
+		  <label for="MainData">{% if page.title contain "Batyaev" %} Personal Profile {% endif %}{% if page.title contain "Батяев" %} Резюме {% endif %}</label>
 		  <input type="radio" name="menuList" id="Projects"/>
-		  <label for="Projects">{% if page.title contain "Batyaev" %} Projects {% else %} Проекты {% endif %}</label>
+		  <label for="Projects">{% if page.title contain "Batyaev" %} Projects {% endif %}{% if page.title contain "Батяев" %} Проекты {% endif %}</label>
 		  <input type="radio" name="menuList" id="СoursesAndСertificates"/>
-		  <label for="СoursesAndСertificates">{% if page.title contain "Batyaev" %} Сourses and Сertificates {% else %} Курсы и Сертификаты {% endif %}</label>
+		  <label for="СoursesAndСertificates">{% if page.title contain "Batyaev" %} Сourses and Сertificates {% endif %}{% if page.title contain "Батяев" %} Курсы и Сертификаты {% endif %}</label>
 		<div>
 
 		{{ content }}
