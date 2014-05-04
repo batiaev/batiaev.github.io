@@ -518,6 +518,10 @@ display: block;
 /*
 /*****************************************************************************/
 
+#css-menu div {
+float: none;
+clear: both
+}
 
 #css-menu ul {
 list-style: none;
