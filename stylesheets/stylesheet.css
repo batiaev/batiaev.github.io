@@ -518,10 +518,6 @@ display: block;
 /*
 /*****************************************************************************/
 
-#css-menu {
-width: 100%;
-}
-
 #css-menu ul {
 list-style: none;
 font-family: Georgia, serif;
@@ -540,6 +536,7 @@ text-decoration: none;
 background-color: #595959;
 padding: 5px 10px 0 10px;
 color: #fefefe;
+width: 25%;
 border-right: 1px solid #797979;
 border-left: 1px solid #191919
 }
