@@ -22,7 +22,7 @@
 		<table style="width:100%;">
 			<tr>
 				<td>
-					<a href="http://anton.batyaev.com"><img src="images/face.png" alt="Anton Batyaev" id="my_photo"></img></a>
+					<a href="http://anton.batyaev.com"><img src="/images/face.png" alt="Anton Batyaev" id="my_photo"></img></a>
 				</td>
 				<td>
 					<h1 id="page_title">Anton Batyaev</h1>
@@ -40,7 +40,11 @@
 							<a href="http://plus.google.com/109685251794521131731"><img src="/images/googleplus.png" alt="Google" id="social_button"></img></a>
 							<a href="mailto:a.batyaev@gmail.com"><img src="/images/mail.png" alt="Email" id="social_button"></img></a>
 							<a href="skype://a_batyaev"><img src="/images/skype.png" alt="Skype" id="social_button"></img></a>
-							<a href="/ru/"><img src="/images/russia.png" alt="Language" id="social_button"></img></a>
+							{% if page.title contain "Batyaev" %}
+							<a href="/ru/"><img src="/images/russia.png" alt="Russian Language" id="social_button"></img></a>
+							{% else %}
+							<a href="/"><img src="/images/usa.png" alt="English Language" id="social_button"></img></a>
+							{% endif %}
 						</li>
 					</ul>
 				</td>
@@ -57,11 +61,11 @@
 
 		<div class="korpus">
 		  <input type="radio" name="menuList" checked="checked" id="MainData"/>
-		  <label for="MainData">Personal Profile</label>
+		  <label for="MainData">{% if page.title contain "Batyaev" %} Personal Profile {% else %} Резюме {% endif %}</label>
 		  <input type="radio" name="menuList" id="Projects"/>
-		  <label for="Projects">Projects</label>
+		  <label for="Projects">{% if page.title contain "Batyaev" %} Projects {% else %} Проекты {% endif %}</label>
 		  <input type="radio" name="menuList" id="СoursesAndСertificates"/>
-		  <label for="СoursesAndСertificates">Сourses and Сertificates</label>
+		  <label for="СoursesAndСertificates">{% if page.title contain "Batyaev" %} Сourses and Сertificates {% else %} Курсы и Сертификаты {% endif %}</label>
 		<div>
 
 		{{ content }}
