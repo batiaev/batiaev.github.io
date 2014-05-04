@@ -518,7 +518,7 @@ display: block;
 /*
 /*****************************************************************************/
 
-#css-menu ul {
+#menu ul {
 list-style: none;
 font-family: Georgia, serif;
 font-size: 18px;
@@ -527,15 +527,15 @@ line-height: 1.4em;
 border:2px solid #000000;
 border-left: 1px solid #000000;
 padding: 0;
-margin: 12px 12px 25px 24px
+margin: 12px 12px 30px 24px
 }
 
-#css-menu li {
+#menu li {
 float: left;
 width: 25%
 }
 
-#css-menu ul li a {
+#menu ul li a {
 display: block;
 text-decoration: none;
 background-color: #595959;
@@ -545,25 +545,25 @@ border-right: 1px solid #797979;
 border-left: 1px solid #191919
 }
 
-#css-menu ul li a span {
+#menu ul li a span {
 display: block
 }
 
-#css-menu ul li a span.text-top {
+#menu ul li a span.text-top {
 border-bottom: 1px solid #595959
 }
 
-#css-menu ul li a:hover span.text-top {
+#menu ul li a:hover span.text-top {
 border-bottom: 1px dashed #fefefe;
 color: #ffddbb
 }
 
-#css-menu ul li a span.text-bottom {
+#menu ul li a span.text-bottom {
 visibility: hidden;
 font-size: 11px;
 text-align: right
 }
 
-#css-menu ul li a:hover span.text-bottom {
+#menu ul li a:hover span.text-bottom {
 visibility: visible
 }
