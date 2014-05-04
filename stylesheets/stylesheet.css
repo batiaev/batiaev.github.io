@@ -527,12 +527,11 @@ font-style: italic;
 line-height: 1.4em;
 border:2px solid #000000;
 border-left: 1px solid #000000;
-float: left;
 padding: 0;
 margin: 12px 0 25px 24px
 }
 
-#css-menu ul li {
+#css-menu li {
 float: left
 }
 
