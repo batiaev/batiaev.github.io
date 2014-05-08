@@ -266,6 +266,7 @@ img#my_photo {
   margin: 0;
   padding: 0;
   border: 0;
+  margin-bottom: -100px;
 }
 
 img#social_button {
