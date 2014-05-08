@@ -398,8 +398,8 @@ Small Device Styles
 }
 
 #title_font {
-font-family: Helvetica,Arial,sans-serif;
-font-style: italic;
+  font-family: Helvetica,Arial,sans-serif;
+  font-style: italic;
 }
 
 .keySkills {
@@ -415,25 +415,24 @@ img.previewPicture {
 }
 
 .korpus > div, .korpus > input {
-display: none; 
-padding: 5px;
+  display: none; 
+  padding: 5px;
 }
 .korpus label {
-font-family: Helvetica,Arial,sans-serif;
-font-style: italic;
-
-padding: 10px 15px;
-border: 1px solid #aaa;
-line-height: 28px;
-cursor: pointer;
-position: relative;
-bottom: 1px;
-background: #fff;
+  font-family: Helvetica,Arial,sans-serif;
+  font-style: italic;
+  padding: 10px 15px;
+  border: 1px solid #aaa;
+  line-height: 28px;
+  cursor: pointer;
+  position: relative;
+  bottom: 1px;
+  background: #fff;
 }
 
-.korpus input[type="radio"]:checked + label {
-border-bottom: 2px solid #aaf;
-background: #eef;
+.korpus input[type="radio"]:checked + label  {
+  border-bottom: 2px solid #aaf;
+  background: #eef;
 }
 
 .korpus > input:nth-of-type(1):checked ~ div:nth-of-type(1),
@@ -487,49 +486,49 @@ display: block;
 /*****************************************************************************/
 
 #menu ul {
-list-style: none;
-font-family: Georgia, serif;
-font-size: 18px;
-font-style: italic;
-line-height: 1.4em;
-border:2px solid #000000;
-border-left: 1px solid #000000;
-padding: 0;
-margin: 12px 12px 30px 24px
+  list-style: none;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.4em;
+  border:2px solid #000000;
+  border-left: 1px solid #000000;
+  padding: 0;
+  margin: 12px 12px 30px 24px
 }
 
 #menu li {
-float: left;
-width: 25%
+  float: left;
+  width: 25%
 }
 
 #menu ul li a {
-display: block;
-text-decoration: none;
-background-color: #595959;
-padding: 5px 10px 0 10px;
-color: #fefefe;
-border-right: 1px solid #797979;
-border-left: 1px solid #191919
+  display: block;
+  text-decoration: none;
+  background-color: #595959;
+  padding: 5px 10px 0 10px;
+  color: #fefefe;
+  border-right: 1px solid #797979;
+  border-left: 1px solid #191919
 }
 
 #menu ul li a span {
-display: block
+  display: block
 }
 
 #menu ul li a span.text-top {
-border-bottom: 1px solid #595959
+  border-bottom: 1px solid #595959
 }
 
 #menu ul li a:hover span.text-top {
-border-bottom: 1px dashed #fefefe;
-color: #ffddbb
+  border-bottom: 1px dashed #fefefe;
+  color: #ffddbb
 }
 
 #menu ul li a span.text-bottom {
-visibility: hidden;
-font-size: 11px;
-text-align: right
+  visibility: hidden;
+  font-size: 11px;
+  text-align: right
 }
 
 #menu ul li a:hover span.text-bottom {
