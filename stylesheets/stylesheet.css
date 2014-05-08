@@ -260,16 +260,18 @@ Full-Width Styles
 }
 
 img#my_photo {
-border-radius: 80px;
-heigth: 128px;
-width: 128px;
-margin-bottom: -100px;
+  border-radius: 80px;
+  heigth: 128px;
+  width: 128px;
+  margin-bottom: -100px;
 }
 
 img#social_button {
-border-radius: 80px;
-heigth: 32px;
-width: 32px;
+  border-radius: 80px;
+  heigth: 32px;
+  width: 32px;
+  margin: 0;
+  padding: 0;
 }
 
 a#forkme_banner {
