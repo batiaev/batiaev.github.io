@@ -272,6 +272,7 @@ img#social_button {
   width: 32px;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 a#forkme_banner {
