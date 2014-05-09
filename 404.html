@@ -3,9 +3,20 @@ layout: default
 title: Anton Batyaev not found
 ---
 
-<script type="text/javascript">
-  var GOOG_FIXURL_LANG = 'en';
-  var GOOG_FIXURL_SITE = 'http://www.example.com'
+<script>
+  (function() {
+    var cx = '002155483828909277960:bc_4spxkr0o';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
 </script>
-<script type="text/javascript" src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
-</script>
+<gcse:search></gcse:search>
+
+<form method="get" action="/search" target="_blank">
+<input name="q" id="form-query" value="" placeholder="поиск по сайту">
+<input src="images/search.png" type="image" style="vertical-align: bottom; padding: 0;"/></form>
