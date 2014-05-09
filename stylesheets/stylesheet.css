@@ -120,6 +120,7 @@ footer {
   position: fixed;
   left: 0;
   bottom: 0;
+  heigth: 128px;
   background: #212121;
   padding: 20px 10px;
   margin: 0 auto;
@@ -337,7 +338,6 @@ a#forkme_banner:hover {
 }
 
 #main_content_wrap {
-  height: 100%;
   background: #f2f2f2;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
