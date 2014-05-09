@@ -97,10 +97,6 @@ p {
   margin: 10px 0 15px 0;
 }
 
-footer p {
-  color: #f2f2f2;
-}
-
 a {
   text-decoration: none;
   color: #007edf;
@@ -119,6 +115,18 @@ a {
 }
 
 a:hover, a:focus {text-decoration: underline;}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  background: #212121;
+}
+
+footer p {
+  color: #f2f2f2;
+}
 
 footer a {
   color: #F2F2F2;
@@ -336,11 +344,6 @@ a#forkme_banner:hover {
 #main_content {
   padding-top: 40px;
 }
-
-#footer_wrap {
-  background: #212121;
-}
-
 
 
 /*******************************************************************************
