@@ -117,13 +117,8 @@ a {
 a:hover, a:focus {text-decoration: underline;}
 
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  heigth: 128px;
   background: #212121;
-  padding: 20px 10px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 footer p {
