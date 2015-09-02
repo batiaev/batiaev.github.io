@@ -1,0 +1,105 @@
+.about-me {
+  background: rgba(3, 3, 53, 0.3);
+  display:block;
+  width: 40%;
+  margin: auto;
+  text-align:center;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -khtml-border-radius: 40px;
+}
+div.about-me * {
+  color: white;
+}
+div.about-me h1 {
+    font-size: 5em;
+    font-family: arial,helvetica;
+    margin:0;
+}
+div.about-me h2 {
+    font-size: 3em;
+    font-family: arial,helvetica;
+    margin:0;
+}
+.section {
+  text-align:center;
+}
+#section0 {
+  background-image: url(../img/ggb.jpg);
+  background-size:auto 100%;
+  background-repeat: no-repeat;
+}
+#section1 {
+  background: -webkit-linear-gradient(#AA997D, #7BAABE);
+  background: -o-linear-gradient(#AA997D, #7BAABE);
+  background: -moz-linear-gradient(#AA997D, #7BAABE);
+  background: linear-gradient(#AA997D, #7BAABE);
+}
+#section2 {
+  background: -webkit-linear-gradient(#7BAABE, #969AC6);
+  background: -o-linear-gradient(#7BAABE, #969AC6);
+  background: -moz-linear-gradient(#7BAABE, #969AC6);
+  background: linear-gradient(#7BAABE, #969AC6);
+}
+#section3 {
+  background: -webkit-linear-gradient(#969AC6, #636F8F);
+  background: -o-linear-gradient(#969AC6, #636F8F);
+  background: -moz-linear-gradient(#969AC6, #636F8F);
+  background: linear-gradient(#969AC6, #636F8F);
+}
+footer {
+  position:fixed;
+  height: 60px;
+  display:block;
+  width: 100%;
+  background: rgba(3, 3, 3, 0.2);
+  z-index:9;
+  text-align:center;
+  color: #f2f2f2;
+  padding: 10px 0 0 0;
+  bottom:0px;
+}
+img#logo {
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  border-radius: 120px;
+  -webkit-border-radius: 120px;
+  -moz-border-radius: 120px;
+  -khtml-border-radius: 120px;
+  heigth: 180px;
+  width: 180px;
+  margin: 10;
+  padding: 0;
+  border: 0;
+}
+.panel {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -khtml-border-radius: 30px;
+}
+.row {
+  margin: auto 20px;
+}
+.cources {
+    -webkit-column-count:3;
+    -moz-column-count:3;
+    column-count:3;
+}
+.badge-top10 {
+    background-color: #0682D1;
+}
+.badge-top20 {
+    background-color: #00A0E8;
+}
+.badge-top30 {
+    background-color: #03C3E5;
+}
