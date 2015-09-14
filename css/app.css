@@ -47,14 +47,14 @@ div.about-me h2 {
   background: -o-linear-gradient(#969AC6, #636F8F);
   background: -moz-linear-gradient(#969AC6, #636F8F);
   background: linear-gradient(#969AC6, #636F8F);
+  padding-bottom: 60px;
 }
 footer {
   position:fixed;
-  height: 60px;
   display:block;
+  height: 60px;
   width: 100%;
   background: rgba(3, 3, 3, 0.2);
-  z-index:9;
   text-align:center;
   color: #f2f2f2;
   padding: 10px 0 0 0;
@@ -80,7 +80,6 @@ img#logo {
   border: 0;
 }
 .panel {
-  background: rgba(255, 255, 255, 0.15);
   border-radius: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
@@ -102,4 +101,19 @@ img#logo {
 }
 .badge-top30 {
     background-color: #03C3E5;
+}
+ul.fa-ul {
+  text-align: left;
+}
+.skill-tests {
+  column-count: 2;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+}
+.fixedbutton {
+  position: absolute;
+  bottom: 10px;
+  margin-right: auto;
+  margin-left: -70px;
+  color: white;
 }
