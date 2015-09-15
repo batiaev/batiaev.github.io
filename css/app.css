@@ -37,16 +37,10 @@ div.about-me h2 {
   background: linear-gradient(#AA997D, #7BAABE);
 }
 #section2 {
-  background: -webkit-linear-gradient(#7BAABE, #969AC6);
-  background: -o-linear-gradient(#7BAABE, #969AC6);
-  background: -moz-linear-gradient(#7BAABE, #969AC6);
-  background: linear-gradient(#7BAABE, #969AC6);
+  background-color:  lightgray;
 }
 #section3 {
-  background: -webkit-linear-gradient(#969AC6, #636F8F);
-  background: -o-linear-gradient(#969AC6, #636F8F);
-  background: -moz-linear-gradient(#969AC6, #636F8F);
-  background: linear-gradient(#969AC6, #636F8F);
+  background-color:  lightgray;
   padding-bottom: 60px;
 }
 footer {
@@ -86,12 +80,7 @@ img#logo {
   -khtml-border-radius: 30px;
 }
 .row {
-  margin: auto 20px;
-}
-.cources {
-    -webkit-column-count:3;
-    -moz-column-count:3;
-    column-count:3;
+  margin: 40px;
 }
 .badge-top10 {
     background-color: #0682D1;

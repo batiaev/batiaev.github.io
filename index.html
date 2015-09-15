@@ -25,10 +25,10 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
-				anchors: ['home', 'experience', 'projects', 'cources'],
+				anchors: ['home', 'skills', 'experience', 'projects', 'cources'],
 				navigation: true,
 				navigationPosition: 'right',
-				navigationTooltips: ['Home', 'Work Experience', 'Projects', 'Cources & Certificates'],
+				navigationTooltips: ['Home', 'Skills', 'Work Experience', 'Projects', 'Cources & Certificates'],
 				autoScrolling: false
 			});
 		});
@@ -65,15 +65,14 @@
 		        <a target="_blank" href="https://www.upwork.com/users/~0123f13a314a7e010a"><span class="fa fa-laptop fa-2x" data-toggle="tooltip" data-placement="bottom" title="Upwork (ODesk) profile"></span></a>
 		    </div>
 		</div>
-		<a class="fixedbutton" href="#experience"><i class="fa fa-arrow-down fa-2x" data-toggle="tooltip" data-placement="top" title="My skills"></i></a>
+		<a class="fixedbutton" href="#skills"><i class="fa fa-arrow-down fa-2x" data-toggle="tooltip" data-placement="top" title="My skills"></i></a>
 	</div>
-	<div class="section" id="section1">
-		<div class="row">
-		  <div class="col-md-5 panel">
-			<h1>Skills</h1>
+	<div class="section">
+		<div class="container">
+			<h2>Skills</h2>
 			<ul class="fa-ul">
 				<li><i class="fa-li fa fa-code"></i>
-					<strong>Languages: </strong><code>Bash</code>, <code>Java</code>,  <code>C++</code>,  <code>Ruby</code>
+					<strong>Languages: </strong><code>Bash</code>, <code>Java</code>,  <code>Groovy</code>,  <code>C++</code>,  <code>Ruby</code>
 				</li></br>
 				<li><i class="fa-li fa fa-database"></i>
 					<strong>DBMS: </strong> <code>Postgres</code>, <code>Firebird</code>, <code>MSSQL</code>, <code>SQLite</code>
@@ -94,39 +93,45 @@
 					<strong>Build systems: </strong><code>Gradle</code>, <code>Maven</code>, <code>QMake</code>, <code>CMake</code>
 				</li></br>
 				<li><i class="fa-li fa fa-gear"></i>
-					<strong>Dev apps: </strong><code>Idea</code>, <code>Qt Creator</code>, <code>TeamCity</code>, <code>Jenkins</code>, <code>Jira</code>, <code>YouTrack</code>
+					<strong>Dev apps: </strong><code>Vim + Tmux</code>, <code>IntelliJ IDEA</code>, <code>RubyMain</code>, <code>Qt Creator</code>, <code>GitLab</code>, <code>TeamCity</code>, <code>Jenkins</code>, <code>Jira</code>, <code>YouTrack</code>, <code>Chef</code>, <code>Pupet</code>
 				</li></br>
 				<li><i class="fa-li fa fa-circle-o"></i>
 					and lot of another technologies...
 				</li>
 			</ul>
-		  </div>
-		  <div class="col-md-5 col-md-offset-2 panel">
-			<h1>Work Experience</h1>
+		</div>
+	</div>
+	<div class="section">
+		<div class="container">
+			<h2>Work Experience</h2>
 			<ul class="fa-ul">
 				<li><i class="fa-li fa fa-spinner fa-spin"></i>
-					<h3>Java Developer<small> at Haulmont</br>
+					<h3>Java Developer<small> at Haulmont<br>
 					<em>November 2014 &ndash; current</em></small></h3>
+					<p>Create groovy scripts for reports. Prepare servers for deploy our application (Postgres, tomcat, ssh, apache, nginx..) and lot of another work</p>
 				</li>
 				<li><i class="fa-li fa fa-check"></i>
-					<h3>Resort Worker<small> at GTLC<br/>
+					<h3>Resort Worker (J1)<small> at GTLC (Grand Teton Lodge Company)<br>
 					<em>May 2014 &ndash; September 2014</em></small></h3>
+					<p>Work in the kitchen, Help to cooks and bartender, working in the employees dining room</p>
 				</li>
 				<li><i class="fa-li fa fa-check"></i>
-					<h3>C++ Software Developer<small> at Atol</br>
+					<h3>C++ Software Developer<small> at Atol<br>
 					<em>October 2012 &ndash; May 2014</em></small></h3>
+					<p>Development of cross-platform software specialized class Middle-office, occupying an intermediate position between Front-and Back-office and for operational management of objects of commercial enterprises. Optimization of server applications for speed and latency. Development of protocols for communicating with the handheld terminal with an integrated bar code laser scanner. Developing and maintaining a network between applications class front-office and middle-office. Development of GUI applications using Qt framework. Development of server-side part of application to work with databases Firebird, MS SQL, Sqlite. Writing *. sh and *. bat scripts for continuous integration server. (build binary files, creating installers for different operating systems linux \ windows, etc.). Code Review to validate source code, written other employees, for the quality, correctness, and compliance with coding style docs.</p>
 				</li>
 				<li><i class="fa-li fa fa-check"></i>
-					<h3>System Administrator<small> at Dogma</br>
+					<h3>System Administrator<small> at Dogma<br>
 					<em>May 2013 &ndash; August 2013</em></small></h3>
+					<p>Network management, small office (about 25 computers distributed between the four geographic locations in the two cities ). Administration ftp , samba, dns and dhcp servers based on Windows Server 2007, 2003. Remote control user computers based on the Linux operating system , configuring network printers, scanners . Control over the purchase of new equipment. Setting up a computer network office ( settings bridge over WiFi to a nearby building , analysis and formation of network card , configure remote access from a remote warehouse, etc. ). Management of access rights to connect to the server (a common work of employees on the server via RDP protocol)</p>
 				</li>
 				<li><i class="fa-li fa fa-check"></i>
-					<h3>Technical Support Engineer<small> at MTS</br>
+					<h3>Technical Support Engineer<small> at MTS<br>
 					<em>July 2012 &ndash; October 2012</em></small></h3>
+					<p>Advising on cellular communication and mobile Internet. Solution of problems and software problems with the network on mobile phones. Providing information about the tariffs for mobile communication and services connected on telephone number.</p>
 				</li>
 			</ul>
 		  </div>
-		</div>
 	</div>
 	<div class="section" id="section2">
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
