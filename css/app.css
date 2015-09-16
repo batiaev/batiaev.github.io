@@ -11,10 +11,6 @@
   color: black;
   width: 450px;
   margin: auto;
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -khtml-border-radius: 40px;
   background: rgba(200, 200, 200, 0.6);
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
@@ -57,25 +53,22 @@ div.about-me h2 {
 #section3 {
   padding-bottom: 60px;
 }
-footer {
-  position:fixed;
-  display:block;
-  height: 60px;
-  width: 100%;
-  background: rgba(3, 3, 3, 0.5);
-  text-align:center;
-  color: #f2f2f2;
-  padding: 10px 0 0 0;
-  bottom:0px;
-}
 footer a {
-  color: #f2f2f2;
+  color: black;
 }
-.panel {
-  border-radius: 30px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -khtml-border-radius: 30px;
+footer hr {
+  border-width: 2px 0px 0px;
+  border-color: DarkMagenta;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.sherlock-decs {
+  text-align: left;
+}
+.round-border {
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -khtml-border-radius: 40px;
 }
 .row {
   margin: 40px;
