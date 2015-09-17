@@ -37,6 +37,10 @@ div.about-me h2 {
     font-family: arial,helvetica;
     margin:0;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
 .section {
   text-align:center;
 }
