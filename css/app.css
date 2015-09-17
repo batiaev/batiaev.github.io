@@ -23,6 +23,9 @@
 #fp-nav ul li .fp-tooltip {
   color: black;
 }
+.skills li {
+  margin-top: 20px;
+}
 div.about-me a,
 div.about-me a:hover {
   color: black;
@@ -43,12 +46,6 @@ div.about-me h2 {
 #section0 {
   background-image: url(../img/ggb.jpg);
   background-size: cover;
-}
-#section1 {
-  background: -webkit-linear-gradient(#AA997D, #7BAABE);
-  background: -o-linear-gradient(#AA997D, #7BAABE);
-  background: -moz-linear-gradient(#AA997D, #7BAABE);
-  background: linear-gradient(#AA997D, #7BAABE);
 }
 #section3 {
   padding-bottom: 60px;
