@@ -1,6 +1,17 @@
 body {
+  background-image:url(../img/ggb.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
   background-color: #e9f0f8;
 }
+.page {
+  background-color: #e9f0f8;
+}
+/*#section0 {
+  background-image: url(../img/ggb.jpg);
+  background-size: cover;
+}*/
 #logo {
   heigth: 180px;
   width: 180px;
@@ -51,15 +62,8 @@ img {
 .section {
   text-align:center;
 }
-#section0 {
-  background-image: url(../img/ggb.jpg);
-  background-size: cover;
-}
 #section3 {
   padding-bottom: 60px;
-}
-footer a {
-  color: black;
 }
 hr {
   border-color: DarkMagenta;
@@ -67,10 +71,16 @@ hr {
 hr.page-separator {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-footer hr {
+hr.footer {
   border-width: 2px 0px 0px;
   border-color: DarkMagenta;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+footer {
+  color: white;
+}
+footer a {
+  color: white;
 }
 .sherlock-decs {
   text-align: left;
