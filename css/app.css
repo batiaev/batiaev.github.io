@@ -62,9 +62,6 @@ img {
 .section {
   text-align:center;
 }
-#section3 {
-  padding-bottom: 60px;
-}
 hr {
   border-color: DarkMagenta;
 }
@@ -72,15 +69,18 @@ hr.page-separator {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 hr.footer {
-  border-width: 2px 0px 0px;
+  border-width: 1px 0px 0px;
   border-color: DarkMagenta;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 footer {
-  color: white;
+  color: blue-gray;
 }
 footer a {
-  color: white;
+  color: blue-gray;
+}
+footer {
+  padding-bottom: 30px;
 }
 .sherlock-decs {
   text-align: left;
