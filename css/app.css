@@ -1,4 +1,4 @@
-body {
+body.ggb {
   background-image:url(../img/ggb.jpg);
   background-repeat:no-repeat;
   background-size: cover;
@@ -117,4 +117,39 @@ ul.fa-ul {
     -webkit-column-count: 2;
     -moz-column-count: 2;
   }
+}
+
+
+.card {
+  background-image:url(../img/backtrack.jpg);
+  background-repeat:no-repeat;
+  background-size: auto 100%;
+  background-attachment:fixed;
+  background-position: center;
+  background-color: black;
+  vertical-align: center;
+  width: 750px;
+  height: 330px;
+  border-bottom-color: blue;
+  border-width: 3px;
+  border-color: red;
+  margin-top: 10%;
+}
+.card * {
+  color: white;
+}
+.card hr {
+  border-color: green;
+}
+.site .secure {
+  color: green;
+}
+.site * .fa {
+  color: green;
+}
+.site .fa {
+  color: green;
+}
+.contacts {
+  margin: auto;
 }
