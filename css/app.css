@@ -26,10 +26,11 @@ body.ggb {
 }
 .about-me {
   color: black;
-  width: 470px;
+  width: 490px;
   margin: auto;
   background: rgba(200, 200, 200, 0.6);
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  padding: 10px 20px;
 }
 .fixedbutton {
   color: white;
