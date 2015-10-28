@@ -1,43 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name='author' content="Anton Batiaev"/>
-	<meta name='dcterms.rights' content="Copyright © 2014 &ndash; 2015 Anton Batiaev. All Rights Reserved."/>
-	<meta name="description" content="Anton Batiaev : Java \ C++ \ Ruby on Rails software developer and linux administrator" />
-	<meta name='keywords' content='Anton Batiaev, software, developer, cv, resume, java, linux, chef, groovy, linux administrator, software developer, crebab studio'/>
-	
-	<title>Anton Batiaev</title>
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
-
-	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				anchors: ['home', 'skills', 'experience', 'projects', 'courses'],
-				navigation: true,
-				navigationPosition: 'right',
-				navigationTooltips: ['Home', 'Skills', 'Work Experience', 'Projects', 'Courses & Certificates'],
-				autoScrolling: false
-			});
-		});
-	</script>
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-39248426-2', 'auto');
-	  ga('send', 'pageview');
-
-	</script>
-</head>
-<body class="ggb">
+---
+layout: default
+---
 
 <div id="fullpage">
 	<div class="section" id="section0">
@@ -333,57 +296,7 @@
 				<li><i class="fa fa-check"></i> Certificate of Achievement ACM/ICPC 2011 Saratov <strong>by ACM/ICPC</strong></li>
 			</ul>
 		</div>
-		<footer class="container center">
-			<hr class="footer">
-			<div class="row">
-			  <div class="col-md-4">
-			  	<h3>Contacts</h3>
-			  	<ul class="fa-ul">
-		        <li data-toggle="tooltip" data-placement="left" title="Facebook"><a target="_blank" href="https://www.facebook.com/a.batyaev"><span class="fa fa-facebook"></span> Anton Batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="Vk"><a target="_blank" href="https://vk.com/a.batiaev"><span class="fa fa-vk"></span> Anton Batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="LinkedIn"><a target="_blank" href="https://www.linkedin.com/pub/anton-batiaev/56/998/4aa"><span class="fa fa-linkedin-square"></span> Anton Batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="Google+"><a target="_blank" href="https://plus.google.com/+AntonBatiaev1"><span class="fa fa-google-plus"></span> Anton Batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="Email"><a target="_blank" href="mailto:anton@batiaev.com"><span class="fa fa-at"></span> anton@batiaev.com</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="Skype"><a target="_blank" href="skype://anton.batiaev"><span class="fa fa-skype"></span> anton.batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="GitHub"><a target="_blank" href="https://github.com/AnBat"><span class="fa fa-github"></span> anbat</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="StackOverflow"><a target="_blank" href="http://stackoverflow.com/users/3445083/anbat"><span class="fa fa-stack-overflow"></span> anbat</a></li>
-			    <li data-toggle="tooltip" data-placement="left" title="Jabber (XMPP)"><a target="_blank" href="jabber:a.batyaev@jabber.org"><span class="fa fa-comment-o"></span> a.batyaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="Upwork (ODesk)"><a target="_blank" href="https://www.upwork.com/users/~0123f13a314a7e010a"><span class="fa fa-laptop"></span> Anton Batiaev</a></li>
-		        <li data-toggle="tooltip" data-placement="left" title="My tech blog"><a target="_blank" href="https://batiaev.com/blog/"><i class="fa fa-pencil"></i> blog</a></li>
-			  	</ul>
-			  </div>
-			  <div class="col-md-4">
-			  	<h3>Projects</h3>
-			  	<ul class="fa-ul">
-			  		<li>Sherlock</li>
-			  		<li>Frontol Manager</li>
-			  		<li>Testing system</li>
-			  		<li>Open source projects</li>
-			  		<li>Crebab Studio</li>
-			  	</ul>
-			  </div>
-			  <div class="col-md-4">
-			  	<h3>Courses</h3>
-			  	<ul class="fa-ul">
-			  		<li>MVA</li>
-			  		<li>Coursera</li>
-			  		<li>D-Link</li>
-			  		<li>Dr.Web</li>
-			  		<li>Cisco</li>
-			  	</ul>
-			  </div>
-			</div>
-			Copyright &copy; 2014 &ndash; 2015. Anton Batiaev.<br>
-			All Rights Reserved.<br>
-			Created by me in <strong><a target="_blank" href="https://crebab.com/">Crebab Studio</a></strong>
-		</footer>
+		{% include footer.html %}
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="js/app.js"></script>
-<link rel="stylesheet" property='stylesheet' href="css/font-awesome.min.css">
-<link rel="stylesheet" property='stylesheet' href="css/jquery.fullPage.css">
-<link rel="stylesheet" property='stylesheet' href="css/bootstrap.min.css">
-<link rel="stylesheet" property='stylesheet' href="css/app.css" />
-</body>
-</html>
