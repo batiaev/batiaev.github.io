@@ -1,3 +1,6 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 body.ggb {
   background-image:url(../img/ggb.jpg);
   background-repeat:no-repeat;
