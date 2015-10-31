@@ -1,0 +1,17 @@
+---
+- id : DWCERT-030-11
+  name : «Antivirus Dr.Web» Business
+- id : DWCERT-030-3
+  name : «Dr.Web for Mac OS X»
+- id : DWCERT-030-5
+  name : «Dr.Web LiveCD (Dr.Web LiveUSB)»
+- id : DWCERT-030-10
+  name : Service «Antivirus Dr.Web» for home"
+- id : DWCERT-030-6
+  name : Dr.Web CureIt!
+- id : DWCERT-004
+  name : Dr.Web AV-Desk Internet Service
+- id : DWCERT-002
+  name : Dr.Web Enterprise Security Suite
+- id : DWCERT-001
+  name : Dr.Web® for Windows

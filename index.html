@@ -273,21 +273,12 @@ layout: default
 				<li><i class="fa fa-check"></i> «Construction of the wireless Wi-Fi networks on the D-Link equipment» <small>by <strong>Alex Mokshanov</strong></small></li>
 			</ul>
 			<h3><a href="https://training.drweb.ru/">Dr.Web <i class="fa fa-external-link"></i></a></h3>
-			<ul class="fa-ul">
-				<li><i class="fa fa-check"></i> <strong>DWCERT-030-11</strong> «Antivirus Dr.Web» Business</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-030-3</strong> «Dr.Web for Mac OS X»</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-030-5</strong> «Dr.Web LiveCD (Dr.Web LiveUSB)»</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-030-10</strong> "Service «Antivirus Dr.Web» for home"</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-030-6</strong> "Dr.Web CureIt!"</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-004</strong> Dr.Web AV-Desk Internet Service</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-002</strong> Dr.Web Enterprise Security Suite</li>
-				<li><i class="fa fa-check"></i> <strong>DWCERT-001</strong> Dr.Web® for Windows</li>
+			<ul class="fa-ul">{% for cert in site.data.dr-web %}
+			<li><i class="fa fa-check"></i> <strong>{{ cert.id }}</strong> {{ cert.name }}</li>{% endfor %}
 			</ul>
 			<h3><a href="https://www.netacad.com/">Cisco Networking Academy <i class="fa fa-external-link"></i></a></h3>
-			<ul class="fa-ul">
-				<li><i class="fa fa-check"></i> <strong>CCNA Discovery 1</strong>: Networking for Home and Small Businesses</li>
-				<li><i class="fa fa-check"></i> <strong>CCNA Discovery 2</strong>: Working at a Small-to-Medium Business or ISP</li>
-				<li><i class="fa fa-check"></i> <strong>CCNA Discovery 3</strong>: Introducing Routing and Switching in the Enterprise</li>
+			<ul class="fa-ul">{% for cert in site.data.cisco %}
+			<li><i class="fa fa-check"></i> <strong>{{ cert.id }}</strong>: {{ cert.name }}</li>{% endfor %}
 			</ul>
 			<h3>Others</h3>
 			<ul class="fa-ul">
