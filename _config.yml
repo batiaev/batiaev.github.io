@@ -1,4 +1,4 @@
 name: Anton Batyaev 
 markdown: kramdown
-highlighter: true
+pygments: true
 permalink: /blog/:year/:month/:day/:title.html
