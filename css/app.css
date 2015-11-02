@@ -1,17 +1,7 @@
-body.ggb {
-  background-image:url(../img/ggb.jpg);
-  background-repeat:no-repeat;
-  background-size: cover;
-  background-attachment:fixed;
+
+body {
   background-color: #e9f0f8;
 }
-.page {
-  background-color: #e9f0f8;
-}
-/*#section0 {
-  background-image: url(../img/ggb.jpg);
-  background-size: cover;
-}*/
 #logo {
   heigth: 180px;
   width: 180px;
@@ -41,10 +31,6 @@ body.ggb {
 .skills li {
   margin-top: 20px;
 }
-div.about-me a,
-div.about-me a:hover {
-  color: black;
-}
 div.about-me h1 {
     font-weight: bold;
     font-size: 4em;
@@ -60,28 +46,52 @@ img {
   max-width: 100%;
   height: auto;
 }
-.section {
-  text-align:center;
-}
 hr {
   border-color: DarkMagenta;
 }
 hr.page-separator {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-hr.footer {
-  border-width: 1px 0px 0px;
-  border-color: DarkMagenta;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+footer div.col-md-6 {
+  padding-right: 25px;
+  padding-left: 25px;
 }
 footer {
-  color: blue-gray;
+  color: LightGray;
+  background-color: #202020;
 }
-footer a {
-  color: blue-gray;
+footer a,
+footer a:hover,
+footer a:visited {
+  color: LightGray;
 }
 footer {
   padding-bottom: 30px;
+}
+.start-page {
+  height: 100vh;
+  background-image:url(../img/ggb.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
+  background-color: #e9f0f8;
+}
+.me {
+  padding-top: 20vh;
+}
+footer h3 {
+  text-align: left;
+  border-bottom: 1px solid DarkMagenta;
+  padding-bottom: 5px;
+}
+.anchor {
+    visibility: hidden;
+}
+.anchor-title:hover .anchor {
+  visibility: visible;
+}
+.certs {
+  border-right: 1px solid DarkMagenta;
 }
 .sherlock-decs {
   text-align: left;

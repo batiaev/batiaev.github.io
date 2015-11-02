@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-US">
 {% include head.html %}
-<body class="ggb">
+<body>
 {{ content }}
-<script type="text/javascript" src="js/app.js"></script>
-<link rel="stylesheet" property='stylesheet' href="css/font-awesome.min.css">
-<link rel="stylesheet" property='stylesheet' href="css/jquery.fullPage.css">
-<link rel="stylesheet" property='stylesheet' href="css/bootstrap.min.css">
-<link rel="stylesheet" property='stylesheet' href="css/app.css" />
+{% include footer.html %}
+<script type="text/javascript" src="{{ site.baseurl }}/js/app.js"></script>
+<link rel="stylesheet" property='stylesheet' href="{{ site.baseurl }}/css/font-awesome.min.css">
+<link rel="stylesheet" property='stylesheet' href="{{ site.baseurl }}/css/bootstrap.min.css">
+<link rel="stylesheet" property='stylesheet' href="{{ site.baseurl }}/css/app.css" />
 </body>
 </html>
