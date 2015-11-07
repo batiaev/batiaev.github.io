@@ -46,9 +46,7 @@ img {
   height: auto;
 }
 hr {
-  border-color: DarkMagenta;
-}
-hr.page-separator {
+  border-color: darkgreen;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 footer div.col-md-6 {
@@ -80,7 +78,7 @@ footer {
 }
 footer h3 {
   text-align: left;
-  border-bottom: 1px solid DarkMagenta;
+  border-bottom: 1px solid darkgreen;
   padding-bottom: 5px;
 }
 .anchor {
