@@ -56,14 +56,17 @@ footer div.col-md-6 {
 footer {
   color: LightGray;
   background-color: #202020;
+  padding-bottom: 30px;
 }
 footer a,
 footer a:hover,
 footer a:visited {
   color: LightGray;
 }
-footer {
-  padding-bottom: 30px;
+footer h3 {
+  text-align: left;
+  border-bottom: 1px solid darkgreen;
+  padding-bottom: 5px;
 }
 .start-page {
   height: 100vh;
@@ -75,11 +78,6 @@ footer {
 }
 .me {
   padding-top: 20vh;
-}
-footer h3 {
-  text-align: left;
-  border-bottom: 1px solid darkgreen;
-  padding-bottom: 5px;
 }
 .anchor {
     visibility: hidden;
