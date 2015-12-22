@@ -2,57 +2,450 @@
 layout: default
 ---
 
-<div class="start-page">
-	<div class="text-center me">
-		<img alt="Anton Batiaev" id="logo" src="img/AntonBatiaev.jpg">
-		<div class="about-me round-border">
-			<h1>Anton Batiaev</h1>
-			<h2>Software Developer</h2>
-			<p><small>from</small> Russia, Samara</p>
-		</div>
-		<a class="fixedbutton" href="#logo"><i class="fa fa-arrow-down fa-2x" data-toggle="tooltip" data-placement="top" title="My&nbsp;skills"></i></a>
-	</div>
-</div>
-<div class="container">
-	<h2 id="skills">Key skills</h2>
-	<ul class="fa-ul skills">
-		<li><i class="fa-li fa fa-code"></i><strong>Languages:</strong> Bash, Java, Groovy, C++, Ruby</li>
-		<li><i class="fa-li fa fa-database"></i><strong>DBMS:</strong> Postgres, Firebird, MSSQL, SQLite</li>
-		<li><i class="fa-li fa fa-code-fork"></i><strong>VCS:</strong> git, svn</li>
-		<li><i class="fa-li fa fa-github"></i><strong>Frameworks:</strong> Angular, Bootstrap, Qt, Spring, Vaadin, Ruby on Rails, etc</li>
-		<li><i class="fa-li fa fa-linux"></i><strong>OS: </strong>Linux, Mac OS, Windows</li>
-		<li><i class="fa-li fa fa-server"></i><strong>Web servers: </strong>Nginx, Apache, Tomcat</li>
-		<li><i class="fa-li fa fa-cogs"></i><strong>Build systems: </strong>Gradle, Maven, QMake, CMake</li>
-		<li><i class="fa-li fa fa-gear"></i><strong>Dev apps: </strong>Vim + Tmux, IntelliJ IDEA, RubyMain, Qt Creator, GitLab, TeamCity, Jenkins, Jira, YouTrack, Chef, Puppet</li>
-		<li>and lot of another technologies...</li>
-	</ul>
-	<hr>
-	<h2>Work Experience</h2>
-	<ul class="fa-ul">
-		<li><i class="fa-li fa fa-spinner fa-spin"></i>
-			<h3>Java Developer<small> at Haulmont<br>
-			<em>November 2014 &ndash; current</em></small></h3>
-			<p>Create groovy scripts for reports. Prepare servers for deploy our application (Postgres, tomcat, ssh, apache, nginx..) and lot of another work</p>
-		</li>
-		<li><i class="fa-li fa fa-check"></i>
-			<h3>Resort Worker (J1)<small> at GTLC<br>
-			<em>May 2014 &ndash; September 2014</em></small></h3>
-			<p>Work in the kitchen, Help to cooks and bartender, working in the employees dining room</p>
-		</li>
-		<li><i class="fa-li fa fa-check"></i>
-			<h3>C++ Software Developer<small> at Atol<br>
-			<em>October 2012 &ndash; May 2014</em></small></h3>
-			<p>Development of cross-platform software specialized class Middle-office, occupying an intermediate position between Front-and Back-office and for operational management of objects of commercial enterprises. Optimization of server applications for speed and latency. Development of protocols for communicating with the handheld terminal with an integrated bar code laser scanner. Developing and maintaining a network between applications class front-office and middle-office. Development of GUI applications using Qt framework. Development of server-side part of application to work with databases Firebird, MS SQL, Sqlite. Writing *.sh and *.bat scripts for continuous integration server. (build binary files, creating installers for different operating systems linux \ windows, etc.). Code Review to validate source code, written other employees, for the quality, correctness, and compliance with coding style docs.</p>
-		</li>
-		<li><i class="fa-li fa fa-check"></i>
-			<h3>System Administrator<small> at Dogma<br>
-			<em>May 2013 &ndash; August 2013</em></small></h3>
-			<p>Network management, small office (about 25 computers distributed between the four geographic locations in the two cities). Administration Ftp, Samba, DNS and DHCP servers based on Windows Server 2007, 2003. Remote control user computers based on the Linux operating system , configuring network printers, scanners . Control over the purchase of new equipment. Setting up a computer network office (settings bridge over Wi-Fi to a nearby building, analysis and formation of network card, configure remote access from a remote warehouse, etc.). Management of access rights to connect to the server (a common work of employees on the server via RDP protocol)</p>
-		</li>
-		<li><i class="fa-li fa fa-check"></i>
-			<h3>Technical Support Engineer<small> at MTS<br>
-			<em>July 2012 &ndash; October 2012</em></small></h3>
-			<p>Advising on cellular communication and mobile Internet. Solution of problems and software problems with the network on mobile phones. Providing information about the tariffs for mobile communication and services connected on telephone number.</p>
-		</li>
-	</ul>
-</div>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Anton Batiaev</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="page-scroll" href="#about">About</a></li>
+                <li><a class="page-scroll" href="#services">Services</a></li>
+                <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
+                <li><a class="page-scroll" href="#contact">Contact</a></li>
+                <li class="hidden"><a href="ru/"><i class="fa fa-globe"></i> Rus / Eng</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1>Your easy way to make awesome site or software</h1>
+            <hr>
+            <p>I can help you build better adaptive websites or highly perfomance application using modern technologies like Ruby on Rails and Java8 with Spring framework! Just send me message and we will find the perfect solution for you!</p>
+            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <!-- <h2 class="section-heading">We've got what you need!</h2> -->
+                <h2 class="section-heading">Nice to meet you!</h2>
+                <hr class="light">
+
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-2 text-center">
+                        <p><img alt="Anton Batiaev" id="logo" src="img/batiaev.jpg"></p>
+                        <h2 class="section-heading">Anton Batiaev</h2>
+                        <h4 class="section-heading">Software Developer</h4>
+                        <p><small class="location"><a href="https://www.google.com/search?q=russia+samara" target="_blank">Russia Samara <i class="fa fa-external-link"></i></a></small></p>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <p class="text-faded">Since 2010 I'm developing hightly loaded applications. Firstly I was working with C++ and designed protocol for intergration our Qt-based application with our another app for embedded systems. Now I'm working basically with Java and Ruby on Rails and on my current job we develop <a href="http://www.sherlocktaxi.com/" data-toggle="tooltip" data-placement="bottom" title="Sherlock Taxi">taxi management solution</a> to customers around the world, based on <a href="https://www.cuba-platform.com/" data-toggle="tooltip" data-placement="bottom" title="Cuba Platform">our Java platform</a>.</p>
+                    </div>
+                </div>
+
+                <a href="#services" class="page-scroll btn btn-default btn-xl">Get Started!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<aside class="bg-dark" id="career">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <h2>My career path</h2>
+            <hr class="light">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-support wow bounceIn text-primary"></i>
+                        <h3>Technical Support Engineer</h3>
+                        <p class="text-muted">July 2012 – October 2012<br>at <a href="http://en.mts.ru/">MTS</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-server wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>System Administrator</h3>
+                        <p class="text-muted">May 2013 – August 2013<br>at Dogma Samara</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-code wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>C++ Developer</h3>
+                        <p class="text-muted">October 2012 – May 2014<br>at <a href="http://atol.ru/">Atol</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-code-fork wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>Java Developer</h3>
+                        <p class="text-muted">November 2014 – current<br>at <a href="http://www.haulmont.com/">Haulmont</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">At Your Service</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+                    <h3>Modern technologies</h3>
+                    <p class="text-muted">Java &amp; Spring, Ruby on Rails and more.</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-crop wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                    <h3>Adaptive design</h3>
+                    <p class="text-muted">Perfect view on any types of screen!</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                    <h3>Ready to Ship</h3>
+                    <p class="text-muted">Own hosting and parther for <a href="https://www.reg.ru/">Reg.ru</a> domain registrator!</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                    <h3>Up to Date</h3>
+                    <p class="text-muted">Technical support, documentation and training.</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-server wow bounceIn text-primary" data-wow-delay=".4s"></i>
+                    <h3>IT support</h3>
+                    <p class="text-muted">Ready to help you with your intranet.</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".5s"></i>
+                    <h3>Made with Love</h3>
+                    <p class="text-muted">Our products are created with love!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="no-padding" id="portfolio">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-lg-4 col-sm-6">
+                <a href="http://www.sherlocktaxi.com/" class="portfolio-box">
+                    <img src="img/portfolio/sherlock3.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">Java Dev</div>
+                            <div class="project-name">Sherlock Taxi</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="http://www.atol.ru/software/frontol-manager/" class="portfolio-box">
+                    <img src="img/portfolio/fm3.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">C++\Qt Dev</div>
+                            <div class="project-name">Frontol Manager</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img src="img/portfolio/photo.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">Site dev</div>
+                            <div class="project-name">Photographer portfolio</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="https://github.com/AnBat" class="portfolio-box">
+                    <img src="img/portfolio/opensource3.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">Open source</div>
+                            <div class="project-name">Fork me on github</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img src="img/portfolio/test2.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">C++\Qt Dev</div>
+                            <div class="project-name">Testing System</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="https://github.com/anbat/vk-java-sdk" class="portfolio-box">
+                    <img src="img/portfolio/vkapi3.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">Java Dev \ Open source</div>
+                            <div class="project-name">Vk Java SDK</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <h2>I always keep learn from the best!</h2>
+            <p>Microsoft, Cisco, Stanford University, University of California &hellip;</p>
+            <a href="#" class="btn btn-default btn-xl wow tada" data-toggle="modal" data-target=".myModal">Check all list!</a>
+        </div>
+    </div>
+</aside>
+<aside>
+    <div class="modal fade myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Courses &amp; Certificates</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="fa-ul">
+                <h3><a href="https://www.stanford.edu/">Stanford University</a></h3>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/cs101">Computer Science</a> 
+                    <small>by <strong>Nick Parlante</strong></small>
+                </li>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/db">Introduction to Databases</a> 
+                    <small>by <strong>Jennifer Widom</strong></small>
+                </li>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/crypto">Cryptography I</a>
+                    <small>by <strong>Dan Boneh</strong></small>
+                </li>
+                <h3><a href="http://unex.uci.edu/">University of California, Irvine Extension</a></h3>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/learn/project-planning">Initiating and Planning Projects</a>
+                    <small>by <strong>Margaret Meloni, MBA, PMP</strong></small>
+                </li>
+                <h3><a href="http://www.upenn.edu/">University of Pennsylvania</a></h3>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/networks">Networked Life</a>
+                    <small>by <strong>Michael Kearns</strong></small>
+                </li>
+                <h3><a href="https://www.umich.edu/">University of Michigan</a></h3>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/insidetheinternet">Internet History, Technology, and Security</a>
+                    <small>by <strong>Charles Severance</strong></small>
+                </li>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/pythonlearn">Programming for Everybody (Python)</a>
+                    <small>by <strong>Charles Severance</strong></small>
+                </li>
+                <h3><a href="http://www.rice.edu/">Rice University</a></h3>
+                <li><i class="fa fa-check"></i> <a target="_blank" href="https://www.coursera.org/course/interactivepython">An Introduction to Interactive Programming in Python</a>
+                    <small>by <strong>Joe Warren, Scott Rixner, John Greiner, Stephen Wong</strong></small>
+                </li>
+                <h3><a href="http://www.microsoftvirtualacademy.com">Microsoft Virtual Academy</a></h3>
+                <li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introtoazurewithpoplavskiy">An Introduction to Windows Azure</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-cloud-websites-on-microsoft-azure-rus">An Introduction to Cloud Websites on Microsoft Azure</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-azure-api-management-rus">An Introduction to Azure API Management</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/business-and-cloud-best-practices-solutions-rus">Business and cloud best practices solutions</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/overview-system-center-advisor-rus">Overview System Center Advisor</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/system-center-app-controller-windows-azure-rus">System Center App Controller: Windows Azure</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/csharp_part_1">C# part 1</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/csharp_part_2">C# part 2</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/fundamentals-of-programming-in-csharp-rus">Fundamentals of programming in C#</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/exciting-programming-c-sharp-rus">Exciting programming C#</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-private-cloud-rus">Introduction to Private Cloud</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-games-programming-on-unity-rus">Introduction to games programming on Unity</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-the-graphics-library-win2d-rus">Introduction to the graphics library Win2D</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/app-development-on-microsoft-platform-rus">App development on Microsoft platform</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/microsoft-azure-security-overview-and-sql-azure-databases-rus">Microsoft Azure security overview and Sql Azure Databases</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-mobile-app-development_rus">Introduction to mobile app development</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/gamepad-support-in-the-development-of-computer-games-rus">Gamepad support in the development of computer games</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/microsoft-visio-2013-overview-rus">Microsoft Visio 2013 Overview</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-programming-with-python_rus">Introduction to programming with Python</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/express-dive-into-development-of-apps-in-javascript-rus">Express dive into development of apps in JavaScript</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/data-import-in-microsoft-sql-server-rus">Data import in Microsoft Sql Server</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/new-possibilities-system-center-operations-manager-sp1-rus">New possibilities System Center Operations Manager SP1</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/how-to-debug-a-website-with-internet-explorer-f12-tools_rus">Debug a website with Internet Explorer F12 tools</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/9c8bdcd2-584b-424a-94f8-605e60c38420">Start development with HTML5, JS and CSS3</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/virtual-desktop-infrasturcture-rus">Virtual Desktop Infrasturcture</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/application-insights-rus">Application Insights</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/app-dev-for-windows-8-html-js-rus">Application development for Windows 8 on HTLP5/JS</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/app-dev-for-windows-8-xaml-c-sharp-rus">Application development for Windows 8 on XAML/C#</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/enterprise-developer-jump-start-rus">Enterprise developer Jump Start</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/new-possibilties-ms-project-2013-project-online-rus">New possibilties Ms Project 2013 and Project Online</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/the-development-of-modern-apps-in-c-sharp-rus">The development of modern apps in C#</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/service-management-windows-azure-rus">Service management Windows Azure</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/big-data-rus">Big Data</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/developing-asp-net-mvc-4-web-applications-jump-start-russian">Developing ASP.Net MVC4 web applications</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/developing-universal-windows-apps-with-html-and-javascript-jump-start_rus">Developing universal windows apps with html and javascript Jump start</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/-tfs2010-rus">Team Foundation Server 2010</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/system-center-2012-firstlook-rus">System Center 2012 firstlook</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/development-and-implementation-of-enterprise-applications-rus">Development and implementation of enterprise applications</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/introduction-to-asp-net-mvc_rus">Introduction to ASP.NET MVC</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/710e43c1-4fed-47cb-8af4-754f2452ddbd">Development difficult apps to Windows Store on HTML5: start</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/107a046e-a0e3-4a70-9c97-713b35458bd5">Start development web apps using ASP.NET</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/gaming-engines-for-windows-8-jump-start-russian">Gaming engines for Windows 8 Jump Start</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/-c-rus">Crash course &#39;Programming in C#&#39;</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/windows-server-2012-virtualization-rus">Windows Server 2012 Virtualization</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/the-cloud-environment-for-developing-and-testing-applications-rus">The cloud environment for developing and testing applications</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/the-microsoft-hybrid-cloud-best-practices-guidance-rus">The Microsoft hybrid cloud best practices guidance</a>
+                </li><li><i class="fa fa-check"></i>
+                    <a target="_blank" href="http://www.microsoftvirtualacademy.com/training-courses/advanced-possibilities-appdev-windows-phone-8-rus">Advanced possibilities appdev Windows Phone 8</a>
+                </li>
+                <h3><a href="http://www.dlink.ru/">D-Link</a></h3>
+                <li><i class="fa fa-check"></i> «Hardware firewalls from company D-link. Network security, VPN technology» <small>by <strong>Alex Mokshanov</strong></small></li>
+                <li><i class="fa fa-check"></i> «Build networks based on managed switches D-Link 2nd and 3rd level. Part 2: Configuring hardware» <small>by <strong>Alex Mokshanov</strong></small></li>
+                <li><i class="fa fa-check"></i> «Construction of video surveillance systems on the D-Link equipment» <small>by <strong>Alex Mokshanov</strong></small></li>
+                <li><i class="fa fa-check"></i> «Construction of the wireless Wi-Fi networks on the D-Link equipment» <small>by <strong>Alex Mokshanov</strong></small></li>
+                <h3><a href="https://training.drweb.ru/">Dr.Web</a></h3>
+                <li><i class="fa fa-check"></i> DWCERT-030-11 «Antivirus Dr.Web» Business</li>
+                <li><i class="fa fa-check"></i> DWCERT-030-3 «Dr.Web for Mac OS X»</li>
+                <li><i class="fa fa-check"></i> DWCERT-030-5 «Dr.Web LiveCD (Dr.Web LiveUSB)»</li>
+                <li><i class="fa fa-check"></i> DWCERT-030-10 Service «Antivirus Dr.Web» for home"</li>
+                <li><i class="fa fa-check"></i> DWCERT-030-6 Dr.Web CureIt!</li>
+                <li><i class="fa fa-check"></i> DWCERT-004 Dr.Web AV-Desk Internet Service</li>
+                <li><i class="fa fa-check"></i> DWCERT-002 Dr.Web Enterprise Security Suite</li>
+                <li><i class="fa fa-check"></i> DWCERT-001 Dr.Web® for Windows</li>
+
+                <h3><a href="https://www.netacad.com/">Cisco Networking Academy</a></h3>
+                <li><i class="fa fa-check"></i> CCNA Discovery 1: Networking for Home and Small Businesses</li>
+                <li><i class="fa fa-check"></i> CCNA Discovery 2: Working at a Small-to-Medium Business or ISP</li>
+                <li><i class="fa fa-check"></i> CCNA Discovery 3: Introducing Routing and Switching in the Enterprise</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</aside>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <h2 class="section-heading">Let's Get In Touch!</h2>
+                <hr class="primary">
+                <p>Ready to start your next project with me? That's great! Send me a friend request in skype or send me an email and I will get back to you as soon as possible!</p>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 text-center">
+                <i class="fa fa-skype fa-3x wow bounceIn"></i>
+                <p><a href="skype:anton@batiaev.com">a_batyaev</a></p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p><a href="mailto:anton@batiaev.com">anton@batiaev.com</a></p>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <p>You can also find me on social networks</p>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <p class="social">
+                <a href="https://www.facebook.com/a.batyaev" data-toggle="tooltip" data-placement="bottom" title="Facebook"><span class="fa fa-3x fa-facebook wow bounceIn" data-wow-delay=".3s"></span></a>
+                <a href="https://vk.com/a.batiaev" data-toggle="tooltip" data-placement="bottom" title="vk.com"><span class="fa fa-3x fa-vk wow bounceIn" data-wow-delay=".4s"></span></a>
+                <a href="https://www.linkedin.com/pub/anton-batiaev/56/998/4aa" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><span class="fa fa-3x fa-linkedin wow bounceIn" data-wow-delay=".5s"></span></a>
+            </p>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <p>or read my blogs</p>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 text-center">
+                <i class="fa fa-3x fa-paper-plane-o wow bounceIn" data-wow-delay=".3s"></i>
+                <p><a href="https://batiaev.com/travel/">Travel Blog</a></p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <i class="fa fa-3x fa-code wow bounceIn" data-wow-delay=".4s"></i>
+                <p><a href="https://batiaev.com/blog/">Tech Blog</a></p>
+            </div>
+        </div>
+    </div>
+</section>
