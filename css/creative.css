@@ -387,6 +387,18 @@ fieldset[disabled] .btn-primary.active {
   text-shadow: none;
   background: #222222;
 }
+.wrapper .bg-primary {
+    background-color: rgba(00,64,00,0.5);
+    color: white;
+}
+.wrapper {
+  background-image: url('../img/ggb.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+}
 .bg-dark {
   background-color: #222222;
   color: white;

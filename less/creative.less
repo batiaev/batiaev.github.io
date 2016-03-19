@@ -334,7 +334,18 @@ header {
     background: @theme-dark;
 }
 
-
+.wrapper {
+  background-image: url('../img/ggb.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  & .bg-primary {
+    background-color: fade(@theme-dark, 50%);
+    color: white;
+  }
+}
 .bg-dark {
     background-color: @theme-dark;
     color: white;
