@@ -7,7 +7,7 @@ body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
-  border-color: #006400;
+  border-color: darkgreen;
   border-width: 3px;
   max-width: 50px;
 }
@@ -18,7 +18,7 @@ a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-  color: #006400;
+  color: darkgreen;
 }
 a:hover,
 a:focus {
@@ -38,13 +38,13 @@ p {
   margin-bottom: 20px;
 }
 .bg-primary {
-  background-color: #006400;
+  background-color: darkgreen;
 }
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
 .text-faded > a {
-  color: #222222;
+  color: rgba(255, 255, 255, 0.55);
 }
 section {
   padding: 100px 0;
@@ -64,7 +64,7 @@ aside {
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
-  color: #006400;
+  color: darkgreen;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -78,18 +78,18 @@ aside {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 13px;
-  color: #222222;
+  color: #222;
   border-top: 2px solid rgba(34, 34, 34, 0.05);
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus:hover {
-  color: #006400;
+  color: darkgreen;
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #006400 !important;
+  color: darkgreen !important;
   background-color: transparent;
-  border-top: 2px solid #006400;
+  border-top: 2px solid darkgreen;
 }
 .navbar-default .nav > li.active > a:hover,
 .navbar-default .nav > li.active > a:focus:hover {
@@ -120,7 +120,7 @@ aside {
     border-color: rgba(34, 34, 34, 0.05);
   }
   .navbar-default.affix .navbar-header .navbar-brand {
-    color: #006400;
+    color: darkgreen;
     font-size: 14px;
   }
   .navbar-default.affix .navbar-header .navbar-brand:hover,
@@ -129,11 +129,11 @@ aside {
   }
   .navbar-default.affix .nav > li > a,
   .navbar-default.affix .nav > li > a:focus {
-    color: #222222;
+    color: #222;
   }
   .navbar-default.affix .nav > li > a:hover,
   .navbar-default.affix .nav > li > a:focus:hover {
-    color: #006400;
+    color: darkgreen;
   }
 }
 header {
@@ -146,7 +146,7 @@ header {
   -o-background-size: cover;
   background-position: center;
   background-image: url('../img/header.jpg');
-  background-color: #222222;
+  background-color: #222;
   text-align: center;
   color: white;
 }
@@ -265,16 +265,16 @@ header .header-content .header-content-inner p {
   margin: 0 auto 20px;
 }
 .text-primary {
-  color: #006400;
+  color: darkgreen;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0;
 }
 .btn-default {
-  color: #222222;
-  background-color: #ffffff;
-  border-color: #ffffff;
+  color: #222;
+  background-color: white;
+  border-color: white;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
@@ -285,7 +285,7 @@ header .header-content .header-content-inner p {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #222222;
+  color: #222;
   background-color: #f2f2f2;
   border-color: #ededed;
 }
@@ -312,17 +312,17 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #ffffff;
-  border-color: #ffffff;
+  background-color: white;
+  border-color: white;
 }
 .btn-default .badge {
-  color: #ffffff;
-  background-color: #222222;
+  color: white;
+  background-color: #222;
 }
 .btn-primary {
-  color: #ffffff;
-  background-color: #006400;
-  border-color: #006400;
+  color: white;
+  background-color: darkgreen;
+  border-color: darkgreen;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
@@ -333,7 +333,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  color: #ffffff;
+  color: white;
   background-color: #004a00;
   border-color: #004000;
 }
@@ -360,12 +360,12 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #006400;
-  border-color: #006400;
+  background-color: darkgreen;
+  border-color: darkgreen;
 }
 .btn-primary .badge {
-  color: #006400;
-  background-color: #ffffff;
+  color: darkgreen;
+  background-color: white;
 }
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -380,16 +380,12 @@ fieldset[disabled] .btn-primary.active {
 ::-moz-selection {
   color: white;
   text-shadow: none;
-  background: #222222;
+  background: #222;
 }
 ::selection {
   color: white;
   text-shadow: none;
-  background: #222222;
-}
-.wrapper .bg-primary {
-    background-color: rgba(00,64,00,0.5);
-    color: white;
+  background: #222;
 }
 .wrapper {
   background-image: url('../img/ggb.jpg');
@@ -399,8 +395,12 @@ fieldset[disabled] .btn-primary.active {
   -o-background-size: cover;
   background-position: center;
 }
+.wrapper .bg-primary {
+  background-color: rgba(0, 100, 0, 0.4);
+  color: white;
+}
 .bg-dark {
-  background-color: #222222;
+  background-color: #222;
   color: white;
 }
 .bg-dark ::-moz-selection {
@@ -426,7 +426,7 @@ img::-moz-selection {
   background: transparent;
 }
 body {
-  webkit-tap-highlight-color: #222222;
+  webkit-tap-highlight-color: #222;
 }
 .fa-envelope:hover,
 .fa-envelope:focus,
@@ -436,7 +436,7 @@ body {
 }
 .fa-laptop:hover,
 .fa-laptop:focus {
-  color: #5bbc2e;
+  color: #5BBC2E;
 }
 .fa-github:hover,
 .fa-github:focus {
@@ -464,11 +464,11 @@ body {
 }
 .fa-skype:hover,
 .fa-skype:focus {
-  color: #12a5f4;
+  color: #12A5F4;
 }
 .fa-stack-overflow:hover,
 .fa-stack-overflow:focus {
-  color: #fe7a15;
+  color: #FE7A15;
 }
 #logo {
   heigth: 100px;
@@ -488,7 +488,7 @@ body {
 }
 .location > a:hover {
   text-decoration: none;
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid #222;
 }
 .location > a:hover .fa {
   display: initial;
@@ -503,6 +503,6 @@ body {
   text-decoration: underline;
 }
 .edu_logo {
-    height: 96px;
-    width: 96px;
+  height: 96px;
+  width: 96px;
 }
