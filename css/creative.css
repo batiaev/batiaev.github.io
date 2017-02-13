@@ -539,3 +539,6 @@ a > .fa-vk:hover,
 .notes {
   padding-top: 20px;
 }
+.lightgray {
+  color: lightgray;
+}
