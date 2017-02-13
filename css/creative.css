@@ -499,6 +499,36 @@ body {
 .social a > .fa {
   color: initial;
 }
+.social a > .fa-facebook:hover,
+.social a > .fa-facebook:focus {
+  color: #3b5998;
+}
+.social a > .fa-vk:hover,
+.social a > .fa-vk:focus {
+  color: #45668e;
+}
+.social a > .fa-vk:hover,
+.social a > .fa-vk:focus {
+  color: #0077b5;
+}
+.skypeLink {
+  color: initial;
+}
+.skypeLink:hover,
+.skypeLink:focus > .fa-skype {
+  color: 12A5F4;
+}
+.emailLink {
+  color: initial;
+}
+.emailLink:hover,
+.emailLink:focus > .fa-envelope-o {
+  color: 009700;
+}
+a > .fa-vk:hover,
+.social a > .fa-vk:focus {
+  color: #0077b5;
+}
 .current-lang {
   text-decoration: underline;
 }
