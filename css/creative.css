@@ -44,7 +44,7 @@ p {
   color: rgba(255, 255, 255, 0.7);
 }
 .text-faded a {
-  color: rgba(255, 255, 255, 0.55);
+  color: white;
 }
 section {
   padding: 100px 0;
@@ -507,8 +507,8 @@ body {
 .social a > .fa-vk:focus {
   color: #45668e;
 }
-.social a > .fa-vk:hover,
-.social a > .fa-vk:focus {
+.social a > .fa-linkedin:hover,
+.social a > .fa-linkedin:focus {
   color: #0077b5;
 }
 .skypeLink {
@@ -516,14 +516,14 @@ body {
 }
 .skypeLink:hover,
 .skypeLink:focus > .fa-skype {
-  color: 12A5F4;
+  color: #12A5F4;
 }
 .emailLink {
   color: initial;
 }
 .emailLink:hover,
 .emailLink:focus > .fa-envelope-o {
-  color: 009700;
+  color: #009700;
 }
 a > .fa-vk:hover,
 .social a > .fa-vk:focus {
