@@ -43,7 +43,7 @@ p {
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
-.text-faded > a {
+.text-faded a {
   color: rgba(255, 255, 255, 0.55);
 }
 section {
