@@ -1,0 +1,32 @@
+{
+  "name": "batiaev.com",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Anton Batiaev - Java Developer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnBat/anbat.github.io"
+  },
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anton Batiaev <anton@batiaev.com>",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.18.7",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-clean-css": "^3.0.2",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sass": "^3.1.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
+    "gulp-watch": "^4.3.11",
+    "rimraf": "^2.3.1"
+  },
+  "devDependencies": {}
+}

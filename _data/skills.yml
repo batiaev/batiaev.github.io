@@ -1,9 +1,0 @@
----
-- Languages : [Bash, Java, Groovy, C++, Ruby]
-- DBMS : [Postgres, Firebird, MSSQL, SQLite]
-- VCS : [git, svn]
-- Frameworks : [Angular, Bootstrap, Qt, Spring, Vaadin, Ruby on Rails, etc]
-- OS : [Linux, Mac OS, Windows]
-- "Web servers" : [Nginx, Apache, Tomcat]
-- "Build systems" : [Gradle, Maven, QMake, CMake]
-- "Dev apps" : [Vim + Tmux, IntelliJ IDEA, RubyMain, Qt Creator, GitLab, TeamCity, Jenkins, Jira, YouTrack, Chef, Puppet]
