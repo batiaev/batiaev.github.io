@@ -52,8 +52,8 @@ section {
 aside {
   padding: 50px 0;
 }
-.no-padding {
-  padding: 0;
+.no-bottom-padding {
+  padding-bottom: 0;
 }
 .navbar-default {
   background-color: white;
