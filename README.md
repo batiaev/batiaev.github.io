@@ -1,28 +1,28 @@
-#Personal site
+# Personal site
 [![License: MIT](https://img.shields.io/dub/l/vibe-d.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/AnBat/anbat.github.io.svg)](https://travis-ci.org/AnBat/anbat.github.io)
 
 Simple half-assed personal website
 
-##Dev tools
+## Dev tools
 - GibHub pages
 - Travis CI
 - Npm
 - Bower
 - Gulp
 
-##Frontend libs
+## Frontend libs
 - JQuery
 - Bootstrap
 - FontAwesome
 - Animate.css
 - and couple more js libs.
 
-##Build
+## Build
 npm i && bower install && gulp
 
-##License
+## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
-##Contacts
+## Contacts
 anton@batiaev.com
