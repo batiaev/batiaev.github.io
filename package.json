@@ -27,7 +27,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
     "rimraf": "^2.3.1",
-    "jquery": "2.*",
+    "jquery": "~3.0.0",
     "font-awesome": "~4.7.0",
     "bootstrap": "~3.3.7",
     "animate.css": "~3.1.1"
