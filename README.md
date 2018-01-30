@@ -1,6 +1,6 @@
 # Personal site
 [![License: MIT](https://img.shields.io/dub/l/vibe-d.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/AnBat/anbat.github.io.svg)](https://travis-ci.org/AnBat/anbat.github.io)
+[![Build Status](https://travis-ci.org/Batiaev/batiaev.github.io.svg)](https://travis-ci.org/Batiaev/batiaev.github.io)
 
 Simple half-assed personal website
 
@@ -18,7 +18,7 @@ Simple half-assed personal website
 - and couple more js libs.
 
 ## Build
-npm i && bower install && gulp
+npm i && gulp
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
