@@ -32,11 +32,11 @@ var path = {
     },
     vendors: {
         css: [
-            'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/fontawesome/css/font-awesome.min.css',
-            'bower_components/animate.css/animate.min.css'
+            'node_modules/bootstrap/dist/css/bootstrap.min.css',
+            'node_modules/font-awesome/css/font-awesome.min.css',
+            'node_modules/animate.css/animate.min.css'
         ],
-        fontawesome: 'bower_components/fontawesome/fonts/*'
+        fontawesome: 'node_modules/font-awesome/fonts/*'
     },
     watch: {
         html: 'src/**/*.html',

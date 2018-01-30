@@ -8,7 +8,6 @@ Simple half-assed personal website
 - GibHub pages
 - Travis CI
 - Npm
-- Bower
 - Gulp
 
 ## Frontend libs

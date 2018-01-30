@@ -5,7 +5,7 @@
   "description": "Anton Batiaev - Java Developer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnBat/anbat.github.io"
+    "url": "https://github.com/Batiaev/batiaev.github.io"
   },
   "main": "index.html",
   "scripts": {
@@ -26,7 +26,10 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "gulp-watch": "^4.3.11",
-    "rimraf": "^2.3.1"
+    "rimraf": "^2.3.1",
+    "font-awesome": "~4.7.0",
+    "bootstrap": "~3.3.7",
+    "animate.css": "~3.1.1"
   },
   "devDependencies": {}
 }
