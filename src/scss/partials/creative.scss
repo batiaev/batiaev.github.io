@@ -136,41 +136,54 @@ aside {
     color: darkgreen;
   }
 }
-header {
-  position: relative;
-  width: 100%;
-  min-height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  background-position: center;
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
   background-image: url('../img/header.jpg');
-  background-color: #222;
-  text-align: center;
+
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+
+  height: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-text {
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
   color: white;
-}
-header .header-content {
-  position: relative;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
   text-align: center;
-  padding: 100px 15px 100px;
-  width: 100%;
 }
-header .header-content .header-content-inner h1 {
+.bg-text h1 {
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
 }
-header .header-content .header-content-inner hr {
+.bg-text hr {
   margin: 30px auto;
 }
-header .header-content .header-content-inner p {
+.bg-text p {
   font-weight: 300;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 50px;
 }
+
 @media (min-width: 768px) {
   header {
     min-height: 100%;
@@ -471,12 +484,12 @@ body {
   color: #FE7A15;
 }
 #logo {
-  heigth: 100px;
-  width: 100px;
-  border-radius: 100px;
-  -webkit-border-radius: 100px;
-  -moz-border-radius: 100px;
-  -khtml-border-radius: 100px;
+  heigth: 250px;
+  width: 250px;
+  border-radius: 250px;
+  -webkit-border-radius: 250px;
+  -moz-border-radius: 250px;
+  -khtml-border-radius: 250px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 .location > a {
