@@ -11,14 +11,12 @@ Simple half-assed personal website
 - Gulp
 
 ## Frontend libs
-- JQuery
-- Bootstrap
-- FontAwesome
-- Animate.css
-- and couple more js libs.
+- React
+- NextJS
+- Material UI
 
 ## Build
-npm i && gulp
+npm run build
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

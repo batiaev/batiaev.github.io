@@ -1,7 +1,0 @@
-User-Agent: *
-Disallow: /src/*
-Disallow: /package.json
-Disallow: /bower.json
-Disallow: /gulpfile.js
-Disallow: /README.md
-Disallow: /LICENSE

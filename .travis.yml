@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - "6.1"
-
+- node
+cache: npm
 before_script:
   - npm install
 
-script: gulp build
+script: npm run build

@@ -1,0 +1,274 @@
+{
+    "name": "Anton Batiaev",
+    "avatar": "/images/batiaev.webp",
+    "titles": [
+        "Software Engineer",
+        "Trader",
+        "Product Owner"
+    ],
+    "tags": [
+        {
+            "label": "MBA",
+            "icon": "SchoolIcon"
+        },
+        {
+            "label": "Cerfitied Java Developer",
+            "icon": "CodeIcon"
+        },
+        {
+            "label": "Accredited Investor (MOEX)",
+            "icon": "TrendingUpIcon"
+        }
+    ],
+    "description": "After 10 years of experience in software development and 4 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
+    "social": [
+        {
+            "name": "linkedin",
+            "link": "https://www.linkedin.com/in/batiaev/"
+        },
+        {
+            "name": "github",
+            "link": "https://www.github.com/batiaev/"
+        },
+        {
+            "name": "telegram",
+            "link": "https://t.me/batiaev_com"
+        },
+        {
+            "name": "facebook",
+            "link": "https://www.facebook.com/batiaev/"
+        },
+        {
+            "name": "twitter",
+            "link": "https://twitter.com/batiaev_com"
+        }
+    ],
+    "skills": [
+        {
+            "type": "Professional",
+            "areas": [
+                {
+                    "name": "Java",
+                    "value": 98
+                },
+                {
+                    "name": "SQL",
+                    "value": 85
+                },
+                {
+                    "name": "React/Typescript",
+                    "value": 70
+                },
+                {
+                    "name": "Finance & Trading",
+                    "value": 75
+                },
+                {
+                    "name": "Derivatives & FinMath",
+                    "value": 90
+                },
+                {
+                    "name": "Risk management",
+                    "value": 95
+                }
+            ]
+        },
+        {
+            "type": "Personal",
+            "areas": [
+                {
+                    "name": "Get It Done",
+                    "value": 100
+                },
+                {
+                    "name": "Critical Thinking",
+                    "value": 95
+                },
+                {
+                    "name": "Team Work",
+                    "value": 90
+                },
+                {
+                    "name": "Positive Attitude",
+                    "value": 85
+                },
+                {
+                    "name": "Communication",
+                    "value": 90
+                },
+                {
+                    "name": "Leadership",
+                    "value": 95
+                }
+            ]
+        }
+    ],
+    "experiences": [
+        {
+            "id": 1,
+            "title": "Technical Product Owner",
+            "period": "February 2020 – present (1 yrs 2 mos)",
+            "company": "Revolut • London",
+            "logo": "/images/revolut.png",
+            "url": "https://revolut.com/",
+            "description": "Team Lead, design from scratch solutions for Wealth & Trading Risk calculation",
+            "tags": []
+        },
+        {
+            "id": 2,
+            "title": "Assistant Vice President",
+            "period": "January 2019 – February 2020  (1 yrs 2 mos)",
+            "company": "Deutsche Bank • Moscow",
+            "logo": "/images/db.png",
+            "url": "https://db.com/",
+            "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
+            "tags": [
+                "NYSE: DB"
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Head of Department",
+            "period": "September 2016 – January 2019 (2 yrs 4 mos)",
+            "company": "Otkritie Broker • Moscow",
+            "logo": "/images/otkritie.png",
+            "url": "https://open-broker.ru/",
+            "description": "Derivatives pricing & Quantitative risks of FX, Equity, Commodity and Derivatives markets",
+            "tags": []
+        },
+        {
+            "id": 3,
+            "title": "Java Developer",
+            "period": "November 2014 - September 2016 (1 yrs 11 mos)",
+            "company": "Haulmont • Samara",
+            "url": "https://open-broker.ru/",
+            "tags": []
+        },
+        {
+            "id": 4,
+            "title": "C++ Developer",
+            "period": "October 2012 – May 2014",
+            "company": "Atol • Samara",
+            "url": "https://atol.ru/",
+            "tags": []
+        },
+        {
+            "id": 4,
+            "title": "Tech support (1st line)",
+            "period": "before 2012",
+            "company": "Mobile TeleSystems • Samara",
+            "url": "https://mts.ru/",
+            "tags": [
+                "MCX: MTSS",
+                "NYSE: MBT"
+            ]
+        }
+    ],
+    "services": [
+        {
+            "logo":"/images/services/postgresql.webp",
+            "name":"Databases",
+            "description":"PostgreSQL, Timescale, Mongo"
+        },
+        {
+            "logo":"/images/services/java.webp",
+            "name":"Backend",
+            "description":"Java, Spring, Netty"
+        },
+        {
+            "logo":"/images/services/react.webp",
+            "name":"Frontend",
+            "description":"React, Typescript, Material UI"
+        },
+        {
+            "logo":"/images/services/docker.webp",
+            "name":"Cloud",
+            "description":"GCP, Docker, Kubernetes"
+        }
+    ],
+    "education": [
+        {
+            "id": 1,
+            "title": "Master of Business Administration",
+            "period": "September 2018 – September 2020",
+            "company": "City Business School",
+            "city":"Moscow",
+            "url": "https://www.e-mba.ru/"
+        },
+        {
+            "id": 2,
+            "title": "Director of Finance",
+            "period": "January 2019",
+            "company": "City Business School",
+            "city":"Moscow",
+            "url": "https://www.e-mba.ru/"
+        },
+        {
+            "id": 3,
+            "title": "Oracle Java Certified Developer",
+            "period": "May 2017",
+            "company": "Oracle",
+            "city":"Moscow",
+            "url": "https://oracle.com/"
+        },
+        {
+            "id": 4,
+            "title": "Masters Degree in Information Security",
+            "period": "September 2010 – February 2016",
+            "company": "PSUTI",
+            "city":"Samara",
+            "url": "http://psuti.ru/"
+        }
+    ],
+    "talks": [
+        {
+            "name":"HighLoad Siberia 2019",
+            "desc":"Why do we do have quick calculations in the bank.",
+            "link":"https://www.highload.ru/siberia/2019",
+            "logo":"/images/conf/highload2019.webp",
+            "slides":"/talks/highload-siberia-2019/slides.pdf",
+            "date": "24 Jun 2019"
+        },
+        {
+            "name":"Hydra 2019",
+            "desc":"Living in a cross-language project. Java between React and C++",
+            "link":"https://2019.hydraconf.com/",
+            "logo":"/images/conf/hydra2019.webp",
+            "slides":"/talks/hydra-conf-2019/slides.pdf",
+            "date": "11 Jul 2019"
+        },
+        {
+            "name":"Pouf.Conf 2019",
+            "desc":"BigBank, BigIT. Live risk systems from scratch",
+            "link":"https://vk.com/poufconf",
+            "logo":"/images/conf/poufconf2019.webp",
+            "slides":"/talks/pouf-conf-2019/slides.pdf",
+            "date": "26 Sep 2019"
+        },
+        {
+            "name":"Find IT Moscow 2019",
+            "desc":"Clean Code : Striving for the unattainable",
+            "link":"https://vk.com/findit_msk",
+            "logo":"/images/conf/findit2019.webp",
+            "slides":"/talks/find-it-msk-2019/slides.pdf",
+            "date": "5 Oct 2019"
+        }
+    ],
+    "blog":[
+        {
+            "logo": "/images/blog/blog3.webp",
+            "link":"https://batiaev.com/blog/who-am-i/",
+            "name":"Who am I. FinTech, Risk management & Derivatives"
+        }, 
+        {
+            "logo":"/images/blog/blog1.webp",
+            "link":"https://habr.com/ru/company/dbtc/blog/487318/",
+            "name":"(Habr) Mutual authentication in Java with TLS / SSL"
+        },
+        {
+            "logo":"/images/blog/blog2.webp",
+            "link":"https://habr.com/ru/company/jugru/blog/449630/",
+            "name":"(Habr) Interview about FinMath development in banks"
+        }
+    ]
+}
