@@ -19,7 +19,7 @@ export default function Contact() {
       <Title text="Contact me" />
 
       <Card className="flexbox">
-        <CardContent>
+        <CardContent className="centered">
           <img alt={data.name} src={data.avatar} className="contactAvatar" />
           <Typography component="h3" variant="h5">
             {data.name}

@@ -16,6 +16,7 @@ export default function Services() {
             <Card className="card">
               <CardMedia
                 component="img"
+                className="cardMedia"
                 width='100%'
                 image={service.logo}
                 title={service.name}

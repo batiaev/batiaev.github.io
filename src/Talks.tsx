@@ -19,6 +19,7 @@ export default function Talks() {
             <Card className="card">
               <CardMedia
                 component="img"
+                className="cardMedia"
                 width="100%"
                 image={talk.logo}
                 title={talk.name}
