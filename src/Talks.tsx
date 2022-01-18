@@ -23,7 +23,6 @@ export default function Talks() {
                 width="100%"
                 image={talk.logo}
                 title={talk.name}
-
               />
               <CardContent>
                 <Typography component="h3" variant="h5" gutterBottom>{talk.name}</Typography>

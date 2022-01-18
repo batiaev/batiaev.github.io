@@ -222,20 +222,20 @@
     ],
     "talks": [
         {
-            "name":"HighLoad Siberia 2019",
-            "desc":"Why do we do have quick calculations in the bank.",
-            "link":"https://www.highload.ru/siberia/2019",
-            "logo":"/images/conf/highload2019.webp",
-            "slides":"/talks/highload-siberia-2019/slides.pdf",
-            "date": "24 Jun 2019"
+            "name":"Joker Conf 2021",
+            "desc":"How to build the development process in remote-first reality?",
+            "link":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
+            "logo":"/images/conf/jockerconf2021.webp",
+            "slides":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
+            "date": "26 Oct 2021"
         },
         {
-            "name":"Hydra 2019",
-            "desc":"Living in a cross-language project. Java between React and C++",
-            "link":"https://2019.hydraconf.com/",
-            "logo":"/images/conf/hydra2019.webp",
-            "slides":"/talks/hydra-conf-2019/slides.pdf",
-            "date": "11 Jul 2019"
+            "name":"Find IT Moscow 2019",
+            "desc":"Clean Code : Striving for the unattainable",
+            "link":"https://vk.com/findit_msk",
+            "logo":"/images/conf/findit2019.webp",
+            "slides":"/talks/find-it-msk-2019/slides.pdf",
+            "date": "5 Oct 2019"
         },
         {
             "name":"Pouf.Conf 2019",
@@ -246,12 +246,20 @@
             "date": "26 Sep 2019"
         },
         {
-            "name":"Find IT Moscow 2019",
-            "desc":"Clean Code : Striving for the unattainable",
-            "link":"https://vk.com/findit_msk",
-            "logo":"/images/conf/findit2019.webp",
-            "slides":"/talks/find-it-msk-2019/slides.pdf",
-            "date": "5 Oct 2019"
+            "name":"Hydra Conf 2019",
+            "desc":"Living in a cross-language project. Java between React and C++",
+            "link":"https://2019.hydraconf.com/",
+            "logo":"/images/conf/hydra2019.webp",
+            "slides":"/talks/hydra-conf-2019/slides.pdf",
+            "date": "11 Jul 2019"
+        },
+        {
+            "name":"HighLoad Siberia 2019",
+            "desc":"Why do we do have quick calculations in the bank.",
+            "link":"https://www.highload.ru/siberia/2019",
+            "logo":"/images/conf/highload2019.webp",
+            "slides":"/talks/highload-siberia-2019/slides.pdf",
+            "date": "24 Jun 2019"
         }
     ],
     "blog":[
