@@ -1,5 +1,5 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
+import React from 'react'
+import Container from '@mui/material/Container'
 
 import Intro from "../src/Intro"
 import Skills from "../src/Skills"

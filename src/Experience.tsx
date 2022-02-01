@@ -1,28 +1,27 @@
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Chip from '@material-ui/core/Chip';
-import CardContent from '@material-ui/core/CardContent';
-import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import Typography from '@material-ui/core/Typography';
+import Card from '@mui/material/Card';
+import Chip from '@mui/material/Chip';
+import CardContent from '@mui/material/CardContent';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import Typography from '@mui/material/Typography';
 
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import Title from "../src/components/Title"
 import data from "../src/data.json"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   historyStart: {
-    padding: theme.spacing(2),
+    padding: '16px',
   },
   historyLine: {
-    paddingTop: theme.spacing(5),
+    paddingTop: "40px",
   },
 }));
 
@@ -32,7 +31,7 @@ export default function Experience() {
   return (
     <section>
       <Title text="Experience" />
-      <Timeline align="alternate">
+      <Timeline position="alternate">
         <TimelineItem>
           <TimelineSeparator>
             <TimelineDot color="primary" className={classes.historyStart}>
@@ -48,8 +47,8 @@ export default function Experience() {
             <TimelineOppositeContent className="wideOnly">
               <Typography color="textSecondary">{experience.period}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator className="wideOnly">
-              <TimelineDot variant={experience.id == 1 ? "outlined" : "default"} color="primary" />
+            <TimelineSeparator>
+              <TimelineDot variant={experience.id == 1 ? "outlined" : "filled"} color="primary" />
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>

@@ -1,17 +1,17 @@
-import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import CodeIcon from '@material-ui/icons/Code';
-import SchoolIcon from '@material-ui/icons/School';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import Chip from '@mui/material/Chip';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import CodeIcon from '@mui/icons-material/Code';
+import SchoolIcon from '@mui/icons-material/School';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 import data from "../src/data.json"
 
@@ -30,7 +30,7 @@ export default function Intro() {
 
   return (
     <Card className="intro" component="section">
-      <img className="avatar" src={data.avatar} title={data.name}/>
+      <img className="avatar" src={data.avatar} title={data.name} alt={"avatar"}/>
       <div className="personalDetails">
         <CardContent>
           <Typography variant="h3" component="h1" color="textPrimary" gutterBottom>
@@ -57,7 +57,7 @@ export default function Intro() {
         </CardContent>
         <CardActions>
           {data.social.map((social) => (
-              <IconButton color="primary" className="svgIcon" href={social.link}>
+              <IconButton color="primary" className="svgIcon" href={social.link} size="large">
               {iconsByName[social.name]}
             </IconButton>
           ))}

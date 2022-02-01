@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline'
 import Copyright from '../src/components/Copyright';
-import theme from '../src/styles/theme';
 import '../src/styles/global.css'
 
 export default function MyApp(props: AppProps) {
@@ -41,12 +39,10 @@ export default function MyApp(props: AppProps) {
           <meta name="twitter:image" content="https://batiaev.com/images/batiaev.webp"/>
 
       </Head>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Component {...pageProps} />
-            <Copyright />
-          </ThemeProvider>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <Component {...pageProps} />
+      <Copyright />
     </>
   );
 }
