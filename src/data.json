@@ -20,7 +20,7 @@
             "icon": "TrendingUpIcon"
         }
     ],
-    "description": "After 10 years of experience in software development and 4 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
+    "description": "After 10+ years of experience in software development and 6 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
     "social": [
         {
             "name": "linkedin",
@@ -225,7 +225,7 @@
             "name":"Joker Conf 2021",
             "desc":"How to build the development process in remote-first reality?",
             "link":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
-            "logo":"/images/conf/jockerconf2021.webp",
+            "logo":"/images/header.webp",
             "slides":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
             "date": "26 Oct 2021"
         },
@@ -264,10 +264,15 @@
     ],
     "blog":[
         {
+            "logo": "/images/blog/blog4.webp",
+            "link":"https://medium.com/fintecy/my-engineering-perspective-on-currency-swaps-7cd7ea73c8ae",
+            "name":"My Engineering Perspective on Currency Swaps"
+        },
+        {
             "logo": "/images/blog/blog3.webp",
             "link":"https://batiaev.com/blog/who-am-i/",
             "name":"Who am I. FinTech, Risk management & Derivatives"
-        }, 
+        },
         {
             "logo":"/images/blog/blog1.webp",
             "link":"https://habr.com/ru/company/dbtc/blog/487318/",

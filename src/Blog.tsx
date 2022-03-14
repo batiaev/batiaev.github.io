@@ -13,7 +13,7 @@ export default function Portfolio() {
       <Title text="Blog" />
       <Grid container spacing={2} className="flexbox">
         {data.blog.map((blog, index) => (
-          <Grid item key={blog.name} xs={12} sm={index == 0 ? 12 : 6} md={4}>
+          <Grid item key={blog.name} xs={12} sm={6} md={index == 0 ? 12 : 4} lg={3}>
             <Link href={blog.link}>
             <Card className="card">
               <CardMedia
