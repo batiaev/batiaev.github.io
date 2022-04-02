@@ -24,23 +24,35 @@
     "social": [
         {
             "name": "linkedin",
+            "id": "batiaev",
             "link": "https://www.linkedin.com/in/batiaev/"
         },
         {
             "name": "github",
+            "hidden": true,
+            "id": "batiaev",
             "link": "https://www.github.com/batiaev/"
         },
         {
             "name": "telegram",
+            "id": "@batiaev_com",
             "link": "https://t.me/batiaev_com"
         },
         {
             "name": "facebook",
+            "hidden": true,
+            "id": "batiaev",
             "link": "https://www.facebook.com/batiaev/"
         },
         {
             "name": "twitter",
+            "id": "batiaev_com",
             "link": "https://twitter.com/batiaev_com"
+        },
+        {
+            "name": "email",
+            "id": "anton@batiaev.com",
+            "link": "mailto:anton@batiaev.com"
         }
     ],
     "skills": [
@@ -276,12 +288,14 @@
         {
             "logo":"/images/blog/blog1.webp",
             "link":"https://habr.com/ru/company/dbtc/blog/487318/",
-            "name":"(Habr) Mutual authentication in Java with TLS / SSL"
+            "name":"Mutual authentication in Java with TLS / SSL",
+            "badge": "habr"
         },
         {
             "logo":"/images/blog/blog2.webp",
             "link":"https://habr.com/ru/company/jugru/blog/449630/",
-            "name":"(Habr) Interview about FinMath development in banks"
+            "name":"Interview about FinTech development",
+            "badge": "habr"
         }
     ]
 }

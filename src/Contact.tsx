@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -9,53 +9,84 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import PublicIcon from '@mui/icons-material/Public'
 import RoomIcon from '@mui/icons-material/Room'
 import Title from "../src/components/Title"
 import data from "../src/data.json"
+import {Avatar, Badge, CardActions, Paper} from "@mui/material"
+import {Box} from "@mui/system"
+import {blue, deepPurple} from "@mui/material/colors"
+import Link from '@mui/material/Link'
+import Grid from "@mui/material/Grid";
 
 export default function Contact() {
-  return (
-    <section>
-      <Title text="Contact me" />
 
-      <Card className="flexbox">
-        <CardContent className="centered">
-          <img alt={data.name} src={data.avatar} className="contactAvatar" />
-          <Typography component="h3" variant="h5">
-            {data.name}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {data.titles.join(', ')}
-          </Typography>
-        </CardContent>
+    function getIcon(socialName) {
+        switch (socialName){
+            case 'github': return <GitHubIcon/>
+            case 'telegram': return <TelegramIcon/>
+            case 'facebook': return <FacebookIcon/>
+            case 'twitter': return <TwitterIcon/>
+            case 'linkedin': return <LinkedInIcon/>
+            case 'email': return <EmailIcon/>
+            default: return <PublicIcon/>
+        }
+    }
 
-        <List component="nav" aria-label="main mailbox folders">
-          <ListItem button key="1">
-            <ListItemIcon>
-              <EmailIcon width='30px' />
-            </ListItemIcon>
-            <ListItemText primary="Email me: anton@batiaev.com" />
-          </ListItem>
-          <ListItem button key="2">
-            <ListItemIcon>
-              <TelegramIcon width='30px' />
-            </ListItemIcon>
-            <ListItemText primary="Message me: @batiaev_com" />
-          </ListItem>
-          <ListItem button key="3">
-            <ListItemIcon>
-              <TwitterIcon width='30px' />
-            </ListItemIcon>
-            <ListItemText primary="Tweet me: @batiaev_com" />
-          </ListItem>
-          <ListItem button key="4">
-            <ListItemIcon>
-              <RoomIcon width='30px' />
-            </ListItemIcon>
-            <ListItemText primary="Meet me in person: Canart Wharf, London, UK" />
-          </ListItem>
-        </List>
-      </Card>
-    </section>
-  );
+    const [selectedItem, elevate] = useState('');
+
+
+    function getTitle(name) {
+        switch (name) {
+            case 'github': return "Show me code"
+            case 'telegram': return "Message me"
+            case 'facebook': return "Message me"
+            case 'twitter': return "Tweet me"
+            case 'linkedin': return "I am hiring"
+            case 'email': return "Email me"
+            default: return "Contact me"
+        }
+    }
+
+    return (
+        <section>
+            <Title text="Get In Touch"/>
+            <Grid container spacing={12}>
+                {data.social.map((social, idx) => (
+                    !social.hidden &&
+                    <Grid item sm={6} lg={3}>
+                        <Paper elevation={selectedItem==social.name ? 4 : 1}
+                               sx={{textAlign: 'center'}}
+                               onMouseOver={e=>elevate(social.name)}
+                               onMouseOut={e=>elevate('none')}
+                        >
+                            <Card sx={selectedItem==social.name ? {bgcolor: deepPurple[100]} : {}}>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                    <Box sx={{color: 'action.active'}} >
+                                        <Badge color="secondary" variant="dot"
+                                               anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+                                            <Avatar sx={{bgcolor: deepPurple[600]}}>
+                                                {getIcon(social.name)}
+                                            </Avatar>
+                                        </Badge>
+                                    </Box>
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {getTitle(social.name)}
+                                    </Typography>
+                                    <Typography color="text.secondary" gutterBottom>
+                                        <Link href={social.link}>{social.id}</Link>
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Paper>
+                    </Grid>
+                ))}
+            </Grid>
+        </section>
+    );
 }
