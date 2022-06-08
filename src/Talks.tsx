@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import Title from "../src/components/Title"
 import data from "../src/data.json"
 import siteData from "../src/site.json"
+import Chip from "@mui/material/Chip"
+import EventIcon from '@mui/icons-material/Event'
 
 export default function Talks() {
   return (
@@ -26,13 +28,15 @@ export default function Talks() {
               />
               <CardContent>
                 <Typography component="h3" variant="h5" gutterBottom>{talk.name}</Typography>
-                <Typography>{talk.desc}</Typography>
-                <Typography component="p" variant="subtitle1">{talk.date}</Typography>
+                <Typography variant={"subtitle1"}>{talk.desc}</Typography>
+                <Typography component="p" paddingTop={2}>
+                  <Chip icon={<EventIcon />} label={talk.date} variant="outlined" color={"primary"}/>
+                </Typography>
               </CardContent>
               <CardActions>
                 {/* <Button size="small" color="primary">Video</Button> */}
                 <Button href={talk.slides} size="small" color="primary">
-                  {siteData.talks.slides}
+                  {siteData.talks.slides} ⟶
                 </Button>
               </CardActions>
             </Card>

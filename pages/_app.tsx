@@ -6,8 +6,8 @@ import { ThemeProvider } from '@mui/material';
 import { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline'
 import Copyright from '../src/components/Copyright';
-import '../src/styles/global.css'
 import defaultTheme from '../src/styles/theme'
+import '../src/styles/global.css'
 import createEmotionCache from '../utility/createEmotionCache'
 
 const clientSideEmotionCache = createEmotionCache();

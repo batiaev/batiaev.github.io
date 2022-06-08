@@ -251,7 +251,7 @@
         },
         {
             "name":"Pouf.Conf 2019",
-            "desc":"BigBank, BigIT. Live risk systems from scratch",
+            "desc":"Big Bank, Big IT. How to build live risk systems from scratch",
             "link":"https://vk.com/poufconf",
             "logo":"/images/conf/poufconf2019.webp",
             "slides":"/talks/pouf-conf-2019/slides.pdf",
@@ -267,7 +267,7 @@
         },
         {
             "name":"HighLoad Siberia 2019",
-            "desc":"Why do we do have quick calculations in the bank.",
+            "desc":"Why do we do have quick FX risk calculations in the bank.",
             "link":"https://www.highload.ru/siberia/2019",
             "logo":"/images/conf/highload2019.webp",
             "slides":"/talks/highload-siberia-2019/slides.pdf",
