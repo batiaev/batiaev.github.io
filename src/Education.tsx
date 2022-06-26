@@ -1,34 +1,34 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import makeStyles from '@mui/styles/makeStyles';
-import SchoolIcon from '@mui/icons-material/School';
-import Typography from '@mui/material/Typography';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import makeStyles from "@mui/styles/makeStyles";
+import SchoolIcon from "@mui/icons-material/School";
+import Typography from "@mui/material/Typography";
 
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import Title from "../src/components/Title"
-import data from "../src/data.json"
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import Title from "../src/components/Title";
+import data from "../src/data.json";
 
 const useStyles = makeStyles(() => ({
   cardContent: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   historyStart: {
-    padding: '16px',
+    padding: "16px"
   },
   historyLine: {
-    paddingTop: "40px",
-  },
+    paddingTop: "40px"
+  }
 }));
 
 export default function Education() {
   const classes = useStyles();
-  
+
   return (
     <section>
       <Title text="Education" />
@@ -37,7 +37,7 @@ export default function Education() {
         <TimelineItem>
           <TimelineSeparator>
             <TimelineDot color="primary" className={classes.historyStart}>
-              <SchoolIcon fontSize="large" width='30px' />
+              <SchoolIcon fontSize="large" width="30px" />
             </TimelineDot>
             <TimelineConnector className={classes.historyLine} />
           </TimelineSeparator>
@@ -48,8 +48,8 @@ export default function Education() {
             <TimelineOppositeContent className="wideOnly">
               <Typography color="textSecondary">{edx.period}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator >
-              <TimelineDot color="primary"/>
+            <TimelineSeparator>
+              <TimelineDot color="primary" />
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>

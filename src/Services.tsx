@@ -1,10 +1,10 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Title from "../src/components/Title"
-import data from "../src/data.json"
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Title from "../src/components/Title";
+import data from "../src/data.json";
 
 export default function Services() {
   return (
@@ -17,7 +17,7 @@ export default function Services() {
               <CardMedia
                 component="img"
                 className="cardMedia"
-                width='100%'
+                width="100%"
                 image={service.logo}
                 title={service.name}
               />

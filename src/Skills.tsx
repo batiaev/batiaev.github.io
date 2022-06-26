@@ -1,10 +1,10 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
-import Grid from '@mui/material/Grid'
-import Title from "../src/components/Title"
-import data from "../src/data.json"
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import LinearProgress from "@mui/material/LinearProgress";
+import Grid from "@mui/material/Grid";
+import Title from "../src/components/Title";
+import data from "../src/data.json";
 
 export default function Skills() {
   return (
@@ -20,14 +20,14 @@ export default function Skills() {
                   {skill.type}
                 </Typography>
                 <ul className="noBulletList">
-                {skill.areas.map((area) => (
-                  <>
-                    <Typography component="li">
-                      {area.name}
-                      <LinearProgress variant="determinate" value={area.value} />
-                    </Typography>
-                  </>
-                ))}
+                  {skill.areas.map((area) => (
+                    <>
+                      <Typography component="li">
+                        {area.name}
+                        <LinearProgress variant="determinate" value={area.value} />
+                      </Typography>
+                    </>
+                  ))}
                 </ul>
               </CardContent>
             </Card>

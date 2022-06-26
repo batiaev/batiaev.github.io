@@ -1,28 +1,28 @@
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import CardContent from '@mui/material/CardContent';
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import Typography from '@mui/material/Typography';
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import CardContent from "@mui/material/CardContent";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import Typography from "@mui/material/Typography";
 
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
-import makeStyles from '@mui/styles/makeStyles';
-import Title from "../src/components/Title"
-import data from "../src/data.json"
+import makeStyles from "@mui/styles/makeStyles";
+import Title from "../src/components/Title";
+import data from "../src/data.json";
 
 const useStyles = makeStyles(() => ({
   historyStart: {
-    padding: '16px',
+    padding: "16px"
   },
   historyLine: {
-    paddingTop: "40px",
-  },
+    paddingTop: "40px"
+  }
 }));
 
 export default function Experience() {
@@ -35,7 +35,7 @@ export default function Experience() {
         <TimelineItem>
           <TimelineSeparator>
             <TimelineDot color="primary" className={classes.historyStart}>
-              <BusinessCenterIcon fontSize="large" width='30px' />
+              <BusinessCenterIcon fontSize="large" width="30px" />
             </TimelineDot>
             <TimelineConnector className={classes.historyLine} />
           </TimelineSeparator>

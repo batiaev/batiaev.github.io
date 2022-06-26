@@ -1,15 +1,15 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Title from "../src/components/Title"
-import data from "../src/data.json"
-import siteData from "../src/site.json"
-import Chip from "@mui/material/Chip"
-import EventIcon from '@mui/icons-material/Event'
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Title from "../src/components/Title";
+import data from "../src/data.json";
+import siteData from "../src/site.json";
+import Chip from "@mui/material/Chip";
+import EventIcon from "@mui/icons-material/Event";
 
 export default function Talks() {
   return (
@@ -17,7 +17,7 @@ export default function Talks() {
       <Title text={siteData.headers.talks} />
       <Grid container spacing={2} className="flexbox">
         {data.talks.map((talk, index) => (
-          <Grid item key={talk.name} xs={12} sm={index == 0 ? 12 : 6} md={ index == 0 || index == 1 ? 6 : 4}>
+          <Grid item key={talk.name} xs={12} sm={index == 0 ? 12 : 6} md={index == 0 || index == 1 ? 6 : 4}>
             <Card className="card">
               <CardMedia
                 component="img"
@@ -30,7 +30,7 @@ export default function Talks() {
                 <Typography component="h3" variant="h5" gutterBottom>{talk.name}</Typography>
                 <Typography variant={"subtitle1"}>{talk.desc}</Typography>
                 <Typography component="p" paddingTop={2}>
-                  <Chip icon={<EventIcon />} label={talk.date} variant="outlined" color={"primary"}/>
+                  <Chip icon={<EventIcon />} label={talk.date} variant="outlined" color={"primary"} />
                 </Typography>
               </CardContent>
               <CardActions>
