@@ -9,6 +9,7 @@ import Experience from "../src/Experience"
 import Blog from "../src/Blog"
 import Contact from "../src/Contact"
 import Talks from "../src/Talks"
+import OpenSource from "../src/OpenSource"
 
 export default function Index() {
   return (
@@ -20,6 +21,7 @@ export default function Index() {
         <Experience />
         <Talks />
         <Education />
+        <OpenSource />
         <Services />
         <Blog />
         <Contact />

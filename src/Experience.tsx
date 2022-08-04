@@ -42,8 +42,8 @@ export default function Experience() {
           <TimelineContent>
           </TimelineContent>
         </TimelineItem>
-        {data.experiences.map((experience) => (
-          <TimelineItem>
+        {data.experiences.map((experience, idx) => (
+          <TimelineItem key={idx}>
             <TimelineOppositeContent className="wideOnly">
               <Typography color="textSecondary">{experience.period}</Typography>
             </TimelineOppositeContent>
@@ -65,8 +65,8 @@ export default function Experience() {
                     {experience.description}
                   </Typography>
 
-                  {experience.tags.map((tag) => (
-                    <Chip
+                  {experience.tags.map((tag, idx) => (
+                    <Chip key={idx}
                       label={tag}
                       variant="outlined"
                       color="primary"

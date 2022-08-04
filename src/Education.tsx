@@ -43,8 +43,8 @@ export default function Education() {
           </TimelineSeparator>
           <TimelineContent />
         </TimelineItem>
-        {data.education.map((edx) => (
-          <TimelineItem>
+        {data.education.map((edx, idx) => (
+          <TimelineItem key={idx}>
             <TimelineOppositeContent className="wideOnly">
               <Typography color="textSecondary">{edx.period}</Typography>
             </TimelineOppositeContent>

@@ -5,32 +5,35 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Title from "../src/components/Title";
 import data from "../src/data.json";
+import Link from "@mui/material/Link";
 
-export default function Services() {
+export default function OpenSource() {
   return (
     <section>
-      <Title text="Toolset" />
+      <Title text="Open source" />
       <Grid container spacing={2} className="flexbox">
-        {data.services.map((service) => (
-          <Grid item key={service.name} xs={12} sm={6} md={3}>
+        {data.openSource.map((repo) => (
+          <Grid item key={repo.name} xs={12} sm={6} md={4}>
+            <Link  href={repo.link}>
             <Card className="card">
               <CardMedia
                 component="img"
                 className="cardMedia"
                 width="100%"
-                image={service.logo}
-                title={service.name}
+                image={repo.logo}
+                title={repo.name}
               />
               <CardContent>
                 <Typography component="h3" variant="h5" gutterBottom>
-                  {service.name}
+                  {repo.name}
                 </Typography>
 
                 <Typography>
-                  {service.description}
+                  {repo.description}
                 </Typography>
               </CardContent>
             </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

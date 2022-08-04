@@ -12,8 +12,8 @@ export default function Skills() {
       <Title text="Skills" />
       <Grid container spacing={2} className="flexbox">
 
-        {data.skills.map((skill) => (
-          <Grid item xs={12} sm={6}>
+        {data.skills.map((skill, idx) => (
+          <Grid item xs={12} sm={6} key={idx}>
             <Card className="card">
               <CardContent>
                 <Typography component="h3" variant="h5" className="centered" gutterBottom>

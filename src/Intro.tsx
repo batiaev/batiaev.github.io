@@ -40,8 +40,9 @@ export default function Intro() {
             {data.titles.join(", ")}
           </Typography>
           <ul className="noBulletList">
-            {data.tags.map((tag) => (
+            {data.tags.map((tag, index) => (
               <Chip
+                key={index}
                 component="li"
                 className="tags"
                 icon={iconsByName[tag.icon]}
@@ -56,8 +57,8 @@ export default function Intro() {
           </Typography>
         </CardContent>
         <CardActions>
-          {data.social.map((social) => (
-            <IconButton color="primary" className="svgIcon" href={social.link} size="large">
+          {data.social.map((social, idx) => (
+            <IconButton key={idx} color="primary" className="svgIcon" href={social.link} size="large">
               {iconsByName[social.name]}
             </IconButton>
           ))}
