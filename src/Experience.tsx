@@ -59,7 +59,7 @@ export default function Experience() {
                     {experience.title}
                   </Typography>
                   <Typography>
-                    @ {experience.company}
+                    @ {experience.company} • {experience.city}
                   </Typography>
                   <Typography>
                     {experience.description}

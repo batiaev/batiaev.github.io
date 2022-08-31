@@ -17,7 +17,7 @@ export default function Portfolio() {
   return (
     <section>
       <Title text="Blog" />
-      <Grid container spacing={6} className="flexbox">
+      <Grid container spacing={2} className="flexbox">
         {data.blog.map((blog, index) => (
           <Grid item key={blog.name} xs={12} sm={6} md={index == 0 ? 12 : 4} lg={3}>
 

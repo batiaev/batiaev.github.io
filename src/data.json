@@ -2,9 +2,7 @@
     "name": "Anton Batiaev",
     "avatar": "/images/batiaev.webp",
     "titles": [
-        "Software Engineer",
-        "Trader",
-        "Product Owner"
+        "Lead Engineering Manager / Product Owner of Trading Platform"
     ],
     "tags": [
         {
@@ -12,7 +10,7 @@
             "icon": "SchoolIcon"
         },
         {
-            "label": "Cerfitied Java Developer",
+            "label": "Certified Java Developer",
             "icon": "CodeIcon"
         },
         {
@@ -57,39 +55,60 @@
     ],
     "skills": [
         {
-            "type": "Professional",
+            "type": "Engineering",
             "areas": [
                 {
-                    "name": "Java",
+                    "name": "Java/Kotlin",
                     "value": 98
                 },
                 {
-                    "name": "SQL",
+                    "name": "Fix/Aeron/GRPC/Kafka",
+                    "value": 90
+                },
+                {
+                    "name": "SQL/Postgres/Timescale",
                     "value": 85
+                },
+                {
+                    "name": "Docker/K8S/Terraform",
+                    "value": 80
                 },
                 {
                     "name": "React/Typescript",
                     "value": 70
-                },
-                {
-                    "name": "Finance & Trading",
-                    "value": 75
-                },
-                {
-                    "name": "Derivatives & FinMath",
-                    "value": 90
-                },
-                {
-                    "name": "Risk management",
-                    "value": 95
                 }
             ]
         },
         {
-            "type": "Personal",
+            "type": "Fintech",
             "areas": [
                 {
-                    "name": "Get It Done",
+                    "name": "Derivatives",
+                    "value": 95
+                },
+                {
+                    "name": "Risk management",
+                    "value": 90
+                },
+                {
+                    "name": "Market Making and DMA",
+                    "value": 85
+                },
+                {
+                    "name": "Quantitative Math",
+                    "value": 80
+                },
+                {
+                    "name": "Algo trading",
+                    "value": 80
+                }
+            ]
+        },
+        {
+            "type": "Product",
+            "areas": [
+                {
+                    "name": "Problem Solving",
                     "value": 100
                 },
                 {
@@ -97,20 +116,16 @@
                     "value": 95
                 },
                 {
-                    "name": "Team Work",
-                    "value": 90
-                },
-                {
-                    "name": "Positive Attitude",
-                    "value": 85
-                },
-                {
-                    "name": "Communication",
-                    "value": 90
+                    "name": "Product Management",
+                    "value": 92
                 },
                 {
                     "name": "Leadership",
-                    "value": 95
+                    "value": 90
+                },
+                {
+                    "name": "Stakeholder management",
+                    "value": 85
                 }
             ]
         }
@@ -118,9 +133,10 @@
     "experiences": [
         {
             "id": 1,
-            "title": "Technical Product Owner",
+            "title": "Lead Engineering Manager (Trading Platform)",
             "period": "February 2020 – present (2 yrs 7 mos)",
-            "company": "Revolut • London",
+            "company": "Revolut",
+            "city": "London",
             "logo": "/images/revolut.png",
             "url": "https://revolut.com/",
             "description": "Team Lead, design from scratch solutions for Wealth & Trading Risk calculation",
@@ -130,7 +146,8 @@
             "id": 2,
             "title": "Assistant Vice President",
             "period": "January 2019 – February 2020  (1 yrs 2 mos)",
-            "company": "Deutsche Bank • Moscow",
+            "company": "Deutsche Bank",
+            "city": "Moscow",
             "logo": "/images/db.png",
             "url": "https://db.com/",
             "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
@@ -143,6 +160,7 @@
             "title": "Head of Department",
             "period": "September 2016 – January 2019 (2 yrs 4 mos)",
             "company": "Otkritie Broker • Moscow",
+            "city": "Moscow",
             "logo": "/images/otkritie.png",
             "url": "https://open-broker.ru/",
             "description": "Derivatives pricing & Quantitative risks of FX, Equity, Commodity and Derivatives markets",
@@ -152,7 +170,8 @@
             "id": 3,
             "title": "Java Developer",
             "period": "November 2014 - September 2016 (1 yrs 11 mos)",
-            "company": "Haulmont • Samara",
+            "company": "Haulmont",
+            "city": "Samara",
             "url": "https://open-broker.ru/",
             "tags": []
         },
@@ -160,7 +179,8 @@
             "id": 4,
             "title": "C++ Developer",
             "period": "October 2012 – May 2014",
-            "company": "Atol • Samara",
+            "company": "Atol",
+            "city": "Samara",
             "url": "https://atol.ru/",
             "tags": []
         },
@@ -168,7 +188,8 @@
             "id": 4,
             "title": "Tech support (1st line)",
             "period": "before 2012",
-            "company": "Mobile TeleSystems • Samara",
+            "company": "Mobile TeleSystems",
+            "city": "Samara",
             "url": "https://mts.ru/",
             "tags": [
                 "MCX: MTSS",
@@ -177,6 +198,12 @@
         }
     ],
     "openSource": [
+        {
+            "logo":"/images/services/disruptor.png",
+            "name":"OrderBook lib",
+            "description":"Order book implementation on java with disruptor",
+            "link": "https://github.com/batiaev/orderbook"
+        },
         {
             "logo":"/images/services/fintecy.webp",
             "name":"MD connectors",
@@ -253,6 +280,14 @@
         }
     ],
     "talks": [
+        {
+            "name":"JavaSwag Podcast #31",
+            "desc":"Many-sided fintech, MBA and transition to Product Owner",
+            "link":"https://soundcloud.com/javaswag/e31",
+            "logo":"/images/conf/javaswag.webp",
+            "slides":"https://soundcloud.com/javaswag/e31",
+            "date": "5 Aug 2022"
+        },
         {
             "name":"Joker Conf 2021",
             "desc":"How to build the development process in remote-first reality?",

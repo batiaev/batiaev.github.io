@@ -13,7 +13,7 @@ export default function OpenSource() {
       <Title text="Open source" />
       <Grid container spacing={2} className="flexbox">
         {data.openSource.map((repo) => (
-          <Grid item key={repo.name} xs={12} sm={6} md={4}>
+          <Grid item key={repo.name} xs={12} sm={6} md={3}>
             <Link  href={repo.link}>
             <Card className="card">
               <CardMedia

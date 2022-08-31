@@ -13,20 +13,19 @@ export default function Skills() {
       <Grid container spacing={2} className="flexbox">
 
         {data.skills.map((skill, idx) => (
-          <Grid item xs={12} sm={6} key={idx}>
+          <Grid item xs={12} sm={idx == 0 ? 12 : 6} md={4} key={idx}>
             <Card className="card">
               <CardContent>
                 <Typography component="h3" variant="h5" className="centered" gutterBottom>
                   {skill.type}
                 </Typography>
                 <ul className="noBulletList">
-                  {skill.areas.map((area) => (
-                    <>
-                      <Typography component="li">
-                        {area.name}
-                        <LinearProgress variant="determinate" value={area.value} />
-                      </Typography>
-                    </>
+                  {skill.areas.map((area, idx) => (
+                    <Typography component="li" key={idx}>
+                      {area.name}
+                      <LinearProgress variant="determinate" value={area.value} />
+                      <br />
+                    </Typography>
                   ))}
                 </ul>
               </CardContent>
