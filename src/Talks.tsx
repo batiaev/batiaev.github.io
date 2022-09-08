@@ -17,7 +17,7 @@ export default function Talks() {
       <Title text={siteData.headers.talks} />
       <Grid container spacing={2} className="flexbox">
         {data.talks.map((talk, index) => (
-          <Grid item key={talk.name} xs={12} sm={6} md={4}>
+          <Grid item key={talk.name} xs={12} sm={index >= 1 ? 6 : 12} md={index >= 4 ? 4 : 6} lg={index >= 3 ? 3 : 4}>
             <Card className="card">
               <CardMedia
                 component="img"
@@ -34,10 +34,15 @@ export default function Talks() {
                 </Typography>
               </CardContent>
               <CardActions>
-                {/* <Button size="small" color="primary">Video</Button> */}
-                <Button href={talk.slides} size="small" color="primary">
+                {talk.video && <Button href={talk.video} size={"small"} color={"primary"}>
+                  {siteData.talks.video} ⟶
+                </Button>}
+                {talk.slides && <Button href={talk.slides} size="small" color="primary">
                   {siteData.talks.slides} ⟶
-                </Button>
+                </Button>}
+                {talk.podcast && <Button href={talk.podcast} size="small" color="primary">
+                  {siteData.talks.podcast} ⟶
+                </Button>}
               </CardActions>
             </Card>
           </Grid>

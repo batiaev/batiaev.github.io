@@ -281,11 +281,19 @@
     ],
     "talks": [
         {
+            "name":"UK Global Talent for Software Engineers",
+            "desc":"My path to receiving endorsement for global talent visa in FinTech field",
+            "link":"https://www.youtube.com/watch?v=Rh3V1JFKRl0",
+            "logo":"/images/conf/globaltalent2022.webp",
+            "video":"https://www.youtube.com/watch?v=Rh3V1JFKRl0",
+            "date": "8 Sep 2022"
+        },
+        {
             "name":"JavaSwag Podcast #31",
             "desc":"Many-sided fintech, MBA and transition to Product Owner",
             "link":"https://soundcloud.com/javaswag/e31",
             "logo":"/images/conf/javaswag.webp",
-            "slides":"https://soundcloud.com/javaswag/e31",
+            "podcast":"https://soundcloud.com/javaswag/e31",
             "date": "5 Aug 2022"
         },
         {
