@@ -17,8 +17,7 @@ export default function Talks() {
       <Title text={siteData.headers.talks} />
       <Grid container spacing={2} className="flexbox">
         {data.talks.map((talk, index) => (
-          // <Grid item key={talk.name} xs={12} sm={index >= 1 ? 6 : 12} md={index >= 4 ? 4 : 6} lg={index >= 3 ? 3 : 4}>
-          <Grid item key={talk.name} xs={12} sm={6} md={index >= 2 ? 4 : 6} lg={4}>
+          <Grid item key={talk.name} xs={12} sm={index >= 1 ? 6 : 12} md={4} lg={4}>
             <Card className="card">
               <CardMedia
                 component="img"
