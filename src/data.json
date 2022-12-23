@@ -281,6 +281,22 @@
     ],
     "talks": [
         {
+            "name":"It's Not a Sweet Business #5",
+            "desc":"Episode #5 about Revolut and FinTech trends in product development",
+            "link":"https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
+            "logo":"/images/conf/ItsNotASweetBusiness.webp",
+            "podcast":"https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
+            "date": "20 DEC 2022"
+        },
+        {
+            "name":"Interview at Relocode channel",
+            "desc":"Relocation to London, work at fintech startup Revolut and Global Talent Visa",
+            "link":"https://www.youtube.com/watch?v=OAYihZC8_LU",
+            "logo":"/images/conf/relocode.webp",
+            "video":"https://www.youtube.com/watch?v=OAYihZC8_LU",
+            "date": "2 Nov 2022"
+        },
+        {
             "name":"UK Global Talent for Software Engineers",
             "desc":"My path to receiving endorsement for global talent visa in FinTech field",
             "link":"https://www.youtube.com/watch?v=Rh3V1JFKRl0",
