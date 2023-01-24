@@ -1,25 +1,25 @@
-import { createTheme } from '@mui/material/styles';
-import {deepPurple} from "@mui/material/colors";
+import { createTheme } from '@mui/material/styles'
+import { deepPurple } from '@mui/material/colors'
 
 const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#f9f4f9"
-        }
-      }
-    }
+          backgroundColor: '#f9f4f9',
+        },
+      },
+    },
   },
   palette: {
     mode: 'light',
     primary: {
-      main:  deepPurple[600],
+      main: deepPurple[600],
     },
     secondary: {
       main: '#19857b',
-    }
+    },
   },
-});
+})
 
-export default theme;
+export default theme

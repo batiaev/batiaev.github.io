@@ -1,33 +1,33 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import makeStyles from "@mui/styles/makeStyles";
-import SchoolIcon from "@mui/icons-material/School";
-import Typography from "@mui/material/Typography";
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import makeStyles from '@mui/styles/makeStyles'
+import SchoolIcon from '@mui/icons-material/School'
+import Typography from '@mui/material/Typography'
 
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import Title from "../src/components/Title";
-import data from "../src/data.json";
+import Timeline from '@mui/lab/Timeline'
+import TimelineItem from '@mui/lab/TimelineItem'
+import TimelineSeparator from '@mui/lab/TimelineSeparator'
+import TimelineConnector from '@mui/lab/TimelineConnector'
+import TimelineContent from '@mui/lab/TimelineContent'
+import TimelineDot from '@mui/lab/TimelineDot'
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
+import Title from '../src/components/Title'
+import data from '../src/data.json'
 
 const useStyles = makeStyles(() => ({
   cardContent: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   historyStart: {
-    padding: "16px"
+    padding: '16px',
   },
   historyLine: {
-    paddingTop: "40px"
-  }
-}));
+    paddingTop: '40px',
+  },
+}))
 
 export default function Education() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <section>
@@ -55,7 +55,9 @@ export default function Education() {
             <TimelineContent>
               <Card className="card">
                 <CardContent className={classes.cardContent}>
-                  <Typography className="mobileOnly" color="textSecondary">{edx.period}</Typography>
+                  <Typography className="mobileOnly" color="textSecondary">
+                    {edx.period}
+                  </Typography>
                   <Typography component="h3" variant="h5" gutterBottom>
                     {edx.title}
                   </Typography>
@@ -69,5 +71,5 @@ export default function Education() {
         ))}
       </Timeline>
     </section>
-  );
+  )
 }

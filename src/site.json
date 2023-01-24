@@ -1,12 +1,12 @@
 {
-    "headers": {
-        "talks": "Talks",
-        "error404": "404 Page not found.",
-        "description404": "The link you clicked may be broken or the page may have been removed.\nIf you want to get it resolved please drop me a message or raise the ticket at GitHub repo"
-    },
-    "talks": {
-        "video": "Youtube video",
-        "podcast": "Podcast episode",
-        "slides": "Slides"
-    }
+  "headers": {
+    "talks": "Talks",
+    "error404": "404 Page not found.",
+    "description404": "The link you clicked may be broken or the page may have been removed.\nIf you want to get it resolved please drop me a message or raise the ticket at GitHub repo"
+  },
+  "talks": {
+    "video": "Youtube video",
+    "podcast": "Podcast episode",
+    "slides": "Slides"
+  }
 }

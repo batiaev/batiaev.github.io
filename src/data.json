@@ -1,380 +1,373 @@
 {
-    "name": "Anton Batiaev",
-    "avatar": "/images/batiaev.webp",
-    "titles": [
-        "Lead Engineering Manager / Product Owner of Trading Platform"
-    ],
-    "tags": [
+  "name": "Anton Batiaev",
+  "avatar": "/images/batiaev.webp",
+  "titles": ["Lead Engineering Manager / Product Owner of Trading Platform"],
+  "tags": [
+    {
+      "label": "MBA",
+      "icon": "SchoolIcon"
+    },
+    {
+      "label": "Certified Java Developer",
+      "icon": "CodeIcon"
+    },
+    {
+      "label": "Accredited Investor (MOEX)",
+      "icon": "TrendingUpIcon"
+    }
+  ],
+  "description": "After 10+ years of experience in software development and 6 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
+  "social": [
+    {
+      "name": "linkedin",
+      "id": "batiaev",
+      "link": "https://www.linkedin.com/in/batiaev/"
+    },
+    {
+      "name": "github",
+      "hidden": true,
+      "id": "batiaev",
+      "link": "https://www.github.com/batiaev/"
+    },
+    {
+      "name": "telegram",
+      "id": "@batiaev_com",
+      "link": "https://t.me/batiaev_com"
+    },
+    {
+      "name": "facebook",
+      "hidden": true,
+      "id": "batiaev",
+      "link": "https://www.facebook.com/batiaev/"
+    },
+    {
+      "name": "twitter",
+      "id": "batiaev_com",
+      "link": "https://twitter.com/batiaev_com"
+    },
+    {
+      "name": "email",
+      "id": "anton@batiaev.com",
+      "link": "mailto:anton@batiaev.com"
+    }
+  ],
+  "skills": [
+    {
+      "type": "Engineering",
+      "areas": [
         {
-            "label": "MBA",
-            "icon": "SchoolIcon"
+          "name": "Java/Kotlin",
+          "value": 98
         },
         {
-            "label": "Certified Java Developer",
-            "icon": "CodeIcon"
+          "name": "Fix/Aeron/GRPC/Kafka",
+          "value": 90
         },
         {
-            "label": "Accredited Investor (MOEX)",
-            "icon": "TrendingUpIcon"
+          "name": "SQL/Postgres/Timescale",
+          "value": 85
+        },
+        {
+          "name": "Docker/K8S/Terraform",
+          "value": 80
+        },
+        {
+          "name": "React/Typescript",
+          "value": 70
         }
-    ],
-    "description": "After 10+ years of experience in software development and 6 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
-    "social": [
+      ]
+    },
+    {
+      "type": "Fintech",
+      "areas": [
         {
-            "name": "linkedin",
-            "id": "batiaev",
-            "link": "https://www.linkedin.com/in/batiaev/"
+          "name": "Derivatives",
+          "value": 95
         },
         {
-            "name": "github",
-            "hidden": true,
-            "id": "batiaev",
-            "link": "https://www.github.com/batiaev/"
+          "name": "Risk management",
+          "value": 90
         },
         {
-            "name": "telegram",
-            "id": "@batiaev_com",
-            "link": "https://t.me/batiaev_com"
+          "name": "Market Making and DMA",
+          "value": 85
         },
         {
-            "name": "facebook",
-            "hidden": true,
-            "id": "batiaev",
-            "link": "https://www.facebook.com/batiaev/"
+          "name": "Quantitative Math",
+          "value": 80
         },
         {
-            "name": "twitter",
-            "id": "batiaev_com",
-            "link": "https://twitter.com/batiaev_com"
-        },
-        {
-            "name": "email",
-            "id": "anton@batiaev.com",
-            "link": "mailto:anton@batiaev.com"
+          "name": "Algo trading",
+          "value": 80
         }
-    ],
-    "skills": [
+      ]
+    },
+    {
+      "type": "Product",
+      "areas": [
         {
-            "type": "Engineering",
-            "areas": [
-                {
-                    "name": "Java/Kotlin",
-                    "value": 98
-                },
-                {
-                    "name": "Fix/Aeron/GRPC/Kafka",
-                    "value": 90
-                },
-                {
-                    "name": "SQL/Postgres/Timescale",
-                    "value": 85
-                },
-                {
-                    "name": "Docker/K8S/Terraform",
-                    "value": 80
-                },
-                {
-                    "name": "React/Typescript",
-                    "value": 70
-                }
-            ]
+          "name": "Problem Solving",
+          "value": 100
         },
         {
-            "type": "Fintech",
-            "areas": [
-                {
-                    "name": "Derivatives",
-                    "value": 95
-                },
-                {
-                    "name": "Risk management",
-                    "value": 90
-                },
-                {
-                    "name": "Market Making and DMA",
-                    "value": 85
-                },
-                {
-                    "name": "Quantitative Math",
-                    "value": 80
-                },
-                {
-                    "name": "Algo trading",
-                    "value": 80
-                }
-            ]
+          "name": "Critical Thinking",
+          "value": 95
         },
         {
-            "type": "Product",
-            "areas": [
-                {
-                    "name": "Problem Solving",
-                    "value": 100
-                },
-                {
-                    "name": "Critical Thinking",
-                    "value": 95
-                },
-                {
-                    "name": "Product Management",
-                    "value": 92
-                },
-                {
-                    "name": "Leadership",
-                    "value": 90
-                },
-                {
-                    "name": "Stakeholder management",
-                    "value": 85
-                }
-            ]
+          "name": "Product Management",
+          "value": 92
+        },
+        {
+          "name": "Leadership",
+          "value": 90
+        },
+        {
+          "name": "Stakeholder management",
+          "value": 85
         }
-    ],
-    "experiences": [
-        {
-            "id": 1,
-            "title": "Lead Engineering Manager (Trading Platform)",
-            "period": "February 2020 – present (2 yrs 7 mos)",
-            "company": "Revolut",
-            "city": "London",
-            "logo": "/images/revolut.png",
-            "url": "https://revolut.com/",
-            "description": "Team Lead, design from scratch solutions for Wealth & Trading Risk calculation",
-            "tags": []
-        },
-        {
-            "id": 2,
-            "title": "Assistant Vice President",
-            "period": "January 2019 – February 2020  (1 yrs 2 mos)",
-            "company": "Deutsche Bank",
-            "city": "Moscow",
-            "logo": "/images/db.png",
-            "url": "https://db.com/",
-            "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
-            "tags": [
-                "NYSE: DB"
-            ]
-        },
-        {
-            "id": 2,
-            "title": "Head of Department",
-            "period": "September 2016 – January 2019 (2 yrs 4 mos)",
-            "company": "Otkritie Broker • Moscow",
-            "city": "Moscow",
-            "logo": "/images/otkritie.png",
-            "url": "https://open-broker.ru/",
-            "description": "Derivatives pricing & Quantitative risks of FX, Equity, Commodity and Derivatives markets",
-            "tags": []
-        },
-        {
-            "id": 3,
-            "title": "Java Developer",
-            "period": "November 2014 - September 2016 (1 yrs 11 mos)",
-            "company": "Haulmont",
-            "city": "Samara",
-            "url": "https://open-broker.ru/",
-            "tags": []
-        },
-        {
-            "id": 4,
-            "title": "C++ Developer",
-            "period": "October 2012 – May 2014",
-            "company": "Atol",
-            "city": "Samara",
-            "url": "https://atol.ru/",
-            "tags": []
-        },
-        {
-            "id": 4,
-            "title": "Tech support (1st line)",
-            "period": "before 2012",
-            "company": "Mobile TeleSystems",
-            "city": "Samara",
-            "url": "https://mts.ru/",
-            "tags": [
-                "MCX: MTSS",
-                "NYSE: MBT"
-            ]
-        }
-    ],
-    "openSource": [
-        {
-            "logo":"/images/services/disruptor.png",
-            "name":"OrderBook lib",
-            "description":"Order book implementation on java with disruptor",
-            "link": "https://github.com/batiaev/orderbook"
-        },
-        {
-            "logo":"/images/services/fintecy.webp",
-            "name":"MD connectors",
-            "description":"Market data gateways",
-            "link": "https://github.com/fintecy/connectors"
-        },
-        {
-            "logo":"/images/services/aiml.webp",
-            "name":"AIML2 interpreter",
-            "description":"chat bot brain",
-            "link": "https://github.com/AIMLang/aiml-java-interpreter"
-        },
-        {
-            "logo":"/images/services/java.webp",
-            "name":"Java courses",
-            "description":"Basic courses about java",
-            "link": "https://github.com/batiaev?tab=repositories&q=course"
-        }
-    ],
-    "services": [
-        {
-            "logo":"/images/services/postgresql.webp",
-            "name":"Databases",
-            "description":"PostgreSQL, Timescale, Mongo"
-        },
-        {
-            "logo":"/images/services/java.webp",
-            "name":"Backend",
-            "description":"Java, Spring, Netty"
-        },
-        {
-            "logo":"/images/services/react.webp",
-            "name":"Frontend",
-            "description":"React, Typescript, Material UI"
-        },
-        {
-            "logo":"/images/services/docker.webp",
-            "name":"Cloud",
-            "description":"GCP, Docker, Kubernetes"
-        }
-    ],
-    "education": [
-        {
-            "id": 1,
-            "title": "Master of Business Administration",
-            "period": "September 2018 – September 2020",
-            "company": "City Business School",
-            "city":"Moscow",
-            "url": "https://www.e-mba.ru/"
-        },
-        {
-            "id": 2,
-            "title": "Director of Finance",
-            "period": "January 2019",
-            "company": "City Business School",
-            "city":"Moscow",
-            "url": "https://www.e-mba.ru/"
-        },
-        {
-            "id": 3,
-            "title": "Oracle Java Certified Developer",
-            "period": "May 2017",
-            "company": "Oracle",
-            "city":"Moscow",
-            "url": "https://oracle.com/"
-        },
-        {
-            "id": 4,
-            "title": "Masters Degree in Information Security",
-            "period": "September 2010 – February 2016",
-            "company": "PSUTI",
-            "city":"Samara",
-            "url": "http://psuti.ru/"
-        }
-    ],
-    "talks": [
-        {
-            "name":"It's Not a Sweet Business #5",
-            "desc":"Episode #5 about Revolut and FinTech trends in product development",
-            "link":"https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
-            "logo":"/images/conf/ItsNotASweetBusiness.webp",
-            "podcast":"https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
-            "date": "20 DEC 2022"
-        },
-        {
-            "name":"Interview at Relocode channel",
-            "desc":"Relocation to London, work at fintech startup Revolut and Global Talent Visa",
-            "link":"https://www.youtube.com/watch?v=OAYihZC8_LU",
-            "logo":"/images/conf/relocode.webp",
-            "video":"https://www.youtube.com/watch?v=OAYihZC8_LU",
-            "date": "2 Nov 2022"
-        },
-        {
-            "name":"UK Global Talent for Software Engineers",
-            "desc":"My path to receiving endorsement for global talent visa in FinTech field",
-            "link":"https://www.youtube.com/watch?v=Rh3V1JFKRl0",
-            "logo":"/images/conf/globaltalent2022.webp",
-            "video":"https://www.youtube.com/watch?v=Rh3V1JFKRl0",
-            "date": "8 Sep 2022"
-        },
-        {
-            "name":"JavaSwag Podcast #31",
-            "desc":"Many-sided fintech, MBA and transition to Product Owner",
-            "link":"https://soundcloud.com/javaswag/e31",
-            "logo":"/images/conf/javaswag.webp",
-            "podcast":"https://soundcloud.com/javaswag/e31",
-            "date": "5 Aug 2022"
-        },
-        {
-            "name":"Joker Conf 2021",
-            "desc":"How to build the development process in remote-first reality?",
-            "link":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
-            "logo":"/images/header.webp",
-            "slides":"https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
-            "date": "26 Oct 2021"
-        },
-        {
-            "name":"Find IT Moscow 2019",
-            "desc":"Clean Code : Striving for the unattainable",
-            "link":"https://vk.com/findit_msk",
-            "logo":"/images/conf/findit2019.webp",
-            "slides":"/talks/find-it-msk-2019/slides.pdf",
-            "date": "5 Oct 2019"
-        },
-        {
-            "name":"Pouf.Conf 2019",
-            "desc":"Big Bank, Big IT. How to build live risk systems from scratch",
-            "link":"https://vk.com/poufconf",
-            "logo":"/images/conf/poufconf2019.webp",
-            "slides":"/talks/pouf-conf-2019/slides.pdf",
-            "date": "26 Sep 2019"
-        },
-        {
-            "name":"Hydra Conf 2019",
-            "desc":"Living in a cross-language project. Java between React and C++",
-            "link":"https://2019.hydraconf.com/",
-            "logo":"/images/conf/hydra2019.webp",
-            "slides":"/talks/hydra-conf-2019/slides.pdf",
-            "date": "11 Jul 2019"
-        },
-        {
-            "name":"HighLoad Siberia 2019",
-            "desc":"Why do we do have quick FX risk calculations in the bank.",
-            "link":"https://www.highload.ru/siberia/2019",
-            "logo":"/images/conf/highload2019.webp",
-            "slides":"/talks/highload-siberia-2019/slides.pdf",
-            "date": "24 Jun 2019"
-        }
-    ],
-    "blog":[
-        {
-            "logo": "/images/blog/blog4.webp",
-            "link":"https://medium.com/fintecy/my-engineering-perspective-on-currency-swaps-7cd7ea73c8ae",
-            "name":"My Engineering Perspective on Currency Swaps"
-        },
-        {
-            "logo": "/images/blog/blog3.webp",
-            "link":"https://batiaev.com/blog/who-am-i/",
-            "name":"Who am I. FinTech, Risk management & Derivatives"
-        },
-        {
-            "logo":"/images/blog/blog1.webp",
-            "link":"https://habr.com/ru/company/dbtc/blog/487318/",
-            "name":"Mutual authentication in Java with TLS / SSL",
-            "badge": "habr"
-        },
-        {
-            "logo":"/images/blog/blog2.webp",
-            "link":"https://habr.com/ru/company/jugru/blog/449630/",
-            "name":"Interview about FinTech development",
-            "badge": "habr"
-        }
-    ]
+      ]
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "title": "Lead Engineering Manager (Trading Platform)",
+      "period": "February 2020 – present (2 yrs 7 mos)",
+      "company": "Revolut",
+      "city": "London",
+      "logo": "/images/revolut.png",
+      "url": "https://revolut.com/",
+      "description": "Team Lead, design from scratch solutions for Wealth & Trading Risk calculation",
+      "tags": []
+    },
+    {
+      "id": 2,
+      "title": "Assistant Vice President",
+      "period": "January 2019 – February 2020  (1 yrs 2 mos)",
+      "company": "Deutsche Bank",
+      "city": "Moscow",
+      "logo": "/images/db.png",
+      "url": "https://db.com/",
+      "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
+      "tags": ["NYSE: DB"]
+    },
+    {
+      "id": 2,
+      "title": "Head of Department",
+      "period": "September 2016 – January 2019 (2 yrs 4 mos)",
+      "company": "Otkritie Broker • Moscow",
+      "city": "Moscow",
+      "logo": "/images/otkritie.png",
+      "url": "https://open-broker.ru/",
+      "description": "Derivatives pricing & Quantitative risks of FX, Equity, Commodity and Derivatives markets",
+      "tags": []
+    },
+    {
+      "id": 3,
+      "title": "Java Developer",
+      "period": "November 2014 - September 2016 (1 yrs 11 mos)",
+      "company": "Haulmont",
+      "city": "Samara",
+      "url": "https://open-broker.ru/",
+      "tags": []
+    },
+    {
+      "id": 4,
+      "title": "C++ Developer",
+      "period": "October 2012 – May 2014",
+      "company": "Atol",
+      "city": "Samara",
+      "url": "https://atol.ru/",
+      "tags": []
+    },
+    {
+      "id": 4,
+      "title": "Tech support (1st line)",
+      "period": "before 2012",
+      "company": "Mobile TeleSystems",
+      "city": "Samara",
+      "url": "https://mts.ru/",
+      "tags": ["MCX: MTSS", "NYSE: MBT"]
+    }
+  ],
+  "openSource": [
+    {
+      "logo": "/images/services/disruptor.png",
+      "name": "OrderBook lib",
+      "description": "Order book implementation on java with disruptor",
+      "link": "https://github.com/batiaev/orderbook"
+    },
+    {
+      "logo": "/images/services/fintecy.webp",
+      "name": "MD connectors",
+      "description": "Market data gateways",
+      "link": "https://github.com/fintecy/connectors"
+    },
+    {
+      "logo": "/images/services/aiml.webp",
+      "name": "AIML2 interpreter",
+      "description": "chat bot brain",
+      "link": "https://github.com/AIMLang/aiml-java-interpreter"
+    },
+    {
+      "logo": "/images/services/java.webp",
+      "name": "Java courses",
+      "description": "Basic courses about java",
+      "link": "https://github.com/batiaev?tab=repositories&q=course"
+    }
+  ],
+  "services": [
+    {
+      "logo": "/images/services/postgresql.webp",
+      "name": "Databases",
+      "description": "PostgreSQL, Timescale, Mongo"
+    },
+    {
+      "logo": "/images/services/java.webp",
+      "name": "Backend",
+      "description": "Java, Spring, Netty"
+    },
+    {
+      "logo": "/images/services/react.webp",
+      "name": "Frontend",
+      "description": "React, Typescript, Material UI"
+    },
+    {
+      "logo": "/images/services/docker.webp",
+      "name": "Cloud",
+      "description": "GCP, Docker, Kubernetes"
+    }
+  ],
+  "education": [
+    {
+      "id": 1,
+      "title": "Master of Business Administration",
+      "period": "September 2018 – September 2020",
+      "company": "City Business School",
+      "city": "Moscow",
+      "url": "https://www.e-mba.ru/"
+    },
+    {
+      "id": 2,
+      "title": "Director of Finance",
+      "period": "January 2019",
+      "company": "City Business School",
+      "city": "Moscow",
+      "url": "https://www.e-mba.ru/"
+    },
+    {
+      "id": 3,
+      "title": "Oracle Java Certified Developer",
+      "period": "May 2017",
+      "company": "Oracle",
+      "city": "Moscow",
+      "url": "https://oracle.com/"
+    },
+    {
+      "id": 4,
+      "title": "Masters Degree in Information Security",
+      "period": "September 2010 – February 2016",
+      "company": "PSUTI",
+      "city": "Samara",
+      "url": "http://psuti.ru/"
+    }
+  ],
+  "talks": [
+    {
+      "name": "It's Not a Sweet Business #5",
+      "desc": "Episode #5 about Revolut and FinTech trends in product development",
+      "link": "https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
+      "logo": "/images/conf/ItsNotASweetBusiness.webp",
+      "podcast": "https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
+      "date": "20 DEC 2022"
+    },
+    {
+      "name": "Interview at Relocode channel",
+      "desc": "Relocation to London, work at fintech startup Revolut and Global Talent Visa",
+      "link": "https://www.youtube.com/watch?v=OAYihZC8_LU",
+      "logo": "/images/conf/relocode.webp",
+      "video": "https://www.youtube.com/watch?v=OAYihZC8_LU",
+      "date": "2 Nov 2022"
+    },
+    {
+      "name": "UK Global Talent for Software Engineers",
+      "desc": "My path to receiving endorsement for global talent visa in FinTech field",
+      "link": "https://www.youtube.com/watch?v=Rh3V1JFKRl0",
+      "logo": "/images/conf/globaltalent2022.webp",
+      "video": "https://www.youtube.com/watch?v=Rh3V1JFKRl0",
+      "date": "8 Sep 2022"
+    },
+    {
+      "name": "JavaSwag Podcast #31",
+      "desc": "Many-sided fintech, MBA and transition to Product Owner",
+      "link": "https://soundcloud.com/javaswag/e31",
+      "logo": "/images/conf/javaswag.webp",
+      "podcast": "https://soundcloud.com/javaswag/e31",
+      "date": "5 Aug 2022"
+    },
+    {
+      "name": "Joker Conf 2021",
+      "desc": "How to build the development process in remote-first reality?",
+      "link": "https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
+      "logo": "/images/header.webp",
+      "slides": "https://jokerconf.com/en/talks/how-to-build-the-development-process-in-remote-first-reality/",
+      "date": "26 Oct 2021"
+    },
+    {
+      "name": "Find IT Moscow 2019",
+      "desc": "Clean Code : Striving for the unattainable",
+      "link": "https://vk.com/findit_msk",
+      "logo": "/images/conf/findit2019.webp",
+      "slides": "/talks/find-it-msk-2019/slides.pdf",
+      "date": "5 Oct 2019"
+    },
+    {
+      "name": "Pouf.Conf 2019",
+      "desc": "Big Bank, Big IT. How to build live risk systems from scratch",
+      "link": "https://vk.com/poufconf",
+      "logo": "/images/conf/poufconf2019.webp",
+      "slides": "/talks/pouf-conf-2019/slides.pdf",
+      "date": "26 Sep 2019"
+    },
+    {
+      "name": "Hydra Conf 2019",
+      "desc": "Living in a cross-language project. Java between React and C++",
+      "link": "https://2019.hydraconf.com/",
+      "logo": "/images/conf/hydra2019.webp",
+      "slides": "/talks/hydra-conf-2019/slides.pdf",
+      "date": "11 Jul 2019"
+    },
+    {
+      "name": "HighLoad Siberia 2019",
+      "desc": "Why do we do have quick FX risk calculations in the bank.",
+      "link": "https://www.highload.ru/siberia/2019",
+      "logo": "/images/conf/highload2019.webp",
+      "slides": "/talks/highload-siberia-2019/slides.pdf",
+      "date": "24 Jun 2019"
+    }
+  ],
+  "blog": [
+    {
+      "logo": "/images/blog/blog4.webp",
+      "link": "https://medium.com/fintecy/my-engineering-perspective-on-currency-swaps-7cd7ea73c8ae",
+      "name": "My Engineering Perspective on Currency Swaps"
+    },
+    {
+      "logo": "/images/blog/blog3.webp",
+      "link": "https://batiaev.com/blog/who-am-i/",
+      "name": "Who am I. FinTech, Risk management & Derivatives"
+    },
+    {
+      "logo": "/images/blog/blog1.webp",
+      "link": "https://habr.com/ru/company/dbtc/blog/487318/",
+      "name": "Mutual authentication in Java with TLS / SSL",
+      "badge": "habr"
+    },
+    {
+      "logo": "/images/blog/blog2.webp",
+      "link": "https://habr.com/ru/company/jugru/blog/449630/",
+      "name": "Interview about FinTech development",
+      "badge": "habr"
+    }
+  ]
 }
