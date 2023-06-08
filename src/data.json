@@ -1,7 +1,7 @@
 {
   "name": "Anton Batiaev",
   "avatar": "/images/batiaev.webp",
-  "titles": ["Lead Engineering Manager / Product Owner of Trading Platform"],
+  "titles": ["Chief Technology Officer (CTO) at WealthTech Startup"],
   "tags": [
     {
       "label": "MBA",
@@ -16,7 +16,7 @@
       "icon": "TrendingUpIcon"
     }
   ],
-  "description": "After 10+ years of experience in software development and 6 years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
+  "description": "After 12+ years of experience in software development and 7+ years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
   "social": [
     {
       "name": "linkedin",
@@ -54,6 +54,7 @@
   "skills": [
     {
       "type": "Engineering",
+      "color": "blue",
       "areas": [
         {
           "name": "Java/Kotlin",
@@ -78,7 +79,8 @@
       ]
     },
     {
-      "type": "Fintech",
+      "type": "WealthTech",
+      "color": "green",
       "areas": [
         {
           "name": "Derivatives",
@@ -104,6 +106,7 @@
     },
     {
       "type": "Product",
+      "color": "red",
       "areas": [
         {
           "name": "Problem Solving",
@@ -130,9 +133,20 @@
   ],
   "experiences": [
     {
-      "id": 1,
-      "title": "Lead Engineering Manager (Trading Platform)",
-      "period": "February 2020 – present (2 yrs 7 mos)",
+      "id": 7,
+      "title": "Chief Technology Officer (CTO)",
+      "period": "Feb 2023 – present · 4 mos",
+      "company": "Stealth WealthTech Startup",
+      "city": "London",
+      "logo": "/images/stealth.png",
+      "url": "https://batiaev.com/",
+      "description": "Leading IT in the company",
+      "tags": []
+    },
+    {
+      "id": 6,
+      "title": "Head of Trading Platform",
+      "period": "Feb 2020 – May 2023 · 3 yrs 4 mos",
       "company": "Revolut",
       "city": "London",
       "logo": "/images/revolut.png",
@@ -141,9 +155,9 @@
       "tags": []
     },
     {
-      "id": 2,
-      "title": "Assistant Vice President",
-      "period": "January 2019 – February 2020  (1 yrs 2 mos)",
+      "id": 5,
+      "title": "Team Lead (AVP)",
+      "period": "Jan 2019 – Feb 2020 · 1 yrs 2 mos",
       "company": "Deutsche Bank",
       "city": "Moscow",
       "logo": "/images/db.png",
@@ -152,10 +166,10 @@
       "tags": ["NYSE: DB"]
     },
     {
-      "id": 2,
+      "id": 4,
       "title": "Head of Department",
       "period": "September 2016 – January 2019 (2 yrs 4 mos)",
-      "company": "Otkritie Broker • Moscow",
+      "company": "Otkritie Broker",
       "city": "Moscow",
       "logo": "/images/otkritie.png",
       "url": "https://open-broker.ru/",
@@ -172,7 +186,7 @@
       "tags": []
     },
     {
-      "id": 4,
+      "id": 2,
       "title": "C++ Developer",
       "period": "October 2012 – May 2014",
       "company": "Atol",
@@ -181,7 +195,7 @@
       "tags": []
     },
     {
-      "id": 4,
+      "id": 1,
       "title": "Tech support (1st line)",
       "period": "before 2012",
       "company": "Mobile TeleSystems",

@@ -7,6 +7,48 @@ header {
   height: 45vh;
 }
 
+.gradient-title {
+  font-size: 4rem!important;
+  font-weight: 800!important;
+  background: -webkit-linear-gradient(45deg, #09009f, #40a67b 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-subtitle {
+  font-size: 1.5rem!important;
+  font-weight: 400!important;
+  background: -webkit-linear-gradient(45deg, #09009f, #40a67b 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skill-card {
+  color: aliceblue;
+  background-image: url("/images/lines.png");
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.skill-card h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+.bg-red {
+  background-color: rgba(97, 51, 57, 100%); /* #613339 */
+}
+.bg-green {
+  background-color: rgba(37, 68, 50, 100%); /* #254432 */
+}
+.bg-blue {
+  background-color: rgba(31, 48, 87, 100%); /* #1f3057 */
+}
+.bg-light-blue {
+  background-color: rgba(31, 48, 87, 10%); /* #1f3057 */
+}
+
 @media screen and (max-width: 600px) {
   header {
     height: 30vh;

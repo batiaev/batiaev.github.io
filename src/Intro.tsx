@@ -33,10 +33,10 @@ export default function Intro() {
       <img className="avatar" src={data.avatar} title={data.name} alt={'avatar'} />
       <div className="personalDetails">
         <CardContent>
-          <Typography variant="h3" component="h1" color="textPrimary" gutterBottom>
+          <Typography variant="h3" component="h1" color="textPrimary" gutterBottom className={"gradient-title"}>
             {data.name}
           </Typography>
-          <Typography component="p" color="textPrimary">
+          <Typography component="p" className={"gradient-subtitle"} color="textPrimary">
             {data.titles.join(', ')}
           </Typography>
           <ul className="noBulletList">
