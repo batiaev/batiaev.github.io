@@ -13,6 +13,7 @@ import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import Title from '../src/components/Title'
 import data from '../src/data.json'
+import { isMobileOnly } from "react-device-detect";
 
 const useStyles = makeStyles(() => ({
   cardContent: {
@@ -48,10 +49,12 @@ export default function Education() {
             <TimelineOppositeContent className="wideOnly">
               <Typography color="textSecondary">{edx.period}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="primary" />
-              <TimelineConnector />
-            </TimelineSeparator>
+            {isMobileOnly ? null : (
+                <TimelineSeparator>
+                  <TimelineDot color="primary"/>
+                  <TimelineConnector/>
+                </TimelineSeparator>
+            )}
             <TimelineContent>
               <Card className="card">
                 <CardContent className={classes.cardContent}>

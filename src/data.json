@@ -135,7 +135,8 @@
     {
       "id": 7,
       "title": "Chief Technology Officer (CTO)",
-      "period": "Feb 2023 – present · 4 mos",
+      "period": "Feb 2023 – present",
+      "duration": "5 mos",
       "company": "Stealth WealthTech Startup",
       "city": "London",
       "logo": "/images/stealth.png",
@@ -146,7 +147,8 @@
     {
       "id": 6,
       "title": "Head of Trading Platform",
-      "period": "Feb 2020 – May 2023 · 3 yrs 4 mos",
+      "period": "Feb 2020 – May 2023",
+      "duration": "3 yrs 4 mos",
       "company": "Revolut",
       "city": "London",
       "logo": "/images/revolut.png",
@@ -157,7 +159,8 @@
     {
       "id": 5,
       "title": "Team Lead (AVP)",
-      "period": "Jan 2019 – Feb 2020 · 1 yrs 2 mos",
+      "period": "Jan 2019 – Feb 2020",
+      "duration": "1 yrs 2 mos",
       "company": "Deutsche Bank",
       "city": "Moscow",
       "logo": "/images/db.png",
@@ -168,7 +171,8 @@
     {
       "id": 4,
       "title": "Head of Department",
-      "period": "September 2016 – January 2019 (2 yrs 4 mos)",
+      "period": "Sep 2016 – Jan 2019",
+      "duration": "2 yrs 4 mos",
       "company": "Otkritie Broker",
       "city": "Moscow",
       "logo": "/images/otkritie.png",
@@ -179,7 +183,8 @@
     {
       "id": 3,
       "title": "Java Developer",
-      "period": "November 2014 - September 2016 (1 yrs 11 mos)",
+      "period": "Nov 2014 - Sep 2016",
+      "duration": "1 yrs 11 mos",
       "company": "Haulmont",
       "city": "Samara",
       "url": "https://open-broker.ru/",
@@ -188,7 +193,8 @@
     {
       "id": 2,
       "title": "C++ Developer",
-      "period": "October 2012 – May 2014",
+      "period": "Oct 2012 – May 2014",
+      "duration": "1 yrs 7 mos",
       "company": "Atol",
       "city": "Samara",
       "url": "https://atol.ru/",

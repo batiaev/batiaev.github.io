@@ -11,6 +11,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector'
 import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
+import { isMobileOnly } from "react-device-detect";
 
 import makeStyles from '@mui/styles/makeStyles'
 import Title from '../src/components/Title'
@@ -31,7 +32,7 @@ export default function Experience() {
   return (
     <section>
       <Title text="Experience" />
-      <Timeline position="alternate">
+      <Timeline position={isMobileOnly ? "right" : "alternate"} >
         <TimelineItem>
           <TimelineSeparator>
             <TimelineDot color="primary" className={classes.historyStart}>
@@ -44,20 +45,24 @@ export default function Experience() {
         {data.experiences.map((experience, idx) => (
           <TimelineItem key={idx}>
             <TimelineOppositeContent className="wideOnly">
-              <Typography color="textSecondary">{experience.period}</Typography>
+              <Typography
+                  color="textSecondary">{experience.period}{experience.duration ? ' · ' + experience.duration : ''}
+              </Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot
-                variant={experience.id == 1 ? 'outlined' : 'filled'}
-                color="primary"
-              />
-              <TimelineConnector />
-            </TimelineSeparator>
+            {isMobileOnly ? null : (
+                <TimelineSeparator>
+                  <TimelineDot
+                      variant={experience.id == 1 ? 'outlined' : 'filled'}
+                      color="primary"
+                  />
+                  <TimelineConnector />
+                </TimelineSeparator>
+            )}
             <TimelineContent>
               <Card className="card">
                 <CardContent>
                   <Typography className="mobileOnly" color="textSecondary">
-                    {experience.period}
+                    {experience.period}{experience.duration?' · ' + experience.duration:''}
                   </Typography>
                   <Typography component="h3" variant="h5" gutterBottom>
                     {experience.title}

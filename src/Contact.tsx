@@ -61,16 +61,16 @@ export default function Contact() {
   return (
     <section>
       <Title text="Get In Touch" />
-      <Grid container spacing={12}>
+      <Grid container>
         {data.social.map(
           (social, idx) =>
             !social.hidden && (
-              <Grid item sm={6} lg={3} key={social.id}>
+              <Grid item xs={12} sm={6} lg={3} sx={{ p: 2 }} key={'social' + idx}>
                 <Paper
                   elevation={selectedItem == social.name ? 4 : 1}
                   sx={{ textAlign: 'center' }}
-                  onMouseOver={(e) => elevate(social.name)}
-                  onMouseOut={(e) => elevate('none')}
+                  onMouseOver={() => elevate(social.name)}
+                  onMouseOut={() => elevate('none')}
                 >
                   <Card
                     sx={selectedItem == social.name ? { bgcolor: deepPurple[100] } : {}}
