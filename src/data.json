@@ -170,7 +170,7 @@
     },
     {
       "id": 4,
-      "title": "Head of Department",
+      "title": "Head of Division",
       "period": "Sep 2016 – Jan 2019",
       "duration": "2 yrs 4 mos",
       "company": "Otkritie Broker",
@@ -294,7 +294,15 @@
   ],
   "talks": [
     {
-      "name": "It's Not a Sweet Business #5",
+      "name": "Ах!Уехавшие #8",
+      "desc": "Episode #8 about UK immigrants and cultural cauldron at London",
+      "link": "https://podcasts.apple.com/cz/podcast/%D0%B0%D1%85-%D1%83%D0%B5%D1%85%D0%B0%D0%B2%D1%88%D0%B8%D0%B5/id1672444104",
+      "logo": "/images/conf/ahuehavshie.webp",
+      "podcast": "https://podcasts.apple.com/cz/podcast/%D0%B0%D1%85-%D1%83%D0%B5%D1%85%D0%B0%D0%B2%D1%88%D0%B8%D0%B5/id1672444104",
+      "date": "21 JUN 2023"
+    },
+    {
+      "name": "It's Not a Sweet B..#5",
       "desc": "Episode #5 about Revolut and FinTech trends in product development",
       "link": "https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
       "logo": "/images/conf/ItsNotASweetBusiness.webp",
@@ -302,7 +310,7 @@
       "date": "20 DEC 2022"
     },
     {
-      "name": "Interview at Relocode channel",
+      "name": "Interview for Relocode",
       "desc": "Relocation to London, work at fintech startup Revolut and Global Talent Visa",
       "link": "https://www.youtube.com/watch?v=OAYihZC8_LU",
       "logo": "/images/conf/relocode.webp",
@@ -310,7 +318,7 @@
       "date": "2 Nov 2022"
     },
     {
-      "name": "UK Global Talent for Software Engineers",
+      "name": "UK Global Talent Visa",
       "desc": "My path to receiving endorsement for global talent visa in FinTech field",
       "link": "https://www.youtube.com/watch?v=Rh3V1JFKRl0",
       "logo": "/images/conf/globaltalent2022.webp",

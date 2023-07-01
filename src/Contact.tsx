@@ -65,12 +65,13 @@ export default function Contact() {
         {data.social.map(
           (social, idx) =>
             !social.hidden && (
-              <Grid item xs={12} sm={6} lg={3} sx={{ p: 2 }} key={'social' + idx}>
+              <Grid item xs={6} sm={6} lg={3} sx={{ p: 2 }} key={'social' + idx}>
                 <Paper
                   elevation={selectedItem == social.name ? 4 : 1}
                   sx={{ textAlign: 'center' }}
                   onMouseOver={() => elevate(social.name)}
                   onMouseOut={() => elevate('none')}
+                  className="card flexbox"
                 >
                   <Card
                     sx={selectedItem == social.name ? { bgcolor: deepPurple[100] } : {}}

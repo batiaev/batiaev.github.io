@@ -120,6 +120,7 @@ footer > a:focus {
 .flexbox > * {
   width: 100%;
   flex-grow: 1;
+  align-self: stretch;
 }
 
 .contactAvatar {

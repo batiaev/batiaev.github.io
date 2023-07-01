@@ -1,22 +1,11 @@
 import React from 'react'
 import Container from '@mui/material/Container'
 
-import Intro from '../src/Intro'
-import Skills from '../src/Skills'
-import Services from '../src/Services'
-import Education from '../src/Education'
-import Experience from '../src/Experience'
-import Blog from '../src/Blog'
 import Contact from '../src/Contact'
-import Talks from '../src/Talks'
-import OpenSource from '../src/OpenSource'
 import Card from '@mui/material/Card'
-import data from '../src/data.json'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import Chip from '@mui/material/Chip'
 import CardActions from '@mui/material/CardActions'
-import IconButton from '@mui/material/IconButton'
 import siteData from '../src/site.json'
 
 export default function Error404() {
