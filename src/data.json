@@ -212,7 +212,7 @@
   ],
   "openSource": [
     {
-      "logo": "/images/services/disruptor.png",
+      "logo": "/images/services/disruptor.webp",
       "name": "OrderBook lib",
       "description": "Order book implementation on java with disruptor",
       "link": "https://github.com/batiaev/orderbook"

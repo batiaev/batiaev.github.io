@@ -30,7 +30,7 @@ export default function Talks() {
                 <Typography component="h3" variant="h5" gutterBottom>
                   {talk.name}
                 </Typography>
-                <Typography variant={'subtitle1'}>{talk.desc}</Typography>
+                <Typography variant={'subtitle1'} component="p">{talk.desc}</Typography>
                 <Typography component="p" paddingTop={2}>
                   <Chip
                     icon={<EventIcon />}

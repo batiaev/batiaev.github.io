@@ -62,6 +62,7 @@ export default function Intro() {
               className="svgIcon"
               href={social.link}
               size="large"
+              aria-label={social.name}
             >
               {iconsByName[social.name]}
             </IconButton>

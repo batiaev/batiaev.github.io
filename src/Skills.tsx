@@ -17,7 +17,7 @@ export default function Skills() {
                 {skill.areas.map((area, idx) => (
                   <Typography component='li' key={idx}>
                     {area.name}
-                    <LinearProgress variant='determinate' value={area.value} />
+                    <LinearProgress variant='determinate' value={area.value} aria-label={area.name}/>
                     <br />
                   </Typography>
                 ))}
