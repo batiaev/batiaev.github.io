@@ -20,12 +20,16 @@ export default function MyApp(props: AppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={defaultTheme}>
         <Head>
-          <title>Anton Batiaev - Fintech Developer, Derivatives Trader, MBA</title>
+          <title>Anton Batiaev - CTO, Global Talent, MBA, Fintech Developer, Derivatives Trader</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
-
+          <meta
+              property="description"
+              content="Anton Batiaev - CTO at WealthTech. MBA, UK Global Talent, Certified Java Developer, involved in software development since 2010.
+                Key skills: Java 17, Spring, Linux, Kafka, Disruptor, Docker etc"
+          />
           <meta
             name="keywords"
             content="cv, resume, Anton Batiaev, Batiaev, java developer, fintech,
@@ -44,11 +48,6 @@ export default function MyApp(props: AppProps) {
           <meta property="og:image" content="https://batiaev.com/images/batiaev.webp" />
           <meta
             property="og:description"
-            content="Anton Batiaev - CTO at WealthTech. MBA, UK Global Talent, Certified Java Developer, involved in software development since 2010.
-                Key skills: Java 17, Spring, Linux, Kafka, Disruptor, Docker etc"
-          />
-          <meta
-            property="description"
             content="Anton Batiaev - CTO at WealthTech. MBA, UK Global Talent, Certified Java Developer, involved in software development since 2010.
                 Key skills: Java 17, Spring, Linux, Kafka, Disruptor, Docker etc"
           />
