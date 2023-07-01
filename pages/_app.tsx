@@ -44,8 +44,13 @@ export default function MyApp(props: AppProps) {
           <meta property="og:image" content="https://batiaev.com/images/batiaev.webp" />
           <meta
             property="og:description"
-            content="Anton Batiaev - Full Stack Certified Java Developer, involved in software development since 2010.
-                Key skills: Java 8, Spring, Linux, Hibernate, Rabbit, Docker etc"
+            content="Anton Batiaev - CTO at WealthTech. MBA, UK Global Talent, Certified Java Developer, involved in software development since 2010.
+                Key skills: Java 17, Spring, Linux, Kafka, Disruptor, Docker etc"
+          />
+          <meta
+            property="description"
+            content="Anton Batiaev - CTO at WealthTech. MBA, UK Global Talent, Certified Java Developer, involved in software development since 2010.
+                Key skills: Java 17, Spring, Linux, Kafka, Disruptor, Docker etc"
           />
 
           <meta name="twitter:card" content="Anton Batiaev - Certified Java Developer" />

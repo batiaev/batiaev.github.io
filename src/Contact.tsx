@@ -11,7 +11,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import PublicIcon from '@mui/icons-material/Public'
 import Title from '../src/components/Title'
 import data from '../src/data.json'
-import { Avatar, Badge, Paper } from '@mui/material'
+import {Avatar, Badge, Paper, Tooltip} from '@mui/material'
 import { Box } from '@mui/system'
 import { deepPurple } from '@mui/material/colors'
 import Link from '@mui/material/Link'
@@ -66,6 +66,12 @@ export default function Contact() {
           (social, idx) =>
             !social.hidden && (
               <Grid item xs={6} sm={6} lg={3} sx={{ p: 1 }} key={'social' + idx}>
+                <Link
+                    underline="none"
+                    href={social.link}
+                    aria-label={social.name}
+                >
+                  <Tooltip title={social.id}>
                 <Paper
                   elevation={selectedItem == social.name ? 4 : 1}
                   sx={{ textAlign: 'center' }}
@@ -93,12 +99,11 @@ export default function Contact() {
                       <Typography variant="h5" component="div">
                         {getTitle(social.name)}
                       </Typography>
-                      <Typography color="text.secondary" gutterBottom>
-                        <Link href={social.link}>{social.id}</Link>
-                      </Typography>
                     </CardContent>
                   </Card>
                 </Paper>
+                  </Tooltip>
+                </Link>
               </Grid>
             ),
         )}

@@ -6,16 +6,30 @@ import Grid from '@mui/material/Grid'
 import Title from '../src/components/Title'
 import data from '../src/data.json'
 import Link from '@mui/material/Link'
+import {useState} from "react";
+import {deepPurple} from "@mui/material/colors";
 
 export default function OpenSource() {
-  return (
+    const [selectedItem, elevate] = useState('#')
+
+    return (
     <section>
       <Title text="Open source" />
       <Grid container spacing={2} className="flexbox">
         {data.openSource.map((repo) => (
           <Grid item key={repo.name} xs={12} sm={6} md={3}>
-            <Link href={repo.link}>
-              <Card className="card">
+            <Link
+                underline="none"
+                href={repo.link}
+                aria-label={repo.name}
+            >
+              <Card className="card"
+                    sx={selectedItem == repo.name ? { bgcolor: deepPurple[100] } : {}}
+                    onMouseOver={() => elevate(repo.name)}
+                    onMouseOut={() => elevate('none')}
+                    onSelect={() => elevate(repo.name)}
+                    onFocus={() => elevate(repo.name)}
+                    elevation={selectedItem == repo.name ? 4 : 1}>
                 <CardMedia
                   component="img"
                   className="cardMedia"

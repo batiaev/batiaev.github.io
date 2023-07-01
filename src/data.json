@@ -20,13 +20,13 @@
   "social": [
     {
       "name": "linkedin",
-      "id": "batiaev",
+      "id": "@batiaev",
       "link": "https://www.linkedin.com/in/batiaev/"
     },
     {
       "name": "github",
       "hidden": true,
-      "id": "batiaev",
+      "id": "@batiaev",
       "link": "https://www.github.com/batiaev/"
     },
     {
@@ -37,12 +37,12 @@
     {
       "name": "facebook",
       "hidden": true,
-      "id": "batiaev",
+      "id": "@batiaev",
       "link": "https://www.facebook.com/batiaev/"
     },
     {
       "name": "twitter",
-      "id": "batiaev_com",
+      "id": "@batiaev_com",
       "link": "https://twitter.com/batiaev_com"
     },
     {
@@ -326,8 +326,8 @@
       "date": "8 Sep 2022"
     },
     {
-      "name": "JavaSwag Podcast #31",
-      "desc": "Many-sided fintech, MBA and transition to Product Owner",
+      "name": "JavaSwag Podcast",
+      "desc": "Episode #31. Many-sided fintech, MBA and transition to Product Owner",
       "link": "https://soundcloud.com/javaswag/e31",
       "logo": "/images/conf/javaswag.webp",
       "podcast": "https://soundcloud.com/javaswag/e31",
