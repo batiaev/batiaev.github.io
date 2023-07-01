@@ -12,6 +12,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import EmailIcon from '@mui/icons-material/Email'
 
 import data from '../src/data.json'
 
@@ -22,6 +23,7 @@ export default function Intro() {
     telegram: <TelegramIcon width="30px" />,
     facebook: <FacebookIcon width="30px" />,
     twitter: <TwitterIcon width="30px" />,
+    email: <EmailIcon width="30px" />,
 
     SchoolIcon: <SchoolIcon width="30px" />,
     CodeIcon: <CodeIcon width="30px" />,

@@ -7,6 +7,14 @@ header {
   height: 45vh;
 }
 
+.default-title {
+  font-size: 4rem!important;
+  font-weight: 800!important;
+  background: -webkit-linear-gradient(135deg, #09009f, #40a67b 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .gradient-title {
   font-size: 4rem!important;
   font-weight: 800!important;
