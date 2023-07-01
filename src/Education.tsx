@@ -13,66 +13,94 @@ import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import Title from '../src/components/Title'
 import data from '../src/data.json'
-import { isMobileOnly } from "react-device-detect";
+import {isMobileOnly} from "react-device-detect";
+import Grid from "@mui/material/Grid";
 
 const useStyles = makeStyles(() => ({
-  cardContent: {
-    flexGrow: 1,
-  },
-  historyStart: {
-    padding: '16px',
-  },
-  historyLine: {
-    paddingTop: '40px',
-  },
+    cardContent: {
+        flexGrow: 1,
+    },
+    historyStart: {
+        padding: '16px',
+    },
+    historyLine: {
+        paddingTop: '40px',
+    },
 }))
 
 export default function Education() {
-  const classes = useStyles()
+    const classes = useStyles()
 
-  return (
-    <section>
-      <Title text="Education" />
-
-      <Timeline>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineDot color="primary" className={classes.historyStart}>
-              <SchoolIcon fontSize="large" width="30px" />
-            </TimelineDot>
-            <TimelineConnector className={classes.historyLine} />
-          </TimelineSeparator>
-          <TimelineContent />
-        </TimelineItem>
-        {data.education.map((edx, idx) => (
-          <TimelineItem key={idx}>
-            <TimelineOppositeContent className="wideOnly">
-              <Typography color="textSecondary">{edx.period}</Typography>
-            </TimelineOppositeContent>
-            {isMobileOnly ? null : (
-                <TimelineSeparator>
-                  <TimelineDot color="primary"/>
-                  <TimelineConnector/>
-                </TimelineSeparator>
-            )}
-            <TimelineContent>
-              <Card className="card">
-                <CardContent className={classes.cardContent}>
-                  <Typography className="mobileOnly" color="textSecondary">
-                    {edx.period}
-                  </Typography>
-                  <Typography component="h3" variant="h5" gutterBottom>
-                    {edx.title}
-                  </Typography>
-                  <Typography>
-                    @ {edx.company} • {edx.city}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
-    </section>
-  )
+    return (
+        <section>
+            <Title text="Education"/>
+            {isMobileOnly
+                ? <Grid container spacing={2} className='flexbox'>
+                    {data.education.map((edx, idx) => (
+                        <Grid item key={'experience-' + idx}>
+                            <Card className="card">
+                                <CardContent className={classes.cardContent}>
+                                    <Typography className="mobileOnly"
+                                                color="textSecondary">
+                                        {edx.period}
+                                    </Typography>
+                                    <Typography component="h3" variant="h5"
+                                                gutterBottom>
+                                        {edx.title}
+                                    </Typography>
+                                    <Typography>
+                                        @ {edx.company} • {edx.city}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+                : <Timeline>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot color="primary"
+                                         className={classes.historyStart}>
+                                <SchoolIcon fontSize="large" width="30px"/>
+                            </TimelineDot>
+                            <TimelineConnector className={classes.historyLine}/>
+                        </TimelineSeparator>
+                        <TimelineContent/>
+                    </TimelineItem>
+                    {data.education.map((edx, idx) => (
+                        <TimelineItem key={idx}>
+                            <TimelineOppositeContent className="wideOnly">
+                                <Typography
+                                    color="textSecondary">{edx.period}</Typography>
+                            </TimelineOppositeContent>
+                            {isMobileOnly ? null : (
+                                <TimelineSeparator>
+                                    <TimelineDot color="primary"/>
+                                    <TimelineConnector/>
+                                </TimelineSeparator>
+                            )}
+                            <TimelineContent>
+                                <Card className="card">
+                                    <CardContent
+                                        className={classes.cardContent}>
+                                        <Typography className="mobileOnly"
+                                                    color="textSecondary">
+                                            {edx.period}
+                                        </Typography>
+                                        <Typography component="h3" variant="h5"
+                                                    gutterBottom>
+                                            {edx.title}
+                                        </Typography>
+                                        <Typography>
+                                            @ {edx.company} • {edx.city}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </TimelineContent>
+                        </TimelineItem>
+                    ))}
+                </Timeline>
+            }
+        </section>
+    )
 }
