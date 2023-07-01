@@ -11,7 +11,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import PublicIcon from '@mui/icons-material/Public'
 import Title from '../src/components/Title'
 import data from '../src/data.json'
-import {Avatar, Badge, Paper, Tooltip} from '@mui/material'
+import {Avatar, Badge, Paper} from '@mui/material'
 import { Box } from '@mui/system'
 import { deepPurple } from '@mui/material/colors'
 import Link from '@mui/material/Link'
@@ -71,7 +71,7 @@ export default function Contact() {
                     href={social.link}
                     aria-label={social.name}
                 >
-                  <Tooltip title={social.id}>
+                {/*<Tooltip title={social.id}>*/}
                 <Paper
                   elevation={selectedItem == social.name ? 4 : 1}
                   sx={{ textAlign: 'center' }}
@@ -102,7 +102,7 @@ export default function Contact() {
                     </CardContent>
                   </Card>
                 </Paper>
-                  </Tooltip>
+                {/*</Tooltip>*/}
                 </Link>
               </Grid>
             ),
