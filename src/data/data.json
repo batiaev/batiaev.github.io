@@ -5,6 +5,10 @@
   "company": "WealthTech Startup",
   "tags": [
     {
+      "label": "UK Global Talent",
+      "icon": "EmojiEventsIcon"
+    },
+    {
       "label": "MBA",
       "icon": "SchoolIcon"
     },
@@ -38,6 +42,7 @@
     {
       "name": "facebook",
       "hidden": true,
+      "hideTopMenu": true,
       "id": "@batiaev",
       "link": "https://www.facebook.com/batiaev/"
     },
