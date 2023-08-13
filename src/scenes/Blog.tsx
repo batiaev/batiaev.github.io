@@ -10,7 +10,7 @@ import { useState } from 'react'
 import Link from "@mui/material/Link";
 import {deepPurple} from "@mui/material/colors";
 
-export default function Portfolio() {
+export default function Blog() {
   const [selectedItem, elevate] = useState('#')
 
   return (

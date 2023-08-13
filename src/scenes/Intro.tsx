@@ -39,7 +39,7 @@ export default function Intro() {
             {data.name}
           </Typography>
           <Typography component="p" className={"gradient-subtitle"} color="textPrimary">
-            {data.titles.join(', ')}
+            {data.titles.join(', ')} at {data.company}
           </Typography>
           <ul className="noBulletList">
             {data.tags.map((tag, index) => (
