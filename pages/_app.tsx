@@ -21,7 +21,7 @@ export default function MyApp(props: AppProps) {
         <CacheProvider value={emotionCache}>
             <ThemeProvider theme={defaultTheme}>
                 <Head>
-                    <title>${data.name} - CTO, Global Talent, MBA, Fintech Developer, Derivatives Trader</title>
+                    <title>{data.name} - CTO, Global Talent, MBA, Fintech Developer, Derivatives Trader</title>
                     <meta
                         name="viewport"
                         content="minimum-scale=1, initial-scale=1, width=device-width"
