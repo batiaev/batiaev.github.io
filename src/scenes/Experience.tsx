@@ -1,113 +1,54 @@
 import Card from '@mui/material/Card'
 import Chip from '@mui/material/Chip'
 import CardContent from '@mui/material/CardContent'
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import Typography from '@mui/material/Typography'
 
-import Timeline from '@mui/lab/Timeline'
-import TimelineItem from '@mui/lab/TimelineItem'
-import TimelineSeparator from '@mui/lab/TimelineSeparator'
-import TimelineConnector from '@mui/lab/TimelineConnector'
-import TimelineContent from '@mui/lab/TimelineContent'
-import TimelineDot from '@mui/lab/TimelineDot'
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
-import { isMobileOnly } from "react-device-detect";
-
-import makeStyles from '@mui/styles/makeStyles'
 import Title from '../components/Title'
 import data from '../data/data.json'
 import React from "react";
-import Grid from "@mui/material/Grid";
-
-const useStyles = makeStyles(() => ({
-  historyStart: {
-    padding: '16px',
-  },
-  historyLine: {
-    paddingTop: '40px',
-  },
-}))
+import Grid from "@mui/material/Unstable_Grid2";
+import CardMedia from "@mui/material/CardMedia";
 
 export default function Experience() {
-  const classes = useStyles()
+    return (
+        <section>
+            <Title text="Experience"/>
+            <Grid container spacing={2}>
+                {data.experiences.map((experience, idx) => (
+                    <Grid key={'experience-' + idx} xs={12} sm={idx === 0 ? 12 : 6}
+                          md={idx < 4 ? 6 : 4} lg={idx === 0 ? 12 : idx > 2 ? 3 : 6}>
+                        <Card className={`card ${'experience-' + idx}`}
+                              sx={{display: 'flex', flexDirection: 'row', flexGrow: 1, bgcolor: experience.bgColor}}>
+                            <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
+                                <Typography >
+                                    {experience.period}{experience.duration ? ' · ' + experience.duration : ''}
+                                </Typography>
+                                <Typography component="h3" variant="h5" gutterBottom>
+                                    {experience.title}
+                                </Typography>
+                                <Typography>
+                                    {experience.period}{experience.duration ? ' · ' + experience.duration : ''}
+                                </Typography>
+                                <Typography>
+                                    @ {experience.company} • {experience.city}
+                                </Typography>
+                                <Typography>{experience.description}</Typography>
 
-  return (
-    <section>
-      <Title text="Experience" />
-      {isMobileOnly
-      ?
-          <Grid container spacing={2} className='flexbox'>
-            {data.experiences.map((experience, idx) => (
-                <Grid item  key={'experience-'+idx}>
-                <Card className="card">
-                  <CardContent>
-                    <Typography className="mobileOnly" color="textSecondary">
-                      {experience.period}{experience.duration?' · ' + experience.duration:''}
-                    </Typography>
-                    <Typography component="h3" variant="h5" gutterBottom>
-                      {experience.title}
-                    </Typography>
-                    <Typography>
-                      @ {experience.company} • {experience.city}
-                    </Typography>
-                    <Typography>{experience.description}</Typography>
-
-                    {experience.tags.map((tag, idx) => (
-                        <Chip key={idx} label={tag} variant="outlined" color="primary" />
-                    ))}
-                  </CardContent>
-                </Card>
-                </Grid>
-            ))}
-          </Grid>
-      : <Timeline position="alternate">
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot color="primary" className={classes.historyStart}>
-                  <BusinessCenterIcon fontSize="large" width="30px" />
-                </TimelineDot>
-                <TimelineConnector className={classes.historyLine} />
-              </TimelineSeparator>
-              <TimelineContent></TimelineContent>
-            </TimelineItem>
-            {data.experiences.map((experience, idx) => (
-                <TimelineItem key={idx}>
-                  <TimelineOppositeContent className="wideOnly">
-                    <Typography
-                        color="textSecondary">{experience.period}{experience.duration ? ' · ' + experience.duration : ''}
-                    </Typography>
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineDot
-                        variant={experience.id == 1 ? 'outlined' : 'filled'}
-                        color="primary"
-                    />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent>
-                    <Card className="card">
-                      <CardContent>
-                        <Typography className="mobileOnly" color="textSecondary">
-                          {experience.period}{experience.duration?' · ' + experience.duration:''}
-                        </Typography>
-                        <Typography component="h3" variant="h5" gutterBottom>
-                          {experience.title}
-                        </Typography>
-                        <Typography>
-                          @ {experience.company} • {experience.city}
-                        </Typography>
-                        <Typography>{experience.description}</Typography>
-
-                        {experience.tags.map((tag, idx) => (
-                            <Chip key={idx} label={tag} variant="outlined" color="primary" />
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </TimelineContent>
-                </TimelineItem>
-            ))}
-          </Timeline>
-      }
-    </section>
-  )
+                                {experience.tags.map((tag, idx) => (
+                                    <Chip key={idx} label={tag} variant="outlined" color="primary"/>
+                                ))}
+                            </CardContent>
+                            {experience.logo ?
+                                <CardMedia
+                                    component="img"
+                                    // sx={{width: 151}}
+                                    image={experience.logo}
+                                    alt={experience.title}
+                                /> : null}
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+        </section>
+    )
 }

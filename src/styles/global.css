@@ -208,6 +208,17 @@ ul.noBulletList {
   padding: 12px;
 }
 
+.experience-0 {
+  background-image: url("/images/currentJobBg.png");
+  color: whitesmoke;
+}
+
+.experience-1 {
+  display: flex;
+  flex-direction: column;
+  background-color: #815DF6FF;
+}
+
 .card {
   height: 100%;
   display: flex;
