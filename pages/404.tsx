@@ -1,18 +1,17 @@
 import React from 'react'
-import Container from '@mui/material/Container'
-
-import Contact from '../src/Contact'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import CardActions from '@mui/material/CardActions'
-import siteData from '../src/site.json'
+import Contact from '../src/scenes/Contact'
+import siteData from '../src/data/site.json'
 
 export default function Error404() {
-  return (
-    <>
-      <header />
-      <Container component="main">
+    return (
+        <>
+            <header/>
+            <main>
+                {siteData.headers.error404}
+                {siteData.headers.description404}
+            </main>
+            <Contact/>
+            {/*<Container component="main">
         <Card className="intro" component="section">
           <div className="personalDetails">
             <CardContent>
@@ -34,7 +33,7 @@ export default function Error404() {
           </div>
         </Card>
         <Contact />
-      </Container>
-    </>
-  )
+      </Container>*/}
+        </>
+    )
 }
