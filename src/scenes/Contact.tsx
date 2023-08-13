@@ -9,8 +9,8 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import PublicIcon from '@mui/icons-material/Public'
-import Title from '../src/components/Title'
-import data from '../src/data.json'
+import Title from '../components/Title'
+import data from '../data/data.json'
 import {Avatar, Badge, Paper} from '@mui/material'
 import { Box } from '@mui/system'
 import { deepPurple } from '@mui/material/colors'
@@ -18,7 +18,7 @@ import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 
 export default function Contact() {
-  function getIcon(socialName) {
+  function getIcon(socialName: string) {
     switch (socialName) {
       case 'github':
         return <GitHubIcon />
@@ -39,7 +39,7 @@ export default function Contact() {
 
   const [selectedItem, elevate] = useState('')
 
-  function getTitle(name) {
+  function getTitle(name: string) {
     switch (name) {
       case 'github':
         return 'Show me code'

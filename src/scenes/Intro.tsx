@@ -14,7 +14,7 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
 
-import data from '../src/data.json'
+import data from '../data/data.json'
 
 export default function Intro() {
   const iconsByName = {
@@ -47,6 +47,7 @@ export default function Intro() {
                 key={index}
                 component="li"
                 className="tags"
+                // @ts-ignore
                 icon={iconsByName[tag.icon]}
                 label={tag.label}
                 variant="outlined"
@@ -66,7 +67,10 @@ export default function Intro() {
               size="large"
               aria-label={social.name}
             >
-              {iconsByName[social.name]}
+              {
+                // @ts-ignore
+                iconsByName[social.name]
+              }
             </IconButton>
           ))}
         </CardActions>

@@ -1,12 +1,12 @@
 import React from 'react'
 import Container from '@mui/material/Container'
 
-import Contact from '../src/Contact'
+import Contact from '../src/scenes/Contact'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import CardActions from '@mui/material/CardActions'
-import siteData from '../src/site.json'
+import siteData from '../src/data/site.json'
 
 export default function Error404() {
   return (

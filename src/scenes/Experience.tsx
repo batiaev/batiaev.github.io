@@ -14,8 +14,8 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import { isMobileOnly } from "react-device-detect";
 
 import makeStyles from '@mui/styles/makeStyles'
-import Title from '../src/components/Title'
-import data from '../src/data.json'
+import Title from '../components/Title'
+import data from '../data/data.json'
 import React from "react";
 import Grid from "@mui/material/Grid";
 

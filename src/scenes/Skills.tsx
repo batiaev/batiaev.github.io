@@ -1,8 +1,8 @@
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Grid from '@mui/material/Grid'
-import Title from '../src/components/Title'
-import data from '../src/data.json'
+import Title from '../components/Title'
+import data from '../data/data.json'
 
 export default function Skills() {
   return (

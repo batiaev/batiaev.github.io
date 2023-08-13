@@ -11,8 +11,8 @@ import TimelineConnector from '@mui/lab/TimelineConnector'
 import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
-import Title from '../src/components/Title'
-import data from '../src/data.json'
+import Title from '../components/Title'
+import data from '../data/data.json'
 import {isMobileOnly} from "react-device-detect";
 import Grid from "@mui/material/Grid";
 
