@@ -37,7 +37,7 @@ export default function Intro() {
     return (
         <Card className="intro" component="section">
             <div className={"intro-inner"}>
-                <div className="personalDetails">
+                <div className={`personalDetails ${isMobileOnly ? 'showContext' : ''}`} >
                     <CardContent>
                         <Typography variant="h3" component="h1" color="textPrimary" gutterBottom
                                     className={"gradient-title"}>

@@ -170,6 +170,7 @@
       "company": "Deutsche Bank",
       "city": "Moscow",
       "url": "https://db.com/",
+      "logo": "/images/autobahn.png",
       "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
       "tags": ["NYSE: DB"]
     },
@@ -203,15 +204,6 @@
       "city": "Samara",
       "url": "https://atol.ru/",
       "tags": []
-    },
-    {
-      "id": 1,
-      "title": "Tech support (1st line)",
-      "period": "before 2012",
-      "company": "Mobile TeleSystems",
-      "city": "Samara",
-      "url": "https://mts.ru/",
-      "tags": ["MCX: MTSS", "NYSE: MBT"]
     }
   ],
   "openSource": [
