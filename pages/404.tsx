@@ -1,12 +1,11 @@
-import React from 'react'
-import Container from '@mui/material/Container'
+import Container from "@mui/material/Container";
 
-import Contact from '../src/scenes/Contact'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import CardActions from '@mui/material/CardActions'
-import siteData from '../src/data/site.json'
+import { Contact } from "@scenes/Contact";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
+import siteData from "../src/data/site.json";
 
 export default function Error404() {
   return (
@@ -17,16 +16,16 @@ export default function Error404() {
           <div className="personalDetails">
             <CardContent>
               <Typography
-                variant="h3"
-                component="h1"
+                align="center"
                 color="textPrimary"
+                component="h1"
                 gutterBottom
-                align={'center'}
+                variant="h3"
               >
                 {siteData.headers.error404}
               </Typography>
-              <Typography align={'center'}>
-                {siteData.headers.description404}{' '}
+              <Typography align="center">
+                {siteData.headers.description404}{" "}
                 <a href="https://github.com/batiaev/batiaev.github.io">@batiaev</a>
               </Typography>
             </CardContent>
@@ -36,5 +35,5 @@ export default function Error404() {
         <Contact />
       </Container>
     </>
-  )
+  );
 }

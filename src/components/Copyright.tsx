@@ -1,14 +1,14 @@
-import Link from '@mui/material/Link'
-import data from '../data/data.json'
+import Link from "@mui/material/Link";
+import data from "../data/data.json";
 
-export default function Copyright() {
+export function Copyright() {
   return (
     <footer>
       {`Copyright © 2013 — ${new Date().getFullYear()} `}
       <Link color="inherit" href="https://localhost:3000">
         {data.name}
       </Link>
-      {'. All Rights Reserved.'}
+      . All Rights Reserved.
     </footer>
-  )
+  );
 }

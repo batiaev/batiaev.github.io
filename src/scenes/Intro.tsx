@@ -1,22 +1,21 @@
-import Chip from '@mui/material/Chip'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Typography from '@mui/material/Typography'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import CodeIcon from '@mui/icons-material/Code'
-import SchoolIcon from '@mui/icons-material/School'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TelegramIcon from '@mui/icons-material/Telegram'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import EmailIcon from '@mui/icons-material/Email'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import Chip from "@mui/material/Chip";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import CodeIcon from "@mui/icons-material/Code";
+import SchoolIcon from "@mui/icons-material/School";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import EmailIcon from "@mui/icons-material/Email";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
-import data from '../data/data.json'
-import React from "react";
-import {isMobileOnly} from "react-device-detect";
+import data from "../data/data.json";
+import { isMobileOnly } from "react-device-detect";
 import Link from "@mui/material/Link";
 
 export default function Intro() {
@@ -52,7 +51,7 @@ export default function Intro() {
                                     key={index}
                                     component="li"
                                     className="tags"
-                                    // @ts-ignore
+                                    //@ts-ignore
                                     icon={iconsByName[tag.icon]}
                                     label={tag.label}
                                     variant="outlined"

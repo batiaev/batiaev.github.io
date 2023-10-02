@@ -1,8 +1,7 @@
-import Card from '@mui/material/Card'
+import Card from "@mui/material/Card";
 
-import Title from '../components/Title'
-import data from '../data/data.json'
-import React from "react";
+import { Title } from "@components/Title";
+import data from "../data/data.json";
 import {isMobileOnly} from "react-device-detect";
 import Grid from "@mui/material/Unstable_Grid2";
 

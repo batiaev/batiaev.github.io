@@ -1,10 +1,11 @@
 type Props = {
     text: string;
 };
-export default function Title({text}: Props) {
+
+export function Title({ text }: Props) {
     return (
-        <h2 className={'default-title'}>
+        <h2 className="default-title">
             {text}
         </h2>
-    )
+    );
 }

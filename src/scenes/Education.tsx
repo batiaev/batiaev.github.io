@@ -1,18 +1,18 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import makeStyles from '@mui/styles/makeStyles'
-import SchoolIcon from '@mui/icons-material/School'
-import Typography from '@mui/material/Typography'
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import makeStyles from "@mui/styles/makeStyles";
+import SchoolIcon from "@mui/icons-material/School";
+import Typography from "@mui/material/Typography";
 
-import Timeline from '@mui/lab/Timeline'
-import TimelineItem from '@mui/lab/TimelineItem'
-import TimelineSeparator from '@mui/lab/TimelineSeparator'
-import TimelineConnector from '@mui/lab/TimelineConnector'
-import TimelineContent from '@mui/lab/TimelineContent'
-import TimelineDot from '@mui/lab/TimelineDot'
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
-import Title from '../components/Title'
-import data from '../data/data.json'
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import { Title } from "@components/Title";
+import data from "../data/data.json";
 import {isMobileOnly} from "react-device-detect";
 import Grid from "@mui/material/Grid";
 
