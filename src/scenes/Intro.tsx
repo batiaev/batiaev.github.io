@@ -5,6 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CodeIcon from "@mui/icons-material/Code";
 import SchoolIcon from "@mui/icons-material/School";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -25,6 +26,7 @@ export default function Intro() {
         telegram: <TelegramIcon width="30px"/>,
         facebook: <FacebookIcon width="30px"/>,
         twitter: <TwitterIcon width="30px"/>,
+        calendar: <EventAvailableIcon width="30px"/>,
         email: <EmailIcon width="30px"/>,
 
         SchoolIcon: <SchoolIcon width="30px"/>,

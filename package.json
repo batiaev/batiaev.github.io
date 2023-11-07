@@ -2,7 +2,7 @@
   "name": "batiaev.com",
   "version": "0.1.1",
   "private": true,
-  "description": "Anton Batiaev - FinTech Engineer and Product Owner",
+  "description": "Anton Batiaev - CTO at Vega Investments",
   "repository": {
     "type": "git",
     "url": "https://github.com/Batiaev/batiaev.github.io"
@@ -19,29 +19,28 @@
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.11",
-    "@mui/lab": "^5.0.0-alpha.138",
-    "@mui/material": "^5.14.3",
-    "@mui/styles": "^5.14.3",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/material": "^5.14.17",
+    "@mui/styles": "^5.14.17",
     "next": "^12.3.4",
     "react": "^17.0.2",
     "react-device-detect": "^2.2.3",
     "react-dom": "^17.0.2",
-    "eslint-plugin-typescript-sort-keys": "^3.0.0",
+    "eslint-plugin-typescript-sort-keys": "^3.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-react-query": "^1.3.0"
   },
   "devDependencies": {
-    "@types/material-ui": "^0.21.12",
-    "@types/node": "^20.4.8",
-    "@types/react": "^18.2.23",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.46.0",
-    "eslint-config-next": "^13.4.13",
+    "@types/material-ui": "^0.21.14",
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.37",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "^14.0.1",
     "prettier": "^3.0.3",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "typescript": "^5.1.6"
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "typescript": "^5.2.2"
   }
 }

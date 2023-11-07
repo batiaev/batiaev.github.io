@@ -48,8 +48,15 @@
     },
     {
       "name": "twitter",
+      "hidden": true,
+      "hideTopMenu": true,
       "id": "@batiaev_com",
       "link": "https://twitter.com/batiaev_com"
+    },
+    {
+      "name": "calendar",
+      "id": "@batiaev",
+      "link": "https://calendly.com/batiaev/30min"
     },
     {
       "name": "email",

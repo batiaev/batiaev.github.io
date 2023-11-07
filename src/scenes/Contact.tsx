@@ -9,6 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PublicIcon from "@mui/icons-material/Public";
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { Title } from "@components/Title";
 import data from "../data/data.json";
 import { Avatar, Badge, Paper } from "@mui/material";
@@ -28,6 +29,8 @@ export function Contact() {
         return <FacebookIcon />;
       case "twitter":
         return <TwitterIcon />;
+      case "calendar":
+        return <EventAvailableIcon />;
       case "linkedin":
         return <LinkedInIcon />;
       case "email":
@@ -53,6 +56,8 @@ export function Contact() {
         return "I am hiring";
       case "email":
         return "Email me";
+      case "calendar":
+        return "Call me";
       default:
         return "Contact me";
     }
