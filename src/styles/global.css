@@ -48,6 +48,48 @@
   background-color: rgba(31, 48, 87, 10%); /* #1f3057 */
 }
 
+.job-card {
+  /*max-width: 400px;*/
+  /*background-color: #254432;*/
+  /*background-color: #1f3057;*/
+  /*background-color: rgba(31, 48, 87, 100%); !* #1f3057 *!*/
+  color: darkgrey;
+  background-image: url("/images/lines.png");
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Company logo */
+.company-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+}
+
+/* Job title */
+.job-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Dates and duration */
+.job-dates {
+  font-size: 14px;
+  /*color: #666666;*/
+  margin-bottom: 10px;
+}
+
+/* Achievements */
+.job-achievements {
+  margin-bottom: 20px;
+}
+
 main {
   width: 100%;
   display: block;

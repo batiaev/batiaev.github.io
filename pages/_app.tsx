@@ -13,7 +13,7 @@ import createEmotionCache from "../utility/createEmotionCache";
 const clientSideEmotionCache: EmotionCache = createEmotionCache();
 
 export default function MyApp(props: AppProps) {
-    // @ts-ignore
+    // @ts-expect-error
     const { Component, emotionCache = clientSideEmotionCache, pageProps }
         = props;
 

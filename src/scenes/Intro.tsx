@@ -18,21 +18,26 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import data from "../data/data.json";
 import { isMobileOnly } from "react-device-detect";
 import Link from "@mui/material/Link";
+import { ReactElement } from 'react'
+
+type MapType = {
+    [id: string]: ReactElement;
+}
 
 export default function Intro() {
-    const iconsByName = {
-        linkedin: <LinkedInIcon width="30px"/>,
-        github: <GitHubIcon width="30px"/>,
-        telegram: <TelegramIcon width="30px"/>,
-        facebook: <FacebookIcon width="30px"/>,
-        twitter: <TwitterIcon width="30px"/>,
-        calendar: <EventAvailableIcon width="30px"/>,
-        email: <EmailIcon width="30px"/>,
+    const iconsByName: MapType = {
+        'linkedin': <LinkedInIcon width="30px"/>,
+        'github': <GitHubIcon width="30px"/>,
+        'telegram': <TelegramIcon width="30px"/>,
+        'facebook': <FacebookIcon width="30px"/>,
+        'twitter': <TwitterIcon width="30px"/>,
+        'calendar': <EventAvailableIcon width="30px"/>,
+        'email': <EmailIcon width="30px"/>,
 
-        SchoolIcon: <SchoolIcon width="30px"/>,
-        CodeIcon: <CodeIcon width="30px"/>,
-        TrendingUpIcon: <TrendingUpIcon width="30px"/>,
-        EmojiEventsIcon: <EmojiEventsIcon width="30px"/>,
+        'SchoolIcon': <SchoolIcon width="30px"/>,
+        'CodeIcon': <CodeIcon width="30px"/>,
+        'TrendingUpIcon': <TrendingUpIcon width="30px"/>,
+        'EmojiEventsIcon': <EmojiEventsIcon width="30px"/>,
     }
 
     return (
@@ -53,7 +58,6 @@ export default function Intro() {
                                     key={index}
                                     component="li"
                                     className="tags"
-                                    //@ts-ignore
                                     icon={iconsByName[tag.icon]}
                                     label={tag.label}
                                     variant="outlined"
@@ -76,7 +80,6 @@ export default function Intro() {
                                     <Chip
                                         component="li"
                                         className="tags"
-                                        // @ts-ignore
                                         icon={iconsByName[social.name]}
                                         label={social.name}
                                         variant="outlined"
