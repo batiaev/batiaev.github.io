@@ -413,15 +413,15 @@
       "author": "Yaroslav Kravchenko",
       "title": "Partner & General Manager, Wealth & Trading at Revolut",
       "linkedin": "https://www.linkedin.com/in/yarik-kravchenko/"
-    },
-    {
-      "quote": "Anton is a rare blend of deep fintech expertise and strategic leadership. At Deutsche Bank, he led the expansion of our FX risk platform to Fixed Income, replacing legacy Excel-based systems with a scalable, high-performance risk solution. His ability to architect complex financial systems while aligning stakeholders made a lasting impact.",
-      "author": "Alexander Beloturkin",
-      "title": "Director, FX Risk IT at Deutche Bank",
-      "linkedin": "https://www.linkedin.com/in/alexander-beloturkin/"
     }
   ],
   "testimonials": [
+    {
+      "quote": "Anton is a rare blend of deep fintech expertise and strategic leadership. At Deutsche Bank, he led the expansion of our FX risk platform to Fixed Income, replacing legacy systems with a scalable, high-performance risk solution. His ability to architect complex financial systems while aligning stakeholders made a lasting impact.",
+      "author": "Alexander Beloturkin",
+      "title": "Director, FX Risk IT at Deutche Bank",
+      "linkedin": "https://www.linkedin.com/in/alexander-beloturkin/"
+    },
     {
       "quote": "Anton doesn't just build technology—he creates strategic advantages. His leadership in developing an in-house derivatives pricing engine gave us unprecedented control over margin trading, improving risk limits and significantly boosting trading volumes.",
       "author": "Alex Maskakov",
