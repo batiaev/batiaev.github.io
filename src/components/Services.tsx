@@ -85,7 +85,7 @@ const Services = () => {
                   <CardContent>
                     <CardDescription className="text-base">{service.description}</CardDescription>
                     <div className="mt-4">
-                      <a href="#experience" className="text-primary hover:underline inline-flex items-center gap-2">
+                      <a href="#case-studies" className="text-primary hover:underline inline-flex items-center gap-2">
                         View Case Studies <ArrowRight className="h-4 w-4" />
                       </a>
                     </div>
