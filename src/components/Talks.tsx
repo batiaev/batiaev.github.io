@@ -99,7 +99,7 @@ const Talks = () => {
                           className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
                         >
                           <PencilLine className="h-4 w-4" />
-                          <span>Blog post</span>
+                          <span>Read Case Study</span>
                         </a>
                       )}
                       {talk.event && (
@@ -110,7 +110,7 @@ const Talks = () => {
                           className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
                         >
                           <CalendarCheck2 className="h-4 w-4" />
-                          <span>Event</span>
+                          <span>Check Event</span>
                         </a>
                       )}
                       {talk.podcast && (
@@ -121,7 +121,7 @@ const Talks = () => {
                           className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
                         >
                           <Mic className="h-4 w-4" />
-                          <span>Podcast</span>
+                          <span>Listen Podcast</span>
                         </a>
                       )}
                       {talk.slides && (
@@ -132,7 +132,7 @@ const Talks = () => {
                           className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
                         >
                           <FileText className="h-4 w-4" />
-                          <span>Slides</span>
+                          <span>View Slides</span>
                         </a>
                       )}
                     </div>

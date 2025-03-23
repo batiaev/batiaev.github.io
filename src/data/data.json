@@ -5,6 +5,16 @@
   "company": "VEGA",
   "tags": [
     {
+      "label": "WealthTech CTO",
+      "color": "purple",
+      "icon": "CodeIcon"
+    },
+    {
+      "label": "Fintech Architect",
+      "color": "amber",
+      "icon": "TrendingUpIcon"
+    },
+    {
       "label": "UK Global Talent",
       "color": "green",
       "icon": "EmojiEventsIcon"
@@ -13,16 +23,6 @@
       "label": "MBA",
       "color": "blue",
       "icon": "SchoolIcon"
-    },
-    {
-      "label": "Certified Java Developer",
-      "color": "purple",
-      "icon": "CodeIcon"
-    },
-    {
-      "label": "Accredited Investor (MOEX)",
-      "color": "amber",
-      "icon": "TrendingUpIcon"
     }
   ],
   "description": "I help fintech founders, VCs, and engineering leaders build innovative financial products, scale engineering teams, and transform technology visions into reality.",
@@ -157,12 +157,14 @@
       "company": "Vega",
       "city": "London",
       "url": "https://vega-alts.com/",
+      "challenge": "A fintech startup needed to scale their engineering team and infrastructure to support rapid growth while maintaining high code quality and team morale.",
       "achievements": [
         "Scaled company from pre-seed with $1M raised to $20M at Series A",
         "Build engineering team from 0 to 35+ engineers",
         "Led by example: #3 in total code contribution with 880+ commits and 455k+ sloc added",
         "Designed microservice architecture to manage 500B+ AUM and 10k+ clients for Apollo Asset Management"
       ],
+      "proofLink": "https://www.apollo.com/insights-news/pressreleases/2024/11/vega-raises--20-million-series-a-led-by-apollo-and-motive-to-sca",
       "tags": []
     },
     {
@@ -175,12 +177,14 @@
       "bgColor": "#815df6",
       "logo": "/images/revolut.gif",
       "url": "https://revolut.com/",
+      "challenge": "A rapidly growing fintech needed to build a scalable portfolio management system to handle increasing AUM and support global expansion.",
       "achievements": [
         "Led the Platform Tribe of 24+ engineers across market making, market data, risk management and brokerage",
         "Designed and build portfolio management system handling $650M+ AUM across multiple access classes",
         "Architected smart order routing (SOR) in market making for hedging with <60ms roundtrip",
         "Supported launch of brokerage operations in Australia, Singapore, and the US"
       ],
+      "proofLink": "https://www.revolut.com/en-LU/news/revolut_adds_european_listed_stocks_to_its_trading_platform_across_the_eea/",
       "tags": []
     },
     {
@@ -198,6 +202,7 @@
         "Facilitated the migration from excel based solution to web based risk calculator",
         "Contributed into backend development to connect multiple systems to our new platform"
       ],
+      "proofLink": "#testimonials",
       "tags": ["NYSE: DB"]
     },
     {
@@ -214,6 +219,7 @@
         "Created in-house derivatives platform: derivatives pricing engine, options & futures greeks calculator, IV curve builder.",
         "Enhanced margin trading services with 15+ overnight swaps and repos strategies."
       ],
+      "proofLink": "#testimonials",
       "tags": []
     },
     {

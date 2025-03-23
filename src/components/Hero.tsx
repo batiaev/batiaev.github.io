@@ -56,7 +56,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-reveal" style={{ animationDelay: '0.6s' }}>
             <Button size="lg" className="font-medium px-8 py-6" asChild>
               <a href="https://calendly.com/batiaev/30min" target="_blank" rel="noreferrer">
-                <Calendar className="mr-2 h-5 w-5" /> Book a Consultation
+                <Calendar className="mr-2 h-5 w-5" /> Book a Free Strategy Call
               </a>
             </Button>
             <Button size="lg" variant="outline" className="font-medium px-8 py-6" asChild>
@@ -65,41 +65,6 @@ const Hero = () => {
               </a>
             </Button>
           </div>
-
-          {/*<div className="mt-8 flex flex-wrap justify-center gap-4 opacity-0 animate-reveal" style={{ animationDelay: '0.7s' }}>*/}
-          {/*  <a*/}
-          {/*    href="https://www.linkedin.com/in/batiaev/"*/}
-          {/*    target="_blank"*/}
-          {/*    rel="noreferrer"*/}
-          {/*    className="text-muted-foreground hover:text-foreground transition-colors"*/}
-          {/*  >*/}
-          {/*    <Linkedin className="h-5 w-5" />*/}
-          {/*  </a>*/}
-          {/*  <a*/}
-          {/*    href="mailto:anton@batiaev.com"*/}
-          {/*    target="_blank"*/}
-          {/*    rel="noreferrer"*/}
-          {/*    className="text-muted-foreground hover:text-foreground transition-colors"*/}
-          {/*  >*/}
-          {/*    <Mail className="h-5 w-5" />*/}
-          {/*  </a>*/}
-          {/*  <a*/}
-          {/*    href="https://t.me/batiaev_com"*/}
-          {/*    target="_blank"*/}
-          {/*    rel="noreferrer"*/}
-          {/*    className="text-muted-foreground hover:text-foreground transition-colors"*/}
-          {/*  >*/}
-          {/*    <MessageCircle className="h-5 w-5" />*/}
-          {/*  </a>*/}
-          {/*  <a*/}
-          {/*    href="https://calendly.com/batiaev/30min"*/}
-          {/*    target="_blank"*/}
-          {/*    rel="noreferrer"*/}
-          {/*    className="text-muted-foreground hover:text-foreground transition-colors"*/}
-          {/*  >*/}
-          {/*    <Calendar className="h-5 w-5" />*/}
-          {/*  </a>*/}
-          {/*</div>*/}
         </div>
       </div>
     </section>
