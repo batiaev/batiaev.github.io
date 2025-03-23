@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,7 +26,7 @@ const Header = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#services" className="text-sm font-medium link-hover">Services</a>
-          <a href="#experience" className="text-sm font-medium link-hover">Experience</a>
+          <a href="#case-studies" className="text-sm font-medium link-hover">Case Studies</a>
           <a href="#testimonials" className="text-sm font-medium link-hover">Testimonials</a>
           <a href="#talks" className="text-sm font-medium link-hover">Talks</a>
           <a href="#contact" className="text-sm font-medium link-hover">Contact</a>
@@ -59,11 +58,11 @@ const Header = () => {
               Services
             </a>
             <a
-              href="#experience"
+              href="#case-studies"
               className="text-lg font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Experience
+              Case Studies
             </a>
             <a
               href="#testimonials"

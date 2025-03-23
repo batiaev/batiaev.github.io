@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import {Calendar, CheckCheck, Download, MessageCircle, PlayCircle} from 'lucide-react';
+import {Calendar, CheckCheck, Download, MessageCircle, PlayCircle, Target, Lightbulb, ChartLine} from 'lucide-react';
 import data from "../data/data.json";
 import {Button} from "@/components/ui/button.tsx";
 
@@ -43,14 +43,14 @@ const Experience = () => {
   }, []);
 
   return (
-    <section id="experience" className="section" ref={sectionRef}>
+    <section id="case-studies" className="section" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="highlight-chip">Professional Journey</div>
-          <h2 className="section-title">My Experience</h2>
+          <div className="highlight-chip">Case Studies</div>
+          <h2 className="section-title">Client Success Stories</h2>
           <p className="section-subtitle mx-auto">
-            A track record of leadership and innovation in financial technology,
-            helping organizations build and scale successful technical teams and products.
+            Real-world examples of how I've helped organizations solve complex technical challenges
+            and achieve measurable business outcomes.
           </p>
         </div>
 
@@ -75,31 +75,46 @@ const Experience = () => {
                             <p className="text-primary font-medium">{item.company} <span className="text-muted-foreground font-normal">· {item.city}</span></p>
                         )}
                       </div>
-                      {item.challenge && (
-                          <div className="mb-4">
-                            <h4 className="font-medium mb-2">The Challenge:</h4>
-                            <p className="text-muted-foreground">{item.challenge}</p>
+
+                      <div className="space-y-6">
+                        {item.challenge && (
+                            <div className="flex items-start gap-3">
+                              <Target className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                              <div>
+                                <h4 className="font-medium mb-2">Client Challenge</h4>
+                                <p className="text-muted-foreground">{item.challenge}</p>
+                              </div>
+                            </div>
+                        )}
+
+                        <div className="flex items-start gap-3">
+                          <Lightbulb className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="font-medium mb-2">Solution Approach</h4>
+                            <ul className="space-y-2">
+                              {item.achievements.map((achievement, i) => (
+                                  <li key={i} className="flex items-start gap-2">
+                                    <CheckCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                                    <span>{achievement}</span>
+                                  </li>
+                              ))}
+                            </ul>
                           </div>
-                      )}
-                      <div className="mb-4">
-                        {item.challenge && <h4 className="font-medium mb-2">The Solution:</h4>}
-                        <ul className="space-y-2">
-                          {item.achievements.map((achievement, i) => (
-                              <li key={i} className="flex items-start gap-2">
-                                <CheckCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                                <span>{achievement}</span>
-                              </li>
-                          ))}
-                        </ul>
+                        </div>
+
+                        {item.proofLink && (
+                            <div className="flex items-start gap-3">
+                              <ChartLine className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                              <div>
+                                <h4 className="font-medium mb-2">Results & Impact</h4>
+                                <a href={item.proofLink} className="inline-flex items-center gap-2 text-primary hover:underline">
+                                  <MessageCircle className="h-5 w-5" />
+                                  <span>View Success Story</span>
+                                </a>
+                              </div>
+                            </div>
+                        )}
                       </div>
-                      {item.proofLink && (
-                          <div className="mt-4">
-                            <a href={item.proofLink} className="inline-flex items-center gap-2 text-primary hover:underline">
-                              <MessageCircle className="h-5 w-5" />
-                              <span>Read the Success Story</span>
-                            </a>
-                          </div>
-                      )}
                     </CardContent>
                   </Card>
                 </div>
@@ -112,18 +127,18 @@ const Experience = () => {
         </div>
 
         <div className="text-center mt-16">
-          <h3 className="text-2xl font-semibold mb-4">Ready to Transform Your Team?</h3>
+          <h3 className="text-2xl font-semibold mb-4">Ready to Transform Your Business?</h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Let's have a chat about how I can help you achieve your goals and transform your business.
+            Let's discuss how I can help solve your technical challenges and drive measurable business outcomes.
           </p>
           <Button size="lg" className="font-medium px-8 py-6" asChild>
             <a href={data.social[5].link} target="_blank" rel="noreferrer">
-              <Calendar className="mr-2 h-5 w-5" /> Book a Call
+              <Calendar className="mr-2 h-5 w-5" /> Book a Consultation
             </a>
           </Button>
         </div>
-        </div>
-      </section>
+      </div>
+    </section>
   );
 };
 
