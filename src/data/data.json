@@ -6,26 +6,30 @@
   "tags": [
     {
       "label": "UK Global Talent",
+      "color": "green",
       "icon": "EmojiEventsIcon"
     },
     {
       "label": "MBA",
+      "color": "blue",
       "icon": "SchoolIcon"
     },
     {
       "label": "Certified Java Developer",
+      "color": "purple",
       "icon": "CodeIcon"
     },
     {
       "label": "Accredited Investor (MOEX)",
+      "color": "amber",
       "icon": "TrendingUpIcon"
     }
   ],
-  "description": "After 14+ years of experience in software development and 8+ years in finance technologies, I've collected a solid expertise to building modern solutions for large investment banks, modern online neobanks, brokerage firms",
+  "description": "I help fintech founders, VCs, and engineering leaders build innovative financial products, scale engineering teams, and transform technology visions into reality.",
   "social": [
     {
       "name": "linkedin",
-      "id": "@batiaev",
+      "id": "linkedin.com/in/batiaev",
       "link": "https://www.linkedin.com/in/batiaev/"
     },
     {
@@ -150,10 +154,15 @@
       "title": "Chief Technology Officer (CTO)",
       "period": "Feb 2023 – present",
       "duration": "2 yrs 1 mos",
-      "company": "VEGA",
+      "company": "Vega",
       "city": "London",
       "url": "https://vega-alts.com/",
-      "description": "Leading IT in the company",
+      "achievements": [
+        "Scaled company from pre-seed with $1M raised to $20M at Series A",
+        "Build engineering team from 0 to 35+ engineers",
+        "Led by example: #3 in total code contribution with 880+ commits and 455k+ sloc added",
+        "Designed microservice architecture to manage 500B+ AUM and 10k+ clients for Apollo Asset Management"
+      ],
       "tags": []
     },
     {
@@ -166,19 +175,29 @@
       "bgColor": "#815df6",
       "logo": "/images/revolut.gif",
       "url": "https://revolut.com/",
-      "description": "Team Lead, design from scratch solutions for Wealth & Trading Risk calculation",
+      "achievements": [
+        "Led the Platform Tribe of 24+ engineers across market making, market data, risk management and brokerage",
+        "Designed and build portfolio management system handling $650M+ AUM across multiple access classes",
+        "Architected smart order routing (SOR) in market making for hedging with <60ms roundtrip",
+        "Supported launch of brokerage operations in Australia, Singapore, and the US"
+      ],
       "tags": []
     },
     {
       "id": 5,
-      "title": "Team Lead (AVP)",
+      "title": "Engineering Lead",
       "period": "Jan 2019 – Feb 2020",
       "duration": "1 yrs 2 mos",
       "company": "Deutsche Bank",
       "city": "Moscow",
       "url": "https://db.com/",
       "logo": "/images/autobahn.png",
-      "description": "Lead Software Engineer, worked on quantitative risks of FX & fixed income derivatives",
+      "achievements": [
+        "Led a team of 3 engineers to expand FX desk risk calculator to new asset class - Fixed income",
+        "Presented the project to the multiple MDs across the organisation",
+        "Facilitated the migration from excel based solution to web based risk calculator",
+        "Contributed into backend development to connect multiple systems to our new platform"
+      ],
       "tags": ["NYSE: DB"]
     },
     {
@@ -189,27 +208,27 @@
       "company": "Otkritie Broker",
       "city": "Moscow",
       "url": "https://open-broker.ru/",
-      "description": "Derivatives pricing & Quantitative risks of FX, Equity, Commodity and Derivatives markets",
+      "achievements": [
+        "Managed team of 10 engineering experts in low latency and high frequency trading.",
+        "Scaled the risk engine to support over 1M updates per second, servicing more than 400k investors.",
+        "Created in-house derivatives platform: derivatives pricing engine, options & futures greeks calculator, IV curve builder.",
+        "Enhanced margin trading services with 15+ overnight swaps and repos strategies."
+      ],
       "tags": []
     },
     {
       "id": 3,
-      "title": "Java Developer",
-      "period": "Nov 2014 - Sep 2016",
-      "duration": "1 yrs 11 mos",
-      "company": "Haulmont",
-      "city": "Samara",
-      "url": "https://open-broker.ru/",
-      "tags": []
-    },
-    {
-      "id": 2,
-      "title": "C++ Developer",
-      "period": "Oct 2012 – May 2014",
-      "duration": "1 yrs 7 mos",
-      "company": "Atol",
-      "city": "Samara",
-      "url": "https://atol.ru/",
+      "title": "Software Engineer",
+      "period": "Sep 2010 - Sep 2016",
+      "duration": "6 yrs",
+      "company": "Multiple companies",
+      "city": "Worldwide",
+      "achievements": [
+        "Multiple backend projects in Java and C++",
+        "Infrastructure and observability projects with on-prem and GCP cloud",
+        "Frontend projects with Qt, Angular 1 and TypeScript",
+        "Few voice recognition and chatbot projects with CMU Sphinx"
+      ],
       "tags": []
     }
   ],
@@ -241,24 +260,29 @@
   ],
   "services": [
     {
-      "logo": "/images/services/postgresql.webp",
-      "name": "Databases",
-      "description": "PostgreSQL, Timescale, Mongo"
+      "logo": "briefcase",
+      "title": "Strategic Advisory",
+      "description": "Providing strategic direction for fintech startups and established financial institutions looking to innovate. I leverage my extensive experience to help navigate complex technological and financial landscapes."
     },
     {
-      "logo": "/images/services/java.webp",
-      "name": "Backend",
-      "description": "Java, Spring, Netty"
+      "logo": "trendingUp",
+      "title": "WealthTech Solutions",
+      "description": "Expertise in derivatives pricing, risk management, market making, DMA, quantitative math, and algorithmic trading. Building innovative solutions that leverage modern financial technology."
     },
     {
-      "logo": "/images/services/react.webp",
-      "name": "Frontend",
-      "description": "React, Typescript, Material UI"
+      "logo": "code",
+      "title": "Engineering Leadership",
+      "description": "Guiding engineering teams with expertise in Java/Kotlin, messaging protocols, databases, cloud infrastructure, and frontend technologies. Building scalable and reliable fintech systems."
     },
     {
-      "logo": "/images/services/docker.webp",
-      "name": "Cloud",
-      "description": "GCP, Docker, Kubernetes"
+      "logo": "barChart",
+      "title": "Product Development",
+      "description": "Leading product development through strong problem solving, critical thinking, and effective stakeholder management. Turning complex financial requirements into user-friendly products."
+    },
+    {
+      "logo": "graduationCap",
+      "title": "CTO Mentorship",
+      "description": "Guiding aspiring and current CTOs through the challenges of technical leadership. From team building to technical debt management, I provide insights based on real-world experience leading engineering teams."
     }
   ],
   "education": [
@@ -297,12 +321,12 @@
   ],
   "talks": [
     {
-      "name": "Ах!Уехавшие #8",
-      "desc": "Episode #8 about UK immigrants and cultural cauldron at London",
-      "link": "https://podcasts.apple.com/cz/podcast/%D0%B0%D1%85-%D1%83%D0%B5%D1%85%D0%B0%D0%B2%D1%88%D0%B8%D0%B5/id1672444104",
-      "logo": "/images/conf/ahuehavshie.webp",
-      "podcast": "https://podcasts.apple.com/cz/podcast/%D0%B0%D1%85-%D1%83%D0%B5%D1%85%D0%B0%D0%B2%D1%88%D0%B8%D0%B5/id1672444104",
-      "date": "21 JUN 2023"
+      "name": "Leadership Roundtable 2024",
+      "desc": "CTO's discussion about Product Market Fit and building a culture of high performance whilst scaling.",
+      "link": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
+      "logo": "/images/conf/ctoRoundtable.jpeg",
+      "event": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
+      "date": "4 JUL 2024"
     },
     {
       "name": "It's Not a Sweet B..#5",
@@ -313,23 +337,7 @@
       "date": "20 DEC 2022"
     },
     {
-      "name": "Interview for Relocode",
-      "desc": "Relocation to London, work at fintech startup Revolut and Global Talent Visa",
-      "link": "https://www.youtube.com/watch?v=OAYihZC8_LU",
-      "logo": "/images/conf/relocode.webp",
-      "video": "https://www.youtube.com/watch?v=OAYihZC8_LU",
-      "date": "2 Nov 2022"
-    },
-    {
-      "name": "UK Global Talent Visa",
-      "desc": "My path to receiving endorsement for global talent visa in FinTech field",
-      "link": "https://www.youtube.com/watch?v=Rh3V1JFKRl0",
-      "logo": "/images/conf/globaltalent2022.webp",
-      "video": "https://www.youtube.com/watch?v=Rh3V1JFKRl0",
-      "date": "8 Sep 2022"
-    },
-    {
-      "name": "JavaSwag Podcast",
+      "name": "JavaSwag Podcast 2022",
       "desc": "Episode #31. Many-sided fintech, MBA and transition to Product Owner",
       "link": "https://javaswag.github.io/episode/31/",
       "logo": "/images/conf/javaswag.webp",
@@ -340,9 +348,17 @@
       "name": "Joker Conf 2021",
       "desc": "How to build the development process in remote-first reality?",
       "link": "https://jokerconf.com/en/talks/7E1IWDPmwWLPIFjz7kDbvA/?referer=/archive/2021/",
-      "logo": "/images/header.webp",
+      "logo": "/images/conf/joker2021.webp",
       "slides": "https://jokerconf.com/en/talks/7E1IWDPmwWLPIFjz7kDbvA/?referer=/archive/2021/",
       "date": "26 Oct 2021"
+    },
+    {
+      "name": "Deutche Bank Blog",
+      "desc": "Mutual authentication in Java with TLS / SSL",
+      "link": "https://habr.com/ru/company/dbtc/blog/487318/",
+      "logo": "/images/blog/blog1.webp",
+      "date": "7 Feb 2020",
+      "blog": "https://habr.com/ru/company/dbtc/blog/487318/"
     },
     {
       "name": "Find IT Moscow 2019",
@@ -375,6 +391,42 @@
       "logo": "/images/conf/highload2019.webp",
       "slides": "/talks/highload-siberia-2019/slides.pdf",
       "date": "24 Jun 2019"
+    },
+    {
+      "name": "Jug Ru Group Blog",
+      "desc": "Interview about financial math",
+      "link": "https://habr.com/ru/companies/jugru/articles/449630/",
+      "logo": "/images/blog/blog2.webp",
+      "date": "30 Apr 2019",
+      "blog": "https://habr.com/ru/companies/jugru/articles/449630/"
+    }
+  ],
+  "pendingApprovalTestimonials": [
+    {
+      "quote": "From day one, Anton set the bar for excellence. He built a high-performing team, scaled our technology to serve top-tier asset managers, and led by example across every aspect of the business. A true force in fintech innovation.",
+      "author": "Alexis Augier",
+      "title": "Founder & CEO at Vega",
+      "linkedin": "https://www.linkedin.com/in/alexisaugier/"
+    },
+    {
+      "quote": "Anton was a driving force behind the success of our Wealth & Trading platform at Revolut. He led a high-performing engineering team, delivering critical systems that powered our global brokerage expansion.",
+      "author": "Yaroslav Kravchenko",
+      "title": "Partner & General Manager, Wealth & Trading at Revolut",
+      "linkedin": "https://www.linkedin.com/in/yarik-kravchenko/"
+    },
+    {
+      "quote": "Anton is a rare blend of deep fintech expertise and strategic leadership. At Deutsche Bank, he led the expansion of our FX risk platform to Fixed Income, replacing legacy Excel-based systems with a scalable, high-performance risk solution. His ability to architect complex financial systems while aligning stakeholders made a lasting impact.",
+      "author": "Alexander Beloturkin",
+      "title": "Director, FX Risk IT at Deutche Bank",
+      "linkedin": "https://www.linkedin.com/in/alexander-beloturkin/"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Anton doesn't just build technology—he creates strategic advantages. His leadership in developing an in-house derivatives pricing engine gave us unprecedented control over margin trading, improving risk limits and significantly boosting trading volumes.",
+      "author": "Alex Maskakov",
+      "title": "CIO at Otkritie Broker",
+      "linkedin": "https://www.linkedin.com/in/alex-maslakov/"
     }
   ],
   "blog": [
