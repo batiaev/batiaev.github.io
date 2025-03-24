@@ -327,8 +327,16 @@
   ],
   "talks": [
     {
+      "name": "Faang Talk #78",
+      "desc": "Discussion about difference between CTO in startup and engineer in FAANG",
+      "link": "https://youtube.com/live/22YCw8DZvb0?feature=share",
+      "logo": "/images/conf/faangTalk78.jpg",
+      "youtube": "https://youtube.com/live/22YCw8DZvb0?feature=share",
+      "date": "25 MAR 2025"
+    },
+    {
       "name": "Leadership Roundtable 2024",
-      "desc": "CTO's discussion about Product Market Fit and building a culture of high performance whilst scaling.",
+      "desc": "CTO's discussion about PMF and building a high performance culture.",
       "link": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
       "logo": "/images/conf/ctoRoundtable.jpeg",
       "event": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
@@ -405,6 +413,14 @@
       "logo": "/images/blog/blog2.webp",
       "date": "30 Apr 2019",
       "blog": "https://habr.com/ru/companies/jugru/articles/449630/"
+    },
+    {
+      "name": "JPoint Conf 2019",
+      "desc": "Interview at Deutche Bank stand",
+      "link": "https://www.youtube.com/watch?v=xIc5XcF4JKA",
+      "logo": "/images/conf/jpoint2019.png",
+      "date": "5 Apr 2019",
+      "youtube": "https://www.youtube.com/watch?v=xIc5XcF4JKA"
     }
   ],
   "pendingApprovalTestimonials": [

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { CalendarCheck2, Mic, PencilLine, FileText } from 'lucide-react';
+import { CalendarCheck2, Mic, PencilLine, FileText, Youtube } from 'lucide-react';
 import data from "../data/data.json";
 
 const Talks = () => {
@@ -72,7 +72,7 @@ const Talks = () => {
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
                     <img
                       src={talk.logo}
                       alt={talk.name}
@@ -133,6 +133,17 @@ const Talks = () => {
                         >
                           <FileText className="h-4 w-4" />
                           <span>View Slides</span>
+                        </a>
+                      )}
+                      {talk.youtube && (
+                        <a
+                          href={talk.youtube}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
+                        >
+                          <Youtube className="h-4 w-4" />
+                          <span>Watch Youtube</span>
                         </a>
                       )}
                     </div>
