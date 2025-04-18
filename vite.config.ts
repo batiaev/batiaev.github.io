@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { compression } from 'vite-plugin-compression2';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -10,7 +11,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: mode === 'development',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -45,6 +46,9 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true
+      },
+      format: {
+        comments: false
       }
     },
     cssCodeSplit: true,
@@ -53,10 +57,21 @@ export default defineConfig(({ mode }) => ({
     assetsInlineLimit: 4096,
     modulePreload: {
       polyfill: true
-    }
+    },
+    target: 'esnext',
+    assetsDir: 'assets',
+    emptyOutDir: true
   },
   plugins: [
     react(),
+    compression({
+      algorithm: 'gzip',
+      exclude: [/\.(br)$/, /\.(gz)$/],
+    }),
+    compression({
+      algorithm: 'brotliCompress',
+      exclude: [/\.(br)$/, /\.(gz)$/],
+    })
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -66,5 +81,7 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
     exclude: ['@radix-ui/react-toast']
-  }
+  },
+  base: '/',
+  publicDir: 'public'
 }));
