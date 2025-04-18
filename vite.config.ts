@@ -46,6 +46,13 @@ export default defineConfig(({ mode }) => ({
         drop_console: true,
         drop_debugger: true
       }
+    },
+    cssCodeSplit: true,
+    cssMinify: true,
+    reportCompressedSize: false,
+    assetsInlineLimit: 4096,
+    modulePreload: {
+      polyfill: true
     }
   },
   plugins: [
@@ -56,4 +63,8 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@radix-ui/react-toast']
+  }
 }));
