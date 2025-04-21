@@ -15,11 +15,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --write .",
-    "clean": "rm -rf dist docs",
-    "prebuild": "npm run clean",
-    "postbuild": "cp -r dist/* docs/ && cp CNAME docs/ && touch docs/.nojekyll",
-    "deploy": "npm run build && git add docs && git commit -m 'Deploy to GitHub Pages' && git push origin main"
+    "format": "prettier --write ."
   },
   "author": "Anton Batiaev <anton@batiaev.com>",
   "license": "MIT",

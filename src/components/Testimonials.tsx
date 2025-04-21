@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -85,15 +84,17 @@ const Testimonials = () => {
                     {data.testimonials[currentIndex].title}
                   </span>
                   <span className="text-muted-foreground pt-2">
-                    <a href={data.testimonials[currentIndex].linkedin}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                      <Linkedin className="h-5 w-5"/>
+                    <a 
+                      href={data.testimonials[currentIndex].linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
+                      aria-label={`Visit ${data.testimonials[currentIndex].author}'s LinkedIn profile`}
+                    >
+                      <Linkedin className="h-5 w-5" aria-hidden="true" />
+                      <span className="sr-only">LinkedIn</span>
                     </a>
                   </span>
-
                 </div>
               </CardContent>
             </Card>

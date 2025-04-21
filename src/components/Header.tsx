@@ -41,14 +41,22 @@ const Header = () => {
           size="icon"
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </Button>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border/40 animate-fade-in z-50">
+        <div 
+          id="mobile-menu"
+          className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border/40 animate-fade-in z-50"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
           <nav className="container py-4 flex flex-col space-y-4">
             <a
               href="#services"
