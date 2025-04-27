@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Linkedin, Mail, Github, MessageCircle, Calendar } from 'lucide-react';
 import data from "../data/data.json";
 
-const Hero = () => {
+const Intro = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,4 +71,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Intro;
