@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { CodeIcon, TrendingUpIcon, ShieldCheck, Rocket, ArrowRight } from 'lucide-react';
+import { CodeIcon, TrendingUpIcon, ShieldCheck, Rocket, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import data from "../data/data.json";
 
@@ -86,7 +86,7 @@ const Services = () => {
                     <ul className="space-y-2 mb-4">
                       {service.outcomes.map((outcome, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
-                            <ArrowRight className="h-4 w-4 text-primary mt-1" />
+                            <CheckCircle2 className="h-4 w-4 text-primary mt-1" />
                             <span>{outcome}</span>
                           </li>
                       ))}

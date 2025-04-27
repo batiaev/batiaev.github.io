@@ -5,24 +5,22 @@
   "company": "VEGA",
   "tags": [
     {
-      "label": "Investor-Grade Tech Audit",
+      "label": "Double Speed to MVP",
+      "description": "Avoid costly rebuilds and accelerate your product launch",
       "color": "purple",
       "icon": "CodeIcon"
     },
     {
-      "label": "MVP Rescue Mission",
+      "label": "Cut Infrastructure Costs",
+      "description": "Optimize your tech stack and reduce operational expenses",
       "color": "amber",
       "icon": "TrendingUpIcon"
     },
     {
-      "label": "Fintech Architecture Design",
+      "label": "Fundraise Faster",
+      "description": "Build investor confidence with a solid technical foundation",
       "color": "green",
       "icon": "EmojiEventsIcon"
-    },
-    {
-      "label": "Fractional CTO Advisory",
-      "color": "blue",
-      "icon": "SchoolIcon"
     }
   ],
   "description": "I help fintech founders, VCs, and engineering leaders build innovative financial products, scale engineering teams, and transform technology visions into reality.",

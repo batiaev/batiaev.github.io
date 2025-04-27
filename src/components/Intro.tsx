@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Linkedin, Mail, Github, MessageCircle, Calendar } from 'lucide-react';
@@ -37,26 +36,26 @@ const Intro = () => {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight mb-6 opacity-0 animate-reveal" style={{ animationDelay: '0.2s' }}>
-            Accelerating <span className="text-primary">Fintech Innovation</span> Through Strategic Expertise
+            Helping Fintech Founders Build <span className="text-primary">Investor-Grade Products</span>
           </h1>
 
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl opacity-0 animate-reveal" style={{ animationDelay: '0.4s' }}>
+          <p className="text-xl text-muted-foreground mb-6 max-w-2xl opacity-0 animate-reveal" style={{ animationDelay: '0.4s' }}>
             {data.description}
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-8 opacity-0 animate-reveal" style={{ animationDelay: '0.5s' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full max-w-3xl opacity-0 animate-reveal" style={{ animationDelay: '0.5s' }}>
             {data.tags.map((tag, index) => (
-                <span key={index} className="bg-accent/50 text-sm px-3 py-1 rounded-full flex items-center gap-2">
-                  <span className={`h-2 w-2 rounded-full bg-${tag.color || 'green'}-500`}></span>
-                  {tag.label}
-                </span>
+              <div className="bg-accent/10 p-4 rounded-lg">
+                <h3 className="font-semibold mb-2">{tag.label}</h3>
+                <p className="text-sm text-muted-foreground">{tag.description}</p>
+              </div>
             ))}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-reveal" style={{ animationDelay: '0.6s' }}>
             <Button size="lg" className="font-medium px-8 py-6" asChild>
               <a href="https://calendly.com/batiaev/30min" target="_blank" rel="noreferrer">
-                <Calendar className="mr-2 h-5 w-5" /> Book a Free Strategy Call
+                <Calendar className="mr-2 h-5 w-5" /> Apply for Strategy Call
               </a>
             </Button>
             <Button size="lg" variant="outline" className="font-medium px-8 py-6" asChild>
@@ -65,6 +64,10 @@ const Intro = () => {
               </a>
             </Button>
           </div>
+
+          <p className="text-sm text-muted-foreground mt-4 opacity-0 animate-reveal" style={{ animationDelay: '0.7s' }}>
+            Limited complimentary strategy calls available for VC-backed founders. Minimum engagement starts at £5,000.
+          </p>
         </div>
       </div>
     </section>
