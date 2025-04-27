@@ -266,29 +266,44 @@
   ],
   "services": [
     {
-      "logo": "briefcase",
-      "title": "Strategic Advisory",
-      "description": "Providing strategic direction for fintech startups and established financial institutions looking to innovate. I leverage my extensive experience to help navigate complex technological and financial landscapes."
+      "title": "Investor-Grade Tech Audit™",
+      "description": "Get a comprehensive review of your MVP architecture, codebase, and technical risks. Perfect for pre-seed and seed-stage startups preparing for their next funding round.",
+      "logo": "shield",
+      "outcomes": [
+        "10-page audit deck for investor presentations",
+        "Technical risk assessment and mitigation plan",
+        "Scalability recommendations for next funding round"
+      ]
     },
     {
+      "title": "MVP Rescue Mission™",
+      "description": "Hands-on technical leadership to fix critical MVP issues before your next funding milestone. Ideal for startups that need to quickly address technical debt or scalability concerns.",
+      "logo": "rocket",
+      "outcomes": [
+        "Critical bug fixes and performance improvements",
+        "Technical debt reduction strategy",
+        "Team mentoring and process optimization"
+      ]
+    },
+    {
+      "title": "Fractional CTO Advisory™",
+      "description": "Ongoing strategic guidance and technical leadership for early-stage fintech startups. Perfect for founders who need expert advice without the full-time CTO commitment.",
       "logo": "trendingUp",
-      "title": "WealthTech Solutions",
-      "description": "Expertise in derivatives pricing, risk management, market making, DMA, quantitative math, and algorithmic trading. Building innovative solutions that leverage modern financial technology."
+      "outcomes": [
+        "Monthly strategic planning sessions",
+        "Technical roadmap development",
+        "Investor relations support"
+      ]
     },
     {
+      "title": "Fintech Architecture Design™",
+      "description": "Expert guidance in designing scalable, secure, and compliant fintech architectures. Essential for startups building complex financial products.",
       "logo": "code",
-      "title": "Engineering Leadership",
-      "description": "Guiding engineering teams with expertise in Java/Kotlin, messaging protocols, databases, cloud infrastructure, and frontend technologies. Building scalable and reliable fintech systems."
-    },
-    {
-      "logo": "barChart",
-      "title": "Product Development",
-      "description": "Leading product development through strong problem solving, critical thinking, and effective stakeholder management. Turning complex financial requirements into user-friendly products."
-    },
-    {
-      "logo": "graduationCap",
-      "title": "CTO Mentorship",
-      "description": "Guiding aspiring and current CTOs through the challenges of technical leadership. From team building to technical debt management, I provide insights based on real-world experience leading engineering teams."
+      "outcomes": [
+        "Compliance-first architecture design",
+        "Scalability and security best practices",
+        "Integration strategy for financial services"
+      ]
     }
   ],
   "education": [
