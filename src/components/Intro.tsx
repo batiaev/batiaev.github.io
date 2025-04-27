@@ -1,7 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Linkedin, Mail, Github, MessageCircle, Calendar } from 'lucide-react';
+import {
+  Linkedin,
+  Calendar,
+  TrendingDownIcon,
+  ShieldCheckIcon,
+  RocketIcon,
+} from 'lucide-react'
 import data from "../data/data.json";
+
+const iconsByName = {
+  'TrendingDown': <TrendingDownIcon className="h-8 w-8 text-primary" />,
+  'ShieldCheck': <ShieldCheckIcon className="h-8 w-8 text-primary" />,
+  'Rocket': <RocketIcon className="h-8 w-8 text-primary" />
+}
 
 const Intro = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -36,7 +48,7 @@ const Intro = () => {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight mb-6 opacity-0 animate-reveal" style={{ animationDelay: '0.2s' }}>
-            Helping Fintech Founders Build <span className="text-primary">Investor-Grade Products</span>
+            Helping Fintech Founders Build <span className="text-primary">Investor-Grade<sup>*</sup> Products</span>
           </h1>
 
           <p className="text-xl text-muted-foreground mb-6 max-w-2xl opacity-0 animate-reveal" style={{ animationDelay: '0.4s' }}>
@@ -46,7 +58,7 @@ const Intro = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full max-w-3xl opacity-0 animate-reveal" style={{ animationDelay: '0.5s' }}>
             {data.tags.map((tag, index) => (
               <div className="bg-accent/10 p-4 rounded-lg">
-                <h3 className="font-semibold mb-2">{tag.label}</h3>
+                <h3 className="font-semibold mb-2">{iconsByName[tag.logo]} {tag.label}</h3>
                 <p className="text-sm text-muted-foreground">{tag.description}</p>
               </div>
             ))}
@@ -65,8 +77,12 @@ const Intro = () => {
             </Button>
           </div>
 
+          <p className="text-sm text-muted-foreground mt-4 opacity-0 animate-reveal">
+            * <b>Investor-grade</b> means building products that pass due diligence, scale cleanly, and impress technical VCs.
+          </p>
           <p className="text-sm text-muted-foreground mt-4 opacity-0 animate-reveal" style={{ animationDelay: '0.7s' }}>
-            Limited complimentary strategy calls available for VC-backed founders. Minimum engagement starts at £5,000.
+            ➔ “Engagements start from £5,000. I selectively partner with founders committed to serious growth.”
+            {/*Limited complimentary strategy calls available for VC-backed founders. Minimum engagement starts at £5,000.*/}
           </p>
         </div>
       </div>

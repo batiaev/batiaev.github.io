@@ -6,21 +6,21 @@
   "tags": [
     {
       "label": "Double Speed to MVP",
-      "description": "Avoid costly rebuilds and accelerate your product launch",
+      "description": "Scaled Vega from $1M pre-seed to $20M Series A, team from 0→35+ engineers",
       "color": "purple",
-      "icon": "CodeIcon"
+      "logo": "Rocket"
     },
     {
       "label": "Cut Infrastructure Costs",
-      "description": "Optimize your tech stack and reduce operational expenses",
+      "description": "Designed $650M AUM portfolio management platform at Revolut, cut operational costs",
       "color": "amber",
-      "icon": "TrendingUpIcon"
+      "logo": "TrendingDown"
     },
     {
-      "label": "Fundraise Faster",
-      "description": "Build investor confidence with a solid technical foundation",
+      "label": "Institutional-Grade Quality",
+      "description": "Built high-performance systems for Deutsche Bank’s FX and Fixed Income desks",
       "color": "green",
-      "icon": "EmojiEventsIcon"
+      "logo": "ShieldCheck"
     }
   ],
   "description": "I help fintech founders, VCs, and engineering leaders build innovative financial products, scale engineering teams, and transform technology visions into reality.",
