@@ -46,10 +46,10 @@ const Contact = () => {
       <section id="contact" className="section bg-accent/30" ref={sectionRef}>
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <div className="highlight-chip">Start Your Journey</div>
-            <h2 className="section-title">Ready to Achieve Your Goals?</h2>
-            <p className="section-subtitle mx-auto">
-              Book a free strategy call to discuss how I can help you to achieve your goals with strategic advice, technical consultation, or CTO mentorship.
+            <div className="highlight-chip">Partner with a Fintech Expert</div>
+            <h2 className="section-title">Scale Smarter. Raise Faster. Build Stronger.</h2>
+            <p className="section-subtitle mx-auto max-w-3xl ">
+              Book a free strategy call to align your tech with your funding and growth goals. Technical advisory or fractional CTO support — tailored to fintech founders.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ const Contact = () => {
               <CardHeader>
                 <CardTitle className="text-2xl">Quick Start Options</CardTitle>
                 <CardDescription>
-                  Choose the most convenient way to start working together.
+                  Choose the fastest path to connect and move forward.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -68,7 +68,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium">Book a Free Strategy Call</p>
-                    <p className="text-sm text-muted-foreground">30-minute consultation to discuss your needs</p>
+                    <p className="text-sm text-muted-foreground">30-minute advisory session to assess your needs.</p>
                     <a href={data.social[5].link} className="text-primary link-hover inline-flex items-center gap-1 mt-1">
                       Schedule Now <ArrowRight className="h-4 w-4" />
                     </a>
@@ -81,7 +81,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium">Connect on LinkedIn</p>
-                    <p className="text-sm text-muted-foreground">Follow for daily insights and updates</p>
+                    <p className="text-sm text-muted-foreground">Follow for daily fintech and scaling insights.</p>
                     <a
                         href={data.social[0].link}
                         target="_blank"
@@ -99,7 +99,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium">Chat on Telegram</p>
-                    <p className="text-sm text-muted-foreground">Quick questions and updates</p>
+                    <p className="text-sm text-muted-foreground">Quick questions? Message me directly.</p>
                     <a
                         href={data.social[2].link}
                         target="_blank"
@@ -115,7 +115,7 @@ const Contact = () => {
 
             <Card className="border-transparent shadow-subtle">
               <CardHeader>
-                <CardTitle className="text-2xl">Tell Me About Your Project</CardTitle>
+                <CardTitle className="text-2xl">Tell Me About Your Startup</CardTitle>
                 <CardDescription>
                   Share your challenges and goals, and I'll create a tailored solution for you.
                 </CardDescription>
@@ -146,7 +146,7 @@ const Contact = () => {
                   </div>
                     <Button type="submit" className="w-full mt-2" asChild>
                       <a href={data.social[0].link} target="_blank" rel="noreferrer">
-                        Send Message
+                        Send My Details
                       </a>
                     </Button>
                 </form>
