@@ -265,43 +265,47 @@
   "services": [
     {
       "title": "Investor-Grade Tech Audit™",
-      "description": "Get a comprehensive review of your MVP architecture, codebase, and technical risks. Perfect for pre-seed and seed-stage startups preparing for their next funding round.",
+      "description": "De-risk your next funding round with a technical audit trusted by top VCs.\nIdentify hidden risks, showcase technical strengths, and position your startup for institutional investment.",
       "logo": "shield",
       "outcomes": [
-        "10-page audit deck for investor presentations",
-        "Technical risk assessment and mitigation plan",
-        "Scalability recommendations for next funding round"
-      ]
+        {"title":"10-page investor-ready technical audit deck", "logo": "file"},
+        {"title":"Technical risk mapping and mitigation blueprint", "logo": "siren"},
+        {"title":"Scalability and product-readiness recommendations", "logo": "trending-up"}
+      ],
+      "link": "See How Founders De-risked Their Fundraise"
     },
     {
-      "title": "MVP Rescue Mission™",
-      "description": "Hands-on technical leadership to fix critical MVP issues before your next funding milestone. Ideal for startups that need to quickly address technical debt or scalability concerns.",
+      "title": "Fundraising Timeline Rescue™",
+      "description": "Rescue critical timelines and secure your next round with fast, focused technical interventions.\nFix MVP roadblocks, reduce technical debt, and hit investor milestones without delay.",
       "logo": "rocket",
       "outcomes": [
-        "Critical bug fixes and performance improvements",
-        "Technical debt reduction strategy",
-        "Team mentoring and process optimization"
-      ]
+        {"title":"Rapid bug resolution and scalability upgrades", "logo": "zap"},
+        {"title":"Debt reduction plans aligned to growth phases", "logo": "wrench"},
+        {"title":"Team mentoring for investor-grade engineering practices", "logo": "brain"}
+      ],
+      "link": "See How Startups Saved Their Fundraise"
     },
     {
       "title": "Fractional CTO Advisory™",
-      "description": "Ongoing strategic guidance and technical leadership for early-stage fintech startups. Perfect for founders who need expert advice without the full-time CTO commitment.",
+      "description": "Strategic CTO partnership without the full-time commitment.\nOngoing technical leadership to keep your tech, product, and fundraising in perfect sync.",
       "logo": "trendingUp",
       "outcomes": [
-        "Monthly strategic planning sessions",
-        "Technical roadmap development",
-        "Investor relations support"
-      ]
+        {"title":"Monthly strategic planning and fundraising alignment", "logo": "calendar-fold"},
+        {"title":"Full technical roadmap creation and execution guidance", "logo":  "milestone"},
+        {"title":"Support on technical due diligence and investor relations", "logo":  "puzzle"}
+      ],
+      "link": "See How Founders Accelerated Growth"
     },
     {
       "title": "Fintech Architecture Design™",
-      "description": "Expert guidance in designing scalable, secure, and compliant fintech architectures. Essential for startups building complex financial products.",
+      "description": "Launch secure, scalable, compliance-ready financial products.\nDesign complex fintech architectures that can pass audits, integrate partners, and scale globally.",
       "logo": "code",
       "outcomes": [
-        "Compliance-first architecture design",
-        "Scalability and security best practices",
-        "Integration strategy for financial services"
-      ]
+        {"title":"Compliance-first, audit-passing architecture designs", "logo": "lock"},
+        {"title":"Scalability and security built for institutional use", "logo":  "trending-up"},
+        {"title":"End-to-end integration strategies for fintech ecosystems", "logo":  "link"}
+      ],
+      "link": "See How Founders Built World-Class Products"
     }
   ],
   "education": [
