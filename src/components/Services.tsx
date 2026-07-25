@@ -95,11 +95,12 @@ const Services = () => {
   return (
       <section id="services" className="section bg-accent/30" ref={sectionRef}>
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <div className="highlight-chip">Solve Your Challenges</div>
-            <h2 className="section-title">Solutions for Fintech Founders</h2>
+          <div className="text-center mb-16 px-4">
+            <div className="highlight-chip">Engagement types</div>
+            <h2 className="section-title">How advisory can help</h2>
             <p className="section-subtitle mx-auto">
-              Strategic technology advisory to accelerate funding, scale securely, and win global markets. Build an investor-grade foundation that drives growth and ensures compliance at every stage.
+              Selective work with founders and investors — diligence, architecture,
+              and leadership support when the primary focus on building allows.
             </p>
           </div>
 
@@ -126,7 +127,7 @@ const Services = () => {
                       ))}
                     </ul>
                     <div className="mt-4">
-                      <a href="#case-studies" className="text-primary hover:underline inline-flex items-center gap-2">
+                      <a href="#testimonials" className="text-primary hover:underline inline-flex min-h-11 items-center gap-2">
                         {service.link} <ArrowRight className="h-4 w-4" />
                       </a>
                     </div>

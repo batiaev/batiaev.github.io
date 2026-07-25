@@ -1,47 +1,64 @@
-import React, { useEffect } from 'react';
-import Header from '@/components/Header';
-import Intro from '@/components/Intro.tsx';
-import Services from '@/components/Services';
-import Experience from '@/components/Experience';
-import Testimonials from '@/components/Testimonials';
-import Talks from '@/components/Talks';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import React, { useEffect, Suspense, lazy } from "react";
+import Header from "@/components/Header";
+import Intro from "@/components/Intro";
+import CapabilityMix from "@/components/CapabilityMix";
+import Initiatives from "@/components/Initiatives";
+import Experience from "@/components/Experience";
+import Engagement from "@/components/Engagement";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+
+const Talks = lazy(() => import("@/components/Talks"));
 
 const Index = () => {
   useEffect(() => {
-    // Implement reveal-on-scroll functionality
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed');
+            entry.target.classList.add("is-revealed");
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
-    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+    document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
       observer.observe(el);
     });
 
+    const hash = window.location.hash;
+    if (hash) {
+      requestAnimationFrame(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
     return () => {
-      document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
         observer.unobserve(el);
       });
     };
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col overflow-x-hidden">
       <Header />
       <main>
         <Intro />
-        <Services />
+        <CapabilityMix />
+        <Initiatives />
         <Experience />
-        <Testimonials />
-        <Talks />
+        <Engagement />
+        <Suspense
+          fallback={
+            <div className="text-muted-foreground py-16 text-center text-sm">
+              Loading talks…
+            </div>
+          }
+        >
+          <Talks />
+        </Suspense>
         <Contact />
       </main>
       <Footer />

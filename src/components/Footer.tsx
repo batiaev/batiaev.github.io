@@ -1,104 +1,106 @@
-import React from 'react';
-import { Linkedin, Mail, Github, MessageCircle, Calendar } from 'lucide-react';
-import data from "../data/data.json";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Linkedin, Mail, MessageCircle } from "lucide-react";
+import data from "@/data/data.json";
+import { socialLink } from "@/lib/social";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/40 py-12 bg-accent/30">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-2">
-            <h3 className="text-2xl font-display font-semibold mb-4">{data.name}</h3>
-            <p className="text-muted-foreground max-w-md">
+    <footer className="border-border/40 border-t bg-accent/30 py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div className="md:col-span-2">
+            <h3 className="font-display mb-4 text-xl font-semibold sm:text-2xl">
+              {data.name}
+            </h3>
+            <p className="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">
               {data.description}
             </p>
           </div>
 
           <div>
-            <h4 className="font-medium mb-4">Links</h4>
+            <h4 className="mb-4 font-medium">Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
+                <a
+                  href="/#building"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  Building
+                </a>
               </li>
               <li>
-                <a href="#case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Case Studies</a>
+                <a
+                  href="/#experience"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  Experience
+                </a>
               </li>
               <li>
-                <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
+                <Link
+                  to="/advisory"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  Advisory
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+                <a
+                  href="/#contact"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-medium mb-4">Connect</h4>
-            <ul className="space-y-3">
+            <h4 className="mb-4 font-medium">Connect</h4>
+            <ul className="space-y-1">
               <li>
                 <a
-                  href={data.social[0].link}
+                  href={socialLink("linkedin")}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
-                  <Linkedin className="h-5 w-5 mr-2" /> LinkedIn
+                  <Linkedin className="mr-2 h-5 w-5" aria-hidden /> LinkedIn
                 </a>
               </li>
               <li>
                 <a
-                  href={data.social[6].link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+                  href={socialLink("email")}
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
-                  <Mail className="h-5 w-5 mr-2" /> Email
+                  <Mail className="mr-2 h-5 w-5" aria-hidden /> Email
                 </a>
               </li>
               <li>
                 <a
-                  href={data.social[2].link}
+                  href={socialLink("telegram")}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
-                  <MessageCircle className="h-5 w-5 mr-2" /> Telegram
-                </a>
-              </li>
-              <li>
-                <a
-                  href={data.social[5].link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Calendar className="h-5 w-5 mr-2" /> Calendar
+                  <MessageCircle className="mr-2 h-5 w-5" aria-hidden />{" "}
+                  Telegram
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-border/40 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">
-            © {currentYear} {data.name}. All rights reserved.
+        <div className="border-border/40 mt-8 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
+          <p className="text-muted-foreground text-sm">
+            © {currentYear} {data.name}
           </p>
-          <div className="mt-4 md:mt-0">
-            <ul className="flex space-x-6 text-sm">
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-            </ul>
-          </div>
+          <p className="text-muted-foreground text-center text-xs sm:text-sm">
+            {data.chip} · London
+          </p>
         </div>
       </div>
     </footer>

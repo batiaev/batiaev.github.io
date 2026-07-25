@@ -6,22 +6,21 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleTagManager } from "@/components/GoogleTagManager";
 
-// Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
+const Advisory = lazy(() => import("./pages/Advisory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Create a loading component
 const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+  <div className="flex min-h-screen items-center justify-center">
+    <div className="border-primary h-8 w-8 animate-spin rounded-full border-b-2" />
   </div>
 );
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000, // 1 minute
-      gcTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
       retry: 1,
     },
   },
@@ -37,7 +36,7 @@ const App = () => (
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/advisory" element={<Advisory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

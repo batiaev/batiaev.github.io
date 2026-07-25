@@ -39,10 +39,10 @@ const Testimonials = () => {
     <section id="testimonials" className="section bg-accent/30" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="highlight-chip">Client Success</div>
-          <h2 className="section-title">What Others Say</h2>
+          <div className="highlight-chip">Peer perspective</div>
+          <h2 className="section-title">What others say</h2>
           <p className="section-subtitle mx-auto">
-            Feedback from founders, executives, and technical leaders I've partnered with.
+            Notes from executives and technical leaders I have worked alongside.
           </p>
         </div>
 

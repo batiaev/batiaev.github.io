@@ -56,10 +56,12 @@ const Talks = () => {
     <section id="talks" className="section" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <div className="highlight-chip">Public Speaking</div>
-          <h2 className="section-title">Talks & Presentations</h2>
+          <div className="highlight-chip">Public record</div>
+          <h2 className="section-title">A decade in front of the room</h2>
           <p className="section-subtitle mx-auto">
-            Sharing insights and experiences through conferences, podcasts, and educational content.
+            Conference talks, podcasts, and panels spanning hands-on engineering
+            deep-dives to platform-leadership conversations — across roles, not
+            just the latest one.
           </p>
         </div>
 
@@ -75,8 +77,12 @@ const Talks = () => {
                   <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
                     <img
                       src={talk.logo}
-                      alt={talk.name}
-                      className="w-full h-full object-cover"
+                      alt=""
+                      width={96}
+                      height={96}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="flex-1">
