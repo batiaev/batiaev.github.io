@@ -1,0 +1,147 @@
+/* Renders the routes once in Node to catch crashes the type-checker cannot see. */
+import React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { MemoryRouter } from 'react-router-dom'
+
+const store = new Map<string, string>()
+
+Object.assign(globalThis, {
+  window: {
+    location: {
+      search: '',
+      origin: 'https://batiaev.com',
+      pathname: '/tools/options-pnl',
+    },
+    localStorage: {
+      getItem: (key: string) => store.get(key) ?? null,
+      setItem: (key: string, value: string) => void store.set(key, value),
+    },
+    matchMedia: () => ({ matches: false }),
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    history: { replaceState: () => {} },
+    scrollTo: () => {},
+    innerWidth: 1280,
+    devicePixelRatio: 1,
+  },
+})
+
+async function render(name: string, path: string) {
+  const [{ default: Index }, { default: Advisory }, { default: OptionsPnl }] =
+    await Promise.all([
+      import('../src/pages/Index'),
+      import('../src/pages/Advisory'),
+      import('../src/pages/OptionsPnl'),
+    ])
+
+  const Page = { '/': Index, '/advisory': Advisory, '/tools/options-pnl': OptionsPnl }[
+    path
+  ]!
+
+  const html = renderToStaticMarkup(
+    <MemoryRouter initialEntries={[path]}>
+      <Page />
+    </MemoryRouter>,
+  )
+
+  console.log(`PASS  ${name} rendered (${html.length} chars)`)
+  return html
+}
+
+const originalError = console.error
+let errorCount = 0
+
+// Expected noise: this app is client-only, so anything the server renderer
+// cannot express is not a real defect. Recharts measures its container, which
+// has no size in Node, so its charts render empty rather than wrong.
+const IGNORED = ['useLayoutEffect', 'Suspense', 'suspended', 'should be greater than 0']
+
+const isIgnored = (args: unknown[]) => {
+  const message = String(args[0] ?? '')
+  return IGNORED.some((pattern) => message.includes(pattern))
+}
+
+console.error = (...args: unknown[]) => {
+  if (isIgnored(args)) return
+  errorCount += 1
+  originalError(...args)
+}
+
+console.warn = (...args: unknown[]) => {
+  if (isIgnored(args)) return
+  originalError(...args)
+}
+
+const optionsHtml = await render('Options P&L', '/tools/options-pnl')
+const homeHtml = await render('Home', '/')
+await render('Advisory', '/advisory')
+
+// The charts are lazy, so the route renders above only reach their fallbacks.
+const [
+  { default: ScopeChart },
+  { default: PayoffChart },
+  { scopeRows },
+  strategy,
+  presets,
+] = await Promise.all([
+  import('../src/components/ScopeChart'),
+  import('../src/components/options/PayoffChart'),
+  import('../src/lib/scopeRows'),
+  import('../src/lib/options/strategy'),
+  import('../src/lib/options/presets'),
+])
+
+const scopeHtml = renderToStaticMarkup(<ScopeChart />)
+console.log(`PASS  ScopeChart rendered (${scopeHtml.length} chars)`)
+
+const position = presets.defaultPosition()
+const payoffHtml = renderToStaticMarkup(
+  <PayoffChart
+    curve={strategy.payoffCurve(position)}
+    position={position}
+    metrics={strategy.metrics(position)}
+    visibleLegs={position.legs.map((leg) => leg.id)}
+  />,
+)
+console.log(`PASS  PayoffChart rendered (${payoffHtml.length} chars)`)
+
+const expectations: [string, boolean][] = [
+  ['metrics tile rendered', optionsHtml.includes('Max profit')],
+  ['breakeven computed', optionsHtml.includes('Breakeven')],
+  ['legs editor rendered', optionsHtml.includes('Premium')],
+  ['presets rendered', optionsHtml.includes('Iron condor')],
+  ['fintecy funnel line', optionsHtml.includes('fintecy.co')],
+  ['scope chart caption rendered', scopeHtml.includes('Direct reports')],
+  ['scope rows newest first', scopeRows[0].role.startsWith('Capital.com')],
+  [
+    'scope rows include the IC step at zero reports',
+    scopeRows.some((row) => row.year === 2016 && row.engineers === 0),
+  ],
+  [
+    'scope rows include the 10-report step',
+    scopeRows.some((row) => row.year === 2018 && row.engineers === 10),
+  ],
+  ['every scope row carries a scale note', scopeRows.every((row) => row.note.length > 0)],
+  [
+    'scope rows descend, so the trend reads cleanly',
+    scopeRows.every((row, i) => i === 0 || row.engineers < scopeRows[i - 1].engineers),
+  ],
+  ['hero falls back to a wordmark when a logo is missing', homeHtml.includes('>Nevis<')],
+  ['hero renders the Vega mark', homeHtml.includes('/images/logo-vega.png')],
+  ['hero logos link to their role anchors', homeHtml.includes('href="#role-revolut"')],
+  ['experience cards expose those anchors', homeHtml.includes('id="role-revolut"')],
+  ['Nevis role rendered', homeHtml.includes('id="role-nevis"')],
+  [
+    'product cards use their own logos',
+    homeHtml.includes('/images/logo-fintecy.png') &&
+      homeHtml.includes('/images/logo-ship.png'),
+  ],
+]
+
+expectations.forEach(([label, ok]) => {
+  if (!ok) errorCount += 1
+  console.log(`${ok ? 'PASS' : 'FAIL'}  ${label}`)
+})
+
+console.log(errorCount === 0 ? '\nSmoke render clean.' : `\n${errorCount} problem(s).`)
+process.exit(errorCount === 0 ? 0 : 1)

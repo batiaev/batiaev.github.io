@@ -4,7 +4,6 @@ import {
   TrendingUpIcon,
   ShieldCheck,
   Rocket,
-  ArrowRight,
   CheckCircle2,
   PuzzleIcon,
   FileIcon,
@@ -97,14 +96,14 @@ const Services = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 px-4">
             <div className="highlight-chip">Engagement types</div>
-            <h2 className="section-title">How advisory can help</h2>
+            <h2 className="section-title">Three ways this usually starts</h2>
             <p className="section-subtitle mx-auto">
-              Selective work with founders and investors — diligence, architecture,
-              and leadership support when the primary focus on building allows.
+              Scoped work with founders and investors. Fixed scope, written
+              output, no retainer required.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {data.services.map((service, index) => (
                 <Card
                     key={index}
@@ -117,20 +116,14 @@ const Services = () => {
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-base mb-4">{service.description}</CardDescription>
-                    <ul className="space-y-2 mb-4">
+                    <ul className="space-y-2">
                       {service.outcomes.map((outcome, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             {smallIconsByName[outcome.logo]}
-                            {/*<CheckCircle2 className="h-4 w-4 text-primary mt-1" />*/}
                             <span>{outcome.title}</span>
                           </li>
                       ))}
                     </ul>
-                    <div className="mt-4">
-                      <a href="#testimonials" className="text-primary hover:underline inline-flex min-h-11 items-center gap-2">
-                        {service.link} <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </div>
                   </CardContent>
                 </Card>
             ))}

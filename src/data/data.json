@@ -1,84 +1,81 @@
 {
   "name": "Anton Batiaev",
   "avatar": "/images/batiaev.webp",
-  "chip": "Fintech builder",
-  "headline": "Building fintech products in the AI-native era",
+  "chip": "Fintech founder & builder",
+  "headline": "I build fintech products — Fintecy for personal finance, SHIP for engineering teams working with agents.",
+  "operatorLine": "Day job: VP Product & Engineering at Capital.com — 77 engineers, 5,500+ instruments, $1.27T client volume in Q1 2026.",
   "company": "Capital.com",
-  "currentRole": "VP Product & Engineering at Capital.com — technology strategy for a 1,300-person company, running the 77-engineer trading-platform tribe behind a regulated, multi-asset CFD platform (5,500+ instruments, $1.27T in client trading volume in Q1 2026).",
-  "description": "I build fintech products with an AI-native operating model — and take CTO / CPO / CPTO seats when regulated platforms need hyperscale delivery, startup pace, and enterprise security and compliance in one thread.",
-  "metaDescription": "Anton Batiaev — fintech builder and CPTO-calibre operator. AI-native products (Ship, Fintecy). VP Product & Engineering at Capital.com; ex-Revolut Head of Wealth & Trading Platform; ex-CTO Vega; Deutsche Bank. Selective advisory, angel, and talent conversations.",
-  "capabilityMix": [
-    {
-      "label": "AI-native setup",
-      "description": "Product and engineering workflows designed for agent-assisted delivery — faster loops without losing ownership of correctness."
-    },
-    {
-      "label": "Hyperscale delivery",
-      "description": "Operating tempo from global consumer fintech — ship under pressure, evidence over narrative, outages that cost money."
-    },
-    {
-      "label": "Startup pace",
-      "description": "0→1 and Series-A scale: small teams, sharp trade-offs, architecture that survives the next funding milestone."
-    },
-    {
-      "label": "Enterprise security & compliance",
-      "description": "Institutional risk systems and regulated platforms — auditability, controls, and stakeholder truth under regulatory gravity."
-    }
-  ],
+  "description": "Fintech founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.",
+  "metaDescription": "Anton Batiaev — fintech founder and builder. Fintecy (personal finance) and Ship (typed knowledge graph for engineering teams). VP Product & Engineering at Capital.com; ex-Revolut, ex-CTO Vega, Deutsche Bank. Free options P&L calculator.",
+  "heroCta": {
+    "label": "See what I'm building",
+    "href": "#building"
+  },
   "initiatives": [
     {
-      "name": "Ship",
-      "description": "AI-native development for product and engineering alignment — goals at the top, evidence from the artefact trail below.",
+      "name": "Fintecy",
+      "tagline": "A single entry point for your financial life",
+      "description": "Connect brokers and banks read-only, get FIFO realised P&L across accounts, and plan long-horizon with data you own.",
+      "status": "Private beta · waitlist open",
+      "proof": "Registered company with its own trademark and ICO data-protection registration — built to hold real account data, not just demo it.",
+      "image": "/images/logo-fintecy.png",
+      "link": "https://fintecy.co",
+      "external": true
+    },
+    {
+      "name": "SHIP",
+      "tagline": "A typed knowledge graph for engineering teams",
+      "description": "Goals, decisions, and artefacts as typed nodes instead of prose. Agents read and write the graph over MCP, and every agent write carries provenance and an audit trail.",
+      "status": "Private beta · waitlist open",
+      "proof": "Provenance is the design constraint: each node records which agent or human wrote it, from which source, and what it superseded.",
+      "image": "/images/logo-ship.png",
       "link": "https://shipplatform.ai",
       "external": true
-    },
-    {
-      "name": "Fintecy",
-      "description": "A single entry point for financial life — banking, trading, and long-horizon planning with data you own.",
-      "link": "https://fintecy.org",
-      "external": true
     }
   ],
-  "serviceLines": [
-    {
-      "title": "Advisory & fractional CTO",
-      "description": "Diligence, architecture de-risking, and fractional CTO partnership for founders and investors.",
-      "href": "#services",
-      "cta": "See engagement types"
-    },
-    {
-      "title": "Public talks",
-      "description": "Conference talks, podcasts, and panels on fintech engineering and platform leadership.",
-      "href": "/#talks",
-      "cta": "See talks"
-    },
-    {
-      "title": "Angel investing",
-      "description": "Selective, angel-aligned participation with founders building fintech and dev-tooling products.",
-      "href": "/#contact",
-      "cta": "Get in touch"
+  "domainProof": {
+    "chip": "Derivatives, options & risk",
+    "title": "Options and risk engines, not just org charts",
+    "subtitle": "The pricing, Greeks, and hedging work behind the leadership titles — one line per employer.",
+    "items": [
+      {
+        "metric": "Greeks & IV curves",
+        "claim": "In-house derivatives pricing engine — options pricing, Greeks, and implied-vol curves for the desk",
+        "context": "Otkritie Broker"
+      },
+      {
+        "metric": "1M+ updates/sec",
+        "claim": "Real-time risk engine covering margin strategies, overnight swaps, and repos for 400k+ investors",
+        "context": "Otkritie Broker"
+      },
+      {
+        "metric": "FX → Fixed Income",
+        "claim": "Extended the FX desk risk calculator to Fixed Income, replacing Excel workflows with a live web platform",
+        "context": "Deutsche Bank"
+      },
+      {
+        "metric": "<60ms roundtrip",
+        "claim": "Smart order routing and hedging across market making, market data, risk, and brokerage",
+        "context": "Revolut"
+      },
+      {
+        "metric": "$1.27T volume",
+        "claim": "Multi-asset execution across 5,500+ instruments, regulated in 5 jurisdictions",
+        "context": "Capital.com, Q1 2026"
+      }
+    ],
+    "cta": {
+      "label": "Open the free options P&L calculator",
+      "href": "/tools/options-pnl"
     }
-  ],
-  "engagementPaths": [
-    {
-      "title": "Building & product",
-      "description": "Conversations with VCs and partners about AI-native fintech products and operator depth.",
-      "href": "#building",
-      "cta": "See what I'm building"
-    },
-    {
-      "title": "Leadership & exec search",
-      "description": "CPTO / CPO / CTO roles in fintech — digital transformation with hyperscale and enterprise-grade delivery.",
-      "href": "#experience",
-      "cta": "Review selected experience"
-    },
-    {
-      "title": "Advisory, talks & angel",
-      "description": "Selective advisory, public talks, and angel-aligned work — plus help attracting engineering and product talent.",
-      "href": "/advisory",
-      "cta": "Open advisory"
-    }
-  ],
+  },
+  "advisoryCard": {
+    "chip": "Selective",
+    "title": "Advisory & diligence",
+    "description": "Building and operating come first. A small number of advisory slots for founders and investors who need fintech judgment, architecture de-risking, or technical diligence.",
+    "href": "/advisory",
+    "cta": "See how that works"
+  },
   "social": [
     {
       "name": "linkedin",
@@ -87,7 +84,6 @@
     },
     {
       "name": "github",
-      "hidden": true,
       "id": "@batiaev",
       "link": "https://www.github.com/batiaev/"
     },
@@ -95,20 +91,6 @@
       "name": "telegram",
       "id": "@batiaev_com",
       "link": "https://t.me/batiaev_com"
-    },
-    {
-      "name": "facebook",
-      "hidden": true,
-      "hideTopMenu": true,
-      "id": "@batiaev",
-      "link": "https://www.facebook.com/batiaev/"
-    },
-    {
-      "name": "twitter",
-      "hidden": true,
-      "hideTopMenu": true,
-      "id": "@batiaev_com",
-      "link": "https://twitter.com/batiaev_com"
     },
     {
       "name": "calendar",
@@ -123,18 +105,43 @@
   ],
   "experiences": [
     {
-      "id": 8,
+      "id": 9,
       "title": "VP Product & Engineering",
-      "period": "2025 – present",
+      "period": "Nov 2025 – present",
       "company": "Capital.com",
+      "anchor": "capital-com",
       "city": "London",
       "url": "https://capital.com/",
+      "archetypes": ["Enterprise", "Transformation"],
+      "teamSize": 77,
+      "startYear": 2025,
+      "scaleNote": "$1.27T per quarter",
       "achievements": [
-        "Set technology strategy for a 1,300-person organisation",
-        "Run the trading-platform tribe end to end: 77 engineers and product",
-        "Platform spans 5,500+ instruments; $1.27T in client trading volume in Q1 2026",
-        "Risk-committee input for a platform regulated across 5 jurisdictions (FCA, CySEC, ASIC, Bahamas SCA, UAE SCA)"
+        "Technology strategy for a 1,300-person organisation",
+        "Own the trading-platform tribe end to end — 77 engineers plus product",
+        "Multi-asset CFD platform: 5,500+ instruments, $1.27T client trading volume in Q1 2026",
+        "Risk-committee input across 5 regulators (FCA, CySEC, ASIC, Bahamas SCA, UAE SCA)"
       ],
+      "tags": []
+    },
+    {
+      "id": 8,
+      "title": "Chief Technology Officer (CTO)",
+      "period": "Jun 2025 – Oct 2025",
+      "company": "Nevis",
+      "anchor": "nevis",
+      "showcase": true,
+      "city": "London",
+      "url": "https://neviswealth.com/",
+      "archetypes": ["0→1", "Hands-on"],
+      "scaleNote": "Seed → Series A (Sequoia)",
+      "achievements": [
+        "Built engineering from zero to 7 engineers through the stealth period",
+        "Automated digital account opening across Schwab, Fidelity, and Goldman Sachs",
+        "AI retrieval stack — full-text plus semantic search and RAG over advisor documents",
+        "SOC 2 Type 1 and Type 2 on a multi-tenant wealth platform"
+      ],
+      "proofLink": "https://sequoiacap.com/article/nevis-bringing-ai-to-wealth-management/",
       "tags": []
     },
     {
@@ -142,12 +149,19 @@
       "title": "Chief Technology Officer (CTO)",
       "period": "Feb 2023 – 2025",
       "company": "Vega",
+      "anchor": "vega",
+      "showcase": true,
+      "logo": "/images/logo-vega.png",
       "city": "London",
       "url": "https://vega-alts.com/",
+      "archetypes": ["0→1"],
+      "teamSize": 35,
+      "startYear": 2023,
+      "scaleNote": "$500B+ AUM",
       "achievements": [
-        "Scaled company from pre-seed (~$1M) to Series A (~$20M)",
+        "Took the company from pre-seed (~$1M) to a ~$20M Series A",
         "Built engineering from 0 to 35+ engineers",
-        "Architecture supporting large institutional AUM and client base",
+        "Platform live across Apollo funds and investor types — $500B+ AUM",
         "Hands-on delivery alongside executive ownership"
       ],
       "proofLink": "https://www.apollo.com/insights-news/pressreleases/2024/11/vega-raises--20-million-series-a-led-by-apollo-and-motive-to-sca",
@@ -156,10 +170,17 @@
     {
       "id": 6,
       "title": "Head of Wealth & Trading Platform",
-      "period": "Feb 2020 – May 2023",
+      "period": "Feb 2020 – Feb 2023",
       "company": "Revolut",
+      "anchor": "revolut",
+      "showcase": true,
+      "logo": "/images/logo-revolut.png",
       "city": "London",
       "url": "https://revolut.com/",
+      "archetypes": ["Hyperscaler"],
+      "teamSize": 24,
+      "startYear": 2020,
+      "scaleNote": "$650M+ AUM",
       "achievements": [
         "Led a tribe of 24+ engineers across market making, market data, risk, and brokerage",
         "Portfolio systems handling $650M+ AUM across asset classes",
@@ -174,89 +195,126 @@
       "title": "Engineering Lead",
       "period": "Jan 2019 – Feb 2020",
       "company": "Deutsche Bank",
+      "anchor": "deutsche-bank",
+      "showcase": true,
+      "logo": "/images/logo-db.png",
       "city": "Moscow",
       "url": "https://db.com/",
+      "archetypes": ["Enterprise", "Transformation"],
+      "scaleNote": "FX + Fixed Income desks",
       "achievements": [
-        "Expanded FX desk risk calculator to Fixed Income",
-        "Aligned stakeholders including MDs across the organisation",
-        "Migrated Excel-based risk workflows to a modern web platform",
-        "Connected multiple systems into the new risk stack"
+        "Extended the FX desk risk calculator to Fixed Income",
+        "Migrated Excel-based risk workflows to a live web platform",
+        "Connected multiple upstream systems into the new risk stack",
+        "Aligned stakeholders up to MD level across the organisation"
       ],
       "tags": ["NYSE: DB"]
     },
     {
       "id": 4,
       "title": "Head of Division",
-      "period": "Sep 2016 – Jan 2019",
+      "period": "2018 – Jan 2019",
       "company": "Otkritie Broker",
+      "anchor": "otkritie-head",
       "city": "Moscow",
       "url": "https://open-broker.ru/",
+      "archetypes": ["Enterprise"],
+      "teamSize": 10,
+      "startYear": 2018,
+      "scaleNote": "400k+ investors",
       "achievements": [
-        "Led 10 engineers in low-latency and high-frequency trading",
-        "Risk engine at 1M+ updates/sec for 400k+ investors",
-        "In-house derivatives pricing, Greeks, and IV curve tooling",
+        "Took over the division: 10 engineers across low-latency and high-frequency trading",
+        "Owned the risk and derivatives-pricing stack serving 400k+ investors",
         "Margin strategies including overnight swaps and repos"
       ],
       "tags": []
     },
     {
       "id": 3,
+      "title": "Lead Software Engineer",
+      "period": "Sep 2016 – 2018",
+      "company": "Otkritie Broker",
+      "anchor": "otkritie-lead",
+      "city": "Moscow",
+      "url": "https://open-broker.ru/",
+      "archetypes": ["Hands-on", "0→1"],
+      "teamSize": 0,
+      "startYear": 2016,
+      "scaleNote": "1M+ updates/sec",
+      "achievements": [
+        "Built the in-house derivatives pricing engine — options pricing, Greeks, and IV curves",
+        "Built the real-time risk engine at 1M+ updates/sec",
+        "Technical lead with no reports — wrote the low-latency Java and C++ myself"
+      ],
+      "tags": []
+    },
+    {
+      "id": 2,
       "title": "Software Engineer",
       "period": "Sep 2010 – Sep 2016",
       "company": "Earlier roles",
+      "anchor": "earlier-roles",
       "city": "Worldwide",
+      "archetypes": ["Hands-on"],
       "achievements": [
         "Production systems in Java and C++",
         "Infrastructure and observability on-prem and in cloud",
-        "Hands-on foundation before trading-platform ownership"
+        "The hands-on foundation under everything above"
       ],
       "tags": []
     }
   ],
   "services": [
     {
-      "title": "Investor-Grade Tech Audit™",
-      "description": "De-risk your next funding round with a technical audit trusted by top VCs.\nIdentify hidden risks, showcase technical strengths, and position your startup for institutional investment.",
+      "title": "Technical diligence",
+      "description": "A read on whether the architecture, team, and delivery model behind a round hold up — written for investors, usable by the founders.",
       "logo": "shield",
       "outcomes": [
-        {"title": "10-page investor-ready technical audit deck", "logo": "file"},
-        {"title": "Technical risk mapping and mitigation blueprint", "logo": "siren"},
-        {"title": "Scalability and product-readiness recommendations", "logo": "trending-up"}
-      ],
-      "link": "See How Founders De-risked Their Fundraise"
+        {
+          "title": "Written findings: risks, severity, and what to do about each",
+          "logo": "file"
+        },
+        {
+          "title": "Architecture and scalability read against the stated plan",
+          "logo": "trending-up"
+        },
+        { "title": "Team and delivery-model assessment, not just code", "logo": "brain" }
+      ]
     },
     {
-      "title": "Fundraising Timeline Rescue™",
-      "description": "Rescue critical timelines and secure your next round with fast, focused technical interventions.\nFix MVP roadblocks, reduce technical debt, and hit investor milestones without delay.",
-      "logo": "rocket",
-      "outcomes": [
-        {"title": "Rapid bug resolution and scalability upgrades", "logo": "zap"},
-        {"title": "Debt reduction plans aligned to growth phases", "logo": "wrench"},
-        {"title": "Team mentoring for investor-grade engineering practices", "logo": "brain"}
-      ],
-      "link": "See How Startups Saved Their Fundraise"
-    },
-    {
-      "title": "Fractional CTO Advisory™",
-      "description": "Strategic CTO partnership without the full-time commitment.\nOngoing technical leadership to keep your tech, product, and fundraising in perfect sync.",
-      "logo": "trendingUp",
-      "outcomes": [
-        {"title": "Monthly strategic planning and fundraising alignment", "logo": "calendar-fold"},
-        {"title": "Full technical roadmap creation and execution guidance", "logo": "milestone"},
-        {"title": "Support on technical due diligence and investor relations", "logo": "puzzle"}
-      ],
-      "link": "See How Founders Accelerated Growth"
-    },
-    {
-      "title": "Fintech Architecture Design™",
-      "description": "Launch secure, scalable, compliance-ready financial products.\nDesign complex fintech architectures that can pass audits, integrate partners, and scale globally.",
+      "title": "Architecture de-risking",
+      "description": "For teams heading into a regulated launch or a scale step: find the parts that will break, and decide what to change before they do.",
       "logo": "code",
       "outcomes": [
-        {"title": "Compliance-first, audit-passing architecture designs", "logo": "lock"},
-        {"title": "Scalability and security built for institutional use", "logo": "trending-up"},
-        {"title": "End-to-end integration strategies for fintech ecosystems", "logo": "link"}
-      ],
-      "link": "See How Founders Built World-Class Products"
+        {
+          "title": "Target architecture with the trade-offs written down",
+          "logo": "milestone"
+        },
+        {
+          "title": "Compliance and auditability designed in, not bolted on",
+          "logo": "lock"
+        },
+        {
+          "title": "Integration strategy for brokers, banks, and market data",
+          "logo": "link"
+        }
+      ]
+    },
+    {
+      "title": "Fractional CTO",
+      "description": "Ongoing technical partnership at a few days a month — roadmap, hiring bar, and the technical side of investor conversations.",
+      "logo": "trendingUp",
+      "outcomes": [
+        {
+          "title": "Roadmap and sequencing you can defend to a board",
+          "logo": "calendar-fold"
+        },
+        {
+          "title": "Hiring bar, interview loop, and first senior hires",
+          "logo": "puzzle"
+        },
+        { "title": "Support through diligence and investor questions", "logo": "siren" }
+      ]
     }
   ],
   "talks": [
@@ -266,6 +324,7 @@
       "link": "https://youtube.com/live/22YCw8DZvb0?feature=share",
       "logo": "/images/conf/faangTalk78.webp",
       "youtube": "https://youtube.com/live/22YCw8DZvb0?feature=share",
+      "track": "leadership",
       "date": "25 MAR 2025"
     },
     {
@@ -273,7 +332,8 @@
       "desc": "CTO's discussion about PMF and building a high performance culture.",
       "link": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
       "logo": "/images/conf/ctoRoundtable.webp",
-      "event": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
+      "post": "https://www.linkedin.com/posts/louis-da-silva_venturebacked-seriesfunded-vcbacked-ugcPost-7214962981552467968-aFGa",
+      "track": "leadership",
       "date": "4 JUL 2024"
     },
     {
@@ -282,6 +342,7 @@
       "link": "https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
       "logo": "/images/conf/ItsNotASweetBusiness.webp",
       "podcast": "https://podcasts.apple.com/gb/podcast/5-fintech-trends-from-head-of-engineering-in-revolut/id1654393807?i=1000590769132",
+      "track": "leadership",
       "date": "20 DEC 2022"
     },
     {
@@ -290,6 +351,7 @@
       "link": "https://javaswag.github.io/episode/31/",
       "logo": "/images/conf/javaswag.webp",
       "podcast": "https://javaswag.github.io/episode/31/",
+      "track": "leadership",
       "date": "5 Aug 2022"
     },
     {
@@ -298,14 +360,16 @@
       "link": "https://jokerconf.com/en/talks/7E1IWDPmwWLPIFjz7kDbvA/?referer=/archive/2021/",
       "logo": "/images/conf/joker2021.webp",
       "slides": "https://jokerconf.com/en/talks/7E1IWDPmwWLPIFjz7kDbvA/?referer=/archive/2021/",
+      "track": "leadership",
       "date": "26 Oct 2021"
     },
     {
-      "name": "Deutche Bank Blog",
+      "name": "Deutsche Bank Blog",
       "desc": "Mutual authentication in Java with TLS / SSL",
       "link": "https://habr.com/ru/company/dbtc/blog/487318/",
       "logo": "/images/blog/blog1.webp",
       "date": "7 Feb 2020",
+      "track": "engineering",
       "blog": "https://habr.com/ru/company/dbtc/blog/487318/"
     },
     {
@@ -314,6 +378,7 @@
       "link": "https://vk.com/findit_msk",
       "logo": "/images/conf/findit2019.webp",
       "slides": "/talks/find-it-msk-2019/slides.pdf",
+      "track": "engineering",
       "date": "5 Oct 2019"
     },
     {
@@ -322,6 +387,7 @@
       "link": "https://vk.com/poufconf",
       "logo": "/images/conf/poufconf2019.webp",
       "slides": "/talks/pouf-conf-2019/slides.pdf",
+      "track": "engineering",
       "date": "26 Sep 2019"
     },
     {
@@ -330,6 +396,7 @@
       "link": "https://2019.hydraconf.com/",
       "logo": "/images/conf/hydra2019.webp",
       "slides": "/talks/hydra-conf-2019/slides.pdf",
+      "track": "engineering",
       "date": "11 Jul 2019"
     },
     {
@@ -338,6 +405,7 @@
       "link": "https://www.highload.ru/siberia/2019",
       "logo": "/images/conf/highload2019.webp",
       "slides": "/talks/highload-siberia-2019/slides.pdf",
+      "track": "engineering",
       "date": "24 Jun 2019"
     },
     {
@@ -346,14 +414,16 @@
       "link": "https://habr.com/ru/companies/jugru/articles/449630/",
       "logo": "/images/blog/blog2.webp",
       "date": "30 Apr 2019",
+      "track": "engineering",
       "blog": "https://habr.com/ru/companies/jugru/articles/449630/"
     },
     {
       "name": "JPoint Conf 2019",
-      "desc": "Interview at Deutche Bank stand",
+      "desc": "Interview at the Deutsche Bank stand",
       "link": "https://www.youtube.com/watch?v=xIc5XcF4JKA",
       "logo": "/images/conf/jpoint2019.webp",
       "date": "5 Apr 2019",
+      "track": "engineering",
       "youtube": "https://www.youtube.com/watch?v=xIc5XcF4JKA"
     }
   ],
@@ -361,7 +431,7 @@
     {
       "quote": "Anton is a rare blend of deep fintech expertise and strategic leadership. At Deutsche Bank, he led the expansion of our FX risk platform to Fixed Income, replacing legacy systems with a scalable, high-performance risk solution. His ability to architect complex financial systems while aligning stakeholders made a lasting impact.",
       "author": "Alexander Beloturkin",
-      "title": "Director, FX Risk IT at Deutche Bank",
+      "title": "Director, FX Risk IT at Deutsche Bank",
       "linkedin": "https://www.linkedin.com/in/alexander-beloturkin/"
     },
     {
@@ -373,7 +443,7 @@
   ],
   "advisoryIntro": {
     "chip": "Selective engagement",
-    "title": "Advisory, diligence & talent",
-    "subtitle": "Primary focus remains building products and operating roles. Advisory is selective — for founders, investors, and teams who need fintech judgment, architecture de-risking, or help attracting engineering and product talent."
+    "title": "Advisory & diligence",
+    "subtitle": "Building products and operating roles come first. Advisory runs at a few days a month, for founders and investors who need fintech judgment, architecture de-risking, or a technical read before a round."
   }
 }

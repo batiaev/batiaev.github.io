@@ -144,6 +144,32 @@
   .highlight-chip {
     @apply inline-flex items-center rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground mb-4;
   }
+
+  /*
+   * Readability scrim for the hero. Opaque only directly under the words and
+   * fully transparent before its own edges, so the dot field stays visible
+   * instead of sitting behind a card.
+   */
+  .hero-scrim {
+    background: radial-gradient(
+      ellipse 68% 58% at 50% 48%,
+      hsl(var(--background) / 0.94) 0%,
+      hsl(var(--background) / 0.88) 40%,
+      hsl(var(--background) / 0.55) 66%,
+      hsl(var(--background) / 0.18) 84%,
+      hsl(var(--background) / 0) 100%
+    );
+  }
+
+  /*
+   * Lets the scrim stay light: each glyph carries its own halo of background
+   * colour, so text over the uncovered dots keeps its contrast.
+   */
+  .text-halo {
+    text-shadow:
+      0 0 10px hsl(var(--background)),
+      0 0 22px hsl(var(--background));
+  }
 }
 
 /* Staggered animation for children */

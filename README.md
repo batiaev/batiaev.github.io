@@ -22,7 +22,16 @@ Simple half-assed personal website
 
 ## Build
 
-npm run build
+- `npm run dev` — local dev server
+- `npm run build` — production build to `dist/`
+- `npm run prodBuild` — build and publish into `docs/` for GitHub Pages
+
+## Checks
+
+- `npm run lint`
+- `npm run verify:options` — Black-Scholes, Black-76, and payoff metrics against
+  textbook values, plus share-URL round-tripping
+- `npm run verify:render` — renders every route once in Node to catch crashes
 
 ## License
 

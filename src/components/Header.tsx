@@ -4,9 +4,11 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import data from "@/data/data.json";
 
-const homeLinks = [
+const navLinks = [
   { href: "/#building", label: "Building" },
+  { href: "/#derivatives", label: "Derivatives" },
   { href: "/#experience", label: "Experience" },
+  { href: "/tools/options-pnl", label: "Options tool" },
   { href: "/#talks", label: "Talks" },
   { href: "/advisory", label: "Advisory" },
   { href: "/#contact", label: "Contact" },
@@ -16,7 +18,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const onAdvisory = location.pathname === "/advisory";
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -27,6 +29,38 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  const renderLink = (
+    link: (typeof navLinks)[number],
+    className: string,
+    onClick?: () => void,
+  ) => {
+    if (link.href.includes("#")) {
+      return (
+        <a
+          key={link.href}
+          href={isHome ? link.href.replace(/^\//, "") : link.href}
+          className={className}
+          onClick={onClick}
+        >
+          {link.label}
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        key={link.href}
+        to={link.href}
+        className={`${className} ${
+          location.pathname === link.href ? "text-primary" : ""
+        }`}
+        onClick={onClick}
+      >
+        {link.label}
+      </Link>
+    );
+  };
 
   return (
     <header
@@ -39,26 +73,11 @@ const Header = () => {
           {data.name}
         </Link>
 
-        <nav className="hidden items-center space-x-6 md:flex lg:space-x-8">
-          {homeLinks.map((link) =>
-            link.href.startsWith("/#") || link.href === "/" ? (
-              <a
-                key={link.href}
-                href={onAdvisory ? link.href : link.href.replace(/^\//, "")}
-                className="link-hover min-h-11 inline-flex items-center text-sm font-medium"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`link-hover min-h-11 inline-flex items-center text-sm font-medium ${
-                  onAdvisory && link.href === "/advisory" ? "text-primary" : ""
-                }`}
-              >
-                {link.label}
-              </Link>
+        <nav className="hidden items-center space-x-5 md:flex lg:space-x-7">
+          {navLinks.map((link) =>
+            renderLink(
+              link,
+              "link-hover min-h-11 inline-flex items-center text-sm font-medium",
             ),
           )}
         </nav>
@@ -88,33 +107,13 @@ const Header = () => {
           aria-label="Mobile navigation"
         >
           <nav className="container flex flex-col space-y-1 px-4 py-4">
-            {homeLinks.map((link) => {
-              const isRoute = link.href === "/advisory";
-              const className =
-                "min-h-11 py-3 text-lg font-medium flex items-center";
-              if (isRoute) {
-                return (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className={className}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              }
-              return (
-                <a
-                  key={link.href}
-                  href={onAdvisory ? link.href : link.href.replace(/^\//, "")}
-                  className={className}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
+            {navLinks.map((link) =>
+              renderLink(
+                link,
+                "min-h-11 py-3 text-lg font-medium flex items-center",
+                () => setIsMobileMenuOpen(false),
+              ),
+            )}
           </nav>
         </div>
       )}

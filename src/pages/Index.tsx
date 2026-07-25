@@ -1,8 +1,8 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import Header from "@/components/Header";
 import Intro from "@/components/Intro";
-import CapabilityMix from "@/components/CapabilityMix";
 import Initiatives from "@/components/Initiatives";
+import DomainProof from "@/components/DomainProof";
 import Experience from "@/components/Experience";
 import Engagement from "@/components/Engagement";
 import Contact from "@/components/Contact";
@@ -46,8 +46,8 @@ const Index = () => {
       <Header />
       <main>
         <Intro />
-        <CapabilityMix />
         <Initiatives />
+        <DomainProof />
         <Experience />
         <Engagement />
         <Suspense

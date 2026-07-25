@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Linkedin, Mail, MessageCircle } from "lucide-react";
+import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import data from "@/data/data.json";
 import { socialLink } from "@/lib/social";
 
@@ -41,6 +41,14 @@ const Footer = () => {
               </li>
               <li>
                 <Link
+                  to="/tools/options-pnl"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  Options P&amp;L calculator
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/advisory"
                   className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
@@ -69,6 +77,16 @@ const Footer = () => {
                   className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
                   <Linkedin className="mr-2 h-5 w-5" aria-hidden /> LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href={socialLink("github")}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
+                >
+                  <Github className="mr-2 h-5 w-5" aria-hidden /> GitHub
                 </a>
               </li>
               <li>

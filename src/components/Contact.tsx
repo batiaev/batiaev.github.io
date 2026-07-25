@@ -33,6 +33,15 @@ const Contact = () => {
             <Link to="/advisory" className="text-primary hover:underline">
               advisory page
             </Link>
+            ; code lives on{" "}
+            <a
+              href={socialLink("github")}
+              target="_blank"
+              rel="noreferrer"
+              className="text-primary hover:underline"
+            >
+              GitHub
+            </a>
             .
           </p>
         </div>
