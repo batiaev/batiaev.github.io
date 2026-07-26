@@ -3,7 +3,54 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import data from '@/data/data.json'
 import { shouldEnableDotField, isNarrowViewport } from '@/lib/dotFieldGuards'
-import { roleAnchor, showcaseRoles } from '@/lib/showcase'
+import {
+  currentRoles,
+  previousRoles,
+  roleAnchor,
+  type ShowcaseRole,
+} from '@/lib/showcase'
+
+const RoleLogos = ({ label, roles }: { label: string; roles: ShowcaseRole[] }) => {
+  if (roles.length === 0) return null
+
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <p className="text-muted-foreground text-halo text-xs uppercase tracking-wider">
+        {label}
+      </p>
+      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+        {roles.map((role) => (
+          <li key={role.anchor}>
+            <a
+              href={`#${roleAnchor(role.anchor)}`}
+              title={`See the ${role.company} role`}
+              className="flex min-h-11 items-center opacity-60 grayscale transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {role.logo ? (
+                <>
+                  <img
+                    src={role.logo}
+                    alt={role.company}
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-8 w-auto sm:h-9"
+                  />
+                  <span className="sr-only">— see the {role.company} role</span>
+                </>
+              ) : (
+                <span className="font-display text-halo text-base font-semibold tracking-tight sm:text-lg">
+                  {role.company}
+                </span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 const Intro = () => {
   const heroRef = useRef<HTMLElement>(null)
@@ -74,40 +121,9 @@ const Intro = () => {
             </a>
           </Button>
 
-          <div className="mt-10 flex flex-col items-center gap-3">
-            <p className="text-muted-foreground text-halo text-xs uppercase tracking-wider">
-              Previously
-            </p>
-            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              {showcaseRoles.map((role) => (
-                <li key={role.anchor}>
-                  <a
-                    href={`#${roleAnchor(role.anchor)}`}
-                    title={`See the ${role.company} role`}
-                    className="flex min-h-11 items-center opacity-60 grayscale transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {role.logo ? (
-                      <>
-                        <img
-                          src={role.logo}
-                          alt={role.company}
-                          width={40}
-                          height={40}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-8 w-auto sm:h-9"
-                        />
-                        <span className="sr-only">— see the {role.company} role</span>
-                      </>
-                    ) : (
-                      <span className="font-display text-halo text-base font-semibold tracking-tight sm:text-lg">
-                        {role.company}
-                      </span>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:gap-10">
+            <RoleLogos label="Now" roles={currentRoles} />
+            <RoleLogos label="Previously" roles={previousRoles} />
           </div>
         </div>
       </div>

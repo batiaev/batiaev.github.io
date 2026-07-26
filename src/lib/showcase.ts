@@ -9,13 +9,17 @@ export interface ShowcaseRole {
 }
 
 /** Roles worth naming in the hero, newest first (source order is reverse-chronological). */
-export const showcaseRoles: ShowcaseRole[] = data.experiences
+const showcased = data.experiences
   .filter((role) => 'showcase' in role && role.showcase === true)
   .map((role) => ({
     company: role.company,
     anchor: role.anchor,
     logo: 'logo' in role ? role.logo : undefined,
+    current: 'current' in role && role.current === true,
   }))
+
+export const currentRoles: ShowcaseRole[] = showcased.filter((r) => r.current)
+export const previousRoles: ShowcaseRole[] = showcased.filter((r) => !r.current)
 
 export function roleAnchor(anchor: string): string {
   return `role-${anchor}`

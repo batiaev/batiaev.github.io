@@ -128,6 +128,12 @@ const expectations: [string, boolean][] = [
   ],
   ['hero falls back to a wordmark when a logo is missing', homeHtml.includes('>Nevis<')],
   ['hero renders the Vega mark', homeHtml.includes('/images/logo-vega.png')],
+  [
+    'hero separates the current role from past ones',
+    homeHtml.includes('Now') &&
+      homeHtml.includes('Previously') &&
+      homeHtml.includes('/images/logo-capital.png'),
+  ],
   ['hero logos link to their role anchors', homeHtml.includes('href="#role-revolut"')],
   ['experience cards expose those anchors', homeHtml.includes('id="role-revolut"')],
   ['Nevis role rendered', homeHtml.includes('id="role-nevis"')],
