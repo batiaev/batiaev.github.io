@@ -12,6 +12,12 @@ export const legSchema = z.object({
   /** Calendar days from today until this leg expires. */
   days: z.number().min(0).max(3_650),
   multiplier: z.number().min(0).max(100_000),
+  /**
+   * "auto" legs are re-priced from the current market whenever an input that
+   * feeds the model changes; "manual" legs hold a premium the user typed in,
+   * which is what you want once it represents a real entry price.
+   */
+  premiumMode: z.enum(["auto", "manual"]).default("auto"),
 });
 
 export const positionSchema = z.object({

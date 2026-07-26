@@ -42,12 +42,13 @@ const Talks = () => {
   }, []);
 
   return (
-    <section id="talks" className="section" ref={sectionRef}>
+    <section id="talks" className="section pt-8" ref={sectionRef}>
       <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <div className="highlight-chip">Public record</div>
-          <h2 className="section-title">A decade in front of the room</h2>
-          <p className="section-subtitle mx-auto">
+        <div className="mb-10 text-center">
+          <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            Talks, podcasts &amp; writing
+          </h3>
+          <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-base leading-relaxed">
             Risk systems, cross-language architecture, and financial math on the
             engineering side; team building and product on the leadership side.
           </p>

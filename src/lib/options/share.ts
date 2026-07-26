@@ -44,6 +44,7 @@ export function encodePosition(position: Position): string {
           num(leg.premium),
           num(leg.days),
           num(leg.multiplier),
+          leg.premiumMode === "manual" ? "m" : "a",
         ].join("-"),
       )
       .join("_"),
@@ -54,13 +55,15 @@ export function encodePosition(position: Position): string {
 
 function decodeLeg(encoded: string): Leg | null {
   const parts = encoded.split("-");
-  if (parts.length !== 7) return null;
+  // Links minted before the premium-mode field carry 7 parts; treat those legs
+  // as "manual" so a shared position keeps the premiums it was shared with.
+  if (parts.length !== 7 && parts.length !== 8) return null;
 
   const kind = KINDS[parts[0]];
   if (!kind) return null;
 
   const [qty, strike, premium, days, multiplier] = parts
-    .slice(2)
+    .slice(2, 7)
     .map((part) => parseNum(part));
 
   if (
@@ -82,6 +85,7 @@ function decodeLeg(encoded: string): Leg | null {
     premium,
     days,
     multiplier,
+    premiumMode: parts[7] === "a" ? "auto" : "manual",
   };
 }
 

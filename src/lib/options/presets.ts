@@ -137,6 +137,49 @@ type Market = Pick<
   "underlying" | "price" | "vol" | "rate" | "dividend"
 >;
 
+/** Theoretical per-unit premium for an option leg at today's market. */
+export function theoreticalPremium(
+  kind: OptionType,
+  strike: number,
+  days: number,
+  market: Market,
+): number {
+  const { price } = valueOption(kind, {
+    price: market.price,
+    strike,
+    years: days / 365,
+    rate: market.rate,
+    carry: market.underlying === "future" ? market.rate : market.dividend,
+    vol: market.vol,
+  });
+
+  return Math.max(round2(price), 0.01);
+}
+
+/**
+ * Re-prices every "auto" leg against the current market, so changing spot or
+ * vol keeps the model self-consistent. Legs the user has edited are "manual"
+ * and never touched — their premium is a real entry price.
+ */
+export function repriceAutoLegs(position: Position): Position {
+  let changed = false;
+
+  const legs = position.legs.map((leg) => {
+    if (leg.premiumMode !== "auto") return leg;
+
+    const premium =
+      leg.kind === "underlying"
+        ? round2(position.price)
+        : theoreticalPremium(leg.kind, leg.strike, leg.days, position);
+
+    if (premium === leg.premium) return leg;
+    changed = true;
+    return { ...leg, premium };
+  });
+
+  return changed ? { ...position, legs } : position;
+}
+
 export function buildLegs(preset: Preset, market: Market, days: number): Leg[] {
   return preset.legs.map((template) => {
     if (template.kind === "underlying") {
@@ -149,18 +192,11 @@ export function buildLegs(preset: Preset, market: Market, days: number): Leg[] {
         premium: round2(market.price),
         days,
         multiplier: 1,
+        premiumMode: "auto" as const,
       };
     }
 
     const strike = roundStrike(market.price, template.strikeRatio ?? 1);
-    const { price } = valueOption(template.kind as OptionType, {
-      price: market.price,
-      strike,
-      years: days / 365,
-      rate: market.rate,
-      carry: market.underlying === "future" ? market.rate : market.dividend,
-      vol: market.vol,
-    });
 
     return {
       id: newLegId(),
@@ -168,11 +204,50 @@ export function buildLegs(preset: Preset, market: Market, days: number): Leg[] {
       side: template.side,
       qty: template.qty,
       strike,
-      premium: Math.max(round2(price), 0.01),
+      premium: theoreticalPremium(template.kind, strike, days, market),
       days,
       multiplier: DEFAULT_MULTIPLIER,
+      premiumMode: "auto" as const,
     };
   });
+}
+
+/** A single leg added from the quick-add row, priced at today's market. */
+export function buildQuickLeg(
+  kind: Leg["kind"],
+  side: Leg["side"],
+  market: Market,
+  days: number,
+  /** Strike carried over from the previous option leg, if there is one. */
+  inheritedStrike?: number,
+): Leg {
+  if (kind === "underlying") {
+    return {
+      id: newLegId(),
+      kind: "underlying",
+      side,
+      qty: DEFAULT_MULTIPLIER,
+      strike: 0,
+      premium: round2(market.price),
+      days,
+      multiplier: 1,
+      premiumMode: "auto",
+    };
+  }
+
+  const strike = inheritedStrike ?? roundStrike(market.price, 1);
+
+  return {
+    id: newLegId(),
+    kind,
+    side,
+    qty: 1,
+    strike,
+    premium: theoreticalPremium(kind, strike, days, market),
+    days,
+    multiplier: DEFAULT_MULTIPLIER,
+    premiumMode: "auto",
+  };
 }
 
 export function applyPreset(preset: Preset, position: Position): Position {

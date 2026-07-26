@@ -26,8 +26,19 @@ interface Props {
   curve: CurvePoint[];
   position: Position;
   metrics: Metrics;
-  visibleLegs: string[];
+  /** Series dataKeys currently hidden — "expiry", "valuation" or `legs.<id>`. */
+  hiddenKeys: string[];
+  onToggleKey: (dataKey: string) => void;
 }
+
+/**
+ * Recharts types `dataKey` as `DataKey<any>`, which allows an accessor
+ * function. Every series here uses a string key, so anything else is ignored.
+ */
+const seriesKey = (entry: unknown): string | null => {
+  const key = (entry as { dataKey?: unknown } | null)?.dataKey;
+  return typeof key === "string" ? key : null;
+};
 
 const legLabel = (
   leg: Position["legs"][number],
@@ -40,7 +51,13 @@ const legLabel = (
   return `${index + 1}. ${side} ${leg.strike} ${leg.kind}`;
 };
 
-const PayoffChart = ({ curve, position, metrics, visibleLegs }: Props) => (
+const PayoffChart = ({
+  curve,
+  position,
+  metrics,
+  hiddenKeys,
+  onToggleKey,
+}: Props) => (
   <div className="h-[22rem] w-full sm:h-[26rem]">
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={curve} margin={{ top: 8, right: 12, bottom: 8, left: 4 }}>
@@ -70,7 +87,27 @@ const PayoffChart = ({ curve, position, metrics, visibleLegs }: Props) => (
           labelFormatter={(price: number) => `Underlying ${formatPrice(price)}`}
           contentStyle={{ fontSize: 12, borderRadius: 8 }}
         />
-        <Legend wrapperStyle={{ fontSize: 12 }} />
+        <Legend
+          wrapperStyle={{ fontSize: 12, cursor: "pointer" }}
+          onClick={(entry) => {
+            const key = seriesKey(entry);
+            if (key) onToggleKey(key);
+          }}
+          formatter={(value, entry) => {
+            const key = seriesKey(entry);
+            const isHidden = key !== null && hiddenKeys.includes(key);
+            return (
+              <span
+                style={{
+                  opacity: isHidden ? 0.4 : 1,
+                  textDecoration: isHidden ? "line-through" : "none",
+                }}
+              >
+                {value}
+              </span>
+            );
+          }}
+        />
 
         <ReferenceLine y={0} stroke="currentColor" strokeOpacity={0.4} />
         <ReferenceLine
@@ -90,21 +127,24 @@ const PayoffChart = ({ curve, position, metrics, visibleLegs }: Props) => (
           />
         ))}
 
-        {position.legs.map((leg, index) =>
-          visibleLegs.includes(leg.id) ? (
-            <Line
-              key={leg.id}
-              type="linear"
-              dataKey={`legs.${leg.id}`}
-              name={legLabel(leg, index)}
-              stroke={LEG_COLOURS[index % LEG_COLOURS.length]}
-              strokeWidth={1}
-              strokeOpacity={0.75}
-              dot={false}
-              isAnimationActive={false}
-            />
-          ) : null,
-        )}
+        {/*
+          Hidden series stay mounted with `hide` rather than being unmounted,
+          so their legend entries remain clickable to bring them back.
+        */}
+        {position.legs.map((leg, index) => (
+          <Line
+            key={leg.id}
+            type="linear"
+            dataKey={`legs.${leg.id}`}
+            name={legLabel(leg, index)}
+            stroke={LEG_COLOURS[index % LEG_COLOURS.length]}
+            strokeWidth={1}
+            strokeOpacity={0.75}
+            dot={false}
+            isAnimationActive={false}
+            hide={hiddenKeys.includes(`legs.${leg.id}`)}
+          />
+        ))}
 
         <Line
           type="linear"
@@ -119,6 +159,7 @@ const PayoffChart = ({ curve, position, metrics, visibleLegs }: Props) => (
           strokeDasharray="5 4"
           dot={false}
           isAnimationActive={false}
+          hide={hiddenKeys.includes("valuation")}
         />
         <Line
           type="linear"
@@ -128,6 +169,7 @@ const PayoffChart = ({ curve, position, metrics, visibleLegs }: Props) => (
           strokeWidth={2.5}
           dot={false}
           isAnimationActive={false}
+          hide={hiddenKeys.includes("expiry")}
         />
       </LineChart>
     </ResponsiveContainer>

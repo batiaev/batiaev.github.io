@@ -4,12 +4,12 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import data from "@/data/data.json";
 
+/** Mirrors the order of the sections on the home page. */
 const navLinks = [
   { href: "/#building", label: "Building" },
-  { href: "/#derivatives", label: "Derivatives" },
   { href: "/#experience", label: "Experience" },
-  { href: "/tools/options-pnl", label: "Options tool" },
-  { href: "/#talks", label: "Talks" },
+  { href: "/#derivatives", label: "Derivatives" },
+  { href: "/#in-public", label: "Teaching & tools" },
   { href: "/advisory", label: "Advisory" },
   { href: "/#contact", label: "Contact" },
 ];

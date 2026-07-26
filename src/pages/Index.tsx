@@ -2,8 +2,9 @@ import React, { useEffect, Suspense, lazy } from "react";
 import Header from "@/components/Header";
 import Intro from "@/components/Intro";
 import Initiatives from "@/components/Initiatives";
-import DomainProof from "@/components/DomainProof";
 import Experience from "@/components/Experience";
+import DomainProof from "@/components/DomainProof";
+import Teaching from "@/components/Teaching";
 import Engagement from "@/components/Engagement";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -47,9 +48,9 @@ const Index = () => {
       <main>
         <Intro />
         <Initiatives />
-        <DomainProof />
         <Experience />
-        <Engagement />
+        <DomainProof />
+        <Teaching />
         <Suspense
           fallback={
             <div className="text-muted-foreground py-16 text-center text-sm">
@@ -59,6 +60,7 @@ const Index = () => {
         >
           <Talks />
         </Suspense>
+        <Engagement />
         <Contact />
       </main>
       <Footer />

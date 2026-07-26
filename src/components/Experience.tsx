@@ -119,6 +119,20 @@ const Experience = () => {
         <Suspense fallback={null}>
           <ScopeChart />
         </Suspense>
+
+        <div className="border-border/50 mx-auto mt-12 max-w-3xl border-t pt-8">
+          <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+            {data.credentials.title}
+          </h3>
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+            {data.credentials.items.map((item) => (
+              <li key={item.qualification} className="text-sm">
+                <span className="font-medium">{item.qualification}</span>
+                <span className="text-muted-foreground"> · {item.institution}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )

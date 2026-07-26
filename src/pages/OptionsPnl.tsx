@@ -1,25 +1,30 @@
 import React, { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { ArrowLeft, Link2, RotateCcw } from "lucide-react";
+import { ArrowLeft, Link2, RotateCcw, Settings2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import LegsEditor from "@/components/options/LegsEditor";
 import MetricsBar from "@/components/options/MetricsBar";
 import NumberField from "@/components/options/NumberField";
 import { useDocumentMeta } from "@/hooks/use-document-meta";
-import { valueOption } from "@/lib/options/blackScholes";
 import {
   DEFAULT_EXPIRY_DAYS,
-  DEFAULT_MULTIPLIER,
   applyPreset,
+  buildQuickLeg,
   defaultPosition,
   presets,
+  repriceAutoLegs,
+  theoreticalPremium,
 } from "@/lib/options/presets";
 import {
   metrics as computeMetrics,
-  newLegId,
   payoffCurve,
   type Leg,
   type Position,
@@ -66,7 +71,7 @@ const Control = ({
 
 const OptionsPnl = () => {
   const [position, setPosition] = useState<Position>(initialPosition);
-  const [hiddenLegs, setHiddenLegs] = useState<string[]>([]);
+  const [hiddenKeys, setHiddenKeys] = useState<string[]>([]);
 
   useDocumentMeta({
     title: "Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev",
@@ -93,18 +98,21 @@ const OptionsPnl = () => {
 
   const visibleLegs = position.legs
     .map((leg) => leg.id)
-    .filter((id) => !hiddenLegs.includes(id));
+    .filter((id) => !hiddenKeys.includes(`legs.${id}`));
 
+  /** Every mutation funnels through here so "auto" legs stay priced at market. */
   const patchPosition = (patch: Partial<Position>) =>
-    setPosition((current) => ({ ...current, ...patch }));
+    setPosition((current) => repriceAutoLegs({ ...current, ...patch }));
 
   const updateLeg = (id: string, patch: Partial<Leg>) =>
-    setPosition((current) => ({
-      ...current,
-      legs: current.legs.map((leg) =>
-        leg.id === id ? { ...leg, ...patch } : leg,
-      ),
-    }));
+    setPosition((current) =>
+      repriceAutoLegs({
+        ...current,
+        legs: current.legs.map((leg) =>
+          leg.id === id ? { ...leg, ...patch } : leg,
+        ),
+      }),
+    );
 
   const removeLeg = (id: string) =>
     setPosition((current) => ({
@@ -112,39 +120,42 @@ const OptionsPnl = () => {
       legs: current.legs.filter((leg) => leg.id !== id),
     }));
 
-  const addLeg = () =>
+  const addLeg = (kind: Leg["kind"], side: Leg["side"]) =>
     setPosition((current) => {
-      const strike = Math.round(current.price);
-      const { price } = valueOption("call", {
-        price: current.price,
-        strike,
-        years: DEFAULT_EXPIRY_DAYS / 365,
-        rate: current.rate,
-        carry:
-          current.underlying === "future" ? current.rate : current.dividend,
-        vol: current.vol,
-      });
+      // Carry the strike over from the last option leg so building a spread is
+      // add-then-nudge rather than add-then-retype.
+      const inherited = [...current.legs]
+        .reverse()
+        .find((leg) => leg.kind !== "underlying")?.strike;
 
-      const leg: Leg = {
-        id: newLegId(),
-        kind: "call",
-        side: "long",
-        qty: 1,
-        strike,
-        premium: Math.max(Math.round(price * 100) / 100, 0.01),
-        days: maxLegDays,
-        multiplier: DEFAULT_MULTIPLIER,
-      };
-
+      const leg = buildQuickLeg(kind, side, current, maxLegDays, inherited);
       return { ...current, legs: [...current.legs, leg] };
     });
 
-  const toggleLeg = (id: string) =>
-    setHiddenLegs((current) =>
-      current.includes(id)
-        ? current.filter((hidden) => hidden !== id)
-        : [...current, id],
+  /** Drops a manual premium back onto the model price. */
+  const repriceLeg = (id: string) =>
+    setPosition((current) => ({
+      ...current,
+      legs: current.legs.map((leg) => {
+        if (leg.id !== id) return leg;
+        const premium =
+          leg.kind === "underlying"
+            ? current.price
+            : theoreticalPremium(leg.kind, leg.strike, leg.days, current);
+        return { ...leg, premium, premiumMode: "auto" as const };
+      }),
+    }));
+
+  const toggleKey = (dataKey: string) =>
+    setHiddenKeys((current) =>
+      current.includes(dataKey)
+        ? current.filter((hidden) => hidden !== dataKey)
+        : [...current, dataKey],
     );
+
+  const toggleLeg = (id: string) => toggleKey(`legs.${id}`);
+
+  const pct = (value: number) => `${Math.round(value * 10000) / 100}%`;
 
   const copyLink = async () => {
     const url = shareUrl(position);
@@ -162,7 +173,7 @@ const OptionsPnl = () => {
 
   const reset = () => {
     setPosition(defaultPosition());
-    setHiddenLegs([]);
+    setHiddenKeys([]);
     window.history.replaceState(null, "", window.location.pathname);
   };
 
@@ -211,7 +222,7 @@ const OptionsPnl = () => {
                     title={preset.blurb}
                     onClick={() => {
                       setPosition((current) => applyPreset(preset, current));
-                      setHiddenLegs([]);
+                      setHiddenKeys([]);
                     }}
                   >
                     {preset.name}
@@ -220,94 +231,128 @@ const OptionsPnl = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-              <Control label="Underlying">
-                <select
-                  aria-label="Underlying type"
-                  className={SELECT_CLASS}
-                  value={position.underlying}
-                  onChange={(event) =>
-                    patchPosition({
-                      underlying: event.target.value as Position["underlying"],
-                    })
+            <div className="flex flex-wrap items-end gap-4">
+              <div className="w-36">
+                <Control
+                  label={
+                    position.underlying === "future"
+                      ? "Futures price"
+                      : "Spot price"
                   }
                 >
-                  <option value="spot">Spot</option>
-                  <option value="future">Future</option>
-                </select>
-              </Control>
+                  <NumberField
+                    label="Underlying price"
+                    value={position.price}
+                    onChange={(price) => patchPosition({ price })}
+                  />
+                </Control>
+              </div>
 
-              <Control label={position.underlying === "future" ? "Futures price" : "Spot price"}>
-                <NumberField
-                  label="Underlying price"
-                  value={position.price}
-                  onChange={(price) => patchPosition({ price })}
-                />
-              </Control>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="min-h-10 gap-2 font-normal"
+                  >
+                    <Settings2 className="h-4 w-4" aria-hidden />
+                    <span className="text-muted-foreground tabular-nums">
+                      {position.underlying === "future" ? "Future" : "Spot"} · IV{" "}
+                      {pct(position.vol)} · r {pct(position.rate)}
+                      {position.underlying === "future"
+                        ? ""
+                        : ` · q ${pct(position.dividend)}`}
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-80 space-y-4">
+                  <div>
+                    <h2 className="text-sm font-medium">Market assumptions</h2>
+                    <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
+                      These drive the model price, the pre-expiry curve, and the
+                      Greeks.
+                    </p>
+                  </div>
 
-              <Control label="Volatility">
-                <NumberField
-                  label="Implied volatility, percent"
-                  suffix="%"
-                  value={Math.round(position.vol * 10000) / 100}
-                  onChange={(vol) => patchPosition({ vol: vol / 100 })}
-                />
-              </Control>
+                  <Control label="Underlying">
+                    <select
+                      aria-label="Underlying type"
+                      className={SELECT_CLASS}
+                      value={position.underlying}
+                      onChange={(event) =>
+                        patchPosition({
+                          underlying: event.target
+                            .value as Position["underlying"],
+                        })
+                      }
+                    >
+                      <option value="spot">Spot</option>
+                      <option value="future">Future</option>
+                    </select>
+                  </Control>
 
-              <Control label="Rate">
-                <NumberField
-                  label="Risk-free rate, percent"
-                  suffix="%"
-                  value={Math.round(position.rate * 10000) / 100}
-                  onChange={(rate) => patchPosition({ rate: rate / 100 })}
-                />
-              </Control>
+                  <Control label="Volatility">
+                    <NumberField
+                      label="Implied volatility, percent"
+                      suffix="%"
+                      value={Math.round(position.vol * 10000) / 100}
+                      onChange={(vol) => patchPosition({ vol: vol / 100 })}
+                    />
+                  </Control>
 
-              <Control
-                label="Dividend"
-                hint={
-                  position.underlying === "future"
-                    ? "Ignored: Black-76"
-                    : undefined
-                }
-              >
-                <NumberField
-                  label="Dividend yield, percent"
-                  suffix="%"
-                  disabled={position.underlying === "future"}
-                  value={Math.round(position.dividend * 10000) / 100}
-                  onChange={(dividend) => patchPosition({ dividend: dividend / 100 })}
-                />
-              </Control>
+                  <Control label="Rate">
+                    <NumberField
+                      label="Risk-free rate, percent"
+                      suffix="%"
+                      value={Math.round(position.rate * 10000) / 100}
+                      onChange={(rate) => patchPosition({ rate: rate / 100 })}
+                    />
+                  </Control>
 
-              <Control label="P&L in (days)" hint={`0 = today, ${maxLegDays} = expiry`}>
-                <NumberField
-                  label="Days from today for the modelled P&L curve"
-                  value={position.valuationDays}
-                  onChange={(valuationDays) =>
-                    patchPosition({
-                      valuationDays: Math.min(
-                        Math.max(valuationDays, 0),
-                        maxLegDays,
-                      ),
-                    })
+                  <Control
+                    label="Dividend"
+                    hint={
+                      position.underlying === "future"
+                        ? "Ignored: Black-76 uses the rate as carry"
+                        : undefined
+                    }
+                  >
+                    <NumberField
+                      label="Dividend yield, percent"
+                      suffix="%"
+                      disabled={position.underlying === "future"}
+                      value={Math.round(position.dividend * 10000) / 100}
+                      onChange={(dividend) =>
+                        patchPosition({ dividend: dividend / 100 })
+                      }
+                    />
+                  </Control>
+                </PopoverContent>
+              </Popover>
+
+              <div className="min-w-[16rem] flex-1">
+                <span className="text-muted-foreground mb-1 block text-xs font-medium uppercase tracking-wider">
+                  P&amp;L in {position.valuationDays} day
+                  {position.valuationDays === 1 ? "" : "s"}
+                  <span className="normal-case tracking-normal">
+                    {" "}
+                    — 0 is today, {maxLegDays} is expiry
+                  </span>
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={maxLegDays}
+                  step={1}
+                  value={Math.min(position.valuationDays, maxLegDays)}
+                  onChange={(event) =>
+                    patchPosition({ valuationDays: Number(event.target.value) })
                   }
+                  aria-label="Days from today for the modelled P&L curve"
+                  className="accent-primary h-2 w-full cursor-pointer"
                 />
-              </Control>
+              </div>
             </div>
-
-            <input
-              type="range"
-              min={0}
-              max={maxLegDays}
-              step={1}
-              value={Math.min(position.valuationDays, maxLegDays)}
-              onChange={(event) =>
-                patchPosition({ valuationDays: Number(event.target.value) })
-              }
-              aria-label="Days from today for the modelled P&L curve"
-              className="accent-primary h-2 w-full cursor-pointer"
-            />
 
             <MetricsBar metrics={metrics} />
 
@@ -323,7 +368,8 @@ const OptionsPnl = () => {
                   curve={curve}
                   position={position}
                   metrics={metrics}
-                  visibleLegs={visibleLegs}
+                  hiddenKeys={hiddenKeys}
+                  onToggleKey={toggleKey}
                 />
               </Suspense>
             </div>
@@ -364,6 +410,7 @@ const OptionsPnl = () => {
                 onRemove={removeLeg}
                 onAdd={addLeg}
                 onToggleVisible={toggleLeg}
+                onReprice={repriceLeg}
               />
             </div>
 

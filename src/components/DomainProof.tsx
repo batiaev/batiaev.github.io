@@ -1,7 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import data from "@/data/data.json";
 
 const DomainProof = () => {
@@ -21,7 +18,7 @@ const DomainProof = () => {
     return () => observer.disconnect();
   }, []);
 
-  const { chip, title, subtitle, items, cta } = data.domainProof;
+  const { chip, title, subtitle, items } = data.domainProof;
 
   return (
     <section
@@ -52,18 +49,6 @@ const DomainProof = () => {
             </li>
           ))}
         </ul>
-
-        <div className="mt-10 text-center">
-          <Button size="lg" className="min-h-11 px-6 font-medium" asChild>
-            <Link to={cta.href}>
-              {cta.label}
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-            </Link>
-          </Button>
-          <p className="text-muted-foreground mt-3 text-sm">
-            Free, no signup, runs entirely in your browser.
-          </p>
-        </div>
       </div>
     </section>
   );

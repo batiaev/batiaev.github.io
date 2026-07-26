@@ -100,7 +100,8 @@ const payoffHtml = renderToStaticMarkup(
     curve={strategy.payoffCurve(position)}
     position={position}
     metrics={strategy.metrics(position)}
-    visibleLegs={position.legs.map((leg) => leg.id)}
+    hiddenKeys={[]}
+    onToggleKey={() => {}}
   />,
 )
 console.log(`PASS  PayoffChart rendered (${payoffHtml.length} chars)`)
@@ -108,7 +109,11 @@ console.log(`PASS  PayoffChart rendered (${payoffHtml.length} chars)`)
 const expectations: [string, boolean][] = [
   ['metrics tile rendered', optionsHtml.includes('Max profit')],
   ['breakeven computed', optionsHtml.includes('Breakeven')],
-  ['legs editor rendered', optionsHtml.includes('Premium')],
+  // Legs render collapsed, so the summary and quick-add row are what's on screen;
+  // the per-field editor (Premium, Days…) only mounts once a row is expanded.
+  ['legs collapse to a summary', optionsHtml.includes('call · 30d ·')],
+  ['quick-add row rendered', optionsHtml.includes('Short underlying')],
+  ['market assumptions behind the cog', optionsHtml.includes('IV 25%')],
   ['presets rendered', optionsHtml.includes('Iron condor')],
   ['fintecy funnel line', optionsHtml.includes('fintecy.co')],
   ['scope chart caption rendered', scopeHtml.includes('Direct reports')],
@@ -137,6 +142,20 @@ const expectations: [string, boolean][] = [
   ['hero logos link to their role anchors', homeHtml.includes('href="#role-revolut"')],
   ['experience cards expose those anchors', homeHtml.includes('id="role-revolut"')],
   ['Nevis role rendered', homeHtml.includes('id="role-nevis"')],
+  // Vega's AUM is sourced from vega-alts.com; $500B+ is an older, unsupported
+  // figure that still appears on the CV. Keep the site on the citable number.
+  ['Vega AUM matches the public figure', homeHtml.includes('$300B+')],
+  ['no unsourced Vega AUM claim', !homeHtml.includes('$500B')],
+  [
+    'Vega raise and valuation are distinguished',
+    homeHtml.includes('valuation $10M → $90M'),
+  ],
+  // Year-level periods keep the four-month Nevis stint and the Revolut/Vega
+  // handover from drawing the eye for the wrong reason.
+  ['periods are year-level', !/\b(Jan|Feb|Jun|Sep|Nov)\s20\d\d/.test(homeHtml)],
+  ['education block rendered', homeHtml.includes('City Business School')],
+  ['teaching record rendered', homeHtml.includes('GeekBrains')],
+  ['options vocabulary present', homeHtml.includes('SPAN')],
   [
     'product cards use their own logos',
     homeHtml.includes('/images/logo-fintecy.png') &&
