@@ -182,11 +182,29 @@ const expectations: [string, boolean][] = [
   ['tools index lists every tool', data.teaching.tools.every((t) => toolsHtml.includes(escapeHtml(t.name)))],
   ['home surfaces every tool too', data.teaching.tools.every((t) => homeHtml.includes(escapeHtml(t.name)))],
   ['take-home states the tax year', takeHomeHtml.includes('2026/27')],
-  ['take-home is explicit about Scotland', takeHomeHtml.includes('Scotland is not covered')],
-  ['offer page compares two offers', offerHtml.includes('Offer A') && offerHtml.includes('Offer B')],
+  ['take-home is explicit about Scotland', takeHomeHtml.includes('Scotland sets its own')],
   [
-    'offer page flags the illiquidity caveat',
-    offerHtml.includes('illiquid') || offerHtml.includes('never becomes liquid'),
+    'take-home covers all four structures',
+    ['Employee', 'Sole trader', 'Own limited company', 'Umbrella'].every((s) =>
+      takeHomeHtml.includes(s),
+    ),
+  ],
+  [
+    'take-home says incorporating is not automatic',
+    takeHomeHtml.includes('no longer an automatic win'),
+  ],
+  [
+    'offer page offers the three archetypes',
+    ['Startup', 'Hypergrowth', 'Enterprise'].every((s) => offerHtml.includes(s)),
+  ],
+  [
+    'offer page shows all three scenarios',
+    offerHtml.includes('If it doesn') && offerHtml.includes('Weighted') && offerHtml.includes('If it works'),
+  ],
+  ['offer page surfaces dilution', offerHtml.includes('Dilution is the part') || offerHtml.includes('→ 0.')],
+  [
+    'offer page refuses to call the weighted column a forecast',
+    offerHtml.includes('not a forecast'),
   ],
   [
     'product cards use their own logos',

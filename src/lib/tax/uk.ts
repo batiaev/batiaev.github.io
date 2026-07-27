@@ -30,6 +30,35 @@ export const NI_UPPER_EARNINGS_LIMIT = 50_270;
 export const NI_MAIN_RATE = 0.08;
 export const NI_UPPER_RATE = 0.02;
 
+/** Class 1 employer (secondary) NI — what an umbrella or your own company pays. */
+export const NI_SECONDARY_THRESHOLD = 5_000;
+export const NI_EMPLOYER_RATE = 0.15;
+/**
+ * Not available to a company whose only employee paid above the secondary
+ * threshold is also its sole director, which is the usual contractor setup.
+ */
+export const EMPLOYMENT_ALLOWANCE = 10_500;
+
+/** Class 4 NI on self-employed profits. Class 2 is treated as paid, so £0. */
+export const CLASS4_LOWER_LIMIT = 12_570;
+export const CLASS4_UPPER_LIMIT = 50_270;
+export const CLASS4_MAIN_RATE = 0.06;
+export const CLASS4_UPPER_RATE = 0.02;
+
+/** Dividend tax. The basic and higher rates each rose 2pp for 2026/27. */
+export const DIVIDEND_ALLOWANCE = 500;
+export const DIVIDEND_BASIC_RATE = 0.1075;
+export const DIVIDEND_HIGHER_RATE = 0.3575;
+export const DIVIDEND_ADDITIONAL_RATE = 0.3935;
+
+/** Corporation tax, with marginal relief between the two limits. */
+export const CT_SMALL_PROFITS_LIMIT = 50_000;
+export const CT_MAIN_RATE_LIMIT = 250_000;
+export const CT_SMALL_RATE = 0.19;
+export const CT_MAIN_RATE = 0.25;
+/** The standard fraction; 25% less 3/200 relief lands exactly on 19% at £50k. */
+export const CT_MARGINAL_RELIEF_FRACTION = 3 / 200;
+
 export type StudentLoanPlan = "none" | "plan1" | "plan2" | "plan4" | "plan5" | "pgl";
 
 interface LoanPlan {
@@ -112,6 +141,67 @@ export function nationalInsuranceOn(earnings: number): number {
     NI_MAIN_RATE;
   const upper = Math.max(earnings - NI_UPPER_EARNINGS_LIMIT, 0) * NI_UPPER_RATE;
   return main + upper;
+}
+
+export function employerNiOn(salary: number, employmentAllowance = 0): number {
+  const raw = Math.max(salary - NI_SECONDARY_THRESHOLD, 0) * NI_EMPLOYER_RATE;
+  return Math.max(raw - employmentAllowance, 0);
+}
+
+export function class4On(profit: number): number {
+  const main =
+    Math.min(
+      Math.max(profit - CLASS4_LOWER_LIMIT, 0),
+      CLASS4_UPPER_LIMIT - CLASS4_LOWER_LIMIT,
+    ) * CLASS4_MAIN_RATE;
+  const upper = Math.max(profit - CLASS4_UPPER_LIMIT, 0) * CLASS4_UPPER_RATE;
+  return main + upper;
+}
+
+export function corporationTaxOn(profit: number): number {
+  if (profit <= 0) return 0;
+  if (profit <= CT_SMALL_PROFITS_LIMIT) return profit * CT_SMALL_RATE;
+  if (profit >= CT_MAIN_RATE_LIMIT) return profit * CT_MAIN_RATE;
+  // Between the limits: main rate less marginal relief, which works out at a
+  // 26.5% marginal rate on the slice — higher than the headline 25%.
+  const relief = CT_MARGINAL_RELIEF_FRACTION * (CT_MAIN_RATE_LIMIT - profit);
+  return profit * CT_MAIN_RATE - relief;
+}
+
+/**
+ * Dividends sit on top of everything else, so the band they fall into depends
+ * on the non-dividend income underneath them. The allowance is tax-free but
+ * still consumes band, which is why it is added back before slicing.
+ */
+export function dividendTaxOn(dividends: number, otherIncome: number): number {
+  if (dividends <= 0) return 0;
+
+  const allowance = personalAllowanceFor(otherIncome + dividends);
+  const otherTaxable = Math.max(otherIncome - allowance, 0);
+  // Any unused Personal Allowance is soaked up by dividends first.
+  const unusedAllowance = Math.max(allowance - otherIncome, 0);
+  const taxableDividends = Math.max(dividends - unusedAllowance, 0);
+  if (taxableDividends <= 0) return 0;
+
+  const free = Math.min(taxableDividends, DIVIDEND_ALLOWANCE);
+  let remaining = taxableDividends - free;
+  // The allowance uses up band even though it is charged at nothing.
+  let position = otherTaxable + free;
+  let tax = 0;
+
+  const take = (ceiling: number, rate: number) => {
+    const room = Math.max(ceiling - position, 0);
+    const slice = Math.min(remaining, room);
+    tax += slice * rate;
+    remaining -= slice;
+    position += slice;
+  };
+
+  take(BASIC_RATE_LIMIT, DIVIDEND_BASIC_RATE);
+  take(ADDITIONAL_RATE_LIMIT, DIVIDEND_HIGHER_RATE);
+  tax += remaining * DIVIDEND_ADDITIONAL_RATE;
+
+  return tax;
 }
 
 export function studentLoanOn(earnings: number, plan: StudentLoanPlan): number {

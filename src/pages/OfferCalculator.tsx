@@ -1,20 +1,35 @@
-import React, { useMemo, useState } from "react";
+import React, { Suspense, lazy, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Plus, Settings2, Trash2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import NumberField from "@/components/options/NumberField";
+import OfferDetail from "@/components/offer/OfferDetail";
 import { useDocumentMeta } from "@/hooks/use-document-meta";
 import { ROUTE_META } from "@/lib/routeMeta";
 import { STUDENT_LOAN_PLANS, TAX_YEAR, type StudentLoanPlan } from "@/lib/tax/uk";
 import {
-  DEFAULT_ASSUMPTIONS,
-  emptyOffer,
-  evaluate,
-  type Assumptions,
+  ARCHETYPES,
+  dilutedPct,
+  offerFromArchetype,
   type Offer,
+  type Scenario,
+} from "@/lib/offer/archetypes";
+import {
+  DEFAULT_ASSUMPTIONS,
+  evaluate,
+  scenarioOf,
+  type Assumptions,
 } from "@/lib/offer/compare";
+
+const OutcomeChart = lazy(() => import("@/components/offer/OutcomeChart"));
 
 const SELECT_CLASS =
   "h-10 w-full rounded-md border border-input bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
@@ -25,13 +40,17 @@ const gbp = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 0,
 });
 
+const SCENARIOS: { id: Scenario; label: string; hint: string }[] = [
+  { id: "downside", label: "It doesn't work", hint: "Equity pays nothing" },
+  { id: "expected", label: "Probability-weighted", hint: "Equity × the odds" },
+  { id: "upside", label: "It works", hint: "The exit happens in full" },
+];
+
 const Control = ({
   label,
-  hint,
   children,
 }: {
   label: string;
-  hint?: string;
   children: React.ReactNode;
 }) => (
   <label className="block">
@@ -39,83 +58,17 @@ const Control = ({
       {label}
     </span>
     {children}
-    {hint ? (
-      <span className="text-muted-foreground mt-1 block text-xs">{hint}</span>
-    ) : null}
   </label>
 );
 
-const OfferCard = ({
-  offer,
-  onChange,
-}: {
-  offer: Offer;
-  onChange: (patch: Partial<Offer>) => void;
-}) => (
-  <div className="border-border/60 bg-background space-y-4 rounded-lg border p-5">
-    <Input
-      aria-label={`Name for ${offer.label}`}
-      value={offer.label}
-      onChange={(event) => onChange({ label: event.target.value })}
-      className="h-10 font-medium"
-    />
-
-    <div className="grid grid-cols-2 gap-3">
-      <Control label="Base salary">
-        <NumberField
-          label={`Base salary for ${offer.label}`}
-          value={offer.base}
-          onChange={(base) => onChange({ base })}
-        />
-      </Control>
-      <Control label="Target bonus">
-        <NumberField
-          label={`Target bonus percent for ${offer.label}`}
-          suffix="%"
-          value={offer.bonusPct}
-          onChange={(bonusPct) => onChange({ bonusPct })}
-        />
-      </Control>
-      <Control label="Sign-on">
-        <NumberField
-          label={`Sign-on bonus for ${offer.label}`}
-          value={offer.signOn}
-          onChange={(signOn) => onChange({ signOn })}
-        />
-      </Control>
-      <Control label="Equity grant" hint="Total, at today's valuation">
-        <NumberField
-          label={`Equity grant for ${offer.label}`}
-          value={offer.equity}
-          onChange={(equity) => onChange({ equity })}
-        />
-      </Control>
-      <Control label="Vests over">
-        <NumberField
-          label={`Vesting years for ${offer.label}`}
-          suffix="yr"
-          value={offer.vestYears}
-          onChange={(vestYears) => onChange({ vestYears })}
-        />
-      </Control>
-      <Control label="Share growth" hint="Assumed, per year">
-        <NumberField
-          label={`Annual share price growth for ${offer.label}`}
-          suffix="%"
-          value={offer.growthPct}
-          onChange={(growthPct) => onChange({ growthPct })}
-        />
-      </Control>
-    </div>
-  </div>
-);
+let nextId = 0;
 
 const OfferCalculator = () => {
-  const [offers, setOffers] = useState<Offer[]>([
-    emptyOffer("a", "Offer A"),
-    { ...emptyOffer("b", "Offer B"), base: 140_000, bonusPct: 10, equity: 40_000 },
-  ]);
+  const [offers, setOffers] = useState<Offer[]>(() =>
+    ARCHETYPES.map((preset) => offerFromArchetype(preset, `o${nextId++}`)),
+  );
   const [assumptions, setAssumptions] = useState<Assumptions>(DEFAULT_ASSUMPTIONS);
+  const [scenario, setScenario] = useState<Scenario>("expected");
 
   useDocumentMeta(ROUTE_META["/tools/offer"]);
 
@@ -126,17 +79,22 @@ const OfferCalculator = () => {
 
   const patchOffer = (id: string, patch: Partial<Offer>) =>
     setOffers((current) =>
-      current.map((offer) => (offer.id === id ? { ...offer, ...patch } : offer)),
+      current.map((offer) =>
+        offer.id === id ? { ...offer, ...patch, archetype: "custom" } : offer,
+      ),
     );
 
   const patchAssumptions = (patch: Partial<Assumptions>) =>
     setAssumptions((current) => ({ ...current, ...patch }));
 
-  const best = results.reduce((leader, candidate) =>
-    candidate.totalNet > leader.totalNet ? candidate : leader,
-  );
-  const runnerUp = results.find((r) => r !== best);
-  const gap = runnerUp ? best.totalNet - runnerUp.totalNet : 0;
+  const best = results.length
+    ? results.reduce((leader, candidate) =>
+        scenarioOf(candidate, scenario).totalNet >
+        scenarioOf(leader, scenario).totalNet
+          ? candidate
+          : leader,
+      )
+    : null;
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
@@ -154,13 +112,19 @@ const OfferCalculator = () => {
             <div className="max-w-2xl">
               <div className="highlight-chip">Free tool · {TAX_YEAR}</div>
               <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                Job offer comparison
+                Compare compensation, not salaries
               </h1>
               <p className="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg">
-                Two offers, four years, after UK tax. Headline packages are
-                built to be compared badly — a bigger grant that vests slower,
-                or a bonus that lands in a higher band, can lose to a plainer
-                offer once the tax runs.
+                A startup grant, a scale-up RSU package and an enterprise base
+                are three different bets, and their headline totals are not
+                comparable. This prices each one as a distribution — what you
+                get if it fails, if it works, and weighted by the odds you give
+                it — after UK tax and after dilution.
+              </p>
+              <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                I have taken all three: enterprise at Deutsche Bank, hypergrowth
+                at Revolut, and 0→1 at Vega and Nevis. The defaults below are
+                the shapes those bets tend to have, not quoted offers.
               </p>
             </div>
           </div>
@@ -168,15 +132,234 @@ const OfferCalculator = () => {
 
         <section className="py-8 sm:py-12">
           <div className="container mx-auto space-y-8 px-4">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              {offers.map((offer) => (
-                <OfferCard
-                  key={offer.id}
-                  offer={offer}
-                  onChange={(patch) => patchOffer(offer.id, patch)}
-                />
-              ))}
+            <div>
+              <h2 className="text-muted-foreground mb-3 text-sm font-medium uppercase tracking-wider">
+                Add an offer
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {ARCHETYPES.map((preset) => (
+                  <Button
+                    key={preset.id}
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="min-h-10"
+                    title={preset.blurb}
+                    onClick={() =>
+                      setOffers((current) => [
+                        ...current,
+                        offerFromArchetype(preset, `o${nextId++}`),
+                      ])
+                    }
+                  >
+                    <Plus className="mr-1.5 h-3.5 w-3.5" aria-hidden />
+                    {preset.label}
+                  </Button>
+                ))}
+              </div>
+              <div className="text-muted-foreground mt-3 grid gap-1 text-xs sm:grid-cols-3">
+                {ARCHETYPES.map((preset) => (
+                  <p key={preset.id} className="leading-relaxed">
+                    <strong className="text-foreground">{preset.label}.</strong>{" "}
+                    {preset.blurb}
+                  </p>
+                ))}
+              </div>
             </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {offers.map((offer) => {
+                const result = results.find((r) => r.offer.id === offer.id)!;
+                const shown = scenarioOf(result, scenario);
+
+                return (
+                  <div
+                    key={offer.id}
+                    className={`rounded-lg border p-4 ${
+                      best?.offer.id === offer.id
+                        ? "border-primary/40 bg-primary/5"
+                        : "border-border/60 bg-background"
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center gap-2">
+                      <Input
+                        aria-label={`Name for ${offer.label}`}
+                        value={offer.label}
+                        onChange={(event) =>
+                          setOffers((current) =>
+                            current.map((o) =>
+                              o.id === offer.id
+                                ? { ...o, label: event.target.value }
+                                : o,
+                            ),
+                          )
+                        }
+                        className="h-9 flex-1 font-medium"
+                      />
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="text-muted-foreground hover:text-foreground h-9 w-9 shrink-0"
+                            aria-label={`Edit details of ${offer.label}`}
+                          >
+                            <Settings2 className="h-4 w-4" aria-hidden />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          align="end"
+                          className="max-h-[70vh] w-96 overflow-y-auto"
+                        >
+                          <OfferDetail
+                            offer={offer}
+                            onChange={(patch) => patchOffer(offer.id, patch)}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="text-muted-foreground hover:text-destructive h-9 w-9 shrink-0"
+                        aria-label={`Remove ${offer.label}`}
+                        onClick={() =>
+                          setOffers((current) =>
+                            current.filter((o) => o.id !== offer.id),
+                          )
+                        }
+                      >
+                        <Trash2 className="h-4 w-4" aria-hidden />
+                      </Button>
+                    </div>
+
+                    <dl className="space-y-1.5 text-sm tabular-nums">
+                      <div className="flex justify-between gap-2">
+                        <dt className="text-muted-foreground">Base + bonus</dt>
+                        <dd>
+                          {gbp.format(offer.base * (1 + offer.bonusPct / 100))}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between gap-2">
+                        <dt className="text-muted-foreground">Equity</dt>
+                        <dd>
+                          {offer.equityKind === "none"
+                            ? "None"
+                            : `${offer.grantPct}% → ${dilutedPct(offer).toFixed(3)}%`}
+                        </dd>
+                      </div>
+                      {offer.equityKind !== "none" ? (
+                        <div className="flex justify-between gap-2">
+                          <dt className="text-muted-foreground">If it exits</dt>
+                          <dd>{gbp.format(result.headlineEquity)}</dd>
+                        </div>
+                      ) : null}
+                    </dl>
+
+                    <div className="border-border/60 mt-3 border-t pt-3">
+                      <p className="text-muted-foreground text-xs uppercase tracking-wider">
+                        Net over {assumptions.horizonYears} years
+                      </p>
+                      <p className="text-2xl font-semibold tabular-nums">
+                        {gbp.format(shown.totalNet)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {results.length > 0 ? (
+              <>
+                <div>
+                  <h2 className="text-muted-foreground mb-3 text-sm font-medium uppercase tracking-wider">
+                    Scenario
+                  </h2>
+                  <div
+                    className="flex flex-wrap gap-2"
+                    role="group"
+                    aria-label="Outcome scenario"
+                  >
+                    {SCENARIOS.map((option) => {
+                      const active = option.id === scenario;
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          onClick={() => setScenario(option.id)}
+                          aria-pressed={active}
+                          title={option.hint}
+                          className={`min-h-10 rounded-full border px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                            active
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border bg-background text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="border-border/60 bg-background rounded-lg border p-3 sm:p-5">
+                  <Suspense
+                    fallback={
+                      <div className="text-muted-foreground flex h-[20rem] items-center justify-center text-sm sm:h-[24rem]">
+                        Loading chart…
+                      </div>
+                    }
+                  >
+                    <OutcomeChart results={results} scenario={scenario} />
+                  </Suspense>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[36rem] text-sm tabular-nums">
+                    <thead>
+                      <tr className="text-muted-foreground border-border/60 border-b text-xs uppercase tracking-wider">
+                        <th className="py-2 text-left font-medium">Offer</th>
+                        <th className="py-2 text-right font-medium">
+                          If it doesn&apos;t work
+                        </th>
+                        <th className="py-2 text-right font-medium">Weighted</th>
+                        <th className="py-2 text-right font-medium">If it works</th>
+                        <th className="py-2 text-right font-medium">Spread</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {results.map((result) => (
+                        <tr
+                          key={result.offer.id}
+                          className="border-border/40 border-b last:border-0"
+                        >
+                          <td className="py-2 font-medium">{result.offer.label}</td>
+                          <td className="py-2 text-right">
+                            {gbp.format(result.downside.totalNet)}
+                          </td>
+                          <td className="py-2 text-right">
+                            {gbp.format(result.expected.totalNet)}
+                          </td>
+                          <td className="py-2 text-right">
+                            {gbp.format(result.upside.totalNet)}
+                          </td>
+                          <td className="text-muted-foreground py-2 text-right">
+                            {gbp.format(
+                              result.upside.totalNet - result.downside.totalNet,
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            ) : (
+              <p className="text-muted-foreground py-12 text-center text-sm">
+                Add an offer to start comparing.
+              </p>
+            )}
 
             <div className="border-border/60 bg-accent/30 rounded-lg border p-5">
               <h2 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
@@ -190,7 +373,7 @@ const OfferCalculator = () => {
                     value={assumptions.horizonYears}
                     onChange={(horizonYears) =>
                       patchAssumptions({
-                        horizonYears: Math.min(Math.max(horizonYears, 1), 10),
+                        horizonYears: Math.min(Math.max(horizonYears, 1), 15),
                       })
                     }
                   />
@@ -205,7 +388,7 @@ const OfferCalculator = () => {
                 </Control>
                 <Control label="Pension">
                   <NumberField
-                    label="Pension contribution, percent of gross"
+                    label="Pension contribution, percent of salary"
                     suffix="%"
                     value={assumptions.pensionPct}
                     onChange={(pensionPct) => patchAssumptions({ pensionPct })}
@@ -249,98 +432,39 @@ const OfferCalculator = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              {results.map((result) => (
-                <div
-                  key={result.offer.id}
-                  className={`rounded-lg border p-5 ${
-                    result === best
-                      ? "border-primary/40 bg-primary/5"
-                      : "border-border/60 bg-background"
-                  }`}
-                >
-                  <div className="mb-4 flex items-baseline justify-between gap-3">
-                    <h3 className="font-semibold">{result.offer.label}</h3>
-                    {result === best && gap !== 0 ? (
-                      <span className="bg-primary text-primary-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">
-                        +{gbp.format(gap)} net
-                      </span>
-                    ) : null}
-                  </div>
-
-                  <div className="mb-4 grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-muted-foreground text-xs uppercase tracking-wider">
-                        Total gross
-                      </p>
-                      <p className="text-xl font-semibold tabular-nums">
-                        {gbp.format(result.totalGross)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-xs uppercase tracking-wider">
-                        Total net
-                      </p>
-                      <p className="text-xl font-semibold tabular-nums">
-                        {gbp.format(result.totalNet)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm tabular-nums">
-                      <thead>
-                        <tr className="text-muted-foreground border-border/60 border-b text-xs uppercase tracking-wider">
-                          <th className="py-2 text-left font-medium">Year</th>
-                          <th className="py-2 text-right font-medium">Cash</th>
-                          <th className="py-2 text-right font-medium">Equity</th>
-                          <th className="py-2 text-right font-medium">Net</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {result.years.map((row) => (
-                          <tr key={row.year} className="border-border/40 border-b last:border-0">
-                            <td className="py-2">{row.year}</td>
-                            <td className="py-2 text-right">
-                              {gbp.format(row.base + row.bonus + row.signOn)}
-                            </td>
-                            <td className="py-2 text-right">
-                              {row.equity > 0 ? gbp.format(row.equity) : "—"}
-                            </td>
-                            <td className="py-2 text-right font-medium">
-                              {gbp.format(row.net)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <div className="border-border/40 text-muted-foreground space-y-3 border-t pt-8 text-sm leading-relaxed">
               <p>
-                <strong className="text-foreground">Method.</strong> Equity
-                vests in equal annual tranches, each valued at the share price
-                implied by your growth assumption in the year it lands. Vesting
-                shares, bonuses and sign-on are all taxed as employment income,
-                so they stack on top of salary rather than being taxed in
-                isolation — which is what pushes a large grant into the higher
-                or additional band. Tax is the same {TAX_YEAR} model as the{" "}
+                <strong className="text-foreground">Method.</strong> Your grant
+                is diluted by each expected round, then valued at the exit.
+                Options pay only the spread over strike, so a large grant at a
+                high strike can be worth far less than a smaller share award.
+                Only the vested portion at the exit date counts. Equity is
+                realised in one year and taxed as income on top of salary, which
+                is what pushes it into the additional rate — the tax model is the
+                same {TAX_YEAR} engine as the{" "}
                 <Link to="/tools/take-home" className="text-primary hover:underline">
                   take-home calculator
                 </Link>
                 .
               </p>
               <p>
-                Totals are nominal — no discounting, and no attempt to price the
-                risk that private equity never becomes liquid. A 10% growth
-                assumption on an illiquid private grant is doing far more work
-                than the same number on listed stock. Treat the equity column as
-                a scenario, not a forecast.
+                <strong className="text-foreground">
+                  The weighted column is not a forecast.
+                </strong>{" "}
+                It is your own probability multiplied by your own exit valuation.
+                Both are guesses, and the honest use of this tool is to notice
+                how hard you have to squint to make a grant beat cash — and how
+                large the spread is either way.
               </p>
-              <p>For planning, not investment or tax advice.</p>
+              <p>
+                Nominal totals, no discounting. Ignores secondaries, liquidation
+                preferences, option exercise cost and timing, EMI/CSOP tax
+                treatment, and the possibility of leaving before the cliff. Any
+                one of those can matter more than the headline number.
+              </p>
+              <p className="text-xs">
+                For thinking, not for deciding. Not investment or tax advice.
+              </p>
             </div>
           </div>
         </section>

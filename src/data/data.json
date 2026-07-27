@@ -121,15 +121,15 @@
         "topic": "Derivatives"
       },
       {
-        "name": "UK take-home pay",
-        "description": "Income tax, National Insurance, pension and student loan for 2026/27 — with the marginal rate on your next pound, including the 60% band most calculators hide.",
+        "name": "UK take-home, four ways",
+        "description": "Employed, self-employed, own company or umbrella — the same money through each wrapper, so you can see what the structure costs rather than the band.",
         "href": "/tools/take-home",
         "status": "Live",
         "topic": "Personal finance"
       },
       {
-        "name": "Job offer comparison",
-        "description": "Two offers, four years, after tax. Base, bonus, sign-on and equity vesting, each year taxed on top of salary the way it actually lands.",
+        "name": "Compensation comparison",
+        "description": "Startup, hypergrowth or enterprise: price each bet as a distribution — downside, weighted and upside — after dilution and UK tax.",
         "href": "/tools/offer",
         "status": "Live",
         "topic": "Personal finance"

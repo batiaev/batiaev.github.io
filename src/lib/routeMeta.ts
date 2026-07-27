@@ -17,10 +17,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "Selective advisory for founders and investors: technical diligence, architecture de-risking, and fractional CTO work in regulated fintech.",
   },
   "/tools": {
-    title:
-      "Free finance calculators — options P&L, UK take-home, offer comparison",
+    title: "Free finance calculators — options P&L, UK take-home, compensation",
     description:
-      "Free, no-signup calculators that run entirely in your browser: options strategy P&L with Greeks, UK take-home pay, and after-tax job offer comparison.",
+      "Free, no-signup calculators that run entirely in your browser: options strategy P&L with Greeks, UK take-home across four employment structures, and compensation comparison by archetype.",
   },
   "/tools/options-pnl": {
     title:
@@ -29,13 +28,12 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.",
   },
   "/tools/take-home": {
-    title: `UK take-home pay calculator ${TAX_YEAR} — tax, NI, pension | Anton Batiaev`,
-    description: `Free UK salary calculator for the ${TAX_YEAR} tax year: income tax, National Insurance, pension salary sacrifice, student loans, and your marginal rate — including the 60% personal-allowance trap. Runs entirely in your browser.`,
+    title: `Employed vs self-employed vs limited company — UK take-home ${TAX_YEAR}`,
+    description: `Compare the same income as an employee, a sole trader, through your own limited company, or via an umbrella. ${TAX_YEAR} income tax, Class 1 and Class 4 NI, corporation tax and dividend tax. Free, runs in your browser.`,
   },
   "/tools/offer": {
-    title:
-      "Job offer comparison calculator — salary, bonus, equity | Anton Batiaev",
+    title: "Startup vs hypergrowth vs enterprise — compensation comparison",
     description:
-      "Compare two job offers after UK tax: base, bonus, sign-on and equity vesting over four years, with income tax, National Insurance and pension applied to each year. Free, no signup.",
+      "Compare compensation shapes, not salaries. Price a startup grant, a scale-up RSU package and an enterprise base as distributions — downside, probability-weighted and upside — after dilution and UK tax.",
   },
 };
