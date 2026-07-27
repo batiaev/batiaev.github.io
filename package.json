@@ -10,12 +10,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prodBuild": "rm -rf ./docs && mkdir -p ./docs && vite build && cp -r ./dist/* ./docs/ && cp ./dist/index.html ./docs/404.html && cp CNAME ./docs/ && touch ./docs/.nojekyll",
+    "prodBuild": "rm -rf ./docs && mkdir -p ./docs && vite build && npm run prerender && cp -r ./dist/* ./docs/ && cp CNAME ./docs/ && touch ./docs/.nojekyll",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "verify": "npm run verify:options && npm run verify:tax && npm run verify:render",
     "verify:options": "esbuild scripts/verify-options.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/verify-options.mjs --log-level=error && node node_modules/.cache/verify-options.mjs",
+    "verify:tax": "esbuild scripts/verify-tax.ts --bundle --platform=node --format=esm --alias:@=./src --outfile=node_modules/.cache/verify-tax.mjs --log-level=error && node node_modules/.cache/verify-tax.mjs",
     "verify:render": "esbuild scripts/smoke-render.tsx --bundle --platform=node --format=esm --jsx=automatic --alias:@=./src --loader:.css=empty --packages=external --outfile=node_modules/.cache/smoke-render.mjs --log-level=error && node node_modules/.cache/smoke-render.mjs",
+    "prerender": "esbuild scripts/prerender.tsx --bundle --platform=node --format=esm --jsx=automatic --alias:@=./src --loader:.css=empty --packages=external --outfile=node_modules/.cache/prerender.mjs --log-level=error && node node_modules/.cache/prerender.mjs",
     "preview": "vite preview",
     "format": "prettier --write ."
   },

@@ -41,10 +41,10 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/tools/options-pnl"
+                  to="/tools"
                   className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center transition-colors"
                 >
-                  Options P&amp;L calculator
+                  Calculators
                 </Link>
               </li>
               <li>

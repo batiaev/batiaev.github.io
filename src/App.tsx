@@ -8,7 +8,10 @@ import { GoogleTagManager } from "@/components/GoogleTagManager";
 
 const Index = lazy(() => import("./pages/Index"));
 const Advisory = lazy(() => import("./pages/Advisory"));
+const Tools = lazy(() => import("./pages/Tools"));
 const OptionsPnl = lazy(() => import("./pages/OptionsPnl"));
+const TakeHome = lazy(() => import("./pages/TakeHome"));
+const OfferCalculator = lazy(() => import("./pages/OfferCalculator"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const LoadingFallback = () => (
@@ -38,7 +41,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/advisory" element={<Advisory />} />
+            <Route path="/tools" element={<Tools />} />
             <Route path="/tools/options-pnl" element={<OptionsPnl />} />
+            <Route path="/tools/take-home" element={<TakeHome />} />
+            <Route path="/tools/offer" element={<OfferCalculator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

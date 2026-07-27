@@ -117,7 +117,22 @@
         "name": "Options P&L calculator",
         "description": "Build any combination of options, futures and underlying, and see the exact payoff at expiry, modelled P&L before it, Greeks and breakevens.",
         "href": "/tools/options-pnl",
-        "status": "Live"
+        "status": "Live",
+        "topic": "Derivatives"
+      },
+      {
+        "name": "UK take-home pay",
+        "description": "Income tax, National Insurance, pension and student loan for 2026/27 — with the marginal rate on your next pound, including the 60% band most calculators hide.",
+        "href": "/tools/take-home",
+        "status": "Live",
+        "topic": "Personal finance"
+      },
+      {
+        "name": "Job offer comparison",
+        "description": "Two offers, four years, after tax. Base, bonus, sign-on and equity vesting, each year taxed on top of salary the way it actually lands.",
+        "href": "/tools/offer",
+        "status": "Live",
+        "topic": "Personal finance"
       }
     ]
   },
@@ -536,5 +551,10 @@
     "chip": "Selective engagement",
     "title": "Advisory & diligence",
     "subtitle": "Building products and operating roles come first. Advisory runs at a few days a month, for founders and investors who need fintech judgment, architecture de-risking, or a technical read before a round."
+  },
+  "toolsPage": {
+    "chip": "Free tools",
+    "title": "Calculators",
+    "subtitle": "Small, exact tools for the questions I kept answering by hand. No signup, no accounts, and nothing leaves your browser."
   }
 }

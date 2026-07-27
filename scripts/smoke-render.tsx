@@ -2,6 +2,7 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
+import data from '../src/data/data.json'
 
 const store = new Map<string, string>()
 
@@ -27,16 +28,30 @@ Object.assign(globalThis, {
 })
 
 async function render(name: string, path: string) {
-  const [{ default: Index }, { default: Advisory }, { default: OptionsPnl }] =
-    await Promise.all([
-      import('../src/pages/Index'),
-      import('../src/pages/Advisory'),
-      import('../src/pages/OptionsPnl'),
-    ])
+  const [
+    { default: Index },
+    { default: Advisory },
+    { default: Tools },
+    { default: OptionsPnl },
+    { default: TakeHome },
+    { default: OfferCalculator },
+  ] = await Promise.all([
+    import('../src/pages/Index'),
+    import('../src/pages/Advisory'),
+    import('../src/pages/Tools'),
+    import('../src/pages/OptionsPnl'),
+    import('../src/pages/TakeHome'),
+    import('../src/pages/OfferCalculator'),
+  ])
 
-  const Page = { '/': Index, '/advisory': Advisory, '/tools/options-pnl': OptionsPnl }[
-    path
-  ]!
+  const Page = {
+    '/': Index,
+    '/advisory': Advisory,
+    '/tools': Tools,
+    '/tools/options-pnl': OptionsPnl,
+    '/tools/take-home': TakeHome,
+    '/tools/offer': OfferCalculator,
+  }[path]!
 
   const html = renderToStaticMarkup(
     <MemoryRouter initialEntries={[path]}>
@@ -75,6 +90,9 @@ console.warn = (...args: unknown[]) => {
 const optionsHtml = await render('Options P&L', '/tools/options-pnl')
 const homeHtml = await render('Home', '/')
 await render('Advisory', '/advisory')
+const toolsHtml = await render('Tools index', '/tools')
+const takeHomeHtml = await render('Take-home', '/tools/take-home')
+const offerHtml = await render('Offer comparison', '/tools/offer')
 
 // The charts are lazy, so the route renders above only reach their fallbacks.
 const [
@@ -105,6 +123,9 @@ const payoffHtml = renderToStaticMarkup(
   />,
 )
 console.log(`PASS  PayoffChart rendered (${payoffHtml.length} chars)`)
+
+/** Names like "Options P&L calculator" arrive escaped in the rendered markup. */
+const escapeHtml = (value: string) => value.replace(/&/g, '&amp;')
 
 const expectations: [string, boolean][] = [
   ['metrics tile rendered', optionsHtml.includes('Max profit')],
@@ -156,6 +177,17 @@ const expectations: [string, boolean][] = [
   ['education block rendered', homeHtml.includes('City Business School')],
   ['teaching record rendered', homeHtml.includes('GeekBrains')],
   ['options vocabulary present', homeHtml.includes('SPAN')],
+
+  // --- Tools ---
+  ['tools index lists every tool', data.teaching.tools.every((t) => toolsHtml.includes(escapeHtml(t.name)))],
+  ['home surfaces every tool too', data.teaching.tools.every((t) => homeHtml.includes(escapeHtml(t.name)))],
+  ['take-home states the tax year', takeHomeHtml.includes('2026/27')],
+  ['take-home is explicit about Scotland', takeHomeHtml.includes('Scotland is not covered')],
+  ['offer page compares two offers', offerHtml.includes('Offer A') && offerHtml.includes('Offer B')],
+  [
+    'offer page flags the illiquidity caveat',
+    offerHtml.includes('illiquid') || offerHtml.includes('never becomes liquid'),
+  ],
   [
     'product cards use their own logos',
     homeHtml.includes('/images/logo-fintecy.png') &&

@@ -14,6 +14,7 @@ import LegsEditor from "@/components/options/LegsEditor";
 import MetricsBar from "@/components/options/MetricsBar";
 import NumberField from "@/components/options/NumberField";
 import { useDocumentMeta } from "@/hooks/use-document-meta";
+import { ROUTE_META } from "@/lib/routeMeta";
 import {
   DEFAULT_EXPIRY_DAYS,
   applyPreset,
@@ -73,11 +74,7 @@ const OptionsPnl = () => {
   const [position, setPosition] = useState<Position>(initialPosition);
   const [hiddenKeys, setHiddenKeys] = useState<string[]>([]);
 
-  useDocumentMeta({
-    title: "Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev",
-    description:
-      "Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.",
-  });
+  useDocumentMeta(ROUTE_META["/tools/options-pnl"]);
 
   useEffect(() => {
     savePosition(position);
