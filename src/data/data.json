@@ -1,15 +1,15 @@
 {
   "name": "Anton Batiaev",
   "avatar": "/images/batiaev.webp",
-  "chip": "Fintech founder & builder",
-  "headline": "I build fintech products — Fintecy for personal finance, SHIP for engineering teams working with agents.",
-  "operatorLine": "Day job: VP Product & Engineering at Capital.com — 77 engineers, 5,500+ instruments, $1.27T client volume in Q1 2026.",
+  "chip": "Fintech builder",
+  "headline": "I build fintech products — algo, execution, and pricing non-linear risk is the part I never got tired of.",
+  "operatorLine": "VP Product & Engineering at Capital.com — lead trading-platform with 77 engineers, 5,500+ instruments, $1.27T client volume in Q1 2026. Alongside it I build Fintecy and SHIP.",
   "company": "Capital.com",
-  "description": "Fintech founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.",
-  "metaDescription": "Anton Batiaev — fintech founder and builder. Fintecy (personal finance) and Ship (typed knowledge graph for engineering teams). VP Product & Engineering at Capital.com; ex-Revolut, ex-CTO Vega, Deutsche Bank. Free options P&L calculator.",
+  "description": "Fintech CPTO, founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.",
+  "metaDescription": "Anton Batiaev — fintech CPTO, founder and builder. VP Product & Engineering at Capital.com; ex-Revolut, ex-CTO Vega, Deutsche Bank.",
   "heroCta": {
-    "label": "See what I'm building",
-    "href": "#building"
+    "label": "See the track record",
+    "href": "#experience"
   },
   "initiatives": [
     {
@@ -36,7 +36,7 @@
   "domainProof": {
     "chip": "The through-line",
     "title": "One problem, every role",
-    "subtitle": "Nine years, five employers, one recurring problem: pricing non-linear risk and keeping it correct in real time. It is the part of the job I never got tired of.",
+    "subtitle": "Ten years, four employers, one recurring problem: pricing non-linear risk and keeping it correct in real time. Same problem each time, with a bigger blast radius.",
     "items": [
       {
         "metric": "Greeks & vol smile",
@@ -206,7 +206,7 @@
     {
       "id": 8,
       "title": "Angel investor, advisor, then CTO",
-      "period": "Jun 2025 - Oct 2025",
+      "period": "Jun 2025 – Oct 2025",
       "company": "Nevis",
       "anchor": "nevis",
       "showcase": true,
@@ -329,7 +329,7 @@
     {
       "id": 3,
       "title": "Lead Software Engineer",
-      "period": "2016 – 2018",
+      "period": "Sep 2016 – Sep 2018",
       "company": "Otkritie Broker",
       "anchor": "otkritie-lead",
       "city": "Moscow",
@@ -352,20 +352,20 @@
     },
     {
       "id": 2,
-      "title": "Software Engineer",
-      "period": "2010 – 2016",
-      "company": "Earlier roles",
-      "anchor": "earlier-roles",
+      "title": "Software Engineer → Lead Engineer",
+      "period": "Sep 2010 – Sep 2016",
+      "company": "Before fintech",
+      "anchor": "before-fintech",
       "city": "Worldwide",
       "archetypes": [
         "Hands-on"
       ],
       "achievements": [
-        "Backend systems in Java and C++ across several companies",
-        "Infrastructure and observability, on-premise and on GCP",
-        "Front-end work in Qt, Angular and TypeScript",
-        "Voice recognition and chatbot projects with CMU Sphinx",
-        "The hands-on foundation under everything above"
+        "Taxi dispatch automation (Sherlock) — real-time order routing at scale of 600+ cars in London, Moscow, Paris and lot more",
+        "Retail POS and fiscal-register software (ATOL Frontol) — payment terminals, hardware integration, offline-first sync",
+        "Backend in Java and C++; infrastructure and observability on-premise and on GCP",
+        "Front-end in Qt, Angular and TypeScript; voice recognition and chatbots with CMU Sphinx",
+        "Not fintech — but six years of real-time, hardware-adjacent systems is where the latency instincts came from"
       ],
       "tags": []
     }

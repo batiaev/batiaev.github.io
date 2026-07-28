@@ -74,7 +74,7 @@ const LearnLayout = ({
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main className="container mx-auto flex-1 px-4 py-8 sm:py-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[15rem_minmax(0,1fr)]">

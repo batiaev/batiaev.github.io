@@ -1,7 +1,13 @@
 import React, { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { ArrowLeft, Link2, RotateCcw, Settings2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Link2,
+  RotateCcw,
+  Settings2,
+} from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -175,7 +181,7 @@ const OptionsPnl = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main>
         <section className="border-border/40 border-b py-10 sm:py-14">
@@ -371,6 +377,31 @@ const OptionsPnl = () => {
               </Suspense>
             </div>
 
+            <a
+              href="https://fintecy.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group border-border/60 bg-accent/30 hover:border-border flex flex-col gap-1 rounded-lg border p-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+            >
+              <span>
+                <span className="block text-base font-semibold">
+                  Want this against your real positions?
+                </span>
+                <span className="text-muted-foreground mt-1 block text-sm leading-relaxed">
+                  Fintecy connects your brokers read-only and runs the same
+                  maths on what you actually hold — live Greeks, realised P&amp;L
+                  and payoff across every account. Private beta.
+                </span>
+              </span>
+              <span className="text-primary inline-flex shrink-0 items-center gap-1 text-sm font-medium">
+                Join the waitlist
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
+              </span>
+            </a>
+
             <div>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
@@ -424,19 +455,6 @@ const OptionsPnl = () => {
                 Vega is quoted per one volatility point, theta per calendar day.
                 Positions are kept in this browser only, and the share link
                 encodes them in the URL rather than on a server.
-              </p>
-              <p>
-                Want this against your real positions?{" "}
-                <a
-                  href="https://fintecy.co"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  Fintecy
-                </a>{" "}
-                connects brokers read-only and does the same maths on what you
-                actually hold.
               </p>
               <p className="text-xs">
                 For education and analysis. Not investment advice, and not a

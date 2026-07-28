@@ -13,7 +13,7 @@ const Tools = () => {
   useDocumentMeta(ROUTE_META["/tools"]);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main>
         <section className="border-border/40 border-b py-10 sm:py-14">

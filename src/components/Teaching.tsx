@@ -25,7 +25,7 @@ const Teaching = () => {
 
   return (
     <section
-      id="in-public"
+      id="toolkit"
       className="section border-border/40 border-t pb-8 pt-16 sm:pt-20"
       ref={sectionRef}
     >

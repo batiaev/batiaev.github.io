@@ -56,11 +56,14 @@ const Initiatives = () => {
     >
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
-          <div className="highlight-chip">Building now</div>
-          <h2 className="section-title">Two products, both mine</h2>
+          <div className="highlight-chip">Also building</div>
+          <h2 className="section-title">Two products, out of the same work</h2>
           <p className="section-subtitle mx-auto">
-            Not side projects with a landing page — registered, in private beta,
-            and built on the same problems I get paid to solve.
+            Both registered companies, both in private beta. Neither is a
+            trading venue: Fintecy is read-only portfolio and P&amp;L
+            aggregation, SHIP is engineering tooling. They exist because the
+            problems kept showing up, not because I went looking for a second
+            job.
           </p>
         </div>
 

@@ -4,9 +4,17 @@ import LearnLayout from "@/components/learn/LearnLayout";
 import StrategyFigure from "@/components/learn/StrategyFigure";
 import NotFound from "@/pages/NotFound";
 import { noteBySlug } from "@/learn/registry";
-import { presets } from "@/lib/options/presets";
+import { presets, roundStrike } from "@/lib/options/presets";
 
 const side = (value: string) => (value === "long" ? "Long" : "Short");
+
+/**
+ * The figure below prices every preset at 100 spot, and presets snap strikes to
+ * the exchange-like grid in `roundStrike`. Showing the raw ratio here would
+ * print 93% while the chart traded 95 — so the table quotes the same strike the
+ * chart actually uses.
+ */
+const REFERENCE_SPOT = 100;
 
 /**
  * Every strategy page is this one template. The prose is editorial, but the
@@ -31,7 +39,7 @@ const StrategyPage = ({ slug }: { slug: string }) => {
           <tr>
             <th>Leg</th>
             <th>Qty</th>
-            <th>Strike</th>
+            <th>Strike at {REFERENCE_SPOT} spot</th>
           </tr>
         </thead>
         <tbody>
@@ -45,7 +53,7 @@ const StrategyPage = ({ slug }: { slug: string }) => {
               <td>
                 {leg.kind === "underlying"
                   ? "—"
-                  : `${Math.round((leg.strikeRatio ?? 1) * 100)}% of spot`}
+                  : roundStrike(REFERENCE_SPOT, leg.strikeRatio ?? 1)}
               </td>
             </tr>
           ))}

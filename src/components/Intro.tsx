@@ -18,7 +18,7 @@ const RoleLogos = ({ label, roles }: { label: string; roles: ShowcaseRole[] }) =
       <p className="text-muted-foreground text-halo text-xs uppercase tracking-wider">
         {label}
       </p>
-      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+      <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-6">
         {roles.map((role) => (
           <li key={role.anchor}>
             <a
@@ -121,7 +121,7 @@ const Intro = () => {
             </a>
           </Button>
 
-          <div className="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:gap-10">
+          <div className="mt-10 flex flex-row items-start justify-center gap-6 sm:gap-10">
             <RoleLogos label="Now" roles={currentRoles} />
             <RoleLogos label="Previously" roles={previousRoles} />
           </div>

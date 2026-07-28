@@ -123,7 +123,7 @@ function strikeStep(price: number): number {
   return 10;
 }
 
-function roundStrike(price: number, ratio: number): number {
+export function roundStrike(price: number, ratio: number): number {
   const step = strikeStep(price);
   return Math.max(Math.round((price * ratio) / step) * step, step);
 }

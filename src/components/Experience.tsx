@@ -43,7 +43,7 @@ const Experience = () => {
           <div className="highlight-chip">Selected experience</div>
           <h2 className="section-title">Four kinds of company, one track record</h2>
           <p className="section-subtitle mx-auto">
-            Enterprise banks, a hyperscaler, a 0→1 startup, and platform transformation —
+            Enterprise investment banks, hyperscalers, 0 → 1 startups, and platform transformation —
             each role is labelled with what it actually was.
           </p>
         </div>

@@ -49,10 +49,11 @@ const tools = ['/tools/options-pnl', '/tools/take-home', '/tools/offer']
 
 const summary = `# Anton Batiaev
 
-> Fintech founder and builder. Fintecy (personal finance) and SHIP (a typed
-> knowledge graph for engineering teams). VP Product & Engineering at
-> Capital.com; previously Revolut, Vega, Nevis and Deutsche Bank. Nine years
-> building derivatives pricing, margin and risk systems.
+> VP Product & Engineering at Capital.com, running the trading-platform tribe;
+> previously Revolut, CTO at Vega and Nevis, and Deutsche Bank. Ten years
+> building execution, derivatives pricing, margin and risk systems. Also builds
+> Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
+> graph for engineering teams).
 
 This site hosts a free options knowledge base and a set of finance
 calculators. Everything runs client-side; there are no accounts and no

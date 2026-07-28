@@ -89,6 +89,9 @@ const ScopeChart = () => (
               position="right"
               fontSize={12}
               className="fill-foreground font-medium"
+              formatter={(value: number) =>
+                value === 0 ? "IC — no reports" : value
+              }
             />
           </Bar>
         </BarChart>

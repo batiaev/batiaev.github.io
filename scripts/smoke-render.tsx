@@ -198,9 +198,17 @@ const expectations: [string, boolean][] = [
     'Vega raise and valuation are distinguished',
     homeHtml.includes('valuation $10M → $90M'),
   ],
-  // Year-level periods keep the four-month Nevis stint and the Revolut/Vega
-  // handover from drawing the eye for the wrong reason.
-  ['periods are year-level', !/\b(Jan|Feb|Jun|Sep|Nov)\s20\d\d/.test(homeHtml)],
+  // Periods are month-level now: hiding the Nevis stint behind bare years made
+  // 2025 look like three overlapping jobs, which was worse than the four-month
+  // truth. What matters is that the precision does not run out halfway down the
+  // page, and that the ranges use one dash.
+  [
+    'every role period is month-level',
+    data.experiences.every((role) =>
+      /^[A-Z][a-z]{2}\s20\d\d\s–\s([A-Z][a-z]{2}\s20\d\d|present)$/.test(role.period),
+    ),
+  ],
+  ['periods use en dashes, not hyphens', !/\d\s-\s\d/.test(homeHtml)],
   ['education block rendered', homeHtml.includes('City Business School')],
   ['teaching record rendered', homeHtml.includes('GeekBrains')],
   ['options vocabulary present', homeHtml.includes('SPAN')],

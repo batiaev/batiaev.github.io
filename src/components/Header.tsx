@@ -6,11 +6,10 @@ import data from "@/data/data.json";
 
 /** Mirrors the order of the sections on the home page. */
 const navLinks = [
-  { href: "/#building", label: "Building" },
   { href: "/#experience", label: "Experience" },
-  { href: "/#derivatives", label: "Derivatives" },
-  { href: "/learn", label: "Learn" },
-  { href: "/#in-public", label: "Teaching & tools" },
+  { href: "/#building", label: "Building" },
+  { href: "/learn", label: "Knowledge" },
+  { href: "/tools", label: "Toolkit" },
   { href: "/advisory", label: "Advisory" },
   { href: "/#contact", label: "Contact" },
 ];

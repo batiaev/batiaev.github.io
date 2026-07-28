@@ -15,7 +15,7 @@ const Advisory = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main>
         <section className="border-border/40 border-b py-12 sm:py-16">

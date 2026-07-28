@@ -43,13 +43,13 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main>
         <Intro />
-        <Initiatives />
         <Experience />
         <DomainProof />
+        <Initiatives />
         <Teaching />
         <Suspense
           fallback={
