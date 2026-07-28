@@ -9,6 +9,8 @@ import { GoogleTagManager } from "@/components/GoogleTagManager";
 const Index = lazy(() => import("./pages/Index"));
 const Advisory = lazy(() => import("./pages/Advisory"));
 const Tools = lazy(() => import("./pages/Tools"));
+const LearnIndex = lazy(() => import("./pages/learn/LearnIndex"));
+const LearnRoute = lazy(() => import("./pages/learn/LearnRoute"));
 const OptionsPnl = lazy(() => import("./pages/OptionsPnl"));
 const TakeHome = lazy(() => import("./pages/TakeHome"));
 const OfferCalculator = lazy(() => import("./pages/OfferCalculator"));
@@ -42,6 +44,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/advisory" element={<Advisory />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/learn" element={<LearnIndex />} />
+            <Route path="/learn/*" element={<LearnRoute />} />
             <Route path="/tools/options-pnl" element={<OptionsPnl />} />
             <Route path="/tools/take-home" element={<TakeHome />} />
             <Route path="/tools/offer" element={<OfferCalculator />} />

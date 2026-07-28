@@ -1,0 +1,71 @@
+Black-Scholes takes six inputs: spot, strike, time, rate, carry and volatility.
+Five of those are observable. Volatility is not — nobody knows what the future
+holds.
+
+So the market inverts the problem. It quotes a price, and you solve backwards
+for the volatility that price implies. That number is **implied volatility**,
+and it is the only genuinely negotiable input. Everything else is arithmetic.
+
+## Options are quoted in volatility
+
+On a professional desk, options are not really priced in currency. They are
+priced in vol, and the currency figure falls out at the end. Two options on
+different underlyings at different strikes with different premiums are directly
+comparable once expressed as implied volatility — which is the whole reason
+the convention exists.
+
+When someone says an option "looks expensive", they almost never mean the
+premium. They mean the implied volatility is high relative to what they expect
+the underlying to actually do.
+
+## Implied versus realised
+
+**Realised volatility** is what the underlying did, measured after the fact.
+**Implied volatility** is what the market is charging for it in advance.
+
+The gap between them is the trade. Selling options is a bet that implied
+exceeds realised; buying them is the reverse. Implied is usually a little
+higher, which is the risk premium option sellers earn — and which is also why
+selling volatility wins most of the time and occasionally loses catastrophically.
+
+<StrategyFigure presetId="short-strangle" />
+
+Move the volatility slider on that strangle. The expiry line does not budge —
+at expiry only the spot price matters. But the pre-expiry line moves a great
+deal, because the position's mark-to-market is a pure volatility view until the
+last day. Short volatility positions are marked against you long before they
+are settled against you.
+
+## The smile
+
+Black-Scholes assumes one volatility for all strikes. The market disagrees.
+
+Plot implied volatility against strike and you get a curve, not a line: out-of-
+the-money puts trade at higher implied volatility than at-the-money options,
+and often higher than out-of-the-money calls. The shape is called the
+**volatility smile**, or the **skew** when it leans one way.
+
+It exists because the model's assumptions are wrong in a specific direction.
+Returns are not normally distributed; crashes are larger and more frequent than
+the maths allows, and they are correlated with everyone wanting protection at
+the same time. The smile is the market pricing in what the model leaves out.
+
+Equity indices show a pronounced downside skew for exactly this reason. FX
+tends toward a more symmetric smile, because either currency can be the one
+that collapses.
+
+## What this means in practice
+
+- A single volatility number for a multi-strike position, which is what this
+  site's calculator uses, is a simplification. It is fine for understanding
+  shape and wrong for pricing a real trade against a real surface.
+- If you are quoted a price, ask what vol it implies before deciding whether it
+  is expensive.
+- If a strategy looks like free money, you are usually short a tail that is not
+  in the model. The smile exists precisely because those tails are real.
+
+I spent a good part of my time at Otkritie building the pricing engine that
+produced these curves for the desk — implied vol, the smile, and the Greeks
+that fall out of them, across index, commodity, FX and single-stock options.
+The lesson that stuck: the model is a language for expressing a view, not a
+source of truth. It is most dangerous when it agrees with you.

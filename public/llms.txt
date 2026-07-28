@@ -1,0 +1,61 @@
+# Anton Batiaev
+
+> Fintech founder and builder. Fintecy (personal finance) and SHIP (a typed
+> knowledge graph for engineering teams). VP Product & Engineering at
+> Capital.com; previously Revolut, Vega, Nevis and Deutsche Bank. Nine years
+> building derivatives pricing, margin and risk systems.
+
+This site hosts a free options knowledge base and a set of finance
+calculators. Everything runs client-side; there are no accounts and no
+tracking beyond analytics.
+
+## Free tools
+
+- [Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev](https://batiaev.com/tools/options-pnl): Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.
+- [Employed vs self-employed vs limited company — UK take-home 2026/27](https://batiaev.com/tools/take-home): Compare the same income as an employee, a sole trader, through your own limited company, or via an umbrella. 2026/27 income tax, Class 1 and Class 4 NI, corporation tax and dividend tax. Free, runs in your browser.
+- [Startup vs hypergrowth vs enterprise — compensation comparison](https://batiaev.com/tools/offer): Compare compensation shapes, not salaries. Price a startup grant, a scale-up RSU package and an enterprise base as distributions — downside, probability-weighted and upside — after dilution and UK tax.
+
+## Knowledge base
+
+### Options
+
+The concepts every strategy page assumes you already have.
+
+- [What an option actually is](https://batiaev.com/learn/options/basics): Calls, puts, strike, expiry and the difference between intrinsic and extrinsic value — the vocabulary everything else assumes.
+- [The Greeks, without the calculus](https://batiaev.com/learn/options/greeks): Delta, gamma, vega and theta as four questions about the same position, and which one actually kills you.
+- [Implied volatility is the price](https://batiaev.com/learn/options/volatility): Why an option's quoted premium is really a volatility number, and what the smile is telling you.
+
+### Strategies
+
+One page per structure, each with a live payoff chart you can edit and open in the calculator.
+
+- [Long call](https://batiaev.com/learn/strategies/long-call): The simplest bullish option: defined risk, unlimited upside, and a bill for time decay every day you are wrong.
+- [Long put](https://batiaev.com/learn/strategies/long-put): Downside exposure with a floor on the loss — the cleanest way to be short without unlimited risk.
+- [Covered call](https://batiaev.com/learn/strategies/covered-call): Own the underlying, sell someone the right to take it from you above a set price, and keep the premium either way.
+- [Cash-secured put](https://batiaev.com/learn/strategies/cash-secured-put): Get paid to bid below the market, with the cash set aside to buy if you are filled.
+- [Bull call spread](https://batiaev.com/learn/strategies/bull-call-spread): Buy a call, sell a higher one. Cheaper than the call alone, with the upside capped at the short strike.
+- [Bear put spread](https://batiaev.com/learn/strategies/bear-put-spread): The same trade pointed down: buy a put, sell a lower one.
+- [Long straddle](https://batiaev.com/learn/strategies/long-straddle): Buy the call and the put at the same strike. A bet on movement, indifferent to direction.
+- [Short strangle](https://batiaev.com/learn/strategies/short-strangle): Sell an out-of-the-money put and call. Collect premium while nothing happens — and carry an undefined tail.
+- [Iron condor](https://batiaev.com/learn/strategies/iron-condor): A short strangle with both tails bought back. Same idea, defined risk, smaller credit.
+- [Long butterfly](https://batiaev.com/learn/strategies/long-butterfly): A cheap, narrow bet that the underlying finishes at a particular price.
+- [Collar](https://batiaev.com/learn/strategies/collar): Hold the asset, buy a protective put, and sell a call to pay for it.
+
+### Risk
+
+How the positions above are margined and measured — the systems side, which is the part I actually built.
+
+- [SPAN, and why your margin is not what you expected](https://batiaev.com/learn/risk/span): How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.
+- [VAR, and what it does not tell you](https://batiaev.com/learn/risk/var-and-es): Value at Risk in one sentence, the three ways to compute it, the reason it is not a coherent risk measure, and why regulators moved to Expected Shortfall.
+- [DV01 and the shape of rate risk](https://batiaev.com/learn/risk/dv01): The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.
+
+### Library
+
+Where to go when this runs out.
+
+- [Books and films](https://batiaev.com/learn/library): What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+
+## Optional
+
+- [CV](https://batiaev.com/cv)
+- [Advisory](https://batiaev.com/advisory): Selective advisory for founders and investors: technical diligence, architecture de-risking, and fractional CTO work in regulated fintech.

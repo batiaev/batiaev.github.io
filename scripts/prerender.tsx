@@ -11,7 +11,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 // react-router v7 dropped the `/server` subpath; MemoryRouter pinned to a
 // single entry renders identically for a one-shot static pass.
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 const DIST = path.resolve('dist')
 
@@ -53,7 +53,11 @@ const [
   { default: OptionsPnl },
   { default: TakeHome },
   { default: OfferCalculator },
+  { default: LearnIndex },
+  { default: LearnRoute },
   { ROUTE_META },
+  { ALL_PAGES, learnPath, pageBySlug },
+  { structuredDataFor },
 ] = await Promise.all([
   import('../src/pages/Index'),
   import('../src/pages/Advisory'),
@@ -61,22 +65,47 @@ const [
   import('../src/pages/OptionsPnl'),
   import('../src/pages/TakeHome'),
   import('../src/pages/OfferCalculator'),
+  import('../src/pages/learn/LearnIndex'),
+  import('../src/pages/learn/LearnRoute'),
   import('../src/lib/routeMeta'),
+  import('../src/learn/registry'),
+  import('../src/lib/structuredData'),
 ])
 
-/** Route → component and the file it is written to, mirroring Pages' directory serving. */
-const ROUTES: { route: string; file: string; Page: React.ComponentType }[] = [
+/**
+ * Route → component and the file it is written to, mirroring Pages' directory
+ * serving. `pattern` matters for routes that read their own params: rendering
+ * the component bare leaves useParams empty, so those must go through Routes.
+ */
+const ROUTES: {
+  route: string
+  file: string
+  Page: React.ComponentType
+  pattern?: string
+}[] = [
   { route: '/', file: 'index.html', Page: Index },
   { route: '/advisory', file: 'advisory/index.html', Page: Advisory },
   { route: '/tools', file: 'tools/index.html', Page: Tools },
   { route: '/tools/options-pnl', file: 'tools/options-pnl/index.html', Page: OptionsPnl },
   { route: '/tools/take-home', file: 'tools/take-home/index.html', Page: TakeHome },
   { route: '/tools/offer', file: 'tools/offer/index.html', Page: OfferCalculator },
+  { route: '/learn', file: 'learn/index.html', Page: LearnIndex },
+  // Every knowledge-base page comes from the registry, so a page that exists
+  // in the sidebar is always built and always in the sitemap.
+  ...ALL_PAGES.map((page) => ({
+    route: learnPath(page.slug),
+    file: `learn/${page.slug}/index.html`,
+    Page: LearnRoute,
+    pattern: '/learn/*',
+  })),
 ]
 
 const template = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8')
 if (!template.includes('<div id="root"></div>')) {
-  throw new Error('dist/index.html has no empty #root to fill — did the build change?')
+  throw new Error(
+    'dist/index.html has no empty #root to fill. Run `npm run build` first — ' +
+      'prerendering twice over its own output would nest the markup.',
+  )
 }
 
 const escapeAttr = (value: string) =>
@@ -88,7 +117,12 @@ const escapeAttr = (value: string) =>
  * match. Both read the same ROUTE_META, so they cannot disagree.
  */
 function applyMeta(html: string, route: string): string {
-  const meta = ROUTE_META[route]
+  const learn = route.startsWith('/learn/')
+    ? pageBySlug(route.replace('/learn/', ''))
+    : undefined
+  const meta = learn
+    ? { title: `${learn.title} — Learn | Anton Batiaev`, description: learn.summary }
+    : ROUTE_META[route]
   if (!meta) return html
 
   return html
@@ -103,14 +137,45 @@ function applyMeta(html: string, route: string): string {
     )
     .replace(
       /(<meta\s+property="og:url"\s+content=")[\s\S]*?(")/,
-      `$1https://batiaev.com${route === '/' ? '/' : route}$2`,
+      `$1${canonicalFor(route)}$2`,
     )
+    // The template hard-codes the home page canonical; every other route was
+    // inheriting it, telling crawlers the whole site was one page.
+    .replace(
+      /(<link\s+rel="canonical"\s+href=")[\s\S]*?(")/,
+      `$1${canonicalFor(route)}$2`,
+    )
+    .replace('</head>', `${structuredData(route)}</head>`)
 }
 
-for (const { route, file, Page } of ROUTES) {
+const canonicalFor = (route: string) =>
+  `https://batiaev.com${route === '/' ? '/' : route}`
+
+/**
+ * Route-specific schema.org blocks, appended to the head so a crawler that
+ * runs no JavaScript still gets them.
+ */
+function structuredData(route: string): string {
+  const blocks = structuredDataFor(route)
+  if (blocks.length === 0) return ''
+  return blocks
+    .map(
+      (block) =>
+        `    <script type="application/ld+json">${JSON.stringify(block)}<\/script>\n`,
+    )
+    .join('')
+}
+
+for (const { route, file, Page, pattern } of ROUTES) {
   const markup = renderToString(
     <MemoryRouter initialEntries={[route]}>
-      <Page />
+      {pattern ? (
+        <Routes>
+          <Route path={pattern} element={<Page />} />
+        </Routes>
+      ) : (
+        <Page />
+      )}
     </MemoryRouter>,
   )
 

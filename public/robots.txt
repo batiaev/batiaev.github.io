@@ -1,4 +1,43 @@
+# Everything here is public and meant to be found — by people, by search
+# engines, and by the assistants people increasingly read through. AI crawlers
+# are allowed deliberately rather than by omission.
+
 User-agent: *
 Allow: /
 
+# Named explicitly so the intent survives a future blanket-disallow default.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://batiaev.com/sitemap.xml
+
+# Site summary for language models — see llmstxt.org
+# https://batiaev.com/llms.txt
+# https://batiaev.com/llms-full.txt

@@ -1,5 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import mdx from "@mdx-js/rollup";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import path from "path";
 import { compression } from 'vite-plugin-compression2';
 
@@ -63,6 +66,12 @@ export default defineConfig(({ mode }) => ({
     emptyOutDir: true
   },
   plugins: [
+    // Must precede the React plugin: MDX compiles .mdx to JSX, which React
+    // then transforms. The other order leaves raw JSX for the bundler.
+    {
+      ...mdx({ jsxImportSource: 'react', remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] }),
+      enforce: 'pre' as const,
+    },
     react(),
     compression({
       algorithm: 'gzip',

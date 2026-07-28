@@ -16,6 +16,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       "Selective advisory for founders and investors: technical diligence, architecture de-risking, and fractional CTO work in regulated fintech.",
   },
+  "/learn": {
+    title: "Options, plainly — a working knowledge base | Anton Batiaev",
+    description:
+      "Free notes on options: calls and puts, the Greeks, implied volatility and the smile, plus a page per strategy with a live payoff chart driven by the same pricing model as the calculator.",
+  },
   "/tools": {
     title: "Free finance calculators — options P&L, UK take-home, compensation",
     description:

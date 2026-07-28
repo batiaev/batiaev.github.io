@@ -1,0 +1,73 @@
+An option is a right, not an obligation, to trade something at a fixed price
+before a fixed date. That is the whole definition. Everything else — the
+Greeks, the smile, the strategies — is bookkeeping on top of it.
+
+## Calls and puts
+
+A **call** gives you the right to buy at the strike. You want the price up.
+A **put** gives you the right to sell at the strike. You want the price down.
+
+Whoever sold you that right has the mirror position and an obligation rather
+than a choice. This asymmetry is the entire product: the buyer's loss is capped
+at the premium, and the seller's is not.
+
+<StrategyFigure presetId="long-call" />
+
+Move the spot slider on that chart. Below the strike the line is flat — you
+simply do not exercise, and the premium is gone. Above it the payoff turns and
+climbs at the same rate as the underlying. The kink sits exactly on the strike,
+which is why option payoffs are drawn with corners rather than curves.
+
+## Strike, expiry, premium
+
+Three numbers define a contract.
+
+- **Strike** — the price you may transact at.
+- **Expiry** — the date the right lapses.
+- **Premium** — what the right costs.
+
+A contract usually covers 100 shares, so a premium quoted at 3.02 costs £302.
+The calculator calls this the multiplier, and forgetting it is the most common
+arithmetic error in option trading.
+
+## Moneyness
+
+An option is **in the money** if exercising it right now would be worth
+something, **at the money** if the strike is roughly spot, and **out of the
+money** if exercising would be pointless. A call at a 90 strike with spot at 100
+is 10 in the money; the same call with spot at 80 is 10 out of the money and
+worth only whatever chance remains.
+
+## Intrinsic and extrinsic value
+
+Premium splits cleanly into two parts.
+
+**Intrinsic value** is what the option is worth if it expired this second —
+`max(spot − strike, 0)` for a call. It cannot be negative, because you would
+simply not exercise.
+
+**Extrinsic value** is everything else: the price of the time remaining and the
+uncertainty in it. It is the entire premium of an out-of-the-money option, and
+it decays to nothing by expiry with mathematical certainty.
+
+That decay is the central fact of being long options. You are paying, every
+day, for the possibility that you are right. Set the days-elapsed slider on the
+chart above and watch the pre-expiry line sag towards the hard expiry line —
+that gap is extrinsic value draining away.
+
+## Why the expiry line has corners
+
+Look at the two lines on the chart. The solid one is the payoff at expiry:
+piecewise linear, kinked exactly at the strike, because at expiry an option is
+worth its intrinsic value and nothing else.
+
+The dashed one is the modelled value before expiry, and it is smooth. It sits
+above the expiry line everywhere, and the distance between them is the
+extrinsic value you still own. Both lines meet at expiry. Every options
+strategy is, in some sense, a bet about how those two lines converge.
+
+## What comes next
+
+The Greeks are the four sensitivities that describe how the dashed line moves
+when something changes — spot, time, or volatility. They are less intimidating
+than the notation suggests, and they are the subject of the next page.

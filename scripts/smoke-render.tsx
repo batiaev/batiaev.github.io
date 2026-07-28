@@ -1,8 +1,12 @@
 /* Renders the routes once in Node to catch crashes the type-checker cannot see. */
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import data from '../src/data/data.json'
+import fs from 'node:fs'
+import { ALL_PAGES, learnPath, orphanedNotes, relatedPages, tagCounts } from '../src/learn/registry'
+import { structuredDataFor } from '../src/lib/structuredData'
+import { INDEX, missingFromIndex, search } from '../src/learn/searchIndex'
 
 const store = new Map<string, string>()
 
@@ -93,6 +97,29 @@ await render('Advisory', '/advisory')
 const toolsHtml = await render('Tools index', '/tools')
 const takeHomeHtml = await render('Take-home', '/tools/take-home')
 const offerHtml = await render('Offer comparison', '/tools/offer')
+
+// Every knowledge-base page must render real content, not a 404 shell.
+const { default: LearnIndex } = await import('../src/pages/learn/LearnIndex')
+const { default: LearnRoute } = await import('../src/pages/learn/LearnRoute')
+
+const learnIndexHtml = renderToStaticMarkup(
+  <MemoryRouter initialEntries={['/learn']}>
+    <LearnIndex />
+  </MemoryRouter>,
+)
+console.log(`PASS  Learn index rendered (${learnIndexHtml.length} chars)`)
+
+const learnPages = ALL_PAGES.map((page) => {
+  const html = renderToStaticMarkup(
+    <MemoryRouter initialEntries={[learnPath(page.slug)]}>
+      <Routes>
+        <Route path="/learn/*" element={<LearnRoute />} />
+      </Routes>
+    </MemoryRouter>,
+  )
+  return { page, html }
+})
+console.log(`PASS  ${learnPages.length} learn pages rendered`)
 
 // The charts are lazy, so the route renders above only reach their fallbacks.
 const [
@@ -205,6 +232,121 @@ const expectations: [string, boolean][] = [
   [
     'offer page refuses to call the weighted column a forecast',
     offerHtml.includes('not a forecast'),
+  ],
+  // --- Learn ---
+  ['learn index lists every page', ALL_PAGES.every((p) => learnIndexHtml.includes(p.title))],
+  [
+    'every learn page renders its own title',
+    learnPages.every(({ page, html }) => html.includes(page.title)),
+  ],
+  [
+    'no learn page falls through to the 404',
+    learnPages.every(({ html }) => !html.includes('Page not found')),
+  ],
+  [
+    'every learn page has real body content',
+    learnPages.every(({ html }) => html.length > 8_000),
+  ],
+  [
+    'strategy pages carry a live figure and a calculator link',
+    learnPages
+      .filter(({ page }) => page.slug.startsWith('strategies/'))
+      .every(({ html }) => html.includes('Open in the calculator')),
+  ],
+  [
+    'strategy notes all match a real preset',
+    orphanedNotes().length === 0,
+  ],
+  [
+    'MDX prose compiled into the page',
+    learnPages.find(({ page }) => page.slug === 'options/greeks')!.html.includes('rate of change of delta'),
+  ],
+  [
+    // Markdown tables need remark-gfm; without it the SPAN risk array silently
+    // renders as a wall of pipe characters.
+    'MDX tables render as tables',
+    learnPages.find(({ page }) => page.slug === 'risk/span')!.html.includes('<table'),
+  ],
+  [
+    'risk section covers SPAN, VAR/ES and DV01',
+    ['risk/span', 'risk/var-and-es', 'risk/dv01'].every((slug) =>
+      learnPages.some(({ page }) => page.slug === slug),
+    ),
+  ],
+  // --- Discoverability ---
+  ['every page carries tags', ALL_PAGES.every((p) => p.tags.length > 0)],
+  [
+    'every page has at least one related page',
+    ALL_PAGES.every((p) => relatedPages(p.slug).length > 0),
+  ],
+  [
+    'related pages never include the page itself',
+    ALL_PAGES.every((p) => relatedPages(p.slug).every((r) => r.slug !== p.slug)),
+  ],
+  ['tags are shared, not per-page singletons', tagCounts().some((t) => t.count >= 3)],
+  [
+    'pages render their tags and related links',
+    learnPages.every(({ html }) => html.includes('Related')),
+  ],
+  [
+    'headings get ids so they can be linked and cited',
+    learnPages
+      .filter(({ page }) => !page.slug.startsWith('strategies/'))
+      .every(({ html }) => /<h2 id="/.test(html)),
+  ],
+
+  // --- Search ---
+  ['search index covers every page', missingFromIndex().length === 0],
+  ['search index has real prose', INDEX.every((e) => e.body.length > 200)],
+  ['a term from body text finds its page', search('risk array').some((h) => h.page.slug === 'risk/span')],
+  ['a tag finds its pages', search('vega').length >= 2],
+  [
+    'a title match outranks a passing mention',
+    search('condor')[0]?.page.slug === 'strategies/iron-condor',
+  ],
+  ['nonsense returns nothing', search('zzzzqqq').length === 0],
+  ['every term must match, not any', search('condor zzzzqqq').length === 0],
+
+  // --- Machine readability ---
+  [
+    'learn pages declare TechArticle schema',
+    ALL_PAGES.every((p) =>
+      structuredDataFor(learnPath(p.slug)).some((b) => b['@type'] === 'TechArticle'),
+    ),
+  ],
+  [
+    'tools declare SoftwareApplication schema',
+    ['/tools/options-pnl', '/tools/take-home', '/tools/offer'].every((r) =>
+      structuredDataFor(r).some((b) => b['@type'] === 'SoftwareApplication'),
+    ),
+  ],
+  [
+    'deep routes carry breadcrumbs',
+    structuredDataFor('/learn/risk/span').some((b) => b['@type'] === 'BreadcrumbList'),
+  ],
+  [
+    'llms.txt exists and lists every learn page',
+    (() => {
+      const path = 'public/llms.txt'
+      if (!fs.existsSync(path)) return false
+      const text = fs.readFileSync(path, 'utf8')
+      return ALL_PAGES.every((p) => text.includes(learnPath(p.slug)))
+    })(),
+  ],
+  [
+    'llms-full.txt carries the prose, not just links',
+    fs.existsSync('public/llms-full.txt') &&
+      fs.readFileSync('public/llms-full.txt', 'utf8').includes('risk array'),
+  ],
+  [
+    'robots.txt allows AI crawlers by name',
+    ['GPTBot', 'ClaudeBot', 'PerplexityBot'].every((bot) =>
+      fs.readFileSync('public/robots.txt', 'utf8').includes(bot),
+    ),
+  ],
+  [
+    'library recommends without reproducing',
+    learnPages.find(({ page }) => page.slug === 'library')!.html.includes('Natenberg'),
   ],
   [
     'product cards use their own logos',

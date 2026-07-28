@@ -99,7 +99,7 @@
   "teaching": {
     "chip": "In public",
     "title": "Teaching & tools",
-    "subtitle": "Conference talks since 2019, four Java courses taught at GeekBrains while running a division, and a set of free calculators and explainers — because explaining a thing is how I check I still understand it.",
+    "subtitle": "Conference talks since 2019, four Java courses taught at GeekBrains while running a division, a knowledge base on options, and a set of free calculators — because explaining a thing is how I check I still understand it.",
     "courses": {
       "institution": "GeekBrains University",
       "role": "Java teacher, part-time",
@@ -134,7 +134,13 @@
         "status": "Live",
         "topic": "Personal finance"
       }
-    ]
+    ],
+    "notes": {
+      "title": "Options, plainly",
+      "description": "A working knowledge base: calls and puts, the Greeks, implied volatility and the smile, plus a page per strategy with a live payoff chart driven by the same model as the calculator.",
+      "href": "/learn",
+      "cta": "Read the notes"
+    }
   },
   "advisoryCard": {
     "chip": "Selective",
@@ -174,7 +180,7 @@
     {
       "id": 9,
       "title": "VP Product & Engineering",
-      "period": "2025 – present",
+      "period": "Nov 2025 – present",
       "company": "Capital.com",
       "anchor": "capital-com",
       "showcase": true,
@@ -200,7 +206,7 @@
     {
       "id": 8,
       "title": "Angel investor, advisor, then CTO",
-      "period": "2025",
+      "period": "Jun 2025 - Oct 2025",
       "company": "Nevis",
       "anchor": "nevis",
       "showcase": true,
@@ -224,7 +230,7 @@
     {
       "id": 7,
       "title": "Chief Technology Officer (CTO)",
-      "period": "2023 – 2025",
+      "period": "Feb 2023 – Jun 2025",
       "company": "Vega",
       "anchor": "vega",
       "showcase": true,
@@ -250,7 +256,7 @@
     {
       "id": 6,
       "title": "Head of Wealth & Trading Platform",
-      "period": "2020 – 2023",
+      "period": "Feb 2020 – May 2023",
       "company": "Revolut",
       "anchor": "revolut",
       "showcase": true,
@@ -277,7 +283,7 @@
     {
       "id": 5,
       "title": "Engineering Lead",
-      "period": "2019 – 2020",
+      "period": "Jan 2019 – Feb 2020",
       "company": "Deutsche Bank",
       "anchor": "deutsche-bank",
       "showcase": true,
@@ -302,7 +308,7 @@
     {
       "id": 4,
       "title": "Head of Division",
-      "period": "2018 – 2019",
+      "period": "Sep 2018 – Jan 2019",
       "company": "Otkritie Broker",
       "anchor": "otkritie-head",
       "city": "Moscow",

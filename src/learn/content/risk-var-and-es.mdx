@@ -1,0 +1,117 @@
+**Value at Risk** answers one question: over some horizon, at some confidence,
+how much could I lose?
+
+A 1-day 99% VAR of £1m means that on 99 days out of 100 you expect to lose less
+than £1m. It says nothing whatsoever about the hundredth day, and that omission
+is the entire debate.
+
+## Three ways to compute it
+
+**Historical simulation.** Take the last few hundred days of market moves,
+apply each one to today's portfolio, sort the resulting P&Ls, and read off the
+percentile. No distributional assumption, which is its great virtue. Its great
+weakness is that it can only produce a crisis it has already seen — a
+two-year window that contains no crash will price no crash.
+
+**Variance–covariance.** Assume returns are normally distributed, compute the
+portfolio's volatility from a covariance matrix, and multiply by the
+appropriate z-score. Fast, analytic, and wrong in a specific direction:
+financial returns have fatter tails than the normal distribution, so this
+method systematically understates exactly the losses you built it to measure.
+It also handles options badly, because a linear approximation of a convex
+payoff breaks down at the sizes that matter.
+
+**Monte Carlo.** Simulate many paths from a model, revalue the portfolio under
+each, take the percentile. Flexible and the only practical choice for genuinely
+non-linear books. Expensive, and no more truthful than the model generating the
+paths.
+
+## Scaling, and a common misuse
+
+A 1-day VAR is often scaled to ten days by multiplying by √10. That step
+assumes returns are independent and identically distributed. They are not:
+volatility clusters, and bad days arrive in runs. Square-root-of-time scaling
+therefore understates multi-day risk precisely during the episodes it is
+supposed to capture.
+
+## Why VAR is not a coherent risk measure
+
+There is a formal definition of what a sensible risk measure should do, set out
+by Artzner and co-authors. One requirement is **subadditivity**: combining two
+portfolios should never produce more risk than the sum of their parts, because
+diversification cannot be harmful.
+
+VAR fails this. It is possible to construct two positions whose combined VAR
+exceeds the sum of the individual VARs — typically involving discrete,
+low-probability large losses that individually sit just outside the confidence
+threshold and together fall inside it. A risk measure that can penalise
+diversification is not merely inelegant; it creates an incentive to concentrate.
+
+VAR has a second, more everyday failure. It is a **threshold**, so it is blind
+to everything past it. Two portfolios can have identical 99% VAR while one
+loses £1.1m on the worst day and the other loses £90m. Selling far
+out-of-the-money options is the classic way to report a flattering VAR while
+accumulating precisely the risk the number cannot see.
+
+## Expected Shortfall
+
+**Expected Shortfall** — also called CVaR or conditional VAR — is the average
+loss *given* that you are in the tail beyond the VAR threshold.
+
+> VAR asks how bad things get before the worst 1%. ES asks how bad the worst 1%
+> actually is.
+
+ES is subadditive and coherent. It cannot be gamed by pushing risk just past a
+percentile, because it integrates over everything out there. This is why the
+Basel Committee's Fundamental Review of the Trading Book replaced 99% VAR with
+**97.5% Expected Shortfall** for market risk capital. The confidence level
+dropped because, for a normal distribution, 97.5% ES lands close to 99% VAR —
+so the change alters what is measured more than how much capital results.
+
+## The catch with ES
+
+ES is harder to backtest. VAR backtesting is simple: count the days the loss
+exceeded the forecast. At 99% over 250 days you expect around two or three
+exceptions, and Basel's traffic-light framework escalates as the count rises —
+a straightforward, auditable test.
+
+ES has no equivalent clean test, because it is a conditional average rather
+than a threshold. Verifying it needs indirect approaches, and this is a live
+practical problem rather than a theoretical footnote: a number you cannot
+readily validate is a number that can drift.
+
+## What both miss
+
+Neither measure covers the risks that actually close firms.
+
+- **Liquidity.** Both assume you can exit at the marked price. In a crisis you
+  cannot, and the mark is the first thing to become fictional.
+- **Correlation breakdown.** Diversification is priced from history.
+  Correlations converge towards one in a crash, exactly when the model is
+  relying on them not to.
+- **Funding.** Losing money and being unable to meet a margin call are
+  different failures. The second is what forces liquidation, and it does not
+  appear in either measure.
+
+LTCM had a sophisticated risk framework. What ended it was a correlated move
+in positions assumed independent, met by margin calls that could not be funded.
+The mathematics was not the weak point.
+
+## Building one
+
+At Revolut I owned the greenfield risk system behind the wealth and trading
+platform — mark-to-market, collateral and variation margin, VAR and Expected
+Shortfall, DV01, Greeks, book value and accruals, across fixed income, FX and
+interest-rate derivatives, spot FX, crypto and commodities.
+
+The lesson that transferred to everything since: **the number is the easy part,
+and the data lineage is the whole job.** A VAR figure is only as good as the
+position feed, the price history and the corporate-action handling underneath
+it. Most of what looked like model risk turned out, on inspection, to be a
+stale price or a position that had been booked twice.
+
+The second lesson is that a risk number nobody can explain gets ignored. If a
+trader cannot see which position drove the move, the report becomes decoration.
+Attribution — being able to decompose the number back to its causes — matters
+more for whether a risk system changes behaviour than the sophistication of
+the model producing it.

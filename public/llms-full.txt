@@ -1,0 +1,1014 @@
+# Anton Batiaev
+
+> Fintech founder and builder. Fintecy (personal finance) and SHIP (a typed
+> knowledge graph for engineering teams). VP Product & Engineering at
+> Capital.com; previously Revolut, Vega, Nevis and Deutsche Bank. Nine years
+> building derivatives pricing, margin and risk systems.
+
+This site hosts a free options knowledge base and a set of finance
+calculators. Everything runs client-side; there are no accounts and no
+tracking beyond analytics.
+
+## Free tools
+
+- [Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev](https://batiaev.com/tools/options-pnl): Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.
+- [Employed vs self-employed vs limited company — UK take-home 2026/27](https://batiaev.com/tools/take-home): Compare the same income as an employee, a sole trader, through your own limited company, or via an umbrella. 2026/27 income tax, Class 1 and Class 4 NI, corporation tax and dividend tax. Free, runs in your browser.
+- [Startup vs hypergrowth vs enterprise — compensation comparison](https://batiaev.com/tools/offer): Compare compensation shapes, not salaries. Price a startup grant, a scale-up RSU package and an enterprise base as distributions — downside, probability-weighted and upside — after dilution and UK tax.
+
+## Knowledge base
+
+### Options
+
+The concepts every strategy page assumes you already have.
+
+- [What an option actually is](https://batiaev.com/learn/options/basics): Calls, puts, strike, expiry and the difference between intrinsic and extrinsic value — the vocabulary everything else assumes.
+- [The Greeks, without the calculus](https://batiaev.com/learn/options/greeks): Delta, gamma, vega and theta as four questions about the same position, and which one actually kills you.
+- [Implied volatility is the price](https://batiaev.com/learn/options/volatility): Why an option's quoted premium is really a volatility number, and what the smile is telling you.
+
+### Strategies
+
+One page per structure, each with a live payoff chart you can edit and open in the calculator.
+
+- [Long call](https://batiaev.com/learn/strategies/long-call): The simplest bullish option: defined risk, unlimited upside, and a bill for time decay every day you are wrong.
+- [Long put](https://batiaev.com/learn/strategies/long-put): Downside exposure with a floor on the loss — the cleanest way to be short without unlimited risk.
+- [Covered call](https://batiaev.com/learn/strategies/covered-call): Own the underlying, sell someone the right to take it from you above a set price, and keep the premium either way.
+- [Cash-secured put](https://batiaev.com/learn/strategies/cash-secured-put): Get paid to bid below the market, with the cash set aside to buy if you are filled.
+- [Bull call spread](https://batiaev.com/learn/strategies/bull-call-spread): Buy a call, sell a higher one. Cheaper than the call alone, with the upside capped at the short strike.
+- [Bear put spread](https://batiaev.com/learn/strategies/bear-put-spread): The same trade pointed down: buy a put, sell a lower one.
+- [Long straddle](https://batiaev.com/learn/strategies/long-straddle): Buy the call and the put at the same strike. A bet on movement, indifferent to direction.
+- [Short strangle](https://batiaev.com/learn/strategies/short-strangle): Sell an out-of-the-money put and call. Collect premium while nothing happens — and carry an undefined tail.
+- [Iron condor](https://batiaev.com/learn/strategies/iron-condor): A short strangle with both tails bought back. Same idea, defined risk, smaller credit.
+- [Long butterfly](https://batiaev.com/learn/strategies/long-butterfly): A cheap, narrow bet that the underlying finishes at a particular price.
+- [Collar](https://batiaev.com/learn/strategies/collar): Hold the asset, buy a protective put, and sell a call to pay for it.
+
+### Risk
+
+How the positions above are margined and measured — the systems side, which is the part I actually built.
+
+- [SPAN, and why your margin is not what you expected](https://batiaev.com/learn/risk/span): How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.
+- [VAR, and what it does not tell you](https://batiaev.com/learn/risk/var-and-es): Value at Risk in one sentence, the three ways to compute it, the reason it is not a coherent risk measure, and why regulators moved to Expected Shortfall.
+- [DV01 and the shape of rate risk](https://batiaev.com/learn/risk/dv01): The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.
+
+### Library
+
+Where to go when this runs out.
+
+- [Books and films](https://batiaev.com/learn/library): What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+
+## Optional
+
+- [CV](https://batiaev.com/cv)
+- [Advisory](https://batiaev.com/advisory): Selective advisory for founders and investors: technical diligence, architecture de-risking, and fractional CTO work in regulated fintech.
+
+---
+
+# Full text
+
+The complete prose of the knowledge base follows, so this file can be read in
+one fetch. Interactive charts are omitted; each page has a live payoff chart
+driven by the same pricing model as the calculator.
+
+## What an option actually is
+
+Source: https://batiaev.com/learn/options/basics
+Topics: beginner, calls and puts, intrinsic value, theta
+
+Calls, puts, strike, expiry and the difference between intrinsic and extrinsic value — the vocabulary everything else assumes.
+
+An option is a right, not an obligation, to trade something at a fixed price
+before a fixed date. That is the whole definition. Everything else — the
+Greeks, the smile, the strategies — is bookkeeping on top of it.
+
+## Calls and puts
+
+A **call** gives you the right to buy at the strike. You want the price up.
+A **put** gives you the right to sell at the strike. You want the price down.
+
+Whoever sold you that right has the mirror position and an obligation rather
+than a choice. This asymmetry is the entire product: the buyer's loss is capped
+at the premium, and the seller's is not.
+
+
+Move the spot slider on that chart. Below the strike the line is flat — you
+simply do not exercise, and the premium is gone. Above it the payoff turns and
+climbs at the same rate as the underlying. The kink sits exactly on the strike,
+which is why option payoffs are drawn with corners rather than curves.
+
+## Strike, expiry, premium
+
+Three numbers define a contract.
+
+- **Strike** — the price you may transact at.
+- **Expiry** — the date the right lapses.
+- **Premium** — what the right costs.
+
+A contract usually covers 100 shares, so a premium quoted at 3.02 costs £302.
+The calculator calls this the multiplier, and forgetting it is the most common
+arithmetic error in option trading.
+
+## Moneyness
+
+An option is **in the money** if exercising it right now would be worth
+something, **at the money** if the strike is roughly spot, and **out of the
+money** if exercising would be pointless. A call at a 90 strike with spot at 100
+is 10 in the money; the same call with spot at 80 is 10 out of the money and
+worth only whatever chance remains.
+
+## Intrinsic and extrinsic value
+
+Premium splits cleanly into two parts.
+
+**Intrinsic value** is what the option is worth if it expired this second —
+`max(spot − strike, 0)` for a call. It cannot be negative, because you would
+simply not exercise.
+
+**Extrinsic value** is everything else: the price of the time remaining and the
+uncertainty in it. It is the entire premium of an out-of-the-money option, and
+it decays to nothing by expiry with mathematical certainty.
+
+That decay is the central fact of being long options. You are paying, every
+day, for the possibility that you are right. Set the days-elapsed slider on the
+chart above and watch the pre-expiry line sag towards the hard expiry line —
+that gap is extrinsic value draining away.
+
+## Why the expiry line has corners
+
+Look at the two lines on the chart. The solid one is the payoff at expiry:
+piecewise linear, kinked exactly at the strike, because at expiry an option is
+worth its intrinsic value and nothing else.
+
+The dashed one is the modelled value before expiry, and it is smooth. It sits
+above the expiry line everywhere, and the distance between them is the
+extrinsic value you still own. Both lines meet at expiry. Every options
+strategy is, in some sense, a bet about how those two lines converge.
+
+## What comes next
+
+The Greeks are the four sensitivities that describe how the dashed line moves
+when something changes — spot, time, or volatility. They are less intimidating
+than the notation suggests, and they are the subject of the next page.
+
+---
+
+## The Greeks, without the calculus
+
+Source: https://batiaev.com/learn/options/greeks
+Topics: greeks, delta, gamma, vega, theta
+
+Delta, gamma, vega and theta as four questions about the same position, and which one actually kills you.
+
+The Greeks are four questions about the same position, each asking what happens
+to its value when one thing moves and everything else stands still.
+
+You do not need the calculus to use them. You need to know which one is
+currently your problem.
+
+## Delta — how much like the underlying is this?
+
+Delta is the change in the option's value for a one-point move in the
+underlying. A call runs from 0 (hopelessly out of the money) to 1 (so deep in
+the money it behaves like stock). A put runs from 0 to −1.
+
+The useful reading is as **equivalent position size**. A 0.4-delta call on 100
+shares behaves, for small moves, like owning 40 shares. Sum the deltas across a
+book and you have your net directional exposure in a single number — which is
+exactly what a trading desk's risk system reports.
+
+
+## Gamma — how fast is delta changing?
+
+Gamma is the rate of change of delta. High gamma means your directional
+exposure is unstable: the position becomes rapidly more long as the price rises
+and more short as it falls.
+
+Gamma is largest at the money and close to expiry. This is why the last day of
+a contract's life is the dangerous one — a position that was comfortably hedged
+in the morning can be badly wrong by the afternoon without the underlying doing
+anything dramatic.
+
+Long options are long gamma, which is pleasant: the position gets longer as it
+wins. Short options are short gamma, which is the opposite, and it is the
+mechanism by which sold options produce sudden large losses.
+
+## Theta — what does waiting cost?
+
+Theta is the value lost per day from time passing alone. It is negative when
+you are long options and positive when you are short.
+
+Theta and gamma are two sides of one trade. Being long gamma — profiting from
+movement — is paid for with negative theta. Being short gamma earns theta and
+sells you the risk. There is no position that is long gamma and long theta;
+if you think you have found one, check the trade again.
+
+## Vega — what if the market changes its mind about risk?
+
+Vega is the change in value for a one-point move in implied volatility. It is
+not actually a Greek letter, which tells you something about how the vocabulary
+grew.
+
+Vega matters more than most people expect. You can be exactly right about
+direction and still lose, because implied volatility collapsed after the event
+you were positioned for. This is routine around earnings: the move happens, and
+the option holder loses anyway.
+
+
+A straddle is nearly pure vega at the money — flat delta, and its value is
+almost entirely a view on volatility. Drag the volatility slider and watch the
+pre-expiry line lift and fall while the expiry line stays exactly where it is.
+That difference is what you are actually trading.
+
+## Which one kills you
+
+In roughly this order:
+
+1. **Gamma**, because it turns a manageable position into an unmanageable one
+   without warning, and it is worst exactly when you have least time to react.
+2. **Vega**, because it moves against you at the same moment as everything
+   else — volatility rises when markets fall, so a hedge gets more expensive
+   precisely when you want it.
+3. **Theta**, which is at least honest. It takes a predictable amount every
+   day and never surprises anyone.
+4. **Delta**, which is the risk everyone thinks about and the one most easily
+   hedged.
+
+The calculator reports all four aggregated across a whole position, which is
+the only level at which they are useful — individual leg Greeks rarely tell you
+what you want to know.
+
+---
+
+## Implied volatility is the price
+
+Source: https://batiaev.com/learn/options/volatility
+Topics: volatility, implied volatility, smile, vega, pricing
+
+Why an option's quoted premium is really a volatility number, and what the smile is telling you.
+
+Black-Scholes takes six inputs: spot, strike, time, rate, carry and volatility.
+Five of those are observable. Volatility is not — nobody knows what the future
+holds.
+
+So the market inverts the problem. It quotes a price, and you solve backwards
+for the volatility that price implies. That number is **implied volatility**,
+and it is the only genuinely negotiable input. Everything else is arithmetic.
+
+## Options are quoted in volatility
+
+On a professional desk, options are not really priced in currency. They are
+priced in vol, and the currency figure falls out at the end. Two options on
+different underlyings at different strikes with different premiums are directly
+comparable once expressed as implied volatility — which is the whole reason
+the convention exists.
+
+When someone says an option "looks expensive", they almost never mean the
+premium. They mean the implied volatility is high relative to what they expect
+the underlying to actually do.
+
+## Implied versus realised
+
+**Realised volatility** is what the underlying did, measured after the fact.
+**Implied volatility** is what the market is charging for it in advance.
+
+The gap between them is the trade. Selling options is a bet that implied
+exceeds realised; buying them is the reverse. Implied is usually a little
+higher, which is the risk premium option sellers earn — and which is also why
+selling volatility wins most of the time and occasionally loses catastrophically.
+
+
+Move the volatility slider on that strangle. The expiry line does not budge —
+at expiry only the spot price matters. But the pre-expiry line moves a great
+deal, because the position's mark-to-market is a pure volatility view until the
+last day. Short volatility positions are marked against you long before they
+are settled against you.
+
+## The smile
+
+Black-Scholes assumes one volatility for all strikes. The market disagrees.
+
+Plot implied volatility against strike and you get a curve, not a line: out-of-
+the-money puts trade at higher implied volatility than at-the-money options,
+and often higher than out-of-the-money calls. The shape is called the
+**volatility smile**, or the **skew** when it leans one way.
+
+It exists because the model's assumptions are wrong in a specific direction.
+Returns are not normally distributed; crashes are larger and more frequent than
+the maths allows, and they are correlated with everyone wanting protection at
+the same time. The smile is the market pricing in what the model leaves out.
+
+Equity indices show a pronounced downside skew for exactly this reason. FX
+tends toward a more symmetric smile, because either currency can be the one
+that collapses.
+
+## What this means in practice
+
+- A single volatility number for a multi-strike position, which is what this
+  site's calculator uses, is a simplification. It is fine for understanding
+  shape and wrong for pricing a real trade against a real surface.
+- If you are quoted a price, ask what vol it implies before deciding whether it
+  is expensive.
+- If a strategy looks like free money, you are usually short a tail that is not
+  in the model. The smile exists precisely because those tails are real.
+
+I spent a good part of my time at Otkritie building the pricing engine that
+produced these curves for the desk — implied vol, the smile, and the Greeks
+that fall out of them, across index, commodity, FX and single-stock options.
+The lesson that stuck: the model is a language for expressing a view, not a
+source of truth. It is most dangerous when it agrees with you.
+
+---
+
+## Long call
+
+Source: https://batiaev.com/learn/strategies/long-call
+Topics: directional, long premium, beginner, theta
+
+The simplest bullish option: defined risk, unlimited upside, and a bill for time decay every day you are wrong.
+
+**The view:** Up, and soon enough to beat theta.
+
+## When it fits
+
+You want exposure to a rise without putting up the cash for the shares, and you can name a date by which you expect it. The premium is the most you can lose, which makes this the usual first option anyone buys.
+
+## What goes wrong
+
+- Time decay works against you every day, and accelerates as expiry approaches.
+- Being right about direction but late is the same as being wrong.
+- A fall in implied volatility can lose you money even if the underlying rises.
+
+---
+
+## Long put
+
+Source: https://batiaev.com/learn/strategies/long-put
+Topics: directional, long premium, hedging, beginner
+
+Downside exposure with a floor on the loss — the cleanest way to be short without unlimited risk.
+
+**The view:** Down, or a hedge against something you own.
+
+## When it fits
+
+Either an outright bearish view, or insurance on a holding you do not want to sell. As a hedge it is expensive precisely when you most want it, because volatility rises as markets fall.
+
+## What goes wrong
+
+- Puts are usually priced above their theoretical value, because everyone wants the same insurance.
+- The premium is a certain cost against an uncertain payoff.
+- Time decay again — a slow decline can still lose money.
+
+---
+
+## Covered call
+
+Source: https://batiaev.com/learn/strategies/covered-call
+Topics: income, short premium, assignment, beginner
+
+Own the underlying, sell someone the right to take it from you above a set price, and keep the premium either way.
+
+**The view:** Flat to mildly up, and you are content to sell at the strike.
+
+## When it fits
+
+You hold the asset, you would be happy selling at a particular level, and you want to be paid for the wait. Popular as an income trade, and reasonable when you genuinely mean the sell.
+
+## What goes wrong
+
+- You keep the entire downside and cap the upside — the payoff is the opposite shape to the one people assume they are buying.
+- A sharp rally means you sell at the strike and watch it keep going.
+- The premium is small compensation for a large move in either direction.
+
+---
+
+## Cash-secured put
+
+Source: https://batiaev.com/learn/strategies/cash-secured-put
+Topics: income, short premium, assignment, beginner
+
+Get paid to bid below the market, with the cash set aside to buy if you are filled.
+
+**The view:** You want to own it, but lower.
+
+## When it fits
+
+You are a willing buyer at a price below spot. Selling the put pays you to wait, and if it is assigned you buy at a level you already chose.
+
+## What goes wrong
+
+- Identical payoff to a covered call — the downside is the whole move to zero, less the premium.
+- You get assigned exactly when you least want to buy, because the price fell for a reason.
+- The cash is tied up for the life of the trade.
+
+---
+
+## Bull call spread
+
+Source: https://batiaev.com/learn/strategies/bull-call-spread
+Topics: directional, spread, defined risk
+
+Buy a call, sell a higher one. Cheaper than the call alone, with the upside capped at the short strike.
+
+**The view:** Up, but only so far.
+
+## When it fits
+
+You have a target rather than a hope. Selling the upper strike funds part of the position and cuts the amount time decay can take from you.
+
+## What goes wrong
+
+- The cap is real: everything above the short strike belongs to someone else.
+- Both legs have to be closed, so spreads cost more to trade than they look.
+- Maximum profit only arrives at expiry, not on the way there.
+
+---
+
+## Bear put spread
+
+Source: https://batiaev.com/learn/strategies/bear-put-spread
+Topics: directional, spread, defined risk
+
+The same trade pointed down: buy a put, sell a lower one.
+
+**The view:** Down, to a level you can name.
+
+## When it fits
+
+A bearish view with a floor in mind — support, a valuation, a level you do not expect to break. Cheaper than the outright put for the same reason.
+
+## What goes wrong
+
+- Capped at the lower strike, so a crash pays no more than a slide.
+- Still a debit: you can lose the whole premium.
+- Short put legs can be assigned early if they go deep in the money.
+
+---
+
+## Long straddle
+
+Source: https://batiaev.com/learn/strategies/long-straddle
+Topics: volatility, long premium, vega, events
+
+Buy the call and the put at the same strike. A bet on movement, indifferent to direction.
+
+**The view:** Something is about to happen. No idea which way.
+
+## When it fits
+
+Ahead of a binary event — earnings, a ruling, a launch — where the size of the move matters more than its sign.
+
+## What goes wrong
+
+- You are buying volatility that is already priced for the event, so the move has to beat expectations, not just happen.
+- Implied volatility usually collapses the moment the news lands, which can lose money even on a correct call.
+- Two premiums to recover means the breakevens are further out than they feel.
+
+---
+
+## Short strangle
+
+Source: https://batiaev.com/learn/strategies/short-strangle
+Topics: volatility, short premium, vega, margin, tail risk
+
+Sell an out-of-the-money put and call. Collect premium while nothing happens — and carry an undefined tail.
+
+**The view:** Quiet, and quieter than the market is pricing.
+
+## When it fits
+
+When implied volatility looks expensive relative to what you expect to be realised. It wins most of the time, which is exactly what makes it dangerous.
+
+## What goes wrong
+
+- Losses are unbounded on the upside and very large on the downside.
+- A high win rate hides the shape: many small gains and occasional catastrophic ones.
+- Margin requirements expand as the position moves against you, forcing you out at the worst moment.
+
+---
+
+## Iron condor
+
+Source: https://batiaev.com/learn/strategies/iron-condor
+Topics: volatility, short premium, defined risk, margin
+
+A short strangle with both tails bought back. Same idea, defined risk, smaller credit.
+
+**The view:** Range-bound, and you want to sleep.
+
+## When it fits
+
+The disciplined version of selling volatility. The wings cost part of the premium and convert an unbounded loss into a known one.
+
+## What goes wrong
+
+- The maximum loss is usually several times the credit received.
+- Four legs means four lots of spread and commission.
+- It needs the underlying to stay inside the range at expiry, not merely to pass through it.
+
+---
+
+## Long butterfly
+
+Source: https://batiaev.com/learn/strategies/long-butterfly
+Topics: volatility, defined risk, pinning
+
+A cheap, narrow bet that the underlying finishes at a particular price.
+
+**The view:** It pins, right here.
+
+## When it fits
+
+A precise view on where something settles, with very little capital at risk. The payoff peak is sharp and only exists at expiry.
+
+## What goes wrong
+
+- The profit zone is narrow and the peak is only reached at expiry.
+- Three strikes, four contracts — execution costs eat a low-premium trade.
+- Usually expires worthless, which is the price of the asymmetry.
+
+---
+
+## Collar
+
+Source: https://batiaev.com/learn/strategies/collar
+Topics: hedging, income, concentrated position
+
+Hold the asset, buy a protective put, and sell a call to pay for it.
+
+**The view:** I want to keep this, but not the tail risk.
+
+## When it fits
+
+A concentrated holding you cannot or will not sell — vested shares being the obvious case. The short call funds the insurance, sometimes entirely.
+
+## What goes wrong
+
+- You give up the upside above the call strike, which on a concentrated position is often the whole reason you held it.
+- Selling calls against shares you cannot deliver creates a real problem if assigned.
+- For employee shares, the tax treatment of a collar is rarely as simple as the payoff diagram.
+
+---
+
+## SPAN, and why your margin is not what you expected
+
+Source: https://batiaev.com/learn/risk/span
+Topics: margin, span, portfolio margin, short premium, exchange, risk systems, measurement
+
+How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.
+
+Sell a naked put and your broker asks for a large deposit. Buy a further
+out-of-the-money put against it, turning the position into a spread with a
+known worst case, and the requirement collapses. Nothing about your view
+changed. What changed is that the margin system can now see the hedge.
+
+That system, on most futures and options exchanges, is **SPAN** — Standard
+Portfolio Analysis of Risk, introduced by the CME in 1988 and licensed by
+exchanges worldwide. It is not complicated, but it is almost never explained,
+so people learn its behaviour by being surprised by it.
+
+## The idea
+
+Strategy-based margining looks at each position and applies a rule. Portfolio
+margining asks a different question: **across a set of plausible market moves,
+what is the worst this whole portfolio does in one day?** That number, roughly,
+is your margin.
+
+Because it values the portfolio as a whole, offsetting positions offset. A
+long call and a short call at a higher strike are not two margin charges; they
+are one spread with a capped loss.
+
+## The risk array
+
+The exchange publishes, for each contract, two parameters: a **price scan
+range** — how far it thinks the underlying can move in a day — and a
+**volatility scan range**. SPAN then revalues your portfolio under sixteen
+scenarios built from those two numbers.
+
+| # | Underlying move | Volatility | Weight |
+|---|---|---|---|
+| 1–2 | Unchanged | Up / down | 100% |
+| 3–4 | +⅓ range | Up / down | 100% |
+| 5–6 | −⅓ range | Up / down | 100% |
+| 7–8 | +⅔ range | Up / down | 100% |
+| 9–10 | −⅔ range | Up / down | 100% |
+| 11–12 | +1 range | Up / down | 100% |
+| 13–14 | −1 range | Up / down | 100% |
+| 15 | +2 ranges | Unchanged | 35% |
+| 16 | −2 ranges | Unchanged | 35% |
+
+Fourteen scenarios walk the price across the scan range in thirds, each paired
+with volatility rising and falling. The last two are the tail: a move of twice
+the scan range, counted at a fraction — conventionally 35% — because the
+exchange wants some charge for a crash without margining every account as
+though one is due tomorrow.
+
+Your **scan risk** is the worst loss across those sixteen rows. Note what this
+implies: the volatility legs mean a short option position can be charged its
+worst case on a day the underlying does not move at all.
+
+
+Drag the volatility slider on that strangle and watch the pre-expiry line drop
+while the expiry line stays put. Rows 1 and 2 of the risk array are exactly
+that move. This is why short volatility positions get margin calls in quiet
+markets — the scan found the vol-up scenario, not a price move.
+
+## The parts nobody mentions
+
+Scan risk is the headline, but the total is built from four more pieces.
+
+**Intra-commodity spread charge.** SPAN treats all months of a contract as one
+underlying, which is generous — a long March and short June future nets to
+almost nothing. But the months do not move identically, so a charge is added
+back for calendar spread risk. It is small, and it surprises people who
+expected a perfectly hedged spread to be free.
+
+**Inter-commodity spread credit.** Related products get a discount for
+offsetting. Long crude against short heating oil is genuinely less risky than
+either alone, and the exchange grants a percentage credit for recognised pairs.
+
+**Delivery or spot month charge.** Contracts near expiry behave badly —
+liquidity thins and squeezes happen — so an extra charge applies as delivery
+approaches.
+
+**Short option minimum.** The one that catches people. A portfolio of deep
+out-of-the-money short options can scan to almost no risk, because in all
+sixteen scenarios the options stay worthless. SPAN refuses to believe this and
+imposes a floor per short contract. Sell enough far-out-of-the-money options
+and your margin is set entirely by this minimum, with the scan irrelevant.
+
+The total is roughly:
+
+```
+margin = max(scan risk + intra-commodity charge − inter-commodity credit,
+             short option minimum)
+             + delivery charge
+```
+
+## What this means when you trade
+
+- **Defining your risk cuts your margin, often dramatically.** Buying the wing
+  on a short position costs premium and buys back a large part of the deposit.
+  This is most of the reason iron condors exist rather than strangles.
+- **Margin is not static.** The exchange raises scan ranges when realised
+  volatility rises — which is precisely when your position is already losing.
+  Requirements expand into a falling market, and forced liquidation is a
+  liquidity event, not a solvency one. That mechanism has ended more accounts
+  than bad directional calls.
+- **Check the short option minimum before scaling.** A strategy that looks
+  capital-efficient at ten contracts may be floored at a hundred.
+- **Your broker may add to it.** SPAN is the exchange's number. Brokers
+  routinely apply a multiplier on top, and retail multipliers can be
+  substantial.
+
+## Notes from building one
+
+I built the risk and margin engine at Otkritie — SPAN portfolio margining
+across futures and options on index, commodity, FX and single stocks, feeding
+a real-time engine handling over a million updates a second for 400,000
+investors. Three things I did not expect going in.
+
+The arithmetic is the easy part. Sixteen revaluations per contract is nothing.
+The hard part is the **reference data**: scan ranges, tiers, spread definitions
+and credit rates change, they arrive as files on a schedule, and a stale
+parameter produces a confidently wrong number rather than an error.
+
+The second is that **the option pricing model inside the margin calculation has
+to match the one on the trading screen**, or clients see a margin requirement
+that disagrees with their own P&L and — reasonably — do not trust either.
+
+The third is that margin is a **real-time obligation, not a report**. It has to
+be right on every tick, because it gates whether an order can be placed at all.
+That constraint, more than the mathematics, is what makes a margin engine an
+engineering problem.
+
+## Beyond SPAN
+
+Exchanges are migrating from the original algorithm to **SPAN 2**, which
+combines a historical-value-at-risk model with a stress component and handles
+liquidity and concentration more explicitly. The intuition above still holds —
+scenarios, portfolio offsets, and add-ons for the things a scenario grid
+misses. The parameters change; the shape of the answer does not.
+
+For the authoritative detail, go to the exchange's own methodology
+documentation rather than a textbook. It is free, precise, and updated when the
+rules change.
+
+---
+
+## VAR, and what it does not tell you
+
+Source: https://batiaev.com/learn/risk/var-and-es
+Topics: var, expected shortfall, risk measure, basel, tail risk, risk systems, measurement
+
+Value at Risk in one sentence, the three ways to compute it, the reason it is not a coherent risk measure, and why regulators moved to Expected Shortfall.
+
+**Value at Risk** answers one question: over some horizon, at some confidence,
+how much could I lose?
+
+A 1-day 99% VAR of £1m means that on 99 days out of 100 you expect to lose less
+than £1m. It says nothing whatsoever about the hundredth day, and that omission
+is the entire debate.
+
+## Three ways to compute it
+
+**Historical simulation.** Take the last few hundred days of market moves,
+apply each one to today's portfolio, sort the resulting P&Ls, and read off the
+percentile. No distributional assumption, which is its great virtue. Its great
+weakness is that it can only produce a crisis it has already seen — a
+two-year window that contains no crash will price no crash.
+
+**Variance–covariance.** Assume returns are normally distributed, compute the
+portfolio's volatility from a covariance matrix, and multiply by the
+appropriate z-score. Fast, analytic, and wrong in a specific direction:
+financial returns have fatter tails than the normal distribution, so this
+method systematically understates exactly the losses you built it to measure.
+It also handles options badly, because a linear approximation of a convex
+payoff breaks down at the sizes that matter.
+
+**Monte Carlo.** Simulate many paths from a model, revalue the portfolio under
+each, take the percentile. Flexible and the only practical choice for genuinely
+non-linear books. Expensive, and no more truthful than the model generating the
+paths.
+
+## Scaling, and a common misuse
+
+A 1-day VAR is often scaled to ten days by multiplying by √10. That step
+assumes returns are independent and identically distributed. They are not:
+volatility clusters, and bad days arrive in runs. Square-root-of-time scaling
+therefore understates multi-day risk precisely during the episodes it is
+supposed to capture.
+
+## Why VAR is not a coherent risk measure
+
+There is a formal definition of what a sensible risk measure should do, set out
+by Artzner and co-authors. One requirement is **subadditivity**: combining two
+portfolios should never produce more risk than the sum of their parts, because
+diversification cannot be harmful.
+
+VAR fails this. It is possible to construct two positions whose combined VAR
+exceeds the sum of the individual VARs — typically involving discrete,
+low-probability large losses that individually sit just outside the confidence
+threshold and together fall inside it. A risk measure that can penalise
+diversification is not merely inelegant; it creates an incentive to concentrate.
+
+VAR has a second, more everyday failure. It is a **threshold**, so it is blind
+to everything past it. Two portfolios can have identical 99% VAR while one
+loses £1.1m on the worst day and the other loses £90m. Selling far
+out-of-the-money options is the classic way to report a flattering VAR while
+accumulating precisely the risk the number cannot see.
+
+## Expected Shortfall
+
+**Expected Shortfall** — also called CVaR or conditional VAR — is the average
+loss *given* that you are in the tail beyond the VAR threshold.
+
+> VAR asks how bad things get before the worst 1%. ES asks how bad the worst 1%
+> actually is.
+
+ES is subadditive and coherent. It cannot be gamed by pushing risk just past a
+percentile, because it integrates over everything out there. This is why the
+Basel Committee's Fundamental Review of the Trading Book replaced 99% VAR with
+**97.5% Expected Shortfall** for market risk capital. The confidence level
+dropped because, for a normal distribution, 97.5% ES lands close to 99% VAR —
+so the change alters what is measured more than how much capital results.
+
+## The catch with ES
+
+ES is harder to backtest. VAR backtesting is simple: count the days the loss
+exceeded the forecast. At 99% over 250 days you expect around two or three
+exceptions, and Basel's traffic-light framework escalates as the count rises —
+a straightforward, auditable test.
+
+ES has no equivalent clean test, because it is a conditional average rather
+than a threshold. Verifying it needs indirect approaches, and this is a live
+practical problem rather than a theoretical footnote: a number you cannot
+readily validate is a number that can drift.
+
+## What both miss
+
+Neither measure covers the risks that actually close firms.
+
+- **Liquidity.** Both assume you can exit at the marked price. In a crisis you
+  cannot, and the mark is the first thing to become fictional.
+- **Correlation breakdown.** Diversification is priced from history.
+  Correlations converge towards one in a crash, exactly when the model is
+  relying on them not to.
+- **Funding.** Losing money and being unable to meet a margin call are
+  different failures. The second is what forces liquidation, and it does not
+  appear in either measure.
+
+LTCM had a sophisticated risk framework. What ended it was a correlated move
+in positions assumed independent, met by margin calls that could not be funded.
+The mathematics was not the weak point.
+
+## Building one
+
+At Revolut I owned the greenfield risk system behind the wealth and trading
+platform — mark-to-market, collateral and variation margin, VAR and Expected
+Shortfall, DV01, Greeks, book value and accruals, across fixed income, FX and
+interest-rate derivatives, spot FX, crypto and commodities.
+
+The lesson that transferred to everything since: **the number is the easy part,
+and the data lineage is the whole job.** A VAR figure is only as good as the
+position feed, the price history and the corporate-action handling underneath
+it. Most of what looked like model risk turned out, on inspection, to be a
+stale price or a position that had been booked twice.
+
+The second lesson is that a risk number nobody can explain gets ignored. If a
+trader cannot see which position drove the move, the report becomes decoration.
+Attribution — being able to decompose the number back to its causes — matters
+more for whether a risk system changes behaviour than the sophistication of
+the model producing it.
+
+---
+
+## DV01 and the shape of rate risk
+
+Source: https://batiaev.com/learn/risk/dv01
+Topics: dv01, duration, convexity, rates, hedging, risk systems, measurement
+
+The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.
+
+Equity desks talk in delta. Rates desks talk in **DV01** — the dollar value of
+a basis point. It is the change in a position's value when the relevant yield
+moves by one hundredth of a percent.
+
+That is all it is. A bond with a DV01 of £850 gains roughly £850 if yields fall
+one basis point, and loses roughly £850 if they rise one. You will also see it
+as **PV01** or **BPV**; for most purposes the distinction is not worth arguing
+about.
+
+## Why a basis point
+
+Because it makes unlike things comparable. A ten-year gilt, an interest-rate
+swap, a futures contract and a portfolio of all three have no common unit until
+you express each as sensitivity to the same small move. Once you do, you can
+add them up, and the sum is the position.
+
+This is the practical reason DV01 wins over duration on a trading desk.
+Duration is a percentage, so it needs a notional and a price before it means
+anything. DV01 is already in money.
+
+## The relationship to duration
+
+They are the same idea in different clothing:
+
+```
+DV01 ≈ modified duration × price × 0.0001
+```
+
+A £10m position with modified duration 8 and a price of par has a DV01 of
+roughly £8,000. Duration tells you the percentage sensitivity; DV01 tells you
+the cash. Risk systems report the cash, because that is what a limit is
+denominated in.
+
+## Convexity, and the direction of the error
+
+DV01 is a first derivative — a straight-line approximation to a curved
+relationship. For a plain bond, the price/yield curve bends favourably:
+**convexity** is positive, so prices rise more than DV01 predicts when yields
+fall, and fall less than it predicts when they rise.
+
+For a one-basis-point move that error is negligible, which is why the unit is
+one basis point. For a fifty-basis-point move it is not, and a DV01-only view
+understates your position in a rally and overstates the damage in a sell-off.
+
+Not everything is positively convex. Mortgage-backed securities and callable
+bonds can exhibit **negative convexity** — as yields fall, borrowers refinance
+and the expected life shortens, so the position stops rallying. Here DV01 is
+not merely imprecise; it points the wrong way about what happens next. Anything
+with an embedded option needs the second-order term.
+
+## One number is not enough
+
+DV01 as usually quoted assumes a **parallel shift** — every point on the curve
+moves by the same basis point. Curves do not oblige. They steepen, flatten and
+twist, and a portfolio can be flat on parallel DV01 while carrying a large bet
+on the shape.
+
+Consider a book that is long two-year and short ten-year in DV01-neutral size.
+Total DV01: zero. A parallel move does nothing. A steepening move can cost a
+great deal.
+
+The fix is **key-rate**, or partial, DV01: bucket the curve by tenor and shift
+each bucket separately, holding the rest fixed. You get a vector rather than a
+scalar — sensitivity at 2y, 5y, 10y, 30y — which is what a rates risk report
+actually shows. The scalar is the sum, and the sum is the least informative
+row.
+
+## Hedging with it
+
+DV01 is how hedge ratios are set. To hedge a position with an instrument, you
+match the DV01s:
+
+```
+hedge notional = position DV01 ÷ hedge instrument DV01 per unit
+```
+
+If a corporate bond position has a DV01 of £42,000 and a futures contract has a
+DV01 of £70 per contract, you need about 600 contracts. In practice this is
+adjusted for the basis between the two instruments and rebalanced as DV01
+itself drifts with yields — the hedge ratio is not constant, which is convexity
+appearing again.
+
+## Where it sits in a risk stack
+
+DV01 is a **sensitivity**, not a loss estimate. It tells you how exposed you
+are per unit of move; it does not tell you how large a move to expect. That is
+the job of [VAR and Expected Shortfall](/learn/risk/var-and-es), which combine
+sensitivities with a view on distribution.
+
+Both matter, and they fail differently. Sensitivities are precise and local:
+correct for small moves, silent about large ones. Distributional measures cover
+the large moves and depend entirely on the history or model you feed them. A
+desk watches both, and trusts neither alone.
+
+## From the build side
+
+My first serious risk work was extending Deutsche Bank's FX desk risk
+calculator to Fixed Income — taking a system that priced one asset class and
+teaching it another, then migrating the workflow off spreadsheets onto a live
+platform. Later, at Revolut, DV01 was one line in a greenfield engine that also
+carried mark-to-market, collateral and variation margin, VAR/ES and Greeks.
+
+The recurring difficulty was never the derivative. It was **agreeing what a
+position was**: the same trade represented differently in three systems,
+settlement conventions that shifted a cash flow by a day, and day-count
+conventions that quietly changed the answer. Anyone who has built one of these
+will tell you the same thing — the risk number is a thin layer of arithmetic
+over a deep pile of reference data, and the pile is where the bugs live.
+
+---
+
+## Books and films
+
+Source: https://batiaev.com/learn/library
+Topics: books, films, further reading, volatility, greeks, risk measure, pricing
+
+What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+
+A short list rather than a long one. Everything here I have actually used, and
+I have said why in my own words — go to the publishers for the real thing.
+
+## The reference
+
+**Options, Futures and Other Derivatives** — John C. Hull. The standard text,
+and standard for a reason: it is the book desks actually keep on the shelf. Not
+a book to read cover to cover. A book to own and open at the chapter you need,
+which for most people is binomial trees first and the Greeks second.
+
+**Option Volatility and Pricing** — Sheldon Natenberg. Where Hull gives you the
+mathematics, Natenberg gives you the trader's intuition for what the numbers
+mean when the market is moving. If you only read one, and you intend to trade
+rather than to price, read this one.
+
+**Dynamic Hedging** — Nassim Nicholas Taleb. Difficult, opinionated, and
+written by someone who ran the risk rather than modelled it. Worth the effort
+specifically for its treatment of the places where the standard model quietly
+stops working.
+
+## On risk, more broadly
+
+**Against the Gods** — Peter L. Bernstein. A history of how humanity learned to
+measure risk at all. Useful perspective on why the tools look the way they do.
+
+**When Genius Failed** — Roger Lowenstein. The LTCM collapse. Read it as a case
+study in what happens when a correct model meets a liquidity constraint and a
+correlated market. The relevant lesson is not that the mathematics was wrong.
+
+**The Black Swan** — Nassim Nicholas Taleb. Overexposed and still worth it, if
+you read it as an argument about the shape of distributions rather than as
+general-purpose contrarianism.
+
+## Engineering, for the systems underneath
+
+**Designing Data-Intensive Applications** — Martin Kleppmann. Nothing to do
+with options, everything to do with building the systems that price them. The
+chapters on consistency and stream processing are the ones that mattered to me
+when we were building risk engines that had to be correct at a million updates
+a second.
+
+## Films
+
+Watch these for the culture, not the mechanics — all three compress and
+simplify, and the first is fiction throughout.
+
+**Margin Call** (2011). The best film about what it is actually like inside a
+bank during a crisis: a risk model returns an unacceptable number overnight,
+and the rest is people deciding what to do about it. Quiet, accurate about
+hierarchy, and unusually fair to everyone involved.
+
+**The Big Short** (2015). Structurally the clearest popular explanation of CDOs
+and credit default swaps ever put on screen, at the cost of some caricature.
+The mechanics of the trade are broadly right.
+
+**Trading Places** (1983). A comedy that ends in a commodities pit, and
+genuinely useful on how a corner works. Also responsible, indirectly, for a
+rule in US law about trading on misappropriated government data.
+
+## Where else to look
+
+The exchange documentation is better than most books for mechanics —
+specifications, margin methodology, contract terms. It is dry, free, and
+authoritative, which is a rare combination. If you want to understand SPAN
+margining, the exchange's own methodology paper will teach you more in an hour
+than any textbook chapter.

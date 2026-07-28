@@ -1,0 +1,137 @@
+Sell a naked put and your broker asks for a large deposit. Buy a further
+out-of-the-money put against it, turning the position into a spread with a
+known worst case, and the requirement collapses. Nothing about your view
+changed. What changed is that the margin system can now see the hedge.
+
+That system, on most futures and options exchanges, is **SPAN** — Standard
+Portfolio Analysis of Risk, introduced by the CME in 1988 and licensed by
+exchanges worldwide. It is not complicated, but it is almost never explained,
+so people learn its behaviour by being surprised by it.
+
+## The idea
+
+Strategy-based margining looks at each position and applies a rule. Portfolio
+margining asks a different question: **across a set of plausible market moves,
+what is the worst this whole portfolio does in one day?** That number, roughly,
+is your margin.
+
+Because it values the portfolio as a whole, offsetting positions offset. A
+long call and a short call at a higher strike are not two margin charges; they
+are one spread with a capped loss.
+
+## The risk array
+
+The exchange publishes, for each contract, two parameters: a **price scan
+range** — how far it thinks the underlying can move in a day — and a
+**volatility scan range**. SPAN then revalues your portfolio under sixteen
+scenarios built from those two numbers.
+
+| # | Underlying move | Volatility | Weight |
+|---|---|---|---|
+| 1–2 | Unchanged | Up / down | 100% |
+| 3–4 | +⅓ range | Up / down | 100% |
+| 5–6 | −⅓ range | Up / down | 100% |
+| 7–8 | +⅔ range | Up / down | 100% |
+| 9–10 | −⅔ range | Up / down | 100% |
+| 11–12 | +1 range | Up / down | 100% |
+| 13–14 | −1 range | Up / down | 100% |
+| 15 | +2 ranges | Unchanged | 35% |
+| 16 | −2 ranges | Unchanged | 35% |
+
+Fourteen scenarios walk the price across the scan range in thirds, each paired
+with volatility rising and falling. The last two are the tail: a move of twice
+the scan range, counted at a fraction — conventionally 35% — because the
+exchange wants some charge for a crash without margining every account as
+though one is due tomorrow.
+
+Your **scan risk** is the worst loss across those sixteen rows. Note what this
+implies: the volatility legs mean a short option position can be charged its
+worst case on a day the underlying does not move at all.
+
+<StrategyFigure presetId="short-strangle" />
+
+Drag the volatility slider on that strangle and watch the pre-expiry line drop
+while the expiry line stays put. Rows 1 and 2 of the risk array are exactly
+that move. This is why short volatility positions get margin calls in quiet
+markets — the scan found the vol-up scenario, not a price move.
+
+## The parts nobody mentions
+
+Scan risk is the headline, but the total is built from four more pieces.
+
+**Intra-commodity spread charge.** SPAN treats all months of a contract as one
+underlying, which is generous — a long March and short June future nets to
+almost nothing. But the months do not move identically, so a charge is added
+back for calendar spread risk. It is small, and it surprises people who
+expected a perfectly hedged spread to be free.
+
+**Inter-commodity spread credit.** Related products get a discount for
+offsetting. Long crude against short heating oil is genuinely less risky than
+either alone, and the exchange grants a percentage credit for recognised pairs.
+
+**Delivery or spot month charge.** Contracts near expiry behave badly —
+liquidity thins and squeezes happen — so an extra charge applies as delivery
+approaches.
+
+**Short option minimum.** The one that catches people. A portfolio of deep
+out-of-the-money short options can scan to almost no risk, because in all
+sixteen scenarios the options stay worthless. SPAN refuses to believe this and
+imposes a floor per short contract. Sell enough far-out-of-the-money options
+and your margin is set entirely by this minimum, with the scan irrelevant.
+
+The total is roughly:
+
+```
+margin = max(scan risk + intra-commodity charge − inter-commodity credit,
+             short option minimum)
+             + delivery charge
+```
+
+## What this means when you trade
+
+- **Defining your risk cuts your margin, often dramatically.** Buying the wing
+  on a short position costs premium and buys back a large part of the deposit.
+  This is most of the reason iron condors exist rather than strangles.
+- **Margin is not static.** The exchange raises scan ranges when realised
+  volatility rises — which is precisely when your position is already losing.
+  Requirements expand into a falling market, and forced liquidation is a
+  liquidity event, not a solvency one. That mechanism has ended more accounts
+  than bad directional calls.
+- **Check the short option minimum before scaling.** A strategy that looks
+  capital-efficient at ten contracts may be floored at a hundred.
+- **Your broker may add to it.** SPAN is the exchange's number. Brokers
+  routinely apply a multiplier on top, and retail multipliers can be
+  substantial.
+
+## Notes from building one
+
+I built the risk and margin engine at Otkritie — SPAN portfolio margining
+across futures and options on index, commodity, FX and single stocks, feeding
+a real-time engine handling over a million updates a second for 400,000
+investors. Three things I did not expect going in.
+
+The arithmetic is the easy part. Sixteen revaluations per contract is nothing.
+The hard part is the **reference data**: scan ranges, tiers, spread definitions
+and credit rates change, they arrive as files on a schedule, and a stale
+parameter produces a confidently wrong number rather than an error.
+
+The second is that **the option pricing model inside the margin calculation has
+to match the one on the trading screen**, or clients see a margin requirement
+that disagrees with their own P&L and — reasonably — do not trust either.
+
+The third is that margin is a **real-time obligation, not a report**. It has to
+be right on every tick, because it gates whether an order can be placed at all.
+That constraint, more than the mathematics, is what makes a margin engine an
+engineering problem.
+
+## Beyond SPAN
+
+Exchanges are migrating from the original algorithm to **SPAN 2**, which
+combines a historical-value-at-risk model with a stress component and handles
+liquidity and concentration more explicitly. The intuition above still holds —
+scenarios, portfolio offsets, and add-ons for the things a scenario grid
+misses. The parameters change; the shape of the answer does not.
+
+For the authoritative detail, go to the exchange's own methodology
+documentation rather than a textbook. It is free, precise, and updated when the
+rules change.

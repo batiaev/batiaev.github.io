@@ -237,3 +237,78 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.12);
 }
+
+/* Knowledge-base prose. Deliberately hand-rolled rather than @tailwindcss/typography
+   so the type scale matches the rest of the site instead of a second one. */
+.prose-page {
+  @apply text-base leading-relaxed;
+}
+
+.prose-page h2 {
+  @apply font-display mt-10 mb-3 scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl;
+}
+
+.prose-page h3 {
+  @apply mt-8 mb-2 scroll-mt-24 text-base font-semibold sm:text-lg;
+}
+
+.prose-page p {
+  @apply text-muted-foreground mb-4 leading-relaxed;
+}
+
+.prose-page ul,
+.prose-page ol {
+  @apply text-muted-foreground mb-4 space-y-1.5 pl-5;
+}
+
+.prose-page ul {
+  @apply list-disc;
+}
+
+.prose-page ol {
+  @apply list-decimal;
+}
+
+.prose-page li {
+  @apply leading-relaxed;
+}
+
+.prose-page a {
+  @apply text-primary hover:underline;
+}
+
+.prose-page strong {
+  @apply text-foreground font-semibold;
+}
+
+.prose-page code {
+  @apply bg-accent text-foreground rounded px-1.5 py-0.5 text-[0.9em];
+}
+
+.prose-page blockquote {
+  @apply border-border text-muted-foreground my-6 border-l-2 pl-4 italic;
+}
+
+.prose-page table {
+  @apply mb-6 w-full text-sm;
+}
+
+.prose-page th {
+  @apply border-border/60 text-muted-foreground border-b py-2 text-left text-xs font-medium uppercase tracking-wider;
+}
+
+.prose-page td {
+  @apply border-border/40 text-muted-foreground border-b py-2;
+}
+
+.prose-page hr {
+  @apply border-border/40 my-10;
+}
+
+.prose-page pre {
+  @apply border-border/60 bg-accent/40 mb-6 overflow-x-auto rounded-lg border p-4 text-sm leading-relaxed;
+}
+
+.prose-page pre code {
+  @apply bg-transparent p-0 text-[0.95em];
+}

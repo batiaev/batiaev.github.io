@@ -1,0 +1,79 @@
+The Greeks are four questions about the same position, each asking what happens
+to its value when one thing moves and everything else stands still.
+
+You do not need the calculus to use them. You need to know which one is
+currently your problem.
+
+## Delta — how much like the underlying is this?
+
+Delta is the change in the option's value for a one-point move in the
+underlying. A call runs from 0 (hopelessly out of the money) to 1 (so deep in
+the money it behaves like stock). A put runs from 0 to −1.
+
+The useful reading is as **equivalent position size**. A 0.4-delta call on 100
+shares behaves, for small moves, like owning 40 shares. Sum the deltas across a
+book and you have your net directional exposure in a single number — which is
+exactly what a trading desk's risk system reports.
+
+<StrategyFigure presetId="bull-call-spread" />
+
+## Gamma — how fast is delta changing?
+
+Gamma is the rate of change of delta. High gamma means your directional
+exposure is unstable: the position becomes rapidly more long as the price rises
+and more short as it falls.
+
+Gamma is largest at the money and close to expiry. This is why the last day of
+a contract's life is the dangerous one — a position that was comfortably hedged
+in the morning can be badly wrong by the afternoon without the underlying doing
+anything dramatic.
+
+Long options are long gamma, which is pleasant: the position gets longer as it
+wins. Short options are short gamma, which is the opposite, and it is the
+mechanism by which sold options produce sudden large losses.
+
+## Theta — what does waiting cost?
+
+Theta is the value lost per day from time passing alone. It is negative when
+you are long options and positive when you are short.
+
+Theta and gamma are two sides of one trade. Being long gamma — profiting from
+movement — is paid for with negative theta. Being short gamma earns theta and
+sells you the risk. There is no position that is long gamma and long theta;
+if you think you have found one, check the trade again.
+
+## Vega — what if the market changes its mind about risk?
+
+Vega is the change in value for a one-point move in implied volatility. It is
+not actually a Greek letter, which tells you something about how the vocabulary
+grew.
+
+Vega matters more than most people expect. You can be exactly right about
+direction and still lose, because implied volatility collapsed after the event
+you were positioned for. This is routine around earnings: the move happens, and
+the option holder loses anyway.
+
+<StrategyFigure presetId="long-straddle" />
+
+A straddle is nearly pure vega at the money — flat delta, and its value is
+almost entirely a view on volatility. Drag the volatility slider and watch the
+pre-expiry line lift and fall while the expiry line stays exactly where it is.
+That difference is what you are actually trading.
+
+## Which one kills you
+
+In roughly this order:
+
+1. **Gamma**, because it turns a manageable position into an unmanageable one
+   without warning, and it is worst exactly when you have least time to react.
+2. **Vega**, because it moves against you at the same moment as everything
+   else — volatility rises when markets fall, so a hedge gets more expensive
+   precisely when you want it.
+3. **Theta**, which is at least honest. It takes a predictable amount every
+   day and never surprises anyone.
+4. **Delta**, which is the risk everyone thinks about and the one most easily
+   hedged.
+
+The calculator reports all four aggregated across a whole position, which is
+the only level at which they are useful — individual leg Greeks rarely tell you
+what you want to know.

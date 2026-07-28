@@ -1,0 +1,66 @@
+A short list rather than a long one. Everything here I have actually used, and
+I have said why in my own words — go to the publishers for the real thing.
+
+## The reference
+
+**Options, Futures and Other Derivatives** — John C. Hull. The standard text,
+and standard for a reason: it is the book desks actually keep on the shelf. Not
+a book to read cover to cover. A book to own and open at the chapter you need,
+which for most people is binomial trees first and the Greeks second.
+
+**Option Volatility and Pricing** — Sheldon Natenberg. Where Hull gives you the
+mathematics, Natenberg gives you the trader's intuition for what the numbers
+mean when the market is moving. If you only read one, and you intend to trade
+rather than to price, read this one.
+
+**Dynamic Hedging** — Nassim Nicholas Taleb. Difficult, opinionated, and
+written by someone who ran the risk rather than modelled it. Worth the effort
+specifically for its treatment of the places where the standard model quietly
+stops working.
+
+## On risk, more broadly
+
+**Against the Gods** — Peter L. Bernstein. A history of how humanity learned to
+measure risk at all. Useful perspective on why the tools look the way they do.
+
+**When Genius Failed** — Roger Lowenstein. The LTCM collapse. Read it as a case
+study in what happens when a correct model meets a liquidity constraint and a
+correlated market. The relevant lesson is not that the mathematics was wrong.
+
+**The Black Swan** — Nassim Nicholas Taleb. Overexposed and still worth it, if
+you read it as an argument about the shape of distributions rather than as
+general-purpose contrarianism.
+
+## Engineering, for the systems underneath
+
+**Designing Data-Intensive Applications** — Martin Kleppmann. Nothing to do
+with options, everything to do with building the systems that price them. The
+chapters on consistency and stream processing are the ones that mattered to me
+when we were building risk engines that had to be correct at a million updates
+a second.
+
+## Films
+
+Watch these for the culture, not the mechanics — all three compress and
+simplify, and the first is fiction throughout.
+
+**Margin Call** (2011). The best film about what it is actually like inside a
+bank during a crisis: a risk model returns an unacceptable number overnight,
+and the rest is people deciding what to do about it. Quiet, accurate about
+hierarchy, and unusually fair to everyone involved.
+
+**The Big Short** (2015). Structurally the clearest popular explanation of CDOs
+and credit default swaps ever put on screen, at the cost of some caricature.
+The mechanics of the trade are broadly right.
+
+**Trading Places** (1983). A comedy that ends in a commodities pit, and
+genuinely useful on how a corner works. Also responsible, indirectly, for a
+rule in US law about trading on misappropriated government data.
+
+## Where else to look
+
+The exchange documentation is better than most books for mechanics —
+specifications, margin methodology, contract terms. It is dry, free, and
+authoritative, which is a rare combination. If you want to understand SPAN
+margining, the exchange's own methodology paper will teach you more in an hour
+than any textbook chapter.
