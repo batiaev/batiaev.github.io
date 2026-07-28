@@ -2,44 +2,23 @@ import React, { useEffect, useRef, Suspense, lazy } from 'react'
 import { CheckCheck, ArrowUpRight } from 'lucide-react'
 import data from '@/data/data.json'
 import { roleAnchor } from '@/lib/showcase'
+import { revealOnScroll } from '@/lib/reveal'
 
 const ScopeChart = lazy(() => import('@/components/ScopeChart'))
 
 const Experience = () => {
-  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const timelineItemsRef = useRef<(HTMLLIElement | null)[]>([])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed')
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    if (sectionRef.current) {
-      sectionRef.current.classList.add('reveal-on-scroll')
-      observer.observe(sectionRef.current)
-    }
-
-    timelineItemsRef.current.forEach((item) => {
-      if (item) {
-        item.classList.add('reveal-on-scroll')
-        observer.observe(item)
-      }
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  useEffect(
+    () => revealOnScroll([headerRef.current, ...timelineItemsRef.current]),
+    [],
+  )
 
   return (
-    <section id="experience" className="section py-16 sm:py-20" ref={sectionRef}>
+    <section id="experience" className="section py-16 sm:py-20">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
+        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14" ref={headerRef}>
           <div className="highlight-chip">Selected experience</div>
           <h2 className="section-title">Four kinds of company, one track record</h2>
           <p className="section-subtitle mx-auto">

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { revealOnScroll } from '@/lib/reveal';
 import { Card, CardContent } from '@/components/ui/card';
 import { Linkedin, Quote } from 'lucide-react';
 import data from "../data/data.json";
@@ -13,27 +14,7 @@ import {
 const Testimonials = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      sectionRef.current.classList.add('reveal-on-scroll');
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
     <section id="testimonials" className="section bg-accent/30" ref={sectionRef}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { revealOnScroll } from '@/lib/reveal';
 import { Card, CardContent } from '@/components/ui/card';
 import { CalendarCheck2, Mic, PencilLine, FileText, Youtube } from 'lucide-react';
 import data from "../data/data.json";
@@ -23,23 +24,7 @@ const Talks = () => {
     [track],
   );
 
-  useEffect(() => {
-    const sectionObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      sectionRef.current.classList.add('reveal-on-scroll');
-      sectionObserver.observe(sectionRef.current);
-    }
-
-    return () => sectionObserver.disconnect();
-  }, []);
+  useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
     <section id="talks" className="section pt-8" ref={sectionRef}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { revealOnScroll, staggerIn } from '@/lib/reveal';
 import {
   CodeIcon,
   TrendingUpIcon,
@@ -47,47 +48,11 @@ const Services = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const sectionObserver = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed');
-          }
-        },
-        { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      sectionRef.current.classList.add('reveal-on-scroll');
-      sectionObserver.observe(sectionRef.current);
-    }
-
-    const cardObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                entry.target.classList.add('animate-scale-in');
-              }, parseInt(entry.target.getAttribute('data-delay') || '0'));
-            }
-          });
-        },
-        { threshold: 0.1 }
-    );
-
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        card.setAttribute('data-delay', `${index * 100}`);
-        cardObserver.observe(card);
-      }
-    });
-
+    const stopReveal = revealOnScroll([sectionRef.current]);
+    const stopStagger = staggerIn(cardsRef.current, 'animate-scale-in');
     return () => {
-      if (sectionRef.current) {
-        sectionObserver.unobserve(sectionRef.current);
-      }
-      cardsRef.current.forEach((card) => {
-        if (card) cardObserver.unobserve(card);
-      });
+      stopReveal();
+      stopStagger();
     };
   }, []);
 

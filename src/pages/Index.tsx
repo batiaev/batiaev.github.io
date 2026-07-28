@@ -13,33 +13,11 @@ const Talks = lazy(() => import("@/components/Talks"));
 
 const Index = () => {
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-      observer.observe(el);
-    });
-
     const hash = window.location.hash;
-    if (hash) {
-      requestAnimationFrame(() => {
-        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
-      });
-    }
-
-    return () => {
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
+    if (!hash) return;
+    requestAnimationFrame(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    });
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { revealOnScroll } from '@/lib/reveal'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, BookOpen, GraduationCap } from 'lucide-react'
 import data from '@/data/data.json'
@@ -7,19 +8,7 @@ import { SECTIONS } from '@/learn/registry'
 const Teaching = () => {
   const sectionRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    el.classList.add('reveal-on-scroll')
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) entry.target.classList.add('is-revealed')
-      },
-      { threshold: 0.1 },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+  useEffect(() => revealOnScroll([sectionRef.current]), [])
 
   const { chip, title, subtitle, courses, tools, notes } = data.teaching
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { revealOnScroll } from "@/lib/reveal";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import data from "@/data/data.json";
 
@@ -34,19 +35,7 @@ const Media = ({ item }: { item: Initiative }) => {
 const Initiatives = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    el.classList.add("reveal-on-scroll");
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-revealed");
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
     <section
