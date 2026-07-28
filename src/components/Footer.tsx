@@ -12,12 +12,25 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
-            <h3 className="font-display mb-4 text-xl font-semibold sm:text-2xl">
-              {data.name}
-            </h3>
-            <p className="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">
-              {data.description}
-            </p>
+            <div className="flex items-start gap-4">
+              <img
+                src={data.avatar}
+                alt={data.name}
+                width={72}
+                height={72}
+                loading="lazy"
+                decoding="async"
+                className="border-border/60 h-16 w-16 shrink-0 rounded-full border object-cover shadow-subtle ring-2 ring-background ring-offset-2 ring-offset-border/40 sm:h-[72px] sm:w-[72px]"
+              />
+              <div>
+                <h3 className="font-display mb-2 text-xl font-semibold sm:text-2xl">
+                  {data.name}
+                </h3>
+                <p className="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">
+                  {data.description}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div>

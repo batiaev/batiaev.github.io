@@ -1,9 +1,10 @@
 # Anton Batiaev
 
-> Fintech founder and builder. Fintecy (personal finance) and SHIP (a typed
-> knowledge graph for engineering teams). VP Product & Engineering at
-> Capital.com; previously Revolut, Vega, Nevis and Deutsche Bank. Nine years
-> building derivatives pricing, margin and risk systems.
+> VP Product & Engineering at Capital.com, running the trading-platform tribe;
+> previously Revolut, CTO at Vega and Nevis, and Deutsche Bank. Ten years
+> building execution, derivatives pricing, margin and risk systems. Also builds
+> Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
+> graph for engineering teams).
 
 This site hosts a free options knowledge base and a set of finance
 calculators. Everything runs client-side; there are no accounts and no
@@ -51,9 +52,11 @@ How the positions above are margined and measured — the systems side, which is
 
 ### Library
 
-Where to go when this runs out.
+Where to go when this runs out — one page each for books, series and films.
 
-- [Books and films](https://batiaev.com/learn/library): What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+- [Books](https://batiaev.com/learn/library/books): The reference texts worth owning, the narratives worth reading, and where to look when both run out.
+- [TV series](https://batiaev.com/learn/library/series): Longer form gets closer to the texture of the job than any film has managed — desk culture, hierarchy, and the parts nobody puts in a prospectus.
+- [Films](https://batiaev.com/learn/library/films): Which films get the culture right even when they bend the mechanics, and which ones to watch knowing exactly what they are.
 
 ## Optional
 
@@ -939,14 +942,14 @@ over a deep pile of reference data, and the pile is where the bugs live.
 
 ---
 
-## Books and films
+## Books
 
-Source: https://batiaev.com/learn/library
-Topics: books, films, further reading, volatility, greeks, risk measure, pricing
+Source: https://batiaev.com/learn/library/books
+Topics: books, further reading, culture, volatility, greeks, risk measure, pricing
 
-What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+The reference texts worth owning, the narratives worth reading, and where to look when both run out.
 
-A short list rather than a long one. Everything here I have actually used, and
+A short list rather than a long one. Everything here I have actually read, and
 I have said why in my own words — go to the publishers for the real thing.
 
 ## The reference
@@ -966,14 +969,36 @@ written by someone who ran the risk rather than modelled it. Worth the effort
 specifically for its treatment of the places where the standard model quietly
 stops working.
 
+## Narrative and memoir
+
+The textbooks tell you how the instruments work. These tell you what happens
+when people use them.
+
+**Liar's Poker** — Michael Lewis. Salomon Brothers in the eighties, and more or
+less the book that invented this genre. Everything below is in conversation
+with it.
+
+**The Big Short** — Michael Lewis. Sharper than the film on the actual
+mechanics of the trade: what the CDS contracts said, why the counterparties
+kept writing them, and how long being right can take.
+
+**Flash Boys** — Michael Lewis. HFT and market microstructure. Contested by
+practitioners on several points, and still the most readable route into why
+venue design, latency and order routing decide who gets filled.
+
+**When Genius Failed** — Roger Lowenstein. The definitive account of LTCM: a
+quant fund with the right models blowing up on a liquidity constraint and a
+correlated market. The relevant lesson is not that the mathematics was wrong.
+
+**Fool's Gold** — Gillian Tett. The JPMorgan team that invented the credit
+derivatives later used to blow up the system. Narrative rather than textbook,
+and unusually good on how a well-intentioned instrument gets away from its
+authors.
+
 ## On risk, more broadly
 
 **Against the Gods** — Peter L. Bernstein. A history of how humanity learned to
 measure risk at all. Useful perspective on why the tools look the way they do.
-
-**When Genius Failed** — Roger Lowenstein. The LTCM collapse. Read it as a case
-study in what happens when a correct model meets a liquidity constraint and a
-correlated market. The relevant lesson is not that the mathematics was wrong.
 
 **The Black Swan** — Nassim Nicholas Taleb. Overexposed and still worth it, if
 you read it as an argument about the shape of distributions rather than as
@@ -987,24 +1012,6 @@ chapters on consistency and stream processing are the ones that mattered to me
 when we were building risk engines that had to be correct at a million updates
 a second.
 
-## Films
-
-Watch these for the culture, not the mechanics — all three compress and
-simplify, and the first is fiction throughout.
-
-**Margin Call** (2011). The best film about what it is actually like inside a
-bank during a crisis: a risk model returns an unacceptable number overnight,
-and the rest is people deciding what to do about it. Quiet, accurate about
-hierarchy, and unusually fair to everyone involved.
-
-**The Big Short** (2015). Structurally the clearest popular explanation of CDOs
-and credit default swaps ever put on screen, at the cost of some caricature.
-The mechanics of the trade are broadly right.
-
-**Trading Places** (1983). A comedy that ends in a commodities pit, and
-genuinely useful on how a corner works. Also responsible, indirectly, for a
-rule in US law about trading on misappropriated government data.
-
 ## Where else to look
 
 The exchange documentation is better than most books for mechanics —
@@ -1012,3 +1019,82 @@ specifications, margin methodology, contract terms. It is dry, free, and
 authoritative, which is a rare combination. If you want to understand SPAN
 margining, the exchange's own methodology paper will teach you more in an hour
 than any textbook chapter.
+
+---
+
+## TV series
+
+Source: https://batiaev.com/learn/library/series
+Topics: series, further reading, culture, risk measure
+
+Longer form gets closer to the texture of the job than any film has managed — desk culture, hierarchy, and the parts nobody puts in a prospectus.
+
+A film has two hours and needs a crisis to fill them. A series has time for the
+ordinary weeks — the standups, the politics, the slow attrition — which is
+where almost all of the actual job lives.
+
+## On the desk
+
+**Industry** (2020– ). The most accurate thing on screen about grad-scheme
+culture, desk politics and the psychological cost of sell-side trading. It gets
+the jargon and the hierarchy right, which almost nothing else does, and it is
+honest that most of the pressure is social rather than mathematical.
+
+## On the buy side
+
+**Billions** (2016–2023). Hedge fund against US Attorney, at length. More about
+power and ego than mechanics, but genuinely good on activist positions, the
+politics of a fund's investor base, and the grey edges of insider trading.
+
+## Adjacent, and worth it
+
+**Succession** (2018–2023). Not finance exactly, and still essential on
+family-controlled conglomerates, M&A, and how a board actually gets worked. If
+you have ever sat in a governance meeting where the real decision happened
+somewhere else, it will feel familiar.
+
+Watch all three for the culture rather than the mechanics. None of them will
+teach you to price anything, and that is not what they are for.
+
+---
+
+## Films
+
+Source: https://batiaev.com/learn/library/films
+Topics: films, further reading, culture, pricing
+
+Which films get the culture right even when they bend the mechanics, and which ones to watch knowing exactly what they are.
+
+Watch these for the culture, not the mechanics — all of them compress and
+simplify, and some of them are fiction throughout. Ranked roughly by how much
+of the job they get right.
+
+## The ones that get it right
+
+**Margin Call** (2011). The best of them: a risk model returns an unacceptable
+number overnight, and the rest is people deciding what to do about it.
+Understated, dialogue-driven, and accurate about hierarchy in a way the others
+are not. If you watch one, watch this.
+
+**The Big Short** (2015). The clearest popular explanation of CDOs and credit
+default swaps ever put on screen, at the cost of some caricature. Conceptually
+sound, and the fourth-wall explainers earn their place. Read the book for the
+mechanics.
+
+**Trading Places** (1983). A comedy that ends in a commodities pit, and
+genuinely useful on how a corner works. Also responsible, indirectly, for a
+rule in US law about trading on misappropriated government data.
+
+## The ones about the culture
+
+**Wall Street** (1987) and **Money Never Sleeps** (2010). Dated, and still the
+cultural template for the whole era — "greed is good" came from here, and was
+not meant as advice. Watch the first; the sequel is for completeness.
+
+**Boiler Room** (2000). Pump-and-dump brokerage culture. More about sales cults
+than about trading, which is precisely what makes it useful: the pressure it
+depicts is real and has not gone anywhere.
+
+**The Wolf of Wall Street** (2013). Stratton Oakmont at full volume. About
+excess and fraud rather than markets. Enjoyable, frequently mistaken for
+aspirational, and worth watching only if you keep that straight.

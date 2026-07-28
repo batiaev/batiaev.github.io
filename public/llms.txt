@@ -1,9 +1,9 @@
 # Anton Batiaev
 
-> Fintech founder and builder. Fintecy (personal finance) and SHIP (a typed
-> knowledge graph for engineering teams). VP Product & Engineering at
-> Capital.com; previously Revolut, Vega, Nevis and Deutsche Bank. Nine years
-> building derivatives pricing, margin and risk systems.
+> Fintech founder and builder. VP Product & Engineering at Capital.com, running the trading-platform tribe;
+> previously Revolut, CTO at Vega and Nevis, and Deutsche Bank. Ten years
+> building execution, derivatives pricing, margin and risk systems. Also builds
+> Fintecy and SHIP.
 
 This site hosts a free options knowledge base and a set of finance
 calculators. Everything runs client-side; there are no accounts and no
@@ -51,9 +51,11 @@ How the positions above are margined and measured — the systems side, which is
 
 ### Library
 
-Where to go when this runs out.
+Where to go when this runs out — one page each for books, series and films.
 
-- [Books and films](https://batiaev.com/learn/library): What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.
+- [Books](https://batiaev.com/learn/library/books): The reference texts worth owning, the narratives worth reading, and where to look when both run out.
+- [TV series](https://batiaev.com/learn/library/series): Longer form gets closer to the texture of the job than any film has managed — desk culture, hierarchy, and the parts nobody puts in a prospectus.
+- [Films](https://batiaev.com/learn/library/films): Which films get the culture right even when they bend the mechanics, and which ones to watch knowing exactly what they are.
 
 ## Optional
 

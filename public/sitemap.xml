@@ -116,7 +116,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://batiaev.com/learn/library</loc>
+    <loc>https://batiaev.com/learn/library/books</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/library/series</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/library/films</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -354,7 +354,19 @@ const expectations: [string, boolean][] = [
   ],
   [
     'library recommends without reproducing',
-    learnPages.find(({ page }) => page.slug === 'library')!.html.includes('Natenberg'),
+    learnPages.find(({ page }) => page.slug === 'library/books')!.html.includes('Natenberg'),
+  ],
+  [
+    'library is split into books, series and films',
+    ['library/books', 'library/series', 'library/films'].every((slug) =>
+      learnPages.some(({ page }) => page.slug === slug),
+    ),
+  ],
+  [
+    'each library page carries only its own medium',
+    learnPages.find(({ page }) => page.slug === 'library/films')!.html.includes('Margin Call') &&
+      !learnPages.find(({ page }) => page.slug === 'library/books')!.html.includes('Margin Call') &&
+      learnPages.find(({ page }) => page.slug === 'library/series')!.html.includes('Industry'),
   ],
   [
     'product cards use their own logos',

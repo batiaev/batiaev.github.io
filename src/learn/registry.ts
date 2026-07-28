@@ -281,21 +281,37 @@ const riskPages: LearnPage[] = [
 
 const libraryPages: LearnPage[] = [
   {
-    slug: "library",
-    // Also tagged with what the recommendations are about, so the page is
+    slug: "library/books",
+    // Also tagged with what the recommendations are about, so each page is
     // reachable from the topics it covers rather than being a dead end.
     tags: [
       "books",
-      "films",
       "further reading",
+      "culture",
       "volatility",
       "greeks",
       "risk measure",
       "pricing",
     ],
-    title: "Books and films",
+    title: "Books",
     summary:
-      "What is genuinely worth reading on derivatives and risk, and which films get the culture right even when they bend the mechanics.",
+      "The reference texts worth owning, the narratives worth reading, and where to look when both run out.",
+    section: "library",
+  },
+  {
+    slug: "library/series",
+    tags: ["series", "further reading", "culture", "risk measure"],
+    title: "TV series",
+    summary:
+      "Longer form gets closer to the texture of the job than any film has managed — desk culture, hierarchy, and the parts nobody puts in a prospectus.",
+    section: "library",
+  },
+  {
+    slug: "library/films",
+    tags: ["films", "further reading", "culture", "pricing"],
+    title: "Films",
+    summary:
+      "Which films get the culture right even when they bend the mechanics, and which ones to watch knowing exactly what they are.",
     section: "library",
   },
 ];
@@ -324,7 +340,7 @@ export const SECTIONS: LearnSection[] = [
   {
     id: "library",
     title: "Library",
-    blurb: "Where to go when this runs out.",
+    blurb: "Where to go when this runs out — one page each for books, series and films.",
     pages: libraryPages,
   },
 ];
