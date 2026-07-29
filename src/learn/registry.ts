@@ -277,13 +277,19 @@ const riskPages: LearnPage[] = [
       "The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.",
     section: "risk",
   },
+  {
+    slug: "risk/dynamic-hedging",
+    tags: ["hedging", "gamma", "greeks", "volatility", "short premium", "risk systems", "pricing"],
+    title: "Dynamic hedging, and where the premium goes",
+    summary:
+      "Sell an option, hedge it to expiry, and watch the premium leave through the hedge — why the price you collect is the price of the gamma you are short.",
+    section: "risk",
+  },
 ];
 
 const libraryPages: LearnPage[] = [
   {
     slug: "library/books",
-    // Also tagged with what the recommendations are about, so each page is
-    // reachable from the topics it covers rather than being a dead end.
     tags: [
       "books",
       "further reading",

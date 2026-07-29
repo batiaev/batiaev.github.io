@@ -121,6 +121,13 @@
         "topic": "Derivatives"
       },
       {
+        "name": "Dynamic hedging simulator",
+        "description": "Sell an option and delta-hedge it to expiry. Set the volatility you sold against the volatility the market delivers, and watch the premium leave through the hedge.",
+        "href": "/tools/hedging",
+        "status": "Live",
+        "topic": "Derivatives"
+      },
+      {
         "name": "UK take-home, four ways",
         "description": "Employed, self-employed, own company or umbrella — the same money through each wrapper, so you can see what the structure costs rather than the band.",
         "href": "/tools/take-home",

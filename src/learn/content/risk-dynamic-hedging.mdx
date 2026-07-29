@@ -1,0 +1,86 @@
+Every other page here describes a position and what it is worth. This one is
+about what happens next, because an option is not a bet you place and leave.
+Sell one and you have taken on an exposure that changes every time the
+underlying moves, and the only way to see what that costs is to run it forward.
+
+<HedgeFigure />
+
+## What the premium actually buys
+
+Sell a thirty-day at-the-money call at 25% volatility and roughly 300 lands in
+your account. It is tempting to read that as income. It is not. It is the
+market's estimate of what it will cost you to stay flat until expiry.
+
+Being short the call leaves you short delta as the underlying rises, so you buy
+to stay hedged. When it falls you sell. Buy high, sell low, thirty times, and
+the losses accumulate — that is what being short gamma means, and it is the
+only reason anyone pays you the premium in the first place.
+
+Run the figure above a few times. The premium is always about 300. The cost of
+hedging is always about 300. What is left over changes sign from path to path
+and is small either way. That is not the hedge failing. That is the option
+being correctly priced.
+
+## When you keep it
+
+The premium is the price of a forecast: 25% annualised. The market either
+delivers that or it does not.
+
+<HedgeFigure
+  realisedVol={0.12}
+  seed={185}
+  caption="The same short call, in a market that only realises 12%. The forecast was wrong in your favour."
+/>
+
+The underlying barely leaves a six-point range, the hedge rarely has to chase
+it, and the hedging bill comes to about 180 against the 300 you took in. You
+keep the difference. This is the entire business model of a short-volatility
+book, and it is also why those books look brilliant for long stretches and then
+do not.
+
+<HedgeFigure
+  realisedVol={0.45}
+  seed={185}
+  caption="The same short call again, in a market realising 45%. Same premium, same hedge, different world."
+/>
+
+Same position, same discipline, same 300 collected. The underlying travels to
+125 instead of 106, the hedge has to chase every swing, and the hedging bill
+comes to nearly 380 — the premium gone, and about 75 of your own money with it.
+
+The asymmetry worth noticing is not in these three numbers, which are close to
+symmetric around the break-even. It is in the distribution behind them.
+Realised volatility cannot fall below zero, so the best case is bounded: you
+keep the premium and no more. There is no matching ceiling on the other side.
+The quiet path pays you a known maximum; the violent path has no maximum at
+all, and a thirty-day chart of a market that merely doubled its volatility is
+nowhere near the bad end of that distribution.
+
+## The part the model does not tell you
+
+Black-Scholes assumes you rebalance continuously. Nobody does. Hedge thirty
+times instead of infinitely often and you are left with an error that has
+nothing to do with whether your volatility forecast was right — it is the
+residual of a discrete approximation to a continuous instruction.
+
+That error shrinks as you hedge more often, roughly with the square root of the
+number of rebalances. Going from six hedges to sixty cuts the spread of
+outcomes by about two thirds. It also multiplies your transaction costs, which
+the model prices at zero and your broker does not.
+
+So the real question on a hedging desk is never "how do I eliminate this error".
+It is "where does the marginal hedge stop paying for itself" — and that is a
+question about spread, commission and market impact, not about the Greeks.
+
+## Why this page exists
+
+The risk systems I have spent most of my career on exist to answer this
+question across a book rather than a single position: what am I short, what
+will it cost me to stay flat, and what happens to that number if the world
+moves. SPAN answers a version of it for margin. VAR answers a version of it for
+capital. This is the version a trader lives with every day.
+
+The figures above use the same Black-Scholes implementation as the
+[options P&L calculator](/tools/options-pnl) — no separate demo model, and no
+market data. The paths are generated and seeded, so the same button always
+produces the same story.

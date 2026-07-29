@@ -14,6 +14,7 @@ const LearnRoute = lazy(() => import("./pages/learn/LearnRoute"));
 const OptionsPnl = lazy(() => import("./pages/OptionsPnl"));
 const TakeHome = lazy(() => import("./pages/TakeHome"));
 const OfferCalculator = lazy(() => import("./pages/OfferCalculator"));
+const Hedging = lazy(() => import("./pages/Hedging"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const LoadingFallback = () => (
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/tools/options-pnl" element={<OptionsPnl />} />
             <Route path="/tools/take-home" element={<TakeHome />} />
             <Route path="/tools/offer" element={<OfferCalculator />} />
+            <Route path="/tools/hedging" element={<Hedging />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

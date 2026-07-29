@@ -1,6 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, Suspense, lazy } from "react";
+import { Link } from "react-router-dom";
 import { revealOnScroll } from "@/lib/reveal";
 import data from "@/data/data.json";
+
+const HedgeFigure = lazy(() => import("@/components/learn/HedgeFigure"));
 
 const DomainProof = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -38,6 +41,23 @@ const DomainProof = () => {
             </li>
           ))}
         </ul>
+
+        <div className="mx-auto mt-12 max-w-3xl">
+          <Suspense fallback={null}>
+            <HedgeFigure
+              compact
+              caption="Sell a thirty-day call at 25% implied and hedge it to expiry. The premium is not income — it is what the hedge is about to cost you."
+              footer={
+                <Link
+                  to="/learn/risk/dynamic-hedging"
+                  className="text-primary hover:underline"
+                >
+                  Read the note →
+                </Link>
+              }
+            />
+          </Suspense>
+        </div>
       </div>
     </section>
   );

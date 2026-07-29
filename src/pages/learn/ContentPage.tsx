@@ -1,6 +1,7 @@
 import React from "react";
 import LearnLayout from "@/components/learn/LearnLayout";
 import StrategyFigure from "@/components/learn/StrategyFigure";
+import HedgeFigure from "@/components/learn/HedgeFigure";
 
 import Basics from "@/learn/content/options-basics.mdx";
 import Greeks from "@/learn/content/options-greeks.mdx";
@@ -8,12 +9,13 @@ import Volatility from "@/learn/content/options-volatility.mdx";
 import Span from "@/learn/content/risk-span.mdx";
 import VarAndEs from "@/learn/content/risk-var-and-es.mdx";
 import Dv01 from "@/learn/content/risk-dv01.mdx";
+import DynamicHedging from "@/learn/content/risk-dynamic-hedging.mdx";
 import LibraryBooks from "@/learn/content/library-books.mdx";
 import LibrarySeries from "@/learn/content/library-series.mdx";
 import LibraryFilms from "@/learn/content/library-films.mdx";
 
 /** Components an .mdx file may use without importing them. */
-const components = { StrategyFigure };
+const components = { StrategyFigure, HedgeFigure };
 
 const BODIES: Record<string, React.ComponentType<{ components?: unknown }>> = {
   "options/basics": Basics,
@@ -22,6 +24,7 @@ const BODIES: Record<string, React.ComponentType<{ components?: unknown }>> = {
   "risk/span": Span,
   "risk/var-and-es": VarAndEs,
   "risk/dv01": Dv01,
+  "risk/dynamic-hedging": DynamicHedging,
   "library/books": LibraryBooks,
   "library/series": LibrarySeries,
   "library/films": LibraryFilms,

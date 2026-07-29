@@ -24,13 +24,18 @@ export const ROUTE_META: Record<string, RouteMeta> = {
   "/tools": {
     title: "Free finance calculators — options P&L, UK take-home, compensation",
     description:
-      "Free, no-signup calculators that run entirely in your browser: options strategy P&L with Greeks, UK take-home across four employment structures, and compensation comparison by archetype.",
+      "Free, no-signup calculators that run entirely in your browser: options strategy P&L with Greeks, a dynamic hedging simulator, UK take-home across four employment structures, and compensation comparison by archetype.",
   },
   "/tools/options-pnl": {
     title:
       "Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev",
     description:
       "Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.",
+  },
+  "/tools/hedging": {
+    title: "Dynamic hedging simulator — what the option premium actually buys",
+    description:
+      "Sell an option, delta-hedge it to expiry and watch the premium leave through the hedge. Set the volatility you sold at against the volatility the market delivers. Free, runs in your browser.",
   },
   "/tools/take-home": {
     title: `Employed vs self-employed vs limited company — UK take-home ${TAX_YEAR}`,

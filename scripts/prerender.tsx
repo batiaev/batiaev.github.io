@@ -53,6 +53,7 @@ const [
   { default: OptionsPnl },
   { default: TakeHome },
   { default: OfferCalculator },
+  { default: Hedging },
   { default: LearnIndex },
   { default: LearnRoute },
   { ROUTE_META },
@@ -65,6 +66,7 @@ const [
   import('../src/pages/OptionsPnl'),
   import('../src/pages/TakeHome'),
   import('../src/pages/OfferCalculator'),
+  import('../src/pages/Hedging'),
   import('../src/pages/learn/LearnIndex'),
   import('../src/pages/learn/LearnRoute'),
   import('../src/lib/routeMeta'),
@@ -89,6 +91,7 @@ const ROUTES: {
   { route: '/tools/options-pnl', file: 'tools/options-pnl/index.html', Page: OptionsPnl },
   { route: '/tools/take-home', file: 'tools/take-home/index.html', Page: TakeHome },
   { route: '/tools/offer', file: 'tools/offer/index.html', Page: OfferCalculator },
+  { route: '/tools/hedging', file: 'tools/hedging/index.html', Page: Hedging },
   { route: '/learn', file: 'learn/index.html', Page: LearnIndex },
   // Every knowledge-base page comes from the registry, so a page that exists
   // in the sidebar is always built and always in the sitemap.

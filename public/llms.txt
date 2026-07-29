@@ -48,6 +48,7 @@ How the positions above are margined and measured — the systems side, which is
 - [SPAN, and why your margin is not what you expected](https://batiaev.com/learn/risk/span): How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.
 - [VAR, and what it does not tell you](https://batiaev.com/learn/risk/var-and-es): Value at Risk in one sentence, the three ways to compute it, the reason it is not a coherent risk measure, and why regulators moved to Expected Shortfall.
 - [DV01 and the shape of rate risk](https://batiaev.com/learn/risk/dv01): The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.
+- [Dynamic hedging, and where the premium goes](https://batiaev.com/learn/risk/dynamic-hedging): Sell an option, hedge it to expiry, and watch the premium leave through the hedge — why the price you collect is the price of the gamma you are short.
 
 ### Library
 
