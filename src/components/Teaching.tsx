@@ -44,14 +44,6 @@ const Teaching = () => {
                 <p className="text-muted-foreground mb-3 text-sm leading-relaxed">
                   {notes.description}
                 </p>
-                <ul className="text-muted-foreground mb-4 flex-1 space-y-1.5 text-sm">
-                  {SECTIONS.map((section) => (
-                    <li key={section.id}>
-                      {section.title} — {section.pages.length}{' '}
-                      {section.pages.length === 1 ? 'page' : 'pages'}
-                    </li>
-                  ))}
-                </ul>
                 <span className="text-primary inline-flex items-center gap-1 text-sm font-medium">
                   {notes.cta}
                   <ArrowRight
@@ -61,20 +53,26 @@ const Teaching = () => {
                 </span>
               </Link>
 
-              <div className="border-border/60 flex flex-col rounded-lg border p-6">
-                <div className="mb-2 flex items-center gap-2">
-                  <GraduationCap className="text-primary h-5 w-5 shrink-0" aria-hidden />
-                  <h4 className="text-base font-semibold">
-                    <a
-                      href={courses.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-hover inline-flex items-center gap-1"
-                    >
+              {/* The whole card is the link, with the arrow in the corner —
+                  same shape as the product cards, rather than an arrow
+                  hanging off the end of the title. */}
+              <a
+                href={courses.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group border-border/60 hover:border-border flex flex-col rounded-lg border p-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <div className="mb-2 flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="text-primary h-5 w-5 shrink-0" aria-hidden />
+                    <h4 className="text-base font-semibold">
                       {courses.institution}
-                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                    </a>
-                  </h4>
+                    </h4>
+                  </div>
+                  <ArrowUpRight
+                    className="text-muted-foreground h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
                 </div>
                 <p className="text-muted-foreground mb-3 text-sm">
                   {courses.role} · {courses.period}
@@ -89,7 +87,7 @@ const Teaching = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </a>
             </div>
           </div>
 

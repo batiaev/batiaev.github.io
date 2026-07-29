@@ -54,6 +54,8 @@ const [
   { default: TakeHome },
   { default: OfferCalculator },
   { default: Hedging },
+  { default: Smile },
+  { default: Retirement },
   { default: LearnIndex },
   { default: LearnRoute },
   { ROUTE_META },
@@ -67,6 +69,8 @@ const [
   import('../src/pages/TakeHome'),
   import('../src/pages/OfferCalculator'),
   import('../src/pages/Hedging'),
+  import('../src/pages/Smile'),
+  import('../src/pages/Retirement'),
   import('../src/pages/learn/LearnIndex'),
   import('../src/pages/learn/LearnRoute'),
   import('../src/lib/routeMeta'),
@@ -92,6 +96,8 @@ const ROUTES: {
   { route: '/tools/take-home', file: 'tools/take-home/index.html', Page: TakeHome },
   { route: '/tools/offer', file: 'tools/offer/index.html', Page: OfferCalculator },
   { route: '/tools/hedging', file: 'tools/hedging/index.html', Page: Hedging },
+  { route: '/tools/smile', file: 'tools/smile/index.html', Page: Smile },
+  { route: '/tools/retirement', file: 'tools/retirement/index.html', Page: Retirement },
   { route: '/learn', file: 'learn/index.html', Page: LearnIndex },
   // Every knowledge-base page comes from the registry, so a page that exists
   // in the sidebar is always built and always in the sitemap.

@@ -12,8 +12,19 @@ const LearnSearch = lazy(() => import("@/components/learn/LearnSearch"));
 const LearnIndex = () => {
   useDocumentMeta(ROUTE_META["/learn"]);
 
+  // A cold load of /learn#risk lands at the top: the browser looks for the
+  // anchor before React has rendered it. Repeat the scroll once it exists, so
+  // a link to a section is worth sharing.
+  React.useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    requestAnimationFrame(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, []);
+
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <main>
         <section className="border-border/40 border-b py-10 sm:py-14">
@@ -26,21 +37,46 @@ const LearnIndex = () => {
               Back to home
             </Link>
             <div className="max-w-2xl">
-              <div className="highlight-chip">Notes</div>
+              <div className="highlight-chip">Domain depth</div>
               <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                Options, plainly
+                From the inside
               </h1>
               <p className="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg">
-                What I wish someone had written down for me when I was building
-                a pricing engine for the first time. Every strategy page carries
-                a live payoff chart driven by the same model as the calculator,
-                so nothing here can describe a shape the tool does not produce.
+                A deliberately narrow set of subjects: options pricing, the risk
+                systems underneath them, and the reading that shaped how I think
+                about both. I have built each of these in production — a
+                derivatives pricing engine and SPAN margining for 400k
+                investors, a greenfield risk system at Revolut, execution and
+                hedging at scale. Explanations of this material are not scarce.
+                Knowing which details decide whether it holds up is.
+              </p>
+              <p className="text-muted-foreground/80 mt-3 text-sm leading-relaxed">
+                Every page that carries a number runs on the same pricing engine
+                as the calculators, so nothing here can describe a shape the
+                tools do not produce.
               </p>
               <div className="mt-6 max-w-md">
                 <Suspense fallback={<div className="h-10" />}>
                   <LearnSearch />
                 </Suspense>
               </div>
+
+              {/* A jump list rather than a scroll: the sections are the shape of
+                  the thing, and there will be more of them. */}
+              <nav aria-label="Sections" className="mt-6 flex flex-wrap gap-2">
+                {SECTIONS.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="border-border/60 hover:border-border text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors"
+                  >
+                    {section.title}
+                    <span className="text-muted-foreground/70 text-xs tabular-nums">
+                      {section.pages.length}
+                    </span>
+                  </a>
+                ))}
+              </nav>
             </div>
           </div>
         </section>
@@ -48,11 +84,17 @@ const LearnIndex = () => {
         <section className="py-10 sm:py-14">
           <div className="container mx-auto space-y-12 px-4">
             {SECTIONS.map((section) => (
-              <div key={section.id}>
+              <div key={section.id} id={section.id} className="scroll-mt-24">
                 <div className="mb-5 max-w-2xl">
-                  <h2 className="font-display text-2xl font-semibold tracking-tight">
-                    {section.title}
-                  </h2>
+                  <div className="flex items-baseline gap-3">
+                    <h2 className="font-display text-2xl font-semibold tracking-tight">
+                      {section.title}
+                    </h2>
+                    <span className="text-muted-foreground text-sm tabular-nums">
+                      {section.pages.length}{" "}
+                      {section.pages.length === 1 ? "page" : "pages"}
+                    </span>
+                  </div>
                   <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
                     {section.blurb}
                   </p>

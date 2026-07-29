@@ -66,7 +66,7 @@ export function structuredDataFor(route: string): Json[] {
         isAccessibleForFree: true,
         isPartOf: {
           "@type": "Collection",
-          name: "Options, plainly",
+          name: "From the inside",
           url: `${ORIGIN}/learn`,
         },
       });

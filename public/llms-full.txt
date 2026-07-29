@@ -6,13 +6,16 @@
 > Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
 > graph for engineering teams).
 
-This site hosts a free options knowledge base and a set of finance
-calculators. Everything runs client-side; there are no accounts and no
-tracking beyond analytics.
+This site hosts a free knowledge base — options, derivatives risk and a
+reading list — plus a set of finance calculators. Everything runs client-side;
+there are no accounts and no tracking beyond analytics.
 
 ## Free tools
 
 - [Options P&L calculator — payoff, Greeks, breakevens | Anton Batiaev](https://batiaev.com/tools/options-pnl): Free options strategy calculator: exact expiry payoff, Black-Scholes and Black-76 P&L before expiry, Greeks, breakevens and shareable links. No signup, runs in your browser.
+- [Dynamic hedging simulator — what the option premium actually buys](https://batiaev.com/tools/hedging): Sell an option, delta-hedge it to expiry and watch the premium leave through the hedge. Set the volatility you sold at against the volatility the market delivers. Free, runs in your browser.
+- [Volatility smile from a quote board — implied vol, skew, curvature](https://batiaev.com/tools/smile): Enter bid and ask for a strip of strikes and get an implied volatility for each side, a fitted smile, and the strikes the market prices clear of its own curve. Free, runs in your browser.
+- [How much is enough? — retirement Monte Carlo across ISA, LISA and pension](https://batiaev.com/tools/retirement): Model a UK retirement plan across an ISA, a LISA and a pension: contributions, growth, and spending it down. A thousand return paths give the chance the money lasts, the spending it could support, and where a plan fails. Free, runs in your browser.
 - [Employed vs self-employed vs limited company — UK take-home 2026/27](https://batiaev.com/tools/take-home): Compare the same income as an employee, a sole trader, through your own limited company, or via an umbrella. 2026/27 income tax, Class 1 and Class 4 NI, corporation tax and dividend tax. Free, runs in your browser.
 - [Startup vs hypergrowth vs enterprise — compensation comparison](https://batiaev.com/tools/offer): Compare compensation shapes, not salaries. Price a startup grant, a scale-up RSU package and an enterprise base as distributions — downside, probability-weighted and upside — after dilution and UK tax.
 

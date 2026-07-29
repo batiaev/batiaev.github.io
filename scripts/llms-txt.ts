@@ -45,7 +45,14 @@ function strategyProse(slug: string): string {
   ].join('\n')
 }
 
-const tools = ['/tools/options-pnl', '/tools/take-home', '/tools/offer']
+const tools = [
+  '/tools/options-pnl',
+  '/tools/hedging',
+  '/tools/smile',
+  '/tools/retirement',
+  '/tools/take-home',
+  '/tools/offer',
+]
 
 const summary = `# Anton Batiaev
 
@@ -55,9 +62,9 @@ const summary = `# Anton Batiaev
 > Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
 > graph for engineering teams).
 
-This site hosts a free options knowledge base and a set of finance
-calculators. Everything runs client-side; there are no accounts and no
-tracking beyond analytics.
+This site hosts a free knowledge base — options, derivatives risk and a
+reading list — plus a set of finance calculators. Everything runs client-side;
+there are no accounts and no tracking beyond analytics.
 
 ## Free tools
 

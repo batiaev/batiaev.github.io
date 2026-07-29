@@ -128,6 +128,20 @@
         "topic": "Derivatives"
       },
       {
+        "name": "Volatility smile",
+        "description": "Put in a strip of bid-ask quotes and get an implied vol for each side, a fitted smile, and the strikes the market prices clear of its own curve.",
+        "href": "/tools/smile",
+        "status": "Live",
+        "topic": "Derivatives"
+      },
+      {
+        "name": "How much is enough?",
+        "description": "Retirement planning across an ISA, a LISA and a pension. A thousand return paths give the chance the money lasts, and the spending it could actually support.",
+        "href": "/tools/retirement",
+        "status": "Live",
+        "topic": "Personal finance"
+      },
+      {
         "name": "UK take-home, four ways",
         "description": "Employed, self-employed, own company or umbrella — the same money through each wrapper, so you can see what the structure costs rather than the band.",
         "href": "/tools/take-home",
@@ -143,8 +157,8 @@
       }
     ],
     "notes": {
-      "title": "Options, plainly",
-      "description": "A working knowledge base: calls and puts, the Greeks, implied volatility and the smile, plus a page per strategy with a live payoff chart driven by the same model as the calculator.",
+      "title": "From the inside",
+      "description": "Options pricing, the risk systems underneath them, and the reading that shaped both — each one something I have built in production rather than read about. The pages that carry numbers run on the same model as the calculators.",
       "href": "/learn",
       "cta": "Read the notes"
     }

@@ -19,6 +19,8 @@ const entries: { loc: string; priority: string }[] = [
   { loc: '/tools', priority: '0.9' },
   { loc: '/tools/options-pnl', priority: '0.9' },
   { loc: '/tools/hedging', priority: '0.8' },
+  { loc: '/tools/smile', priority: '0.8' },
+  { loc: '/tools/retirement', priority: '0.8' },
   { loc: '/tools/take-home', priority: '0.8' },
   { loc: '/tools/offer', priority: '0.8' },
   { loc: '/learn', priority: '0.9' },
