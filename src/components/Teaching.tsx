@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import { revealOnScroll } from '@/lib/reveal'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, BookOpen, GraduationCap } from 'lucide-react'
+import ToolList from '@/components/tools/ToolList'
 import data from '@/data/data.json'
-import { SECTIONS } from '@/learn/registry'
 
 const Teaching = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -15,7 +15,7 @@ const Teaching = () => {
   return (
     <section
       id="toolkit"
-      className="section border-border/40 border-t pb-8 pt-16 sm:pt-20"
+      className="border-border/40 border-t pb-8 pt-16 sm:pt-20"
       ref={sectionRef}
     >
       <div className="container mx-auto px-4">
@@ -103,30 +103,7 @@ const Teaching = () => {
                 </Link>
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {tools.map((tool) => (
-                <Link
-                  key={tool.href}
-                  to={tool.href}
-                  className="group flex flex-col rounded-lg border border-transparent bg-background p-6 shadow-subtle transition-colors hover:border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <p className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">
-                    {tool.topic}
-                  </p>
-                  <h4 className="mb-2 text-base font-semibold">{tool.name}</h4>
-                  <p className="text-muted-foreground mb-4 flex-1 text-sm leading-relaxed">
-                    {tool.description}
-                  </p>
-                  <span className="text-primary inline-flex items-center gap-1 text-sm font-medium">
-                    Open
-                    <ArrowRight
-                      className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                      aria-hidden
-                    />
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <ToolList tools={tools} heading="h4" />
           </div>
         </div>
       </div>

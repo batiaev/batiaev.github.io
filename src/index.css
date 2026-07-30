@@ -1,5 +1,6 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Inter is loaded from index.html. An @import here would put the font
+   stylesheet behind this one in the request chain, so the text waits for two
+   round trips instead of one. */
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +8,15 @@
 
 @layer base {
   :root {
+    /*
+     * Height of the sticky header, so anything that sticks underneath it can
+     * say so — the knowledge-base nav, and `scroll-mt` on anchor targets.
+     * A fixed height rather than a measured one: the header is a 44px tap
+     * target plus its padding, and pinning it here means a sticky offset
+     * cannot drift out of step with it.
+     */
+    --header-h: 4.25rem;
+
     --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
@@ -104,17 +114,15 @@
   .container {
     @apply px-4 md:px-8;
   }
+
+  @media (min-width: 640px) {
+    :root {
+      --header-h: 4.75rem;
+    }
+  }
 }
 
 @layer components {
-  .glass-panel {
-    @apply bg-white/80 backdrop-blur-md shadow-subtle rounded-xl border border-white/20;
-  }
-
-  .section {
-    @apply py-16 md:py-24;
-  }
-
   .section-title {
     @apply text-3xl md:text-4xl lg:text-5xl font-medium mb-4;
   }
@@ -135,12 +143,56 @@
     @apply opacity-0 animate-scale-in;
   }
 
-  .navbar {
-    @apply sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md;
-  }
-
   .highlight-chip {
     @apply inline-flex items-center rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground mb-4;
+  }
+
+  /*
+   * One swipeable row on a phone, a wrapping group from sm up.
+   *
+   * Ten preset buttons wrapped to five rows on a 375px screen and pushed the
+   * chart the presets change well below the fold. Assumes a parent with px-4,
+   * which every page container has, so the row can bleed to both edges and
+   * still line its first item up with the text above it.
+   */
+  .scroll-row {
+    /* scroll-padding, or the browser snaps the first item flush to the edge on
+       load and eats the padding that lines it up with the heading above. */
+    @apply -mx-4 flex snap-x scroll-pl-4 gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0;
+    scrollbar-width: none;
+  }
+
+  .scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-row > * {
+    @apply shrink-0 snap-start;
+  }
+
+  /* A swipeable row of cards on a phone, a plain block from sm up. */
+  .card-row {
+    /* items-stretch, so the cards in a row share one height instead of
+       leaving ragged white space under the shorter ones. */
+    @apply -mx-4 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto scroll-pl-4 px-4 pb-2 sm:mx-0 sm:block sm:overflow-visible sm:px-0 sm:pb-0;
+    scrollbar-width: none;
+  }
+
+  .card-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-row > * {
+    @apply w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink;
+  }
+
+  /* Rounded nav chip, used by the tool switcher and the knowledge-base tabs. */
+  .nav-pill {
+    @apply border-border/60 text-muted-foreground hover:border-border hover:text-foreground inline-flex min-h-9 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+  }
+
+  .nav-pill[aria-current] {
+    @apply border-primary/40 bg-accent text-accent-foreground font-medium;
   }
 
   /*
@@ -170,19 +222,6 @@
   }
 }
 
-/* Staggered animation for children */
-.stagger-children > * {
-  opacity: 0;
-  animation: fade-in 0.5s ease-out forwards;
-}
-
-.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
-
 /*
  * Appear on scroll.
  *
@@ -211,35 +250,11 @@
     transition: none;
   }
 
-  .hero-card,
-  .stagger-children > * {
+  .hero-card {
     opacity: 1;
     transform: none;
     animation: none;
   }
-}
-
-/* Smooth page transitions */
-.page-transition-enter {
-  opacity: 0;
-  transform: scale(0.98);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: scale(0.98);
-  transition: opacity 0.3s, transform 0.3s;
 }
 
 /* Custom scrollbar */

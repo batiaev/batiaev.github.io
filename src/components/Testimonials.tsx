@@ -17,7 +17,7 @@ const Testimonials = () => {
   useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
-    <section id="testimonials" className="section bg-accent/30" ref={sectionRef}>
+    <section id="testimonials" className="bg-accent/30 py-16 md:py-24" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <div className="highlight-chip">Peer perspective</div>

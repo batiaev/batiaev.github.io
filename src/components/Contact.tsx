@@ -11,7 +11,7 @@ const Contact = () => {
   useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
-    <section id="contact" className="section py-16 sm:py-20" ref={sectionRef}>
+    <section id="contact" className="py-16 sm:py-20" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
           <div className="highlight-chip">Contact</div>

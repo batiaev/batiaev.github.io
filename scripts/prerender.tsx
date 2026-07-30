@@ -170,7 +170,7 @@ function structuredData(route: string): string {
   return blocks
     .map(
       (block) =>
-        `    <script type="application/ld+json">${JSON.stringify(block)}<\/script>\n`,
+        `    <script type="application/ld+json">${JSON.stringify(block)}</script>\n`,
     )
     .join('')
 }

@@ -115,6 +115,7 @@
     "tools": [
       {
         "name": "Options P&L calculator",
+        "short": "Options P&L",
         "description": "Build any combination of options, futures and underlying, and see the exact payoff at expiry, modelled P&L before it, Greeks and breakevens.",
         "href": "/tools/options-pnl",
         "status": "Live",
@@ -122,6 +123,7 @@
       },
       {
         "name": "Dynamic hedging simulator",
+        "short": "Hedging",
         "description": "Sell an option and delta-hedge it to expiry. Set the volatility you sold against the volatility the market delivers, and watch the premium leave through the hedge.",
         "href": "/tools/hedging",
         "status": "Live",
@@ -129,6 +131,7 @@
       },
       {
         "name": "Volatility smile",
+        "short": "Vol smile",
         "description": "Put in a strip of bid-ask quotes and get an implied vol for each side, a fitted smile, and the strikes the market prices clear of its own curve.",
         "href": "/tools/smile",
         "status": "Live",
@@ -136,6 +139,7 @@
       },
       {
         "name": "How much is enough?",
+        "short": "Retirement",
         "description": "Retirement planning across an ISA, a LISA and a pension. A thousand return paths give the chance the money lasts, and the spending it could actually support.",
         "href": "/tools/retirement",
         "status": "Live",
@@ -143,6 +147,7 @@
       },
       {
         "name": "UK take-home, four ways",
+        "short": "Take-home",
         "description": "Employed, self-employed, own company or umbrella — the same money through each wrapper, so you can see what the structure costs rather than the band.",
         "href": "/tools/take-home",
         "status": "Live",
@@ -150,6 +155,7 @@
       },
       {
         "name": "Compensation comparison",
+        "short": "Offers",
         "description": "Startup, hypergrowth or enterprise: price each bet as a distribution — downside, weighted and upside — after dilution and UK tax.",
         "href": "/tools/offer",
         "status": "Live",

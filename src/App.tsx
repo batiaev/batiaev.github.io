@@ -38,10 +38,10 @@ const queryClient = new QueryClient({
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <GoogleTagManager />
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GoogleTagManager />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />

@@ -10,13 +10,17 @@ const Experience = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const timelineItemsRef = useRef<(HTMLLIElement | null)[]>([])
 
-  useEffect(
-    () => revealOnScroll([headerRef.current, ...timelineItemsRef.current]),
-    [],
-  )
+  useEffect(() => {
+    const carousel = window.matchMedia('(max-width: 639px)').matches
+    return revealOnScroll(
+      carousel
+        ? [headerRef.current]
+        : [headerRef.current, ...timelineItemsRef.current],
+    )
+  }, [])
 
   return (
-    <section id="experience" className="section py-16 sm:py-20">
+    <section id="experience" className="py-16 sm:py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14" ref={headerRef}>
           <div className="highlight-chip">Selected experience</div>
@@ -27,12 +31,24 @@ const Experience = () => {
           </p>
         </div>
 
-        <ol className="mx-auto max-w-3xl space-y-6">
+        <nav aria-label="Roles" className="scroll-row mb-4 sm:hidden">
+          {data.experiences.map((item) => (
+            <a
+              key={item.id}
+              href={`#${roleAnchor(item.anchor)}`}
+              className="nav-pill"
+            >
+              {item.company}
+            </a>
+          ))}
+        </nav>
+
+        <ol className="card-row sm:mx-auto sm:max-w-3xl sm:space-y-6">
           {data.experiences.map((item, index) => (
             <li
               key={item.id}
               id={roleAnchor(item.anchor)}
-              className="scroll-mt-24 rounded-lg border border-border/50 bg-background/80 p-5 transition-shadow target:ring-2 target:ring-primary/40 sm:p-6"
+              className="scroll-mt-[7.5rem] rounded-lg border border-border/50 bg-background/80 p-5 transition-shadow target:ring-2 target:ring-primary/40 sm:scroll-mt-24 sm:p-6"
               ref={(el) => {
                 timelineItemsRef.current[index] = el
               }}

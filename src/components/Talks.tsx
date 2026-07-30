@@ -27,7 +27,7 @@ const Talks = () => {
   useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
-    <section id="talks" className="section pt-8" ref={sectionRef}>
+    <section id="talks" className="pb-16 pt-8 md:pb-24" ref={sectionRef}>
       <div className="container mx-auto">
         <div className="mb-10 text-center">
           <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -68,7 +68,7 @@ const Talks = () => {
           {visibleTalks.map((talk) => (
             <Card
               key={talk.name}
-              className="card-hover border-transparent shadow-subtle overflow-hidden lines-bg-card"
+              className="card-hover border-transparent shadow-subtle overflow-hidden"
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">

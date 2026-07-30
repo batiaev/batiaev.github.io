@@ -57,7 +57,7 @@ const Services = () => {
   }, []);
 
   return (
-      <section id="services" className="section bg-accent/30" ref={sectionRef}>
+      <section id="services" className="bg-accent/30 py-16 md:py-24" ref={sectionRef}>
         <div className="container mx-auto">
           <div className="text-center mb-16 px-4">
             <div className="highlight-chip">Engagement types</div>
@@ -72,7 +72,7 @@ const Services = () => {
             {data.services.map((service, index) => (
                 <Card
                     key={index}
-                    className="hero-card card-hover border-transparent shadow-subtle overflow-hidden lines-bg-card"
+                    className="hero-card card-hover border-transparent shadow-subtle overflow-hidden"
                     ref={el => cardsRef.current[index] = el}
                 >
                   <CardHeader className="pb-0">

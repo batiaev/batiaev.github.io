@@ -14,7 +14,7 @@ const Engagement = () => {
   return (
     <section
       id="engage"
-      className="section bg-accent/30 py-16 sm:py-20"
+      className="bg-accent/30 py-16 sm:py-20"
       ref={sectionRef}
     >
       <div className="container mx-auto px-4">

@@ -3,49 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { LearnMobileNav, LearnTree } from "@/components/learn/LearnNav";
 import { useDocumentMeta } from "@/hooks/use-document-meta";
-import {
-  SECTIONS,
-  learnPath,
-  neighbours,
-  pageBySlug,
-  relatedPages,
-} from "@/learn/registry";
+import { learnPath, neighbours, pageBySlug, relatedPages } from "@/learn/registry";
 
 // The search index carries the full prose, so it loads only when rendered.
 const LearnSearch = lazy(() => import("@/components/learn/LearnSearch"));
-
-const Sidebar = ({ current }: { current: string }) => (
-  <nav aria-label="Knowledge base" className="text-sm">
-    {SECTIONS.map((section) => (
-      <div key={section.id} className="mb-6">
-        <h2 className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">
-          {section.title}
-        </h2>
-        <ul className="space-y-0.5">
-          {section.pages.map((page) => {
-            const active = page.slug === current;
-            return (
-              <li key={page.slug}>
-                <Link
-                  to={learnPath(page.slug)}
-                  aria-current={active ? "page" : undefined}
-                  className={`block rounded px-2 py-1.5 leading-snug transition-colors ${
-                    active
-                      ? "bg-accent text-accent-foreground font-medium"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {page.title}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    ))}
-  </nav>
-);
 
 /**
  * Shared chrome for every knowledge-base page. Content pages supply only their
@@ -76,9 +39,11 @@ const LearnLayout = ({
   return (
     <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
-      <main className="container mx-auto flex-1 px-4 py-8 sm:py-12">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[15rem_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-24 lg:self-start">
+      <main className="container mx-auto flex-1 px-4 pb-8 sm:pb-12">
+        <LearnMobileNav slug={slug} />
+
+        <div className="grid grid-cols-1 gap-10 pt-6 sm:pt-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:pt-12">
+          <aside className="hidden lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:block lg:self-start">
             <Link
               to="/learn"
               className="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-2 text-sm"
@@ -91,7 +56,7 @@ const LearnLayout = ({
                 <LearnSearch compact />
               </Suspense>
             </div>
-            <Sidebar current={slug} />
+            <LearnTree current={slug} />
           </aside>
 
           <div className="min-w-0">

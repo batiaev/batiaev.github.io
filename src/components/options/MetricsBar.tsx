@@ -17,7 +17,7 @@ const Tile = ({
   hint?: string;
   tone?: "neutral" | "profit" | "loss";
 }) => (
-  <div className="border-border/60 bg-background rounded-lg border p-4">
+  <div className="border-border/60 bg-background rounded-lg border p-3 sm:p-4">
     <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
       {label}
     </p>
@@ -33,7 +33,7 @@ const Tile = ({
       {value}
     </p>
     {hint ? (
-      <p className="text-muted-foreground mt-1 text-xs">{hint}</p>
+      <p className="text-muted-foreground mt-1 text-xs leading-snug">{hint}</p>
     ) : null}
   </div>
 );
@@ -45,7 +45,7 @@ const MetricsBar = ({ metrics }: Props) => {
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
         <Tile
           label="Max profit"
           value={
@@ -72,7 +72,7 @@ const MetricsBar = ({ metrics }: Props) => {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
         <Tile label="Delta Δ" value={formatGreek(metrics.delta)} hint="Per 1 point of underlying" />
         <Tile label="Gamma Γ" value={formatGreek(metrics.gamma, 3)} hint="Delta change per point" />
         <Tile label="Vega ν" value={formatGreek(metrics.vega)} hint="Per 1 vol point" />

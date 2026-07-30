@@ -64,11 +64,17 @@ const Header = () => {
 
   return (
     <header
-      className={`navbar sticky top-0 z-40 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 py-3 shadow-subtle backdrop-blur" : "py-4 sm:py-5"
+      /*
+       * The padding does not change with scroll any more. It used to shrink,
+       * which moved every sticky element under the header by 8px the moment you
+       * started scrolling — visible as a jump on the knowledge-base nav, and a
+       * layout shift on every page. Only the surface reacts now.
+       */
+      className={`border-border/40 sticky top-0 z-40 h-[var(--header-h)] w-full border-b backdrop-blur-md transition-shadow duration-300 ${
+        isScrolled ? "bg-background/95 shadow-subtle" : "bg-background/80"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4">
+      <div className="container mx-auto flex h-full items-center justify-between px-4">
         <Link to="/" className="font-display text-xl font-semibold sm:text-2xl">
           {data.name}
         </Link>

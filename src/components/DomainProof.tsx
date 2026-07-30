@@ -15,7 +15,7 @@ const DomainProof = () => {
   return (
     <section
       id="derivatives"
-      className="section border-border/40 border-t py-16 sm:py-20"
+      className="border-border/40 border-t py-16 sm:py-20"
       ref={sectionRef}
     >
       <div className="container mx-auto px-4">

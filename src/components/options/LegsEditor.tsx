@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { ChevronDown, Eye, EyeOff, Plus, RefreshCw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NumberField from "@/components/options/NumberField";
+import Field, { SELECT_CLASS } from "@/components/tools/Field";
 import { formatPrice } from "@/lib/options/format";
 import type { Leg } from "@/lib/options/strategy";
-
-const SELECT_CLASS =
-  "h-10 w-full rounded-md border border-input bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 /** The one-click adds. Everything else lives behind the per-leg editor. */
 const QUICK_ADDS: { kind: Leg["kind"]; side: Leg["side"]; label: string }[] = [
@@ -39,21 +37,6 @@ function summary(leg: Leg): string {
 
   return `${side} ${qty} ${formatPrice(leg.strike)} ${leg.kind} · ${leg.days}d · ${formatPrice(leg.premium)}`;
 }
-
-const Field = ({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) => (
-  <label className="block">
-    <span className="text-muted-foreground mb-1 block text-xs font-medium">
-      {label}
-    </span>
-    {children}
-  </label>
-);
 
 const LegsEditor = ({
   legs,
@@ -242,7 +225,8 @@ const LegsEditor = ({
         })}
       </ul>
 
-      <div className="flex flex-wrap gap-2 pt-1">
+      {/* One swipeable row on a phone: six buttons wrapped to three rows. */}
+      <div className="scroll-row pt-1">
         {QUICK_ADDS.map((quick) => (
           <Button
             key={quick.label}

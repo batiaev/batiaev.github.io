@@ -1,48 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 
 declare global {
   interface Window {
-    dataLayer: any[];
+    /** gtag pushes its own arguments object, not a typed event. */
+    dataLayer: unknown[]
+    gtag?: (...args: unknown[]) => void
   }
 }
 
-const GTM_ID = 'G-ZQVRL217XS';
-
+/**
+ * Reports client-side navigations to the tag loaded in index.html.
+ *
+ * This used to inject a second copy of gtag.js and call `config` again, so
+ * every visit loaded the library twice and counted the landing page twice —
+ * while the navigations that actually needed reporting, the ones this router
+ * handles without a document load, were never sent at all.
+ */
 export function GoogleTagManager() {
+  const location = useLocation()
+  const landing = useRef(true)
+
   useEffect(() => {
-    // Load GTM script asynchronously
-    const script = document.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
+    // The `config` call in index.html already reported the page we arrived on.
+    if (landing.current) {
+      landing.current = false
+      return
+    }
 
-    // Initialize dataLayer
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js',
-    });
+    window.gtag?.('event', 'page_view', {
+      page_path: `${location.pathname}${location.search}${location.hash}`,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
+  }, [location])
 
-    // Load GTM configuration
-    const gtmScript = document.createElement('script');
-    gtmScript.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${GTM_ID}', {
-        page_path: window.location.pathname,
-        transport_url: 'https://www.google-analytics.com',
-      });
-    `;
-    document.head.appendChild(gtmScript);
-
-    return () => {
-      // Cleanup
-      document.head.removeChild(script);
-      document.head.removeChild(gtmScript);
-    };
-  }, []);
-
-  return null;
-} 
+  return null
+}
