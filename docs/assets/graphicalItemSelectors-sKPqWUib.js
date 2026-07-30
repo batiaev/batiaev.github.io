@@ -1,0 +1,1 @@
+import{b2 as i}from"./CartesianChart-B9nbfExN.js";function a(a,n){var r,s;return null!==(r=null===(s=a.graphicalItems.cartesianItems.find((i=>i.id===n)))||void 0===s?void 0:s.xAxisId)&&void 0!==r?r:i}function n(a,n){var r,s;return null!==(r=null===(s=a.graphicalItems.cartesianItems.find((i=>i.id===n)))||void 0===s?void 0:s.yAxisId)&&void 0!==r?r:i}export{n as a,a as s};

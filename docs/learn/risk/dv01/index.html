@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DV01 and the shape of rate risk — Learn | Anton Batiaev</title>
+    <meta
+      name="description"
+      content="The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough."
+    />
+    <meta
+      name="keywords"
+      content="Anton Batiaev, fintech founder, trading platforms, derivatives, options pricing, risk systems, SPAN margin, VAR, CTO, CPO, Capital.com, Revolut, Vega, Deutsche Bank, advisory"
+    />
+    <meta name="author" content="Anton Batiaev" />
+    <link rel="canonical" href="https://batiaev.com/learn/risk/dv01" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:title" content="DV01 and the shape of rate risk — Learn | Anton Batiaev" />
+    <meta property="og:site_name" content="Anton Batiaev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://batiaev.com/learn/risk/dv01" />
+    <meta property="og:see_also" content="https://www.linkedin.com/in/batiaev/" />
+    <meta property="og:image" content="https://batiaev.com/images/batiaev.jpg" />
+    <meta property="og:image:alt" content="Anton Batiaev" />
+    <meta
+      property="og:description"
+      content="Fintech founder and builder — Fintecy and Ship in private beta. VP Product &amp; Engineering at Capital.com."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@batiaev_com" />
+    <meta name="twitter:title" content="Anton Batiaev — Fintech founder & builder" />
+    <meta
+      name="twitter:description"
+      content="Fintech founder and builder — Fintecy and Ship in private beta. VP Product &amp; Engineering at Capital.com, running the trading-platform tribe. Ten years building execution, derivatives pricing and risk systems."
+    />
+    <meta name="twitter:creator" content="@batiaev_com" />
+    <meta name="twitter:image" content="https://batiaev.com/images/batiaev.jpg" />
+    <meta name="twitter:image:alt" content="Anton Batiaev" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anton Batiaev",
+        "url": "https://batiaev.com/",
+        "image": "https://batiaev.com/images/batiaev.jpg",
+        "email": "mailto:anton@batiaev.com",
+        "jobTitle": "VP Product & Engineering",
+        "description": "Fintech founder and builder. Founder of Fintecy and Ship; VP Product & Engineering at Capital.com, running the trading-platform tribe. Ten years building execution, derivatives pricing and risk systems; previously Revolut, CTO at Vega, and Deutsche Bank.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Capital.com",
+          "url": "https://capital.com/"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        },
+        "knowsAbout": [
+          "Fintech",
+          "Derivatives and options pricing",
+          "Trading platforms",
+          "Risk systems",
+          "Engineering leadership"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/batiaev/",
+          "https://github.com/batiaev",
+          "https://t.me/batiaev_com"
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      .font-display {
+        font-family: "SF Pro Display", Inter, system-ui, sans-serif;
+      }
+    </style>
+
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-ZQVRL217XS"></script>
+    <script type="module" crossorigin src="/assets/index-COIKqSj9.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/ui-DdTWCHPi.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-CwVuO2OU.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BlHrGpCg.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CwA2KPpd.css">
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://batiaev.com/"},{"@type":"ListItem","position":2,"name":"Options, derivatives risk and trading systems, from the inside | Anton Batiaev","item":"https://batiaev.com/learn"},{"@type":"ListItem","position":3,"name":"Risk","item":"https://batiaev.com/learn/risk"},{"@type":"ListItem","position":4,"name":"DV01 and the shape of rate risk","item":"https://batiaev.com/learn/risk/dv01"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DV01 and the shape of rate risk","description":"The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.","url":"https://batiaev.com/learn/risk/dv01","author":{"@type":"Person","name":"Anton Batiaev","url":"https://batiaev.com/"},"publisher":{"@type":"Person","name":"Anton Batiaev","url":"https://batiaev.com/"},"inLanguage":"en-GB","keywords":"dv01, duration, convexity, rates, hedging, risk systems, measurement","isAccessibleForFree":true,"isPartOf":{"@type":"Collection","name":"From the inside","url":"https://batiaev.com/learn"}}</script>
+</head>
+
+  <body>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-ZQVRL217XS");
+    </script>
+
+    <div id="root"><div class="flex min-h-screen flex-col overflow-x-clip"><header class="border-border/40 sticky top-0 z-40 h-[var(--header-h)] w-full border-b backdrop-blur-md transition-shadow duration-300 bg-background/80"><div class="container mx-auto flex h-full items-center justify-between px-4"><a class="font-display text-xl font-semibold sm:text-2xl" href="/" data-discover="true">Anton Batiaev</a><nav class="hidden items-center space-x-5 md:flex lg:space-x-7"><a href="/#experience" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Experience</a><a href="/#building" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Building</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/learn" data-discover="true">Knowledge</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/tools" data-discover="true">Toolkit</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/advisory" data-discover="true">Advisory</a><a href="/#contact" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Contact</a></nav><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 min-h-11 min-w-11 md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></button></div></header><main class="container mx-auto flex-1 px-4 pb-8 sm:pb-12"><div class="border-border/40 bg-background/95 sticky top-[var(--header-h)] z-30 -mx-4 border-b px-4 py-2 backdrop-blur md:-mx-8 md:px-8 lg:hidden"><div class="flex items-center gap-2"><button type="button" aria-expanded="false" aria-controls="learn-contents" class="border-border/60 text-muted-foreground hover:text-foreground inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-md border px-2.5 text-sm transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list h-4 w-4" aria-hidden="true"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg>Contents<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><div class="min-w-0 flex-1"><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at div
+    at div
+    at div
+    at LearnMobileNav (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8262:25)
+    at main
+    at div
+    at LearnLayout (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8514:7)
+    at ContentPage (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9953:22)
+    at LearnRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:10065:22)
+    at RenderedRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:5905:26)
+    at Routes (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6723:3)
+    at Router (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6653:13)
+    at MemoryRouter (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6569:3)"></template><div class="h-10"></div><!--/$--></div></div><nav aria-label="Risk notes" class="scroll-row mt-2 lg:hidden"><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/span" data-discover="true">SPAN, and why your margin is not what you expected</a><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/var-and-es" data-discover="true">VAR, and what it does not tell you</a><a aria-current="page" class="nav-pill max-w-[14rem] truncate" href="/learn/risk/dv01" data-discover="true">DV01 and the shape of rate risk</a><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/dynamic-hedging" data-discover="true">Dynamic hedging, and where the premium goes</a></nav></div><div class="grid grid-cols-1 gap-10 pt-6 sm:pt-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:pt-12"><aside class="hidden lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:block lg:self-start"><a class="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-2 text-sm" href="/learn" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left h-4 w-4" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>All notes</a><div class="mb-6"><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at div
+    at aside
+    at div
+    at main
+    at div
+    at LearnLayout (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8514:7)
+    at ContentPage (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9953:22)
+    at LearnRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:10065:22)
+    at RenderedRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:5905:26)
+    at Routes (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6723:3)
+    at Router (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6653:13)
+    at MemoryRouter (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6569:3)"></template><div class="h-10"></div><!--/$--></div><nav aria-label="Knowledge base" class="text-sm"><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Options</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/basics" data-discover="true">What an option actually is</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/greeks" data-discover="true">The Greeks, without the calculus</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/volatility" data-discover="true">Implied volatility is the price</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Strategies</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-call" data-discover="true">Long call</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-put" data-discover="true">Long put</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/covered-call" data-discover="true">Covered call</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/cash-secured-put" data-discover="true">Cash-secured put</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/bull-call-spread" data-discover="true">Bull call spread</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/bear-put-spread" data-discover="true">Bear put spread</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-straddle" data-discover="true">Long straddle</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/short-strangle" data-discover="true">Short strangle</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/iron-condor" data-discover="true">Iron condor</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-butterfly" data-discover="true">Long butterfly</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/collar" data-discover="true">Collar</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Risk</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/span" data-discover="true">SPAN, and why your margin is not what you expected</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/var-and-es" data-discover="true">VAR, and what it does not tell you</a></li><li><a aria-current="page" class="block rounded px-2 py-1.5 leading-snug transition-colors bg-accent text-accent-foreground font-medium" href="/learn/risk/dv01" data-discover="true">DV01 and the shape of rate risk</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/dynamic-hedging" data-discover="true">Dynamic hedging, and where the premium goes</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Library</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/books" data-discover="true">Books</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/series" data-discover="true">TV series</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/films" data-discover="true">Films</a></li></ul></div></nav></aside><div class="min-w-0"><article class="prose-page"><header class="mb-8"><h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">DV01 and the shape of rate risk</h1><p class="text-muted-foreground mt-3 text-base leading-relaxed sm:text-lg">The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.</p></header><p>Equity desks talk in delta. Rates desks talk in <strong>DV01</strong> — the dollar value of
+a basis point. It is the change in a position&#x27;s value when the relevant yield
+moves by one hundredth of a percent.</p>
+<p>That is all it is. A bond with a DV01 of £850 gains roughly £850 if yields fall
+one basis point, and loses roughly £850 if they rise one. You will also see it
+as <strong>PV01</strong> or <strong>BPV</strong>; for most purposes the distinction is not worth arguing
+about.</p>
+<h2 id="why-a-basis-point">Why a basis point</h2>
+<p>Because it makes unlike things comparable. A ten-year gilt, an interest-rate
+swap, a futures contract and a portfolio of all three have no common unit until
+you express each as sensitivity to the same small move. Once you do, you can
+add them up, and the sum is the position.</p>
+<p>This is the practical reason DV01 wins over duration on a trading desk.
+Duration is a percentage, so it needs a notional and a price before it means
+anything. DV01 is already in money.</p>
+<h2 id="the-relationship-to-duration">The relationship to duration</h2>
+<p>They are the same idea in different clothing:</p>
+<pre><code>DV01 ≈ modified duration × price × 0.0001
+</code></pre>
+<p>A £10m position with modified duration 8 and a price of par has a DV01 of
+roughly £8,000. Duration tells you the percentage sensitivity; DV01 tells you
+the cash. Risk systems report the cash, because that is what a limit is
+denominated in.</p>
+<h2 id="convexity-and-the-direction-of-the-error">Convexity, and the direction of the error</h2>
+<p>DV01 is a first derivative — a straight-line approximation to a curved
+relationship. For a plain bond, the price/yield curve bends favourably:
+<strong>convexity</strong> is positive, so prices rise more than DV01 predicts when yields
+fall, and fall less than it predicts when they rise.</p>
+<p>For a one-basis-point move that error is negligible, which is why the unit is
+one basis point. For a fifty-basis-point move it is not, and a DV01-only view
+understates your position in a rally and overstates the damage in a sell-off.</p>
+<p>Not everything is positively convex. Mortgage-backed securities and callable
+bonds can exhibit <strong>negative convexity</strong> — as yields fall, borrowers refinance
+and the expected life shortens, so the position stops rallying. Here DV01 is
+not merely imprecise; it points the wrong way about what happens next. Anything
+with an embedded option needs the second-order term.</p>
+<h2 id="one-number-is-not-enough">One number is not enough</h2>
+<p>DV01 as usually quoted assumes a <strong>parallel shift</strong> — every point on the curve
+moves by the same basis point. Curves do not oblige. They steepen, flatten and
+twist, and a portfolio can be flat on parallel DV01 while carrying a large bet
+on the shape.</p>
+<p>Consider a book that is long two-year and short ten-year in DV01-neutral size.
+Total DV01: zero. A parallel move does nothing. A steepening move can cost a
+great deal.</p>
+<p>The fix is <strong>key-rate</strong>, or partial, DV01: bucket the curve by tenor and shift
+each bucket separately, holding the rest fixed. You get a vector rather than a
+scalar — sensitivity at 2y, 5y, 10y, 30y — which is what a rates risk report
+actually shows. The scalar is the sum, and the sum is the least informative
+row.</p>
+<h2 id="hedging-with-it">Hedging with it</h2>
+<p>DV01 is how hedge ratios are set. To hedge a position with an instrument, you
+match the DV01s:</p>
+<pre><code>hedge notional = position DV01 ÷ hedge instrument DV01 per unit
+</code></pre>
+<p>If a corporate bond position has a DV01 of £42,000 and a futures contract has a
+DV01 of £70 per contract, you need about 600 contracts. In practice this is
+adjusted for the basis between the two instruments and rebalanced as DV01
+itself drifts with yields — the hedge ratio is not constant, which is convexity
+appearing again.</p>
+<h2 id="where-it-sits-in-a-risk-stack">Where it sits in a risk stack</h2>
+<p>DV01 is a <strong>sensitivity</strong>, not a loss estimate. It tells you how exposed you
+are per unit of move; it does not tell you how large a move to expect. That is
+the job of <a href="/learn/risk/var-and-es">VAR and Expected Shortfall</a>, which combine
+sensitivities with a view on distribution.</p>
+<p>Both matter, and they fail differently. Sensitivities are precise and local:
+correct for small moves, silent about large ones. Distributional measures cover
+the large moves and depend entirely on the history or model you feed them. A
+desk watches both, and trusts neither alone.</p>
+<h2 id="from-the-build-side">From the build side</h2>
+<p>My first serious risk work was extending Deutsche Bank&#x27;s FX desk risk
+calculator to Fixed Income — taking a system that priced one asset class and
+teaching it another, then migrating the workflow off spreadsheets onto a live
+platform. Later, at Revolut, DV01 was one line in a greenfield engine that also
+carried mark-to-market, collateral and variation margin, VAR/ES and Greeks.</p>
+<p>The recurring difficulty was never the derivative. It was <strong>agreeing what a
+position was</strong>: the same trade represented differently in three systems,
+settlement conventions that shifted a cash flow by a day, and day-count
+conventions that quietly changed the answer. Anyone who has built one of these
+will tell you the same thing — the risk number is a thin layer of arithmetic
+over a deep pile of reference data, and the pile is where the bugs live.</p></article><ul class="mt-10 flex flex-wrap gap-2" aria-label="Topics"><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">dv01</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">duration</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">convexity</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">rates</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">hedging</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">risk systems</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">measurement</li></ul><section aria-label="Related pages" class="border-border/40 mt-8 border-t pt-6"><h2 class="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">Related</h2><ul class="grid grid-cols-1 gap-3 sm:grid-cols-3"><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/risk/span" data-discover="true"><span class="block text-sm font-medium">SPAN, and why your margin is not what you expected</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">How exchange portfolio margining actually works: the sixteen-scenario risk array, spread c<!-- -->…</span></a></li><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/risk/var-and-es" data-discover="true"><span class="block text-sm font-medium">VAR, and what it does not tell you</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">Value at Risk in one sentence, the three ways to compute it, the reason it is not a cohere<!-- -->…</span></a></li><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/risk/dynamic-hedging" data-discover="true"><span class="block text-sm font-medium">Dynamic hedging, and where the premium goes</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">Sell an option, hedge it to expiry, and watch the premium leave through the hedge — why th<!-- -->…</span></a></li></ul></section><nav aria-label="Adjacent pages" class="border-border/40 mt-12 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:justify-between"><a class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm" href="/learn/risk/var-and-es" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>VAR, and what it does not tell you</a><a class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm sm:text-right" href="/learn/risk/dynamic-hedging" data-discover="true">Dynamic hedging, and where the premium goes<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></nav></div></div></main><footer class="border-border/40 border-t bg-accent/30 py-10 sm:py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4"><div class="col-span-2"><div class="flex items-start gap-4"><img src="/images/batiaev.jpg" alt="Anton Batiaev" width="72" height="72" loading="lazy" decoding="async" class="border-border/60 h-16 w-16 shrink-0 rounded-full border object-cover shadow-subtle ring-2 ring-background ring-offset-2 ring-offset-border/40 sm:h-[72px] sm:w-[72px]"/><div><h3 class="font-display mb-2 text-xl font-semibold sm:text-2xl">Anton Batiaev</h3><p class="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">Fintech CPTO, founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.</p></div></div></div><div><h4 class="mb-2 font-medium sm:mb-4">Links</h4><ul><li><a href="/#experience" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base">Experience</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/learn" data-discover="true">Knowledge base</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/tools" data-discover="true">Calculators</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/advisory" data-discover="true">Advisory</a></li><li><a href="/#contact" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base">Contact</a></li></ul></div><div><h4 class="mb-2 font-medium sm:mb-4">Connect</h4><ul><li><a href="https://www.linkedin.com/in/batiaev/" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin mr-2 h-5 w-5" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg> <!-- -->LinkedIn</a></li><li><a href="https://www.github.com/batiaev/" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github mr-2 h-5 w-5" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg> <!-- -->GitHub</a></li><li><a href="mailto:anton@batiaev.com" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail mr-2 h-5 w-5" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg> <!-- -->Email</a></li><li><a href="https://t.me/batiaev_com" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle mr-2 h-5 w-5" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg> <!-- -->Telegram</a></li></ul></div></div><div class="border-border/40 mt-8 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row sm:gap-4 sm:pt-8"><p class="text-muted-foreground text-sm">© <!-- -->2026<!-- --> <!-- -->Anton Batiaev</p><p class="text-muted-foreground text-center text-xs sm:text-sm">Fintech builder<!-- --> · London</p></div></div></footer></div></div>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPAN, and why your margin is not what you expected — Learn | Anton Batiaev</title>
+    <meta
+      name="description"
+      content="How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out."
+    />
+    <meta
+      name="keywords"
+      content="Anton Batiaev, fintech founder, trading platforms, derivatives, options pricing, risk systems, SPAN margin, VAR, CTO, CPO, Capital.com, Revolut, Vega, Deutsche Bank, advisory"
+    />
+    <meta name="author" content="Anton Batiaev" />
+    <link rel="canonical" href="https://batiaev.com/learn/risk/span" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:title" content="SPAN, and why your margin is not what you expected — Learn | Anton Batiaev" />
+    <meta property="og:site_name" content="Anton Batiaev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://batiaev.com/learn/risk/span" />
+    <meta property="og:see_also" content="https://www.linkedin.com/in/batiaev/" />
+    <meta property="og:image" content="https://batiaev.com/images/batiaev.jpg" />
+    <meta property="og:image:alt" content="Anton Batiaev" />
+    <meta
+      property="og:description"
+      content="Fintech founder and builder — Fintecy and Ship in private beta. VP Product &amp; Engineering at Capital.com."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@batiaev_com" />
+    <meta name="twitter:title" content="Anton Batiaev — Fintech founder & builder" />
+    <meta
+      name="twitter:description"
+      content="Fintech founder and builder — Fintecy and Ship in private beta. VP Product &amp; Engineering at Capital.com, running the trading-platform tribe. Ten years building execution, derivatives pricing and risk systems."
+    />
+    <meta name="twitter:creator" content="@batiaev_com" />
+    <meta name="twitter:image" content="https://batiaev.com/images/batiaev.jpg" />
+    <meta name="twitter:image:alt" content="Anton Batiaev" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anton Batiaev",
+        "url": "https://batiaev.com/",
+        "image": "https://batiaev.com/images/batiaev.jpg",
+        "email": "mailto:anton@batiaev.com",
+        "jobTitle": "VP Product & Engineering",
+        "description": "Fintech founder and builder. Founder of Fintecy and Ship; VP Product & Engineering at Capital.com, running the trading-platform tribe. Ten years building execution, derivatives pricing and risk systems; previously Revolut, CTO at Vega, and Deutsche Bank.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Capital.com",
+          "url": "https://capital.com/"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "London",
+          "addressCountry": "GB"
+        },
+        "knowsAbout": [
+          "Fintech",
+          "Derivatives and options pricing",
+          "Trading platforms",
+          "Risk systems",
+          "Engineering leadership"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/batiaev/",
+          "https://github.com/batiaev",
+          "https://t.me/batiaev_com"
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      .font-display {
+        font-family: "SF Pro Display", Inter, system-ui, sans-serif;
+      }
+    </style>
+
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-ZQVRL217XS"></script>
+    <script type="module" crossorigin src="/assets/index-COIKqSj9.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/ui-DdTWCHPi.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-CwVuO2OU.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-BlHrGpCg.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CwA2KPpd.css">
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://batiaev.com/"},{"@type":"ListItem","position":2,"name":"Options, derivatives risk and trading systems, from the inside | Anton Batiaev","item":"https://batiaev.com/learn"},{"@type":"ListItem","position":3,"name":"Risk","item":"https://batiaev.com/learn/risk"},{"@type":"ListItem","position":4,"name":"SPAN, and why your margin is not what you expected","item":"https://batiaev.com/learn/risk/span"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"SPAN, and why your margin is not what you expected","description":"How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.","url":"https://batiaev.com/learn/risk/span","author":{"@type":"Person","name":"Anton Batiaev","url":"https://batiaev.com/"},"publisher":{"@type":"Person","name":"Anton Batiaev","url":"https://batiaev.com/"},"inLanguage":"en-GB","keywords":"margin, span, portfolio margin, short premium, exchange, risk systems, measurement","isAccessibleForFree":true,"isPartOf":{"@type":"Collection","name":"From the inside","url":"https://batiaev.com/learn"}}</script>
+</head>
+
+  <body>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-ZQVRL217XS");
+    </script>
+
+    <div id="root"><div class="flex min-h-screen flex-col overflow-x-clip"><header class="border-border/40 sticky top-0 z-40 h-[var(--header-h)] w-full border-b backdrop-blur-md transition-shadow duration-300 bg-background/80"><div class="container mx-auto flex h-full items-center justify-between px-4"><a class="font-display text-xl font-semibold sm:text-2xl" href="/" data-discover="true">Anton Batiaev</a><nav class="hidden items-center space-x-5 md:flex lg:space-x-7"><a href="/#experience" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Experience</a><a href="/#building" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Building</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/learn" data-discover="true">Knowledge</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/tools" data-discover="true">Toolkit</a><a class="link-hover min-h-11 inline-flex items-center text-sm font-medium " href="/advisory" data-discover="true">Advisory</a><a href="/#contact" class="link-hover min-h-11 inline-flex items-center text-sm font-medium">Contact</a></nav><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 min-h-11 min-w-11 md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></button></div></header><main class="container mx-auto flex-1 px-4 pb-8 sm:pb-12"><div class="border-border/40 bg-background/95 sticky top-[var(--header-h)] z-30 -mx-4 border-b px-4 py-2 backdrop-blur md:-mx-8 md:px-8 lg:hidden"><div class="flex items-center gap-2"><button type="button" aria-expanded="false" aria-controls="learn-contents" class="border-border/60 text-muted-foreground hover:text-foreground inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-md border px-2.5 text-sm transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list h-4 w-4" aria-hidden="true"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg>Contents<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><div class="min-w-0 flex-1"><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at div
+    at div
+    at div
+    at LearnMobileNav (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8262:25)
+    at main
+    at div
+    at LearnLayout (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8514:7)
+    at ContentPage (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9953:22)
+    at LearnRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:10065:22)
+    at RenderedRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:5905:26)
+    at Routes (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6723:3)
+    at Router (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6653:13)
+    at MemoryRouter (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6569:3)"></template><div class="h-10"></div><!--/$--></div></div><nav aria-label="Risk notes" class="scroll-row mt-2 lg:hidden"><a aria-current="page" class="nav-pill max-w-[14rem] truncate" href="/learn/risk/span" data-discover="true">SPAN, and why your margin is not what you expected</a><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/var-and-es" data-discover="true">VAR, and what it does not tell you</a><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/dv01" data-discover="true">DV01 and the shape of rate risk</a><a class="nav-pill max-w-[14rem] truncate" href="/learn/risk/dynamic-hedging" data-discover="true">Dynamic hedging, and where the premium goes</a></nav></div><div class="grid grid-cols-1 gap-10 pt-6 sm:pt-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:pt-12"><aside class="hidden lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:block lg:self-start"><a class="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-2 text-sm" href="/learn" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left h-4 w-4" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>All notes</a><div class="mb-6"><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at div
+    at aside
+    at div
+    at main
+    at div
+    at LearnLayout (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8514:7)
+    at ContentPage (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9953:22)
+    at LearnRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:10065:22)
+    at RenderedRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:5905:26)
+    at Routes (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6723:3)
+    at Router (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6653:13)
+    at MemoryRouter (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6569:3)"></template><div class="h-10"></div><!--/$--></div><nav aria-label="Knowledge base" class="text-sm"><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Options</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/basics" data-discover="true">What an option actually is</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/greeks" data-discover="true">The Greeks, without the calculus</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/options/volatility" data-discover="true">Implied volatility is the price</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Strategies</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-call" data-discover="true">Long call</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-put" data-discover="true">Long put</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/covered-call" data-discover="true">Covered call</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/cash-secured-put" data-discover="true">Cash-secured put</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/bull-call-spread" data-discover="true">Bull call spread</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/bear-put-spread" data-discover="true">Bear put spread</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-straddle" data-discover="true">Long straddle</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/short-strangle" data-discover="true">Short strangle</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/iron-condor" data-discover="true">Iron condor</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/long-butterfly" data-discover="true">Long butterfly</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/strategies/collar" data-discover="true">Collar</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Risk</h2><ul class="space-y-0.5"><li><a aria-current="page" class="block rounded px-2 py-1.5 leading-snug transition-colors bg-accent text-accent-foreground font-medium" href="/learn/risk/span" data-discover="true">SPAN, and why your margin is not what you expected</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/var-and-es" data-discover="true">VAR, and what it does not tell you</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/dv01" data-discover="true">DV01 and the shape of rate risk</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/risk/dynamic-hedging" data-discover="true">Dynamic hedging, and where the premium goes</a></li></ul></div><div class="mb-6 last:mb-0"><h2 class="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">Library</h2><ul class="space-y-0.5"><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/books" data-discover="true">Books</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/series" data-discover="true">TV series</a></li><li><a class="block rounded px-2 py-1.5 leading-snug transition-colors text-muted-foreground hover:text-foreground" href="/learn/library/films" data-discover="true">Films</a></li></ul></div></nav></aside><div class="min-w-0"><article class="prose-page"><header class="mb-8"><h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">SPAN, and why your margin is not what you expected</h1><p class="text-muted-foreground mt-3 text-base leading-relaxed sm:text-lg">How exchange portfolio margining actually works: the sixteen-scenario risk array, spread charges, and the short option minimum that catches people out.</p></header><p>Sell a naked put and your broker asks for a large deposit. Buy a further
+out-of-the-money put against it, turning the position into a spread with a
+known worst case, and the requirement collapses. Nothing about your view
+changed. What changed is that the margin system can now see the hedge.</p>
+<p>That system, on most futures and options exchanges, is <strong>SPAN</strong> — Standard
+Portfolio Analysis of Risk, introduced by the CME in 1988 and licensed by
+exchanges worldwide. It is not complicated, but it is almost never explained,
+so people learn its behaviour by being surprised by it.</p>
+<h2 id="the-idea">The idea</h2>
+<p>Strategy-based margining looks at each position and applies a rule. Portfolio
+margining asks a different question: <strong>across a set of plausible market moves,
+what is the worst this whole portfolio does in one day?</strong> That number, roughly,
+is your margin.</p>
+<p>Because it values the portfolio as a whole, offsetting positions offset. A
+long call and a short call at a higher strike are not two margin charges; they
+are one spread with a capped loss.</p>
+<h2 id="the-risk-array">The risk array</h2>
+<p>The exchange publishes, for each contract, two parameters: a <strong>price scan
+range</strong> — how far it thinks the underlying can move in a day — and a
+<strong>volatility scan range</strong>. SPAN then revalues your portfolio under sixteen
+scenarios built from those two numbers.</p>
+<table><thead><tr><th>#</th><th>Underlying move</th><th>Volatility</th><th>Weight</th></tr></thead><tbody><tr><td>1–2</td><td>Unchanged</td><td>Up / down</td><td>100%</td></tr><tr><td>3–4</td><td>+⅓ range</td><td>Up / down</td><td>100%</td></tr><tr><td>5–6</td><td>−⅓ range</td><td>Up / down</td><td>100%</td></tr><tr><td>7–8</td><td>+⅔ range</td><td>Up / down</td><td>100%</td></tr><tr><td>9–10</td><td>−⅔ range</td><td>Up / down</td><td>100%</td></tr><tr><td>11–12</td><td>+1 range</td><td>Up / down</td><td>100%</td></tr><tr><td>13–14</td><td>−1 range</td><td>Up / down</td><td>100%</td></tr><tr><td>15</td><td>+2 ranges</td><td>Unchanged</td><td>35%</td></tr><tr><td>16</td><td>−2 ranges</td><td>Unchanged</td><td>35%</td></tr></tbody></table>
+<p>Fourteen scenarios walk the price across the scan range in thirds, each paired
+with volatility rising and falling. The last two are the tail: a move of twice
+the scan range, counted at a fraction — conventionally 35% — because the
+exchange wants some charge for a crash without margining every account as
+though one is due tomorrow.</p>
+<p>Your <strong>scan risk</strong> is the worst loss across those sixteen rows. Note what this
+implies: the volatility legs mean a short option position can be charged its
+worst case on a day the underlying does not move at all.</p>
+<figure class="border-border/60 bg-background my-8 rounded-lg border p-4 sm:p-5"><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at figure
+    at StrategyFigure (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8664:25)
+    at MDXContent4 (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9385:8)
+    at article
+    at div
+    at div
+    at main
+    at div
+    at LearnLayout (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:8514:7)
+    at ContentPage (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:9953:22)
+    at LearnRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/.cache/prerender.mjs:10065:22)
+    at RenderedRoute (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:5905:26)
+    at Routes (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6723:3)
+    at Router (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6653:13)
+    at MemoryRouter (file:///Users/anton/Documents/_repo/batiaev/batiaev.github.io/node_modules/react-router/dist/development/chunk-LFPYN7LY.mjs:6569:3)"></template><div class="text-muted-foreground flex h-[18rem] items-center justify-center text-sm">Loading chart…</div><!--/$--><div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3"><label class="block"><span class="text-muted-foreground mb-1 flex justify-between text-xs font-medium"><span>Spot</span><span class="tabular-nums">100</span></span><input type="range" min="60" max="140" step="1" aria-label="Underlying price" class="accent-primary h-2 w-full cursor-pointer" value="100"/></label><label class="block"><span class="text-muted-foreground mb-1 flex justify-between text-xs font-medium"><span>Volatility</span><span class="tabular-nums">25<!-- -->%</span></span><input type="range" min="5" max="120" step="1" aria-label="Implied volatility" class="accent-primary h-2 w-full cursor-pointer" value="25"/></label><label class="block"><span class="text-muted-foreground mb-1 flex justify-between text-xs font-medium"><span>Days elapsed</span><span class="tabular-nums">0</span></span><input type="range" min="0" max="30" step="1" aria-label="Days from today" class="accent-primary h-2 w-full cursor-pointer" value="0"/></label></div><dl class="border-border/60 mt-4 grid grid-cols-2 gap-3 border-t pt-4 text-sm tabular-nums sm:grid-cols-4"><div><dt class="text-muted-foreground text-xs uppercase tracking-wider">Max profit</dt><dd class="font-medium">+54</dd></div><div><dt class="text-muted-foreground text-xs uppercase tracking-wider">Max loss</dt><dd class="font-medium">Unlimited</dd></div><div><dt class="text-muted-foreground text-xs uppercase tracking-wider">Breakeven</dt><dd class="font-medium">89.46 / 110.54</dd></div><div><dt class="text-muted-foreground text-xs uppercase tracking-wider">Net cash</dt><dd class="font-medium">+54</dd></div></dl><figcaption class="text-muted-foreground mt-4 flex flex-wrap items-center justify-between gap-3 text-xs"><span>Priced at <!-- -->100<!-- --> spot, <!-- -->25<!-- -->% vol,<!-- --> <!-- -->30<!-- --> days left. Move the sliders.</span><span class="flex items-center gap-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent rounded-md px-3 text-muted-foreground hover:text-foreground h-8" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw mr-1.5 h-3.5 w-3.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>Reset</button><a class="text-primary inline-flex items-center gap-1 font-medium hover:underline" href="/tools/options-pnl?v=1&amp;u=s&amp;s=100&amp;iv=25&amp;r=4&amp;q=0&amp;t=0&amp;l=p-s-1-90-0.19-30-100-a_c-s-1-110-0.35-30-100-a" data-discover="true">Open in the calculator<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right h-3.5 w-3.5" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></span></figcaption></figure>
+<p>Drag the volatility slider on that strangle and watch the pre-expiry line drop
+while the expiry line stays put. Rows 1 and 2 of the risk array are exactly
+that move. This is why short volatility positions get margin calls in quiet
+markets — the scan found the vol-up scenario, not a price move.</p>
+<h2 id="the-parts-nobody-mentions">The parts nobody mentions</h2>
+<p>Scan risk is the headline, but the total is built from four more pieces.</p>
+<p><strong>Intra-commodity spread charge.</strong> SPAN treats all months of a contract as one
+underlying, which is generous — a long March and short June future nets to
+almost nothing. But the months do not move identically, so a charge is added
+back for calendar spread risk. It is small, and it surprises people who
+expected a perfectly hedged spread to be free.</p>
+<p><strong>Inter-commodity spread credit.</strong> Related products get a discount for
+offsetting. Long crude against short heating oil is genuinely less risky than
+either alone, and the exchange grants a percentage credit for recognised pairs.</p>
+<p><strong>Delivery or spot month charge.</strong> Contracts near expiry behave badly —
+liquidity thins and squeezes happen — so an extra charge applies as delivery
+approaches.</p>
+<p><strong>Short option minimum.</strong> The one that catches people. A portfolio of deep
+out-of-the-money short options can scan to almost no risk, because in all
+sixteen scenarios the options stay worthless. SPAN refuses to believe this and
+imposes a floor per short contract. Sell enough far-out-of-the-money options
+and your margin is set entirely by this minimum, with the scan irrelevant.</p>
+<p>The total is roughly:</p>
+<pre><code>margin = max(scan risk + intra-commodity charge − inter-commodity credit,
+             short option minimum)
+             + delivery charge
+</code></pre>
+<h2 id="what-this-means-when-you-trade">What this means when you trade</h2>
+<ul>
+<li><strong>Defining your risk cuts your margin, often dramatically.</strong> Buying the wing
+on a short position costs premium and buys back a large part of the deposit.
+This is most of the reason iron condors exist rather than strangles.</li>
+<li><strong>Margin is not static.</strong> The exchange raises scan ranges when realised
+volatility rises — which is precisely when your position is already losing.
+Requirements expand into a falling market, and forced liquidation is a
+liquidity event, not a solvency one. That mechanism has ended more accounts
+than bad directional calls.</li>
+<li><strong>Check the short option minimum before scaling.</strong> A strategy that looks
+capital-efficient at ten contracts may be floored at a hundred.</li>
+<li><strong>Your broker may add to it.</strong> SPAN is the exchange&#x27;s number. Brokers
+routinely apply a multiplier on top, and retail multipliers can be
+substantial.</li>
+</ul>
+<h2 id="notes-from-building-one">Notes from building one</h2>
+<p>I built the risk and margin engine at Otkritie — SPAN portfolio margining
+across futures and options on index, commodity, FX and single stocks, feeding
+a real-time engine handling over a million updates a second for 400,000
+investors. Three things I did not expect going in.</p>
+<p>The arithmetic is the easy part. Sixteen revaluations per contract is nothing.
+The hard part is the <strong>reference data</strong>: scan ranges, tiers, spread definitions
+and credit rates change, they arrive as files on a schedule, and a stale
+parameter produces a confidently wrong number rather than an error.</p>
+<p>The second is that <strong>the option pricing model inside the margin calculation has
+to match the one on the trading screen</strong>, or clients see a margin requirement
+that disagrees with their own P&amp;L and — reasonably — do not trust either.</p>
+<p>The third is that margin is a <strong>real-time obligation, not a report</strong>. It has to
+be right on every tick, because it gates whether an order can be placed at all.
+That constraint, more than the mathematics, is what makes a margin engine an
+engineering problem.</p>
+<h2 id="beyond-span">Beyond SPAN</h2>
+<p>Exchanges are migrating from the original algorithm to <strong>SPAN 2</strong>, which
+combines a historical-value-at-risk model with a stress component and handles
+liquidity and concentration more explicitly. The intuition above still holds —
+scenarios, portfolio offsets, and add-ons for the things a scenario grid
+misses. The parameters change; the shape of the answer does not.</p>
+<p>For the authoritative detail, go to the exchange&#x27;s own methodology
+documentation rather than a textbook. It is free, precise, and updated when the
+rules change.</p></article><ul class="mt-10 flex flex-wrap gap-2" aria-label="Topics"><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">margin</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">span</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">portfolio margin</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">short premium</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">exchange</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">risk systems</li><li class="bg-accent text-accent-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">measurement</li></ul><section aria-label="Related pages" class="border-border/40 mt-8 border-t pt-6"><h2 class="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">Related</h2><ul class="grid grid-cols-1 gap-3 sm:grid-cols-3"><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/strategies/short-strangle" data-discover="true"><span class="block text-sm font-medium">Short strangle</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">Sell an out-of-the-money put and call. Collect premium while nothing happens — and carry a<!-- -->…</span></a></li><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/strategies/iron-condor" data-discover="true"><span class="block text-sm font-medium">Iron condor</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">A short strangle with both tails bought back. Same idea, defined risk, smaller credit.<!-- -->…</span></a></li><li><a class="border-border/60 hover:border-border block h-full rounded-lg border p-3 transition-colors" href="/learn/risk/var-and-es" data-discover="true"><span class="block text-sm font-medium">VAR, and what it does not tell you</span><span class="text-muted-foreground mt-1 block text-xs leading-relaxed">Value at Risk in one sentence, the three ways to compute it, the reason it is not a cohere<!-- -->…</span></a></li></ul></section><nav aria-label="Adjacent pages" class="border-border/40 mt-12 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:justify-between"><a class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm" href="/learn/strategies/collar" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left h-4 w-4 transition-transform group-hover:-translate-x-0.5" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Collar</a><a class="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm sm:text-right" href="/learn/risk/var-and-es" data-discover="true">VAR, and what it does not tell you<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></nav></div></div></main><footer class="border-border/40 border-t bg-accent/30 py-10 sm:py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4"><div class="col-span-2"><div class="flex items-start gap-4"><img src="/images/batiaev.jpg" alt="Anton Batiaev" width="72" height="72" loading="lazy" decoding="async" class="border-border/60 h-16 w-16 shrink-0 rounded-full border object-cover shadow-subtle ring-2 ring-background ring-offset-2 ring-offset-border/40 sm:h-[72px] sm:w-[72px]"/><div><h3 class="font-display mb-2 text-xl font-semibold sm:text-2xl">Anton Batiaev</h3><p class="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">Fintech CPTO, founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.</p></div></div></div><div><h4 class="mb-2 font-medium sm:mb-4">Links</h4><ul><li><a href="/#experience" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base">Experience</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/learn" data-discover="true">Knowledge base</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/tools" data-discover="true">Calculators</a></li><li><a class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base" href="/advisory" data-discover="true">Advisory</a></li><li><a href="/#contact" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base">Contact</a></li></ul></div><div><h4 class="mb-2 font-medium sm:mb-4">Connect</h4><ul><li><a href="https://www.linkedin.com/in/batiaev/" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin mr-2 h-5 w-5" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg> <!-- -->LinkedIn</a></li><li><a href="https://www.github.com/batiaev/" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github mr-2 h-5 w-5" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg> <!-- -->GitHub</a></li><li><a href="mailto:anton@batiaev.com" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail mr-2 h-5 w-5" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg> <!-- -->Email</a></li><li><a href="https://t.me/batiaev_com" target="_blank" rel="noreferrer" class="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors sm:text-base"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle mr-2 h-5 w-5" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg> <!-- -->Telegram</a></li></ul></div></div><div class="border-border/40 mt-8 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row sm:gap-4 sm:pt-8"><p class="text-muted-foreground text-sm">© <!-- -->2026<!-- --> <!-- -->Anton Batiaev</p><p class="text-muted-foreground text-center text-xs sm:text-sm">Fintech builder<!-- --> · London</p></div></div></footer></div></div>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+import{r as t}from"./ui-DdTWCHPi.js";function e({title:e,description:n}){t.useEffect((()=>{const t=document.title;document.title=e;const o=document.querySelector('meta[name="description"]'),c=o?.content??null;return o&&n&&(o.content=n),()=>{document.title=t,o&&null!==c&&(o.content=c)}}),[e,n])}export{e as u};
