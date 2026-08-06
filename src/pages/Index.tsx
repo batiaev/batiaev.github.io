@@ -27,7 +27,7 @@ const Index = () => {
         <Intro />
         <Experience />
         <DomainProof />
-        <Initiatives />
+        {/*<Initiatives />*/}
         <Teaching />
         <Suspense
           fallback={
