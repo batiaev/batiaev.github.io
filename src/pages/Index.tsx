@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import Header from "@/components/Header";
 import Intro from "@/components/Intro";
-import Initiatives from "@/components/Initiatives";
+// import Initiatives from "@/components/Initiatives";
 import Experience from "@/components/Experience";
 import DomainProof from "@/components/DomainProof";
 import Teaching from "@/components/Teaching";
@@ -27,7 +27,7 @@ const Index = () => {
         <Intro />
         <Experience />
         <DomainProof />
-        <Initiatives />
+        {/*<Initiatives />*/}
         <Teaching />
         <Suspense
           fallback={
