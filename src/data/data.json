@@ -3,7 +3,7 @@
   "avatar": "/images/batiaev.jpg",
   "chip": "Fintech builder",
   "headline": "I build fintech products — algo, execution, and pricing non-linear risk is the part I never got tired of.",
-  "operatorLine": "VP Product & Engineering at Capital.com — lead trading-platform with 77 engineers, 5,500+ instruments, $1.27T client volume in Q1 2026. Alongside it I build Fintecy and SHIP.",
+  "operatorLine": "VP Product & Engineering at Capital.com — lead trading platform with ~100 engineers, 5,500+ instruments, $1.27T client volume in Q1 2026. Alongside it I build Fintecy, SHIP, and Parenza.",
   "company": "Capital.com",
   "description": "Fintech CPTO, founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.",
   "metaDescription": "Anton Batiaev — fintech CPTO, founder and builder. VP Product & Engineering at Capital.com; ex-Revolut, ex-CTO Vega, Deutsche Bank.",
@@ -30,6 +30,17 @@
       "proof": "Provenance is the design constraint: each node records which agent or human wrote it, from which source, and what it superseded.",
       "image": "/images/logo-ship.png",
       "link": "https://shipplatform.ai",
+      "external": true
+    },
+    {
+      "name": "Parenza",
+      "tagline": "Parenting decision support, in your own AI or ours",
+      "description": "A structured family record — feeds, sleep, health, decisions — with a panel of specialist agents and a Chief of Staff that returns one answer instead of five conflicting ones. Use it in the app, or inside Claude and ChatGPT over MCP.",
+      "status": "Pre-launch · design-partner cohort",
+      "proof": "Running on my own family's record since July 2026: 10 specialists, 1,300+ routine entries, MCP into the assistant I already use. Not a medical device — and no certifications we don't hold.",
+      "capabilities": ["Routines", "Knowledge base", "Specialist panel", "MCP"],
+      "image": "/images/logo-parenza.svg",
+      "link": "https://parenza.ai",
       "external": true
     }
   ],
@@ -219,12 +230,12 @@
         "Enterprise",
         "Transformation"
       ],
-      "teamSize": 77,
+      "teamSize": 87,
       "startYear": 2025,
       "scaleNote": "$1.27T per quarter",
       "achievements": [
         "Technology strategy for a 1,300-person organisation",
-        "Own the trading-platform tribe end to end — 77 engineers plus product",
+        "Own the trading-platform end to end — 87 engineers plus product",
         "Multi-asset CFD platform: 5,500+ instruments, $1.27T client trading volume in Q1 2026",
         "Risk-committee input across 5 regulators (FCA, CySEC, ASIC, Bahamas SCA, UAE SCA)"
       ],

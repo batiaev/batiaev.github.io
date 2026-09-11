@@ -3,7 +3,12 @@ import { revealOnScroll } from "@/lib/reveal";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import data from "@/data/data.json";
 
-type Initiative = (typeof data.initiatives)[number];
+type Initiative = (typeof data.initiatives)[number] & {
+  capabilities?: readonly string[];
+};
+
+const capabilitiesOf = (item: Initiative): readonly string[] =>
+  item.capabilities ?? [];
 
 const Media = ({ item }: { item: Initiative }) => {
   const image = "image" in item ? item.image : undefined;
@@ -46,58 +51,76 @@ const Initiatives = () => {
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
           <div className="highlight-chip">Building</div>
-          <h2 className="section-title">Two products of my own</h2>
+          <h2 className="section-title">Three products of my own</h2>
           <p className="section-subtitle mx-auto">
             Fintecy pulls a scattered financial life into one place. SHIP gives
             engineering teams a typed graph their agents can actually write to.
-            Both are registered companies in private beta, and both started as
-            problems I hit myself.
+            Parenza is the same graph, aimed at a family: a structured record, a
+            specialist panel, and one synthesized answer — in your own AI or
+            ours. All three started as problems I hit myself.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
-          {data.initiatives.map((item) => (
-            <a
-              key={item.name}
-              href={item.link}
-              {...(item.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="group flex flex-col rounded-lg border border-transparent bg-background p-6 shadow-subtle transition-colors hover:border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <div className="flex items-start gap-4">
-                <Media item={item} />
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-xl font-semibold">{item.name}</h3>
-                    <ArrowUpRight
-                      className="text-muted-foreground h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                      aria-hidden
-                    />
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {data.initiatives.map((item) => {
+            const capabilities = capabilitiesOf(item);
+
+            return (
+              <a
+                key={item.name}
+                href={item.link}
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="group flex flex-col rounded-lg border border-transparent bg-background p-6 shadow-subtle transition-colors hover:border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <div className="flex items-start gap-4">
+                  <Media item={item} />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-xl font-semibold">{item.name}</h3>
+                      <ArrowUpRight
+                        className="text-muted-foreground h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </div>
+                    <p className="text-primary mt-1 text-sm font-medium">
+                      {item.tagline}
+                    </p>
                   </div>
-                  <p className="text-primary mt-1 text-sm font-medium">
-                    {item.tagline}
-                  </p>
                 </div>
-              </div>
 
-              <p className="text-muted-foreground mt-4 flex-1 text-sm leading-relaxed">
-                {item.description}
-              </p>
+                <p className="text-muted-foreground mt-4 flex-1 text-sm leading-relaxed">
+                  {item.description}
+                </p>
 
-              <p className="border-border/60 text-muted-foreground mt-5 flex items-start gap-2 border-t pt-4 text-sm leading-relaxed">
-                <ShieldCheck
-                  className="text-primary mt-0.5 h-4 w-4 shrink-0"
-                  aria-hidden
-                />
-                <span>{item.proof}</span>
-              </p>
+                {capabilities.length > 0 ? (
+                  <ul className="mt-4 flex flex-wrap gap-1.5">
+                    {capabilities.map((capability) => (
+                      <li
+                        key={capability}
+                        className="border-border/60 text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs font-medium"
+                      >
+                        {capability}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
 
-              <p className="text-muted-foreground mt-4 text-xs font-medium uppercase tracking-wider">
-                {item.status}
-              </p>
-            </a>
-          ))}
+                <p className="border-border/60 text-muted-foreground mt-5 flex items-start gap-2 border-t pt-4 text-sm leading-relaxed">
+                  <ShieldCheck
+                    className="text-primary mt-0.5 h-4 w-4 shrink-0"
+                    aria-hidden
+                  />
+                  <span>{item.proof}</span>
+                </p>
+
+                <p className="text-muted-foreground mt-4 text-xs font-medium uppercase tracking-wider">
+                  {item.status}
+                </p>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

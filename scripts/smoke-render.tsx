@@ -371,7 +371,8 @@ const expectations: [string, boolean][] = [
   [
     'product cards use their own logos',
     homeHtml.includes('/images/logo-fintecy.png') &&
-      homeHtml.includes('/images/logo-ship.png'),
+      homeHtml.includes('/images/logo-ship.png') &&
+      homeHtml.includes('/images/logo-parenza.svg'),
   ],
 ]
 
