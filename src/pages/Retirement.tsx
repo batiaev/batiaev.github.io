@@ -144,10 +144,10 @@ const Retirement = () => {
   const success = result.successRate;
   const tone =
     success >= 0.85
-      ? "text-emerald-600"
+      ? "text-positive"
       : success >= 0.6
-        ? "text-amber-600"
-        : "text-red-600";
+        ? "text-warning"
+        : "text-negative";
 
   const verdict =
     success >= 0.9

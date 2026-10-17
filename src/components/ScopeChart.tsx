@@ -39,12 +39,12 @@ const RoleTick = ({ x = 0, y = 0, payload }: TickProps) => {
 };
 
 const ScopeChart = () => (
-  <figure className="border-border/50 bg-background/80 mx-auto mt-10 max-w-3xl rounded-lg border p-5 sm:p-6">
+  <figure className="surface p-5 sm:p-6">
     <figcaption className="mb-5">
-      <h3 className="text-base font-semibold sm:text-lg">
+      <h3 className="text-[15px] font-semibold tracking-tight">
         Direct reports, and the size of the problem behind them
       </h3>
-      <p className="text-muted-foreground mt-1 text-sm">
+      <p className="text-muted-foreground mt-1 text-[13px] leading-relaxed">
         Bars are engineers reporting into me. Under each role is what that team
         was carrying — the units differ on purpose, because the problems did.
       </p>
@@ -81,7 +81,7 @@ const ScopeChart = () => (
           <Bar
             dataKey="engineers"
             fill="hsl(var(--primary))"
-            radius={[0, 6, 6, 0]}
+            radius={[0, 3, 3, 0]}
             isAnimationActive={false}
           >
             <LabelList

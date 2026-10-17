@@ -1,0 +1,110 @@
+Every agentic workflow is a loop: decide what to do, do it, check whether it
+worked, repeat. The first two steps get the demos. The third decides whether
+the result can be trusted, and it is the one most often left to the model's own
+judgement — which is to say, skipped.
+
+The rule that makes these loops hold up is simple to state: **the check has to
+be something the model cannot talk its way past.**
+
+## Plan, act, verify
+
+**Plan** is where scope gets decided, and where most expensive mistakes are made
+cheaply. A plan written down before any change — which files, which approach,
+how success will be shown — gives a human one place to say "no, not like that"
+before an hour of work goes in the wrong direction. It also gives the agent
+something to check itself against later.
+
+**Act** should be small. A diff a reviewer can read in two minutes gets read; a
+diff that touches forty files gets approved. Small steps also make failure
+cheap: when step four breaks something, steps one to three are still good.
+
+**Verify** is a gate, not an opinion. Compare:
+
+| Weak check | Strong check |
+|---|---|
+| "The code looks correct" | The tests pass |
+| The tests the agent just wrote pass | Tests that existed before the change still pass |
+| Snapshot tests regenerated | Property tests: monotonicity, round-trips, known answers |
+| "It builds" | The page renders and the number on it is right |
+| The agent says it is done | A command exits zero |
+
+The strong column has one thing in common: the agent does not control the
+outcome. That is the point.
+
+## Property checks beat examples
+
+For anything that computes, the most robust gate is a set of properties rather
+than a list of expected outputs. This site's calculators are checked that way:
+
+- **Closed-form anchors.** Hedging an option at zero volatility must compound to
+  exactly `exp(rt)`.
+- **Round-trips.** Price at a volatility, invert the price, recover the
+  volatility to 1e-7.
+- **Monotonicity.** Every lever must pull the right way — more contribution,
+  more money.
+- **Statistical tolerance.** A Monte Carlo result is compared against its own
+  standard error, not a magic number.
+- **Hostile input.** An empty field, a crossed market, a quote below intrinsic.
+
+An agent can make an example test pass by changing the example. It cannot make
+"inverting the price recovers the volatility" pass without the maths being
+right. That asymmetry is what lets a loop run unattended for longer.
+
+## Humans at the irreversible step
+
+Autonomy should scale with reversibility, not with confidence. An agent can
+iterate on a working tree all afternoon because version control undoes
+anything. It should not push, deploy, send, delete or pay without a person
+saying yes — and that approval should be specific to the action, not a blanket
+"go ahead" that silently covers the next one.
+
+On this site the split is explicit: the agent can change anything in the source
+and run every check, but nothing is live until the static build is regenerated
+and committed, and that step is mine.
+
+## Sub-agents for separation, not speed
+
+Splitting work across agents is tempting for throughput. Its better use is
+**separation of concerns**:
+
+- a reviewer agent that sees only the diff and the brief, not the reasoning
+  that produced it, so it is not persuaded by the author's story;
+- a researcher that reads widely and returns a conclusion, so the main context
+  is not filled with forty files it will never need again;
+- specialists with narrow briefs — security, database migrations, compliance
+  language — whose instructions would be noise in every other task.
+
+Each spawn starts cold and re-derives context, so it is not free. Use it where
+independence is the value.
+
+## Evals: the regression suite for behaviour
+
+Code has tests; agent behaviour needs **evals** — a fixed set of tasks with a
+way of scoring the result, run whenever the prompt, the tools or the model
+change. Without them every change to the harness is a guess, and model upgrades
+become anxious events instead of routine ones.
+
+Good evals look like the work: real tasks from the backlog, real failure cases
+that were fixed once, graded on whether the outcome was correct rather than
+whether the transcript looked confident. A handful of honest evals beats a
+leaderboard of synthetic ones.
+
+## Cost and latency are design inputs
+
+Every loop iteration costs tokens and time. That shapes design:
+
+- give the agent the cheapest check first — the type-checker before the full
+  test suite, the unit test before the browser;
+- keep stable context stable, so it can be cached rather than re-sent;
+- stop loops that are not converging. Three failed attempts at the same fix
+  usually mean the plan is wrong, not the code.
+
+## What changes for the team
+
+The bottleneck moves. Writing the change gets cheap; specifying it and checking
+it do not. Teams that do well with agents write better briefs, invest in
+faster and stricter gates, and treat every recurring correction as a bug in the
+harness rather than in the model. The
+[harness note](/learn/ai/harness) covers where those corrections live, and the
+[product engineering note](/learn/ai/product-engineering) what it does to how a
+team is organised.

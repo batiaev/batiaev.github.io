@@ -16,21 +16,27 @@ export const LearnTree = ({
   <nav aria-label="Knowledge base" className="text-sm">
     {SECTIONS.map((section) => (
       <div key={section.id} className="mb-6 last:mb-0">
-        <h2 className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">
+        <h2 className="eyebrow mb-2">
           {section.title}
         </h2>
         <ul className="space-y-0.5">
-          {section.pages.map((page) => {
+          {section.pages.map((page, i) => {
             const active = page.slug === current;
+            const groupStart = page.group && page.group !== section.pages[i - 1]?.group;
             return (
               <li key={page.slug}>
+                {groupStart ? (
+                  <span className="text-muted-foreground block px-2 pb-1 pt-2 font-mono text-[11px] uppercase tracking-[0.08em]">
+                    {page.group}
+                  </span>
+                ) : null}
                 <Link
                   to={learnPath(page.slug)}
                   onClick={onNavigate}
                   aria-current={active ? "page" : undefined}
                   className={`block rounded px-2 py-1.5 leading-snug transition-colors ${
                     active
-                      ? "bg-accent text-accent-foreground font-medium"
+                      ? "bg-accent text-foreground font-medium"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -85,7 +91,7 @@ export const LearnMobileNav = ({ slug }: { slug: string }) => {
   return (
     <div
       ref={container}
-      className="border-border/40 bg-background/95 sticky top-[var(--header-h)] z-30 -mx-4 border-b px-4 py-2 backdrop-blur md:-mx-8 md:px-8 lg:hidden"
+      className="border-border bg-background/95 sticky top-[var(--header-h)] z-20 -mx-4 border-b px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6 md:hidden"
     >
       <div className="flex items-center gap-2">
         <button
@@ -93,7 +99,7 @@ export const LearnMobileNav = ({ slug }: { slug: string }) => {
           onClick={() => setOpen((current) => !current)}
           aria-expanded={open}
           aria-controls="learn-contents"
-          className="border-border/60 text-muted-foreground hover:text-foreground inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-md border px-2.5 text-sm transition-colors"
+          className="border-border text-muted-foreground hover:text-foreground inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border px-2.5 text-[13px] transition-colors"
         >
           <List className="h-4 w-4" aria-hidden />
           Contents
@@ -112,7 +118,7 @@ export const LearnMobileNav = ({ slug }: { slug: string }) => {
       {open ? (
         <div
           id="learn-contents"
-          className="border-border/40 bg-background animate-fade-in absolute left-0 right-0 top-full max-h-[70vh] overflow-y-auto border-b px-4 py-4 shadow-elevated"
+          className="border-border bg-background animate-fade-in absolute left-0 right-0 top-full max-h-[70vh] overflow-y-auto border-b px-4 py-4 shadow-elevated"
         >
           <LearnTree current={slug} onNavigate={() => setOpen(false)} />
         </div>
@@ -123,7 +129,7 @@ export const LearnMobileNav = ({ slug }: { slug: string }) => {
       {section ? (
         <nav
           aria-label={`${section.title} notes`}
-          className="scroll-row mt-2 lg:hidden"
+          className="scroll-row mt-2"
         >
           {section.pages.map((other) => (
             <SiblingPill
@@ -209,7 +215,7 @@ export const LearnSectionTabs = () => {
   const active = useVisibleSection();
 
   return (
-    <div className="border-border/40 bg-background/95 sticky top-[var(--header-h)] z-30 border-b px-4 py-2 backdrop-blur sm:hidden">
+    <div className="border-border bg-background/95 sticky top-[var(--header-h)] z-20 border-b px-4 py-2 backdrop-blur sm:hidden">
       <nav aria-label="Sections" className="scroll-row">
         {SECTIONS.map((section) => (
           <a
@@ -219,7 +225,7 @@ export const LearnSectionTabs = () => {
             className="nav-pill"
           >
             {section.title}
-            <span className="text-muted-foreground/70 text-xs tabular-nums">
+            <span className="text-muted-foreground text-xs tabular-nums">
               {section.pages.length}
             </span>
           </a>

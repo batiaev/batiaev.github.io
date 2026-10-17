@@ -1,70 +1,61 @@
-import React, { useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import React from "react";
+import { Calendar, Mail } from "lucide-react";
+import PageHero, { Lede } from "@/components/PageHero";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
-import { BackLink } from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "lucide-react";
+import { useDocumentMeta } from "@/hooks/use-document-meta";
+import { ROUTE_META } from "@/lib/routeMeta";
 import data from "@/data/data.json";
 import { socialLink } from "@/lib/social";
 
+const BookCall = ({ label }: { label: string }) => (
+  <Button className="min-h-10" asChild>
+    <a href={socialLink("calendar")} target="_blank" rel="noreferrer">
+      <Calendar aria-hidden />
+      {label}
+    </a>
+  </Button>
+);
+
 const Advisory = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useDocumentMeta(ROUTE_META["/advisory"]);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-clip">
-      <Header />
-      <main>
-        <section className="border-border/40 border-b py-12 sm:py-16">
-          <div className="container mx-auto px-4">
-            <BackLink to="/" label="Back to home" />
-            <div className="mx-auto max-w-2xl text-center">
-              <div className="highlight-chip">{data.advisoryIntro.chip}</div>
-              <h1 className="section-title mt-4">{data.advisoryIntro.title}</h1>
-              <p className="section-subtitle mx-auto">
-                {data.advisoryIntro.subtitle}
-              </p>
-              <Button size="lg" className="mt-8 min-h-11 font-medium" asChild>
-                <a
-                  href={socialLink("calendar")}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Calendar className="mr-2 h-5 w-5" aria-hidden />
-                  Book a call
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <Services />
-        <Testimonials />
-
-        <section className="bg-accent/30 py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="mb-4 text-2xl font-semibold">Ready to talk?</h2>
-            <p className="text-muted-foreground mx-auto mb-8 max-w-xl">
-              Thirty minutes is usually enough to tell whether this is a fit.
-            </p>
-            <Button size="lg" className="min-h-11 font-medium" asChild>
-              <a
-                href={socialLink("calendar")}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Calendar className="mr-2 h-5 w-5" aria-hidden />
-                Book a consultation
+    <>
+      <PageHero
+        chip={data.advisoryIntro.chip}
+        title={data.advisoryIntro.title}
+        actions={
+          <>
+            <Button variant="outline" className="min-h-10" asChild>
+              <a href={socialLink("email")}>
+                <Mail aria-hidden />
+                Email
               </a>
             </Button>
+            <BookCall label="Book a call" />
+          </>
+        }
+      >
+        <Lede>{data.advisoryIntro.subtitle}</Lede>
+      </PageHero>
+
+      <Services />
+      <Testimonials />
+
+      <section className="border-border border-t">
+        <div className="container mx-auto flex flex-col gap-4 py-10 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight">Ready to talk?</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Thirty minutes is usually enough to tell whether this is a fit.
+            </p>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          <BookCall label="Book a consultation" />
+        </div>
+      </section>
+    </>
   );
 };
 

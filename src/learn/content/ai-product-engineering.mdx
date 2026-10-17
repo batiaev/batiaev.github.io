@@ -1,0 +1,104 @@
+For most of the history of software, the expensive part was writing the code.
+Planning, process and team shape all grew around that constraint. Agents have
+not removed it, but they have moved it: a competent first draft of a change is
+now minutes away. What is still slow is knowing which change to make, and
+knowing whether the one you got is right.
+
+That shift changes what good product engineering looks like, and it changes it
+for product managers and engineering leaders as much as for engineers.
+
+## The new bottlenecks
+
+| Used to be scarce | Now scarce |
+|---|---|
+| Typing the code | Saying precisely what should change |
+| Knowing the syntax | Knowing which details decide whether it holds up |
+| Review of a colleague's diff | Review of a machine's diff, at volume |
+| Writing tests | Writing checks the author cannot game |
+| Documentation nobody reads | Briefs an agent reads on every task |
+
+Every row on the right is a judgement problem. None of them gets easier because
+the model got better at code.
+
+## The spec is the artefact
+
+When an agent implements, the spec stops being a ticket someone skims and
+becomes the input that determines the output. A good one is short and
+specific:
+
+- **What and why** — the user problem, in one paragraph.
+- **The shape of done** — what someone will see, and the check that proves it.
+- **Constraints** — what must not change, what must not be invented, which
+  existing pattern to follow.
+- **Open questions** — named, so they get answered rather than guessed.
+
+Writing that well is product work. It is also the cheapest point in the whole
+process to catch a wrong idea — the plan costs a minute to read; the
+implementation of the wrong plan costs a review cycle and a revert.
+
+## Taste becomes configuration
+
+Every team has standards that live in people's heads: how dense a table should
+be, which error messages are acceptable, why a figure is never shown without
+its source, when a number must say it was simulated. Agents do not absorb those
+by osmosis. They follow what is written down.
+
+So taste moves into files: a design system with named components and tokens, a
+brief per repository, rules that attach to the paths they govern, checks that
+fail the build when a raw colour sneaks past the tokens. This site is an
+example — its brief carries rules like *never fabricate market data* and
+*motion must compute something*, and every change, by a person or an agent,
+starts from them.
+
+The side effect is welcome: standards that are written down can be argued with,
+versioned and improved. Standards in people's heads mostly get re-litigated.
+
+## Verification scales the team
+
+If an agent can produce ten changes a day, the team needs to be able to trust
+ten changes a day. That is a verification problem, and it is solved the same
+way it always was, only with less tolerance for gaps:
+
+- fast, strict gates that run on every change;
+- property and invariant tests for anything that computes;
+- a real environment to look at, not just a green build;
+- humans reviewing intent and risk, not formatting.
+
+The [agentic workflows note](/learn/ai/agentic-workflows) goes into the gates.
+The organisational point is that investment in verification used to be a
+quality decision. It is now a capacity decision.
+
+## The product–engineering line moves
+
+When implementation is cheap, the person closest to the problem can often get
+much further on their own. Product managers prototype the change instead of
+describing it. Engineers spend more time on what to build and how to prove it,
+and less on transcription. Designers ship the component rather than the
+picture of it.
+
+That does not remove the roles. It removes the hand-offs between them that
+existed only because writing code was slow. What remains distinct is
+accountability: who decides what good is, and who answers for it when it is
+not.
+
+## Knowledge is infrastructure
+
+An agent is only as good as what it knows about the product, the codebase and
+the decisions behind both. A team that keeps its goals, decisions and artefacts
+somewhere structured — not scattered across chat threads and stale wiki pages —
+gives every agent and every new hire the same head start. That is the problem
+SHIP exists for, and the [knowledge bases note](/learn/ai/knowledge-bases)
+explains why typed structure beats retrieval for it.
+
+## What to do on Monday
+
+1. Write a one-page brief for your main repository: purpose, hard rules, the
+   command that proves a change works.
+2. Make that command fast enough that people — and agents — actually run it.
+3. Turn your three most frequent review comments into rules or checks.
+4. Require a written plan before any change larger than a single file.
+5. Keep irreversible steps — deploys, data changes, messages to customers —
+   behind a human, explicitly.
+
+None of it needs a new tool. All of it gets more valuable the more of the work
+is done by agents.

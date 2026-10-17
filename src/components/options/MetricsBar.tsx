@@ -24,9 +24,9 @@ const Tile = ({
     <p
       className={`mt-1 text-lg font-semibold tabular-nums sm:text-xl ${
         tone === "profit"
-          ? "text-emerald-600"
+          ? "text-positive"
           : tone === "loss"
-            ? "text-red-600"
+            ? "text-negative"
             : ""
       }`}
     >

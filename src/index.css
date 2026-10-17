@@ -9,90 +9,113 @@
 @layer base {
   :root {
     /*
-     * Height of the sticky header, so anything that sticks underneath it can
-     * say so — the knowledge-base nav, and `scroll-mt` on anchor targets.
-     * A fixed height rather than a measured one: the header is a 44px tap
-     * target plus its padding, and pinning it here means a sticky offset
-     * cannot drift out of step with it.
+     * Height of the shell header, so anything that sticks underneath it can
+     * say so — the knowledge-base nav, and `scroll-mt` on anchor targets. One
+     * value at every width: the header is a single 48px row everywhere, which
+     * is what keeps a sticky offset from drifting out of step with it.
      */
-    --header-h: 4.25rem;
+    --header-h: 3rem;
 
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    /*
+     * Two surfaces, the way the dealing tool draws them: a tinted canvas the
+     * sidebar and header sit on, and a white tile that holds the page. The
+     * gap between them is the frame, so cards inside the tile need hairlines
+     * rather than shadows to separate.
+     */
+    --canvas: 228 16% 96%;
+    --background: 0 0% 100%;
+    --foreground: 228 14% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 228 14% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 228 14% 10%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    /* The one accent. Links, focus, the active marker and the main series in
+       a chart — never a background fill for a whole surface. */
+    --primary: 235 56% 57%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5.9% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 228 14% 95%;
+    --secondary-foreground: 228 14% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 228 16% 96%;
+    --muted-foreground: 228 7% 43%;
 
-    --accent: 221 83% 95%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 228 14% 94.5%;
+    --accent-foreground: 228 14% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
+    /* Gains and losses. Tokens rather than palette classes so a P&L figure
+       keeps its contrast in the dark theme. */
+    --positive: 155 64% 32%;
+    --negative: 0 68% 48%;
+    --warning: 30 92% 40%;
 
-    --radius: 0.75rem;
+    --border: 228 13% 90%;
+    /* Form fields only. Darker than --border on purpose: a field's edge is the
+       only thing that says "type here", so it needs 3:1 against the tile
+       (WCAG 1.4.11). Hairlines elsewhere are decoration and can stay faint. */
+    --input: 228 10% 58%;
+    --ring: 235 56% 57%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.625rem;
+
+    --sidebar-background: 228 16% 96%;
+    --sidebar-foreground: 228 10% 30%;
+    --sidebar-primary: 228 14% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 228 14% 92%;
+    --sidebar-accent-foreground: 228 14% 10%;
+    --sidebar-border: 228 13% 90%;
+    --sidebar-ring: 235 56% 57%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --canvas: 240 6% 4%;
+    --background: 240 5% 7.5%;
+    --foreground: 228 14% 93%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 5% 7.5%;
+    --card-foreground: 228 14% 93%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 5% 9%;
+    --popover-foreground: 228 14% 93%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 235 86% 75%;
+    --primary-foreground: 240 6% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 228 14% 93%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 4% 11%;
+    --muted-foreground: 228 6% 62%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 240 4% 13%;
+    --accent-foreground: 228 14% 93%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --positive: 152 52% 54%;
+    --negative: 0 86% 70%;
+    --warning: 36 92% 60%;
+
+    --border: 240 4% 15.5%;
+    --input: 240 5% 41%;
+    --ring: 235 86% 75%;
+
+    --sidebar-background: 240 6% 4%;
+    --sidebar-foreground: 228 8% 72%;
+    --sidebar-primary: 228 14% 93%;
+    --sidebar-primary-foreground: 240 6% 8%;
+    --sidebar-accent: 240 4% 12%;
+    --sidebar-accent-foreground: 228 14% 93%;
+    --sidebar-border: 240 4% 15.5%;
+    --sidebar-ring: 235 86% 75%;
   }
 }
 
@@ -101,50 +124,97 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-canvas text-foreground font-sans antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Inter's straight-sided 1, open digits and the alternate a — the set
+       Linear and most trading UIs settle on, because a 1 that reads as an l
+       is a real problem in a column of prices. */
+    font-feature-settings: "cv11", "ss01", "ss03";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-medium tracking-tight;
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.22);
+  }
+
+  :focus-visible {
+    outline-color: hsl(var(--ring));
   }
 
   .container {
-    @apply px-4 md:px-8;
-  }
-
-  @media (min-width: 640px) {
-    :root {
-      --header-h: 4.75rem;
-    }
+    @apply px-4 sm:px-6 lg:px-10;
   }
 }
 
 @layer components {
+  /*
+   * Section eyebrow. Mono, small, uppercase, with a square accent tick — the
+   * one place the accent colour appears before the reader has done anything.
+   */
+  .highlight-chip {
+    @apply text-muted-foreground mb-3 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.08em];
+  }
+
+  .highlight-chip::before {
+    content: "";
+    @apply bg-primary inline-block h-1.5 w-1.5 rounded-[2px];
+  }
+
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-medium mb-4;
+    @apply mb-2 text-2xl font-semibold tracking-tight sm:text-[1.75rem] sm:leading-tight;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl;
+    @apply text-muted-foreground mb-8 max-w-2xl text-[15px] leading-relaxed sm:mb-10;
+  }
+
+  /* A labelled block inside a section — "Teaching", "Tools", "Education". */
+  .eyebrow {
+    @apply text-muted-foreground font-mono text-[11px] font-medium uppercase tracking-[0.08em];
+  }
+
+  /*
+   * The card surface. Hairline border, no shadow, and hover changes the
+   * border rather than lifting the card — nothing on this site moves unless it
+   * is computing something.
+   */
+  .surface {
+    @apply border-border bg-background rounded-lg border;
+  }
+
+  .surface-link {
+    @apply border-border bg-background rounded-lg border transition-colors hover:border-foreground/20 hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-elevated hover:-translate-y-1;
+    @apply transition-colors hover:border-foreground/20;
   }
 
   .link-hover {
-    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+    @apply underline-offset-4 hover:underline;
+  }
+
+  /* A small neutral tag — archetypes, topics, statuses. */
+  .tag {
+    @apply border-border text-muted-foreground inline-flex h-5 items-center rounded-md border px-1.5 text-[11px] font-medium;
+  }
+
+  /* Keyboard hint, as in the search field. */
+  .kbd {
+    @apply border-border bg-muted text-muted-foreground inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 font-mono text-[10px] font-medium;
   }
 
   .hero-card {
     @apply opacity-0 animate-scale-in;
-  }
-
-  .highlight-chip {
-    @apply inline-flex items-center rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground mb-4;
   }
 
   /*
@@ -158,7 +228,7 @@
   .scroll-row {
     /* scroll-padding, or the browser snaps the first item flush to the edge on
        load and eats the padding that lines it up with the heading above. */
-    @apply -mx-4 flex snap-x scroll-pl-4 gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0;
+    @apply -mx-4 flex snap-x scroll-pl-4 gap-1.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0;
     scrollbar-width: none;
   }
 
@@ -174,7 +244,7 @@
   .card-row {
     /* items-stretch, so the cards in a row share one height instead of
        leaving ragged white space under the shorter ones. */
-    @apply -mx-4 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto scroll-pl-4 px-4 pb-2 sm:mx-0 sm:block sm:overflow-visible sm:px-0 sm:pb-0;
+    @apply -mx-4 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto scroll-pl-4 px-4 pb-2 sm:mx-0 sm:block sm:overflow-visible sm:px-0 sm:pb-0;
     scrollbar-width: none;
   }
 
@@ -186,13 +256,14 @@
     @apply w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink;
   }
 
-  /* Rounded nav chip, used by the tool switcher and the knowledge-base tabs. */
+  /* Segmented-control chip, used by the tool switcher and the knowledge-base tabs. */
   .nav-pill {
-    @apply border-border/60 text-muted-foreground hover:border-border hover:text-foreground inline-flex min-h-9 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+    @apply border-border text-muted-foreground hover:text-foreground hover:bg-accent/60 inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-md border px-2.5 text-[13px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
   }
 
-  .nav-pill[aria-current] {
-    @apply border-primary/40 bg-accent text-accent-foreground font-medium;
+  .nav-pill[aria-current],
+  .nav-pill[aria-pressed="true"] {
+    @apply border-foreground/15 bg-accent text-foreground font-medium;
   }
 
   /*
@@ -202,11 +273,11 @@
    */
   .hero-scrim {
     background: radial-gradient(
-      ellipse 68% 58% at 50% 48%,
+      ellipse 70% 62% at 30% 48%,
       hsl(var(--background) / 0.94) 0%,
-      hsl(var(--background) / 0.88) 40%,
-      hsl(var(--background) / 0.55) 66%,
-      hsl(var(--background) / 0.18) 84%,
+      hsl(var(--background) / 0.86) 42%,
+      hsl(var(--background) / 0.5) 68%,
+      hsl(var(--background) / 0.12) 86%,
       hsl(var(--background) / 0) 100%
     );
   }
@@ -233,13 +304,13 @@
  */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(12px);
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -257,9 +328,15 @@
   }
 }
 
-/* Custom scrollbar */
+/* Quiet scrollbars, in both themes. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--foreground) / 0.14) transparent;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -267,51 +344,54 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 5px;
+  background: hsl(var(--foreground) / 0.1);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.12);
+  background: hsl(var(--foreground) / 0.18);
+  background-clip: padding-box;
 }
 
 /* Knowledge-base prose. Deliberately hand-rolled rather than @tailwindcss/typography
    so the type scale matches the rest of the site instead of a second one. */
 .prose-page {
-  @apply text-base leading-relaxed;
+  @apply text-[15px] leading-[1.7] sm:text-base;
 }
 
 .prose-page h2 {
-  @apply font-display mt-10 mb-3 scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl;
+  @apply font-display mb-3 mt-12 scroll-mt-20 text-xl font-semibold tracking-tight sm:text-[1.375rem];
 }
 
 .prose-page h3 {
-  @apply mt-8 mb-2 scroll-mt-24 text-base font-semibold sm:text-lg;
+  @apply mb-2 mt-8 scroll-mt-20 text-base font-semibold sm:text-[1.0625rem];
 }
 
 .prose-page p {
-  @apply text-muted-foreground mb-4 leading-relaxed;
+  @apply text-foreground/80 mb-4;
 }
 
 .prose-page ul,
 .prose-page ol {
-  @apply text-muted-foreground mb-4 space-y-1.5 pl-5;
+  @apply text-foreground/80 mb-5 space-y-1.5 pl-5;
 }
 
 .prose-page ul {
-  @apply list-disc;
+  @apply list-disc marker:text-muted-foreground/60;
 }
 
 .prose-page ol {
-  @apply list-decimal;
+  @apply list-decimal marker:text-muted-foreground marker:font-mono marker:text-sm;
 }
 
 .prose-page li {
-  @apply leading-relaxed;
+  @apply pl-1;
 }
 
 .prose-page a {
-  @apply text-primary hover:underline;
+  @apply text-primary underline decoration-primary/30 underline-offset-[3px] transition-colors hover:decoration-primary;
 }
 
 .prose-page strong {
@@ -319,33 +399,37 @@
 }
 
 .prose-page code {
-  @apply bg-accent text-foreground rounded px-1.5 py-0.5 text-[0.9em];
+  @apply border-border bg-muted text-foreground rounded border px-1 py-px font-mono text-[0.85em];
 }
 
 .prose-page blockquote {
-  @apply border-border text-muted-foreground my-6 border-l-2 pl-4 italic;
+  @apply border-primary/50 text-muted-foreground my-6 border-l-2 pl-4;
 }
 
 .prose-page table {
-  @apply mb-6 w-full text-sm;
+  @apply border-border mb-6 w-full border-separate border-spacing-0 overflow-hidden rounded-lg border text-sm;
 }
 
 .prose-page th {
-  @apply border-border/60 text-muted-foreground border-b py-2 text-left text-xs font-medium uppercase tracking-wider;
+  @apply border-border bg-muted/60 text-muted-foreground border-b px-3 py-2 text-left font-mono text-[11px] font-medium uppercase tracking-wider;
 }
 
 .prose-page td {
-  @apply border-border/40 text-muted-foreground border-b py-2;
+  @apply border-border/70 text-foreground/80 border-b px-3 py-2 align-top tabular-nums;
+}
+
+.prose-page tr:last-child td {
+  @apply border-b-0;
 }
 
 .prose-page hr {
-  @apply border-border/40 my-10;
+  @apply border-border my-10;
 }
 
 .prose-page pre {
-  @apply border-border/60 bg-accent/40 mb-6 overflow-x-auto rounded-lg border p-4 text-sm leading-relaxed;
+  @apply border-border bg-muted/50 mb-6 overflow-x-auto rounded-lg border p-4 font-mono text-[13px] leading-relaxed;
 }
 
 .prose-page pre code {
-  @apply bg-transparent p-0 text-[0.95em];
+  @apply border-0 bg-transparent p-0 text-[1em];
 }

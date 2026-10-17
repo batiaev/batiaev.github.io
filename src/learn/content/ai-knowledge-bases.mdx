@@ -1,0 +1,109 @@
+The usual way to give a model knowledge is to put the documents in a vector
+store and retrieve the closest chunks at question time. It demos well, and it
+fails quietly — not with an error, but with a fluent answer built from the wrong
+paragraph of the wrong version of the right document.
+
+That failure is structural, and fixing it is less about better retrieval than
+about deciding what the knowledge actually is.
+
+## How retrieval goes wrong
+
+A retrieval pipeline has four stages, and each loses something:
+
+| Stage | What it does | What it loses |
+|---|---|---|
+| Chunk | Split documents into passages | The sentence before, which said "this was rejected" |
+| Embed | Turn passages into vectors | Exact terms — ticker symbols, error codes, names |
+| Retrieve | Return the nearest passages | Anything phrased differently from the question |
+| Generate | Answer from what came back | The fact that what came back was incomplete |
+
+The last row is the dangerous one. The model cannot know what retrieval did not
+return, so it answers from what it has, confidently. A decision that was made in
+March and reversed in May is two documents; whichever chunk is closer to the
+question wins.
+
+## Hybrid search fixes recall
+
+Semantic search is good at meaning and bad at precise terms. Full-text search is
+the opposite. Running both and merging the results — then re-ranking the merged
+list — fixes most recall problems at modest cost. The AI retrieval stack I
+built at Nevis combined full-text and semantic search for exactly that reason:
+in wealth management the questions name specific funds, forms and account
+types, and an embedding alone will happily return a passage about a similar
+one.
+
+Hybrid search makes retrieval better. It does not make it *right*, because the
+underlying problem is not finding passages. It is that passages are the wrong
+unit for most of what an organisation needs to know.
+
+## Typed knowledge
+
+Ask what an engineering team actually needs an agent to know, and the answer is
+rarely "the paragraph that mentions X". It is:
+
+- what the team is trying to achieve — **goals**;
+- what was decided, by whom, and why — **decisions**;
+- what exists — **artefacts**: services, repositories, documents, pull requests;
+- how those relate — this decision serves that goal, this artefact implements
+  that decision.
+
+Represented as typed nodes with typed edges, those questions stop being
+retrieval problems. "What is the current decision on the auth provider?" is a
+lookup of a node of type *decision*, scoped to *auth*, that has not been
+superseded — not a similarity search over every message that mentions auth.
+
+This is the design behind SHIP: goals, decisions and artefacts as typed nodes
+instead of prose, which agents read and write through MCP.
+
+## Provenance and supersession
+
+Two properties make a knowledge base trustworthy enough for agents to act on.
+
+**Provenance.** Every node records who wrote it — which person or which agent —
+from which source, and when. An answer can then say where it came from, and a
+reviewer can discount a claim that came from an agent's inference rather than a
+human decision. In SHIP an agent's write is recorded as an agent observation and
+audit-logged; it does not silently become fact.
+
+**Supersession.** Knowledge changes. A decision that is replaced should not be
+deleted — the history of why it changed is often the most useful part — but it
+must be marked as superseded, with a link to what replaced it. Retrieval over
+documents has no equivalent: the old version and the new one are just two
+passages.
+
+## MCP is the boundary
+
+The Model Context Protocol gives agents a typed interface to a system: a list of
+tools, each with a schema. For a knowledge base that is the right boundary,
+because it makes the contract explicit:
+
+- **Reads** are broad: search, fetch a node, traverse its relations.
+- **Writes** are narrow and attributable: record an observation, propose a
+  status change, link two nodes — never "rewrite the graph".
+- **Some writes are not offered at all.** Where an agent writing a wrong value
+  is worse than no agent, the tool is read-only and the record is still entered
+  by a person. The capability you leave out is part of the design.
+
+The same interface serves every assistant the user already has. One knowledge
+base, reachable from whichever client a person prefers, beats a separate
+memory locked inside each.
+
+## When retrieval is still right
+
+Typed structure is not free: someone, or something, has to create the nodes.
+For large bodies of reference text — manuals, regulations, research — retrieval
+remains the right tool, ideally hybrid and with citations back to the source
+passage. The practical architecture is both: a typed core for the things the
+organisation decides and owns, and retrieval around it for the things it reads.
+
+## The short version
+
+- Retrieval finds passages; organisations run on decisions.
+- Hybrid search for recall, re-ranking for precision, citations for trust.
+- Type the knowledge that changes and matters: goals, decisions, artefacts.
+- Record provenance on every write and supersede rather than delete.
+- Make the agent interface narrow where mistakes are expensive.
+
+The [harness note](/learn/ai/harness) covers how this knowledge reaches a model
+as context, and the [agentic workflows note](/learn/ai/agentic-workflows) how to
+check what the model does with it.

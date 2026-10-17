@@ -1,6 +1,7 @@
 
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import plugin from "tailwindcss/plugin";
 
 export default {
 	darkMode: ["class"],
@@ -14,21 +15,29 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
 			screens: {
-				'2xl': '1400px'
+				// Inside the shell the tile is already narrower than the viewport,
+				// so this is a reading cap, not a breakpoint.
+				'2xl': '1200px'
 			}
 		},
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
-				display: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
+				// One family. A second display face was the first thing that made
+				// the old site read as a template.
+				display: ['Inter', 'system-ui', 'sans-serif'],
+				mono: ['ui-monospace', 'SFMono-Regular', '"SF Mono"', '"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
+				canvas: 'hsl(var(--canvas))',
+				positive: 'hsl(var(--positive))',
+				negative: 'hsl(var(--negative))',
+				warning: 'hsl(var(--warning))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -70,6 +79,7 @@ export default {
 				}
 			},
 			borderRadius: {
+				xl: 'calc(var(--radius) + 4px)',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
@@ -118,9 +128,9 @@ export default {
 				'blur-in': 'blur-in 0.6s ease-out forwards'
 			},
 			boxShadow: {
-				'subtle': '0 2px 10px rgba(0, 0, 0, 0.05)',
-				'glass': '0 8px 32px rgba(0, 0, 0, 0.1)',
-				'elevated': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01)'
+				'subtle': '0 1px 2px hsl(var(--foreground) / 0.04)',
+				'glass': '0 8px 32px hsl(var(--foreground) / 0.08)',
+				'elevated': '0 16px 40px -12px hsl(var(--foreground) / 0.18), 0 0 0 1px hsl(var(--border))'
 			},
 			backdropFilter: {
 				'none': 'none',
@@ -128,5 +138,14 @@ export default {
 			}
 		}
 	},
-	plugins: [tailwindcssAnimate],
+	plugins: [
+		tailwindcssAnimate,
+		// `collapsed:` — styles for the icon-only sidebar rail. The state lives
+		// on <html>, set before first paint, so a collapsed sidebar never flashes
+		// open on load. Scoped to [data-rail] so the same nav rendered in the
+		// mobile sheet is never squeezed to icons.
+		plugin(({ addVariant }) => {
+			addVariant('collapsed', 'html[data-sidebar=collapsed] [data-rail] &');
+		}),
+	],
 } satisfies Config;

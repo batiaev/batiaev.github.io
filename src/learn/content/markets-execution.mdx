@@ -1,0 +1,128 @@
+"Buy 1,000" is an instruction. What the client receives is a set of fills at
+prices, times and venues, and the difference between the two is execution.
+Most of the work happens in the few milliseconds nobody sees, and the quality of
+it only becomes visible in aggregate — which is why it is measured badly so
+often.
+
+## Order types are risk choices
+
+Every order type trades certainty of execution against certainty of price.
+
+| Order | Guarantees | Risks |
+|---|---|---|
+| Market | It fills (if there is liquidity) | The price, in a thin or fast market |
+| Limit | The worst price | That it never fills |
+| Stop | That it triggers at a level | The fill price after triggering — a stop becomes a market order |
+| Stop-limit | Trigger and worst price | Triggering, then not filling, while the market runs away |
+| IOC / FOK | No resting order left behind | Partial or no fill |
+
+The useful framing for clients and for product teams alike: a market order buys
+certainty that you trade and pays for it in price; a limit order buys certainty
+of price and pays for it in the risk of missing the trade. A stop is not
+protection against gaps — when the market opens through it, the fill is wherever
+the market is.
+
+## Smart order routing
+
+When the same instrument trades in several places, an order has to decide
+where to go. A **smart order router** takes the parent order and the current
+state of each venue and produces child orders:
+
+1. Build the consolidated book from each venue's depth.
+2. Adjust each venue's prices for its fees, rebates and expected fill
+   probability — the headline price is not the price you get.
+3. Walk the book, taking the best effective prices until the order is filled
+   or the limit is reached.
+4. Send the child orders, ideally so that they arrive together, because the
+   first fill is a signal to anyone watching the other venues.
+5. Handle what comes back: partial fills, rejects, and quotes that had moved by
+   the time the order arrived.
+
+Step 4 is where latency stops being an engineering metric and becomes a cost.
+Orders that arrive at different venues a few milliseconds apart give
+faster participants time to adjust the quotes the router was relying on.
+
+## Liquidity aggregation
+
+A broker or dealer that hedges through several liquidity providers runs the
+same logic in a different setting. Each provider streams quotes, often with
+different sizes, different validity, and different rules about whether a
+request at that price will actually be honoured. **Last look** — a provider's
+right to reject a trade request within a short window after seeing it — means a
+quote is an offer to consider, not a commitment.
+
+The aggregator therefore keeps statistics, not just prices: per provider, the
+fill ratio, the reject ratio by market condition, how long the last look takes,
+and the markouts after the fill. A provider with the best headline price and a
+high reject rate in fast markets is often the most expensive one in the book.
+
+At Revolut the liquidity aggregation, smart order routing and hedging algorithms
+ran with a roundtrip under 60 milliseconds. The number matters less than the
+discipline behind it: knowing where each millisecond went.
+
+## The latency budget
+
+End-to-end latency is a sum, and each term has an owner:
+
+- market data in: venue → network → feed handler → book;
+- decision: risk checks, pricing, routing logic;
+- order out: gateway → network → venue;
+- acknowledgement and fill back, through the same path.
+
+Measuring only the total tells you there is a problem and nothing about where.
+Timestamping at each boundary — and keeping the clocks that write those
+timestamps in agreement — turns "the platform is slow" into "the risk check
+added 4 milliseconds after the last release", which is a problem someone can
+fix.
+
+Tail latency matters more than the average. A system that answers in 2
+milliseconds at the median and 400 at the 99.9th percentile will hurt clients
+precisely on the busy days, because the tail is where the volume is.
+
+## Pre-trade risk checks
+
+Every order passes through checks before it leaves: does the client have the
+margin, is the size inside limits, is the price within a band of the market, is
+this order a duplicate, is the instrument tradable right now. They are the
+cheapest insurance a platform buys, and they sit directly in the latency path,
+so two properties matter:
+
+- **They must be fast and deterministic** — no network calls on the hot path
+  that can stall.
+- **They must fail closed.** If a check cannot decide, the order does not go.
+  A risk check that times out and lets the order through is not a risk check.
+
+Fat-finger price bands deserve particular care: too tight and they reject
+legitimate orders on volatile days, too loose and they let through the error
+they exist to stop.
+
+## Measuring what it cost
+
+Execution quality is measured against a benchmark, and the choice of benchmark
+decides the answer.
+
+- **Arrival price.** The mid when the order was decided. The gap to the average
+  fill price is **implementation shortfall**: everything execution cost,
+  including the market moving while you worked the order.
+- **Spread capture.** Where inside the bid-offer the fill landed.
+- **VWAP.** Fill price against the volume-weighted average over the period.
+  Useful for large orders worked over time; flattering for small ones, which
+  are part of the volume they are measured against.
+- **Markouts.** The same post-trade measure a market maker uses, from the
+  client's side: did the price keep moving after the fill?
+
+Regulation in Europe frames all of this as best execution: firms must take all
+sufficient steps to obtain the best possible result for clients, considering
+price, costs, speed, likelihood of execution and settlement, size and nature.
+The practical consequence is that every one of the numbers above has to be
+computable after the fact, per order, with the market data that was true at the
+time — which takes us back to [market data](/learn/markets/market-data).
+
+## The short version
+
+- Pick order types for the risk you would rather carry.
+- Route on effective prices, not headline ones.
+- Score liquidity providers on fills and markouts, not quotes.
+- Budget latency per hop, and watch the tail.
+- Keep pre-trade checks fast, deterministic and closed on failure.
+- Measure against arrival price before anything that flatters you.

@@ -1,0 +1,133 @@
+A market maker quotes a price to buy and a price to sell, and earns the gap
+between them. Described like that it sounds like a toll booth. In practice the
+spread is the smaller part of the job. The larger part is the inventory that
+every fill leaves behind, and the uncomfortable fact that the clients most
+eager to trade with you are often the ones who know something you do not.
+
+## Where a spread comes from
+
+The classic decomposition has three parts, and each points at a different
+lever:
+
+| Component | What it pays for | What moves it |
+|---|---|---|
+| Order processing | Fees, infrastructure, people | Scale and automation |
+| Inventory | Carrying a position you did not choose | Volatility, position size, time to unwind |
+| Adverse selection | Trading against better-informed flow | Who the counterparty is, and how fast prices move after the fill |
+
+Ho and Stoll formalised the inventory part in 1981; Glosten and Milgrom the
+adverse-selection part in 1985. Neither is new. What changes in a real system
+is that all three are measured continuously, per instrument and per client
+segment, rather than assumed.
+
+## Skew before you widen
+
+When a market maker accumulates a long position the instinct is to widen both
+sides. That is usually the wrong move. Widening makes you less competitive on
+the side that would *reduce* your risk as well as on the side that would add
+to it.
+
+The better move is to **skew**: shift both quotes down, so your offer becomes
+more attractive — someone buys your inventory from you — and your bid less
+attractive, so fewer people sell you more. The spread can stay the same width
+while its centre moves away from the market mid.
+
+Avellaneda and Stoikov (2008) made this precise. Their **reservation price** —
+the price at which the market maker is indifferent to holding one more unit —
+is the mid adjusted for inventory:
+
+```
+r = s − q · γ · σ² · (T − t)
+```
+
+where `s` is the mid, `q` the signed inventory, `γ` risk aversion, `σ` the
+volatility and `T − t` the time left to carry the position. Quotes are then
+placed around `r`, not around `s`.
+
+A worked illustration, with round numbers rather than market ones: mid 100.00,
+long 10 units, `γ = 0.01`, `σ = 2` per square-root day, half a day left.
+The adjustment is `10 × 0.01 × 4 × 0.5 = 0.20`, so the reservation price is
+99.80 and both quotes slide twenty cents down. Double the position and the skew
+doubles. Double the volatility and it quadruples — which is the formula's way
+of saying that inventory in a fast market is much more expensive than the same
+inventory in a slow one.
+
+The same paper gives the optimal total spread:
+
+```
+δ = γ · σ² · (T − t) + (2 / γ) · ln(1 + γ / k)
+```
+
+where `k` measures how quickly the chance of a fill falls away with distance
+from the mid. The spread widens with volatility and with the time left to carry
+the position, and narrows as `k` rises — when competition for flow is fierce,
+quoting wide simply stops getting filled. Risk aversion is less obvious than it
+looks: it raises the first term and lowers the second, so a more cautious market
+maker skews harder but does not necessarily quote wider.
+
+## Adverse selection, measured
+
+You cannot see a counterparty's information. You can see what the market did
+after you traded with them. That is a **markout**: the move in the mid, from
+your side of the trade, at a set horizon after the fill.
+
+- Buy at 99.98, mid is 99.90 a second later: −8 ticks at one second.
+- The same at ten seconds and sixty seconds gives a curve.
+
+Average those curves by client segment, venue or order type, and the toxic flow
+identifies itself. Benign flow has markouts that hover around zero. Informed
+flow has markouts that fall steadily against you, and the horizon at which they
+stop falling tells you how fast the information was.
+
+Markouts are the single most useful number a dealing desk computes, because they
+turn an argument ("this client is too smart for us") into a measurement, and
+because they separate two problems that look the same in P&L: quoting too
+tight, and quoting the wrong people.
+
+## Hold, net or hedge
+
+Every fill leaves exposure, and there are three things to do with it:
+
+1. **Hold it** and let the skew work it off. Cheapest, if the market cooperates.
+2. **Net it** against opposing client flow. A dealer facing many clients often
+   finds that buyers and sellers offset each other for much of the day, and only
+   the residual needs managing.
+3. **Hedge it** externally — in the underlying, a future, or a correlated
+   instrument. This costs a spread and carries basis risk, but caps the loss.
+
+The decision is a limit structure, not a judgement call made trade by trade:
+position limits per instrument and per correlated group, a loss limit, and
+rules for when the residual is hedged automatically. A hedging algorithm then
+decides *how* — slicing the hedge, choosing venues and managing its own market
+impact — which is the problem the [execution note](/learn/markets/execution)
+covers.
+
+## Options make it two-dimensional
+
+An options market maker carries the same problem with more axes. The inventory
+is not a quantity but a set of Greeks: delta, which is hedged continuously in
+the underlying, and gamma and vega, which can only be reduced by trading other
+options. Skew then applies to the **volatility surface** rather than to a
+price: a book that is long vega lowers the implied volatility it quotes,
+across the strikes and expiries where it is long.
+
+The cost of carrying that gamma is exactly what the
+[dynamic hedging note](/learn/risk/dynamic-hedging) simulates: the premium
+collected for an option is the price of the hedging it is about to require.
+
+## What breaks in practice
+
+- **Stale inputs.** Quoting off a price that has stopped updating is the fastest
+  way to be picked off. Every quoting engine needs a staleness kill switch —
+  see the [market data note](/learn/markets/market-data).
+- **Correlated inventory.** Ten small positions in instruments that move
+  together are one large position. Limits set per instrument miss it.
+- **Feedback loops.** Your own hedging moves the market your quotes are built
+  on. A hedge that is too aggressive shows up as worse markouts on your own
+  next fills.
+- **Regime change.** Parameters fitted on a quiet month are wrong on the day it
+  stops being quiet, which is the day they matter.
+
+None of this needs exotic maths. It needs every number — spread, skew, markout,
+residual — to be visible to the people accountable for the book, live, with the
+age of the data beside it.

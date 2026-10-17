@@ -26,7 +26,7 @@ Only `prodBuild` deploys. Nothing is live until `docs/` is rebuilt and committed
 
 ## Checks
 
-`npm run verify` runs every suite below plus a render smoke test — around 295
+`npm run verify` runs every suite below plus a render smoke test — around 330
 assertions in total.
 
 | Command | What it pins down |
@@ -38,6 +38,7 @@ assertions in total.
 | `verify:tax` | 2026/27 income tax, NI, corporation and dividend tax |
 | `verify:structures` | Employment structures for the take-home comparison |
 | `verify:offer` | Compensation archetypes and dilution |
+| `verify:market-making` | The market-making note's worked example, computed: reservation-price skew linear in inventory and quadratic in volatility, the optimal spread's limits and monotonicity, markouts, hostile input |
 | `verify:render` | Renders every route in Node and asserts on the HTML |
 
 Pre-existing lint and type errors live in unused `src/components/ui/` shadcn

@@ -17,9 +17,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       "Selective advisory for founders and investors: technical diligence, architecture de-risking, and fractional CTO work in regulated fintech.",
   },
   "/learn": {
-    title: "Options, derivatives risk and trading systems, from the inside | Anton Batiaev",
+    title: "Markets, derivatives risk and AI engineering, from the inside | Anton Batiaev",
     description:
-      "Written from ten years building the systems that price and margin derivatives: options and the Greeks, a page per strategy with a live payoff chart, SPAN, VAR, DV01 and dynamic hedging, plus the books worth your time. Free, no signup.",
+      "Written from ten years building the systems that price, margin and execute: options and the Greeks, a page per strategy with a live payoff chart, SPAN, VAR, DV01, dynamic hedging, market data, market making and execution — plus AI engineering: harnesses, agentic workflows and knowledge bases. Free, no signup.",
   },
   "/tools": {
     title: "Free finance calculators — options P&L, UK take-home, compensation",

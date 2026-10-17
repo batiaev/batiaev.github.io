@@ -7,6 +7,28 @@
   "company": "Capital.com",
   "description": "Fintech CPTO, founder and builder. I ship my own products, and run the trading-platform tribe at Capital.com.",
   "metaDescription": "Anton Batiaev — fintech CPTO, founder and builder. VP Product & Engineering at Capital.com; ex-Revolut, ex-CTO Vega, Deutsche Bank.",
+  "stats": [
+    {
+      "value": "$1.27T",
+      "label": "Client trading volume in Q1 2026",
+      "source": "Capital.com"
+    },
+    {
+      "value": "5,500+",
+      "label": "Instruments, regulated in 5 jurisdictions",
+      "source": "Capital.com"
+    },
+    {
+      "value": "1M+/s",
+      "label": "Updates through the real-time risk engine",
+      "source": "Otkritie Broker"
+    },
+    {
+      "value": "<60ms",
+      "label": "Roundtrip for liquidity aggregation and routing",
+      "source": "Revolut"
+    }
+  ],
   "heroCta": {
     "label": "See the track record",
     "href": "#experience"

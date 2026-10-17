@@ -25,7 +25,7 @@ Object.assign(globalThis, {
       setItem: (key: string, value: string) => void store.set(key, value),
       removeItem: (key: string) => void store.delete(key),
     },
-    matchMedia: () => ({ matches: false }),
+    matchMedia: () => ({ matches: false, addEventListener: () => {}, removeEventListener: () => {} }),
     addEventListener: () => {},
     removeEventListener: () => {},
     history: { replaceState: () => {} },
@@ -58,6 +58,7 @@ const [
   { default: Retirement },
   { default: LearnIndex },
   { default: LearnRoute },
+  { default: AppShell },
   { ROUTE_META },
   { ALL_PAGES, learnPath, pageBySlug },
   { structuredDataFor },
@@ -73,6 +74,7 @@ const [
   import('../src/pages/Retirement'),
   import('../src/pages/learn/LearnIndex'),
   import('../src/pages/learn/LearnRoute'),
+  import('../src/components/shell/AppShell'),
   import('../src/lib/routeMeta'),
   import('../src/learn/registry'),
   import('../src/lib/structuredData'),
@@ -178,13 +180,17 @@ function structuredData(route: string): string {
 for (const { route, file, Page, pattern } of ROUTES) {
   const markup = renderToString(
     <MemoryRouter initialEntries={[route]}>
-      {pattern ? (
-        <Routes>
-          <Route path={pattern} element={<Page />} />
-        </Routes>
-      ) : (
-        <Page />
-      )}
+      {/* The same shell the client renders as its layout route, so the
+          static HTML carries the sidebar's links as well as the page. */}
+      <AppShell>
+        {pattern ? (
+          <Routes>
+            <Route path={pattern} element={<Page />} />
+          </Routes>
+        ) : (
+          <Page />
+        )}
+      </AppShell>
     </MemoryRouter>,
   )
 

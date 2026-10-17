@@ -6,8 +6,9 @@
 > Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
 > graph for engineering teams).
 
-This site hosts a free knowledge base — options, derivatives risk and a
-reading list — plus a set of finance calculators. Everything runs client-side;
+This site hosts a free knowledge base — options, derivatives risk, market data,
+market making and execution, AI engineering (harnesses, agentic workflows,
+knowledge bases) and a reading list — plus a set of finance calculators. Everything runs client-side;
 there are no accounts and no tracking beyond analytics.
 
 ## Free tools
@@ -23,16 +24,11 @@ there are no accounts and no tracking beyond analytics.
 
 ### Options
 
-The concepts every strategy page assumes you already have.
+The concepts every strategy assumes, then one page per structure — each with a live payoff chart you can edit and open in the calculator.
 
 - [What an option actually is](https://batiaev.com/learn/options/basics): Calls, puts, strike, expiry and the difference between intrinsic and extrinsic value — the vocabulary everything else assumes.
 - [The Greeks, without the calculus](https://batiaev.com/learn/options/greeks): Delta, gamma, vega and theta as four questions about the same position, and which one actually kills you.
 - [Implied volatility is the price](https://batiaev.com/learn/options/volatility): Why an option's quoted premium is really a volatility number, and what the smile is telling you.
-
-### Strategies
-
-One page per structure, each with a live payoff chart you can edit and open in the calculator.
-
 - [Long call](https://batiaev.com/learn/strategies/long-call): The simplest bullish option: defined risk, unlimited upside, and a bill for time decay every day you are wrong.
 - [Long put](https://batiaev.com/learn/strategies/long-put): Downside exposure with a floor on the loss — the cleanest way to be short without unlimited risk.
 - [Covered call](https://batiaev.com/learn/strategies/covered-call): Own the underlying, sell someone the right to take it from you above a set price, and keep the premium either way.
@@ -53,6 +49,23 @@ How the positions above are margined and measured — the systems side, which is
 - [VAR, and what it does not tell you](https://batiaev.com/learn/risk/var-and-es): Value at Risk in one sentence, the three ways to compute it, the reason it is not a coherent risk measure, and why regulators moved to Expected Shortfall.
 - [DV01 and the shape of rate risk](https://batiaev.com/learn/risk/dv01): The one number a rates desk actually watches, how it relates to duration and convexity, and why a single parallel shift is not enough.
 - [Dynamic hedging, and where the premium goes](https://batiaev.com/learn/risk/dynamic-hedging): Sell an option, hedge it to expiry, and watch the premium leave through the hedge — why the price you collect is the price of the gamma you are short.
+
+### Markets
+
+How prices arrive and how orders meet them — market data, market making and execution, from the side of the systems that run them.
+
+- [Market data is a claim about the past](https://batiaev.com/learn/markets/market-data): Ticks, books and the plumbing between an exchange and a price on screen: normalisation, conflation, gaps, staleness, and what a composite price quietly hides.
+- [Market making is inventory management](https://batiaev.com/learn/markets/market-making): Where a spread comes from, why a market maker skews rather than widens, the reservation price, adverse selection measured by markouts, and when to hedge rather than hold.
+- [Execution, from order to fill](https://batiaev.com/learn/markets/execution): Order types, smart order routing and liquidity aggregation, the latency budget, pre-trade risk checks, and how to measure what execution actually cost.
+
+### AI engineering
+
+Building with models and agents in production: the harness around the model, the workflows that keep it honest, and the knowledge it reads and writes.
+
+- [The harness is most of the product](https://batiaev.com/learn/ai/harness): A model is one component. The context it is given, the tools it may call, the permissions around them and the checks after them decide whether an agent is useful.
+- [Agentic workflows that hold up](https://batiaev.com/learn/ai/agentic-workflows): Plan, act, verify — and why the verify step has to be something the model cannot talk its way past: tests, type-checks, property checks, and a human at the irreversible step.
+- [Knowledge bases: typed beats retrieved](https://batiaev.com/learn/ai/knowledge-bases): Why retrieval over a pile of documents fails quietly, what hybrid search fixes, and why goals, decisions and artefacts work better as typed nodes with provenance.
+- [Product engineering when code is cheap](https://batiaev.com/learn/ai/product-engineering): When an agent can write the diff, the scarce work moves to the spec, the verification and the taste encoded in rules — and the line between product and engineering moves with it.
 
 ### Library
 
@@ -1028,6 +1041,912 @@ The figures above use the same Black-Scholes implementation as the
 [options P&L calculator](/tools/options-pnl) — no separate demo model, and no
 market data. The paths are generated and seeded, so the same button always
 produces the same story.
+
+---
+
+## Market data is a claim about the past
+
+Source: https://batiaev.com/learn/markets/market-data
+Topics: market data, latency, risk systems, measurement, pricing
+
+Ticks, books and the plumbing between an exchange and a price on screen: normalisation, conflation, gaps, staleness, and what a composite price quietly hides.
+
+A price on a screen looks like a fact about now. It is a claim about the past,
+made by a venue, carried through several systems that each changed it a little,
+and displayed some milliseconds — or seconds — after the event it describes.
+Every system that prices, margins or executes against that number inherits
+those changes, whether or not anyone wrote them down.
+
+Market data is the least glamorous part of a trading platform and the one most
+likely to be quietly wrong. Pricing models get reviewed. Feed handlers mostly
+get noticed when they stop.
+
+## What actually arrives
+
+Venues publish at different depths, and the depth decides what you can know.
+
+| Level | What it carries | What it lets you answer |
+|---|---|---|
+| L1 | Best bid, best offer, last trade | Where is the market? |
+| L2 | Aggregated size at each price level | How much can I trade before the price moves? |
+| L3 | Every individual order, add / modify / cancel | Who is queued ahead of me, and is that size real? |
+
+Most retail-facing systems run on L1 and a few levels of L2. That is enough to
+show a price, and not enough to know what a large order will cost — which is
+why execution systems and display systems often subscribe to the same
+instrument at different depths.
+
+The other distinction that matters is **snapshot versus incremental**. A
+snapshot is the whole book; an incremental feed is a stream of changes to it.
+Incremental feeds are smaller and faster, and they carry a sequence number for
+a reason: apply one update out of order, or miss one, and every book you build
+afterwards is wrong in a way that looks perfectly plausible.
+
+## Normalisation is where meaning changes
+
+Each venue has its own symbology, tick sizes, lot sizes, price multipliers,
+trading calendars and conventions for what a "trade" is. A feed handler
+translates all of that into one internal model, and every translation is a
+decision someone made once and nobody revisits:
+
+- **Instrument identity.** The same economic thing can be several listings,
+  and one ticker can mean different things on different venues. Mapping errors
+  here do not crash anything; they price one instrument off another.
+- **Price scaling.** Pence versus pounds, quoted versus clean price, a futures
+  multiplier applied twice or not at all. A factor of 100 is easy to spot. A
+  factor of 1.0125 is not.
+- **Trade conditions.** Auction prints, off-book trades, late reports and
+  corrections all arrive as "trades". A last-price field that includes them is
+  measuring something different from one that does not.
+- **Calendars.** Half-days, holidays and session breaks decide whether a quiet
+  feed is a closed market or a broken connection.
+
+The useful habit is to keep the raw message alongside the normalised one for
+long enough to answer "what did the venue actually say?" When a client disputes
+a fill, that question arrives within the hour.
+
+## Gaps, recovery and the book you cannot trust
+
+Sequence numbers make gaps detectable; they do not make them harmless. When a
+gap appears the honest state of the book is *unknown*, and the system has to
+choose:
+
+1. **Stop and recover.** Mark the instrument stale, request a snapshot or
+   replay, rebuild, then resume. Correct, and briefly blind.
+2. **Carry on.** Keep applying updates to a book known to be missing some.
+   Fast, and wrong in a way that cannot be measured.
+
+Anything that prices or margins should take the first option and say so. The
+second is how a crossed book — best bid above best offer — ends up feeding a
+risk engine, which then reports a profit that does not exist.
+
+Crossed and locked markets are worth checking for explicitly. They are rare on
+a single healthy venue, common across venues for a few milliseconds, and almost
+always a sign of a stale side when they persist.
+
+## Conflation and staleness
+
+A busy instrument can update tens of thousands of times a second, and most
+consumers cannot use that. **Conflation** keeps the latest state and drops the
+intermediate ones: a screen redrawing at 4Hz needs the price as of now, not
+every price since the last frame.
+
+Conflation is right for display and dangerous for anything that needs the
+path — a stop that should have triggered at a price the conflated stream never
+showed, or a volume-weighted calculation computed over a sample instead of the
+trades.
+
+Staleness is the mirror problem: a price that has not changed may be a quiet
+market or a dead connection. The two look identical in the data. Good systems
+carry the time of the last update next to every price, and the age of that
+timestamp — not the price — is what a dealer looks at first when something
+seems off. A coloured "seconds since last update" next to a figure is one of
+the most useful pieces of UI in a dealing tool, because it answers the question
+before it is asked.
+
+## Timestamps, plural
+
+A single tick can carry several times:
+
+- when the venue matched or published it;
+- when it reached your network;
+- when your handler decoded it;
+- when your application acted on it.
+
+The gaps between them are your latency budget, measured. Keeping only the last
+one — usually the local receive time — throws away the ability to say whether
+a slow fill was the venue, the network or your own code. Clocks also need to
+agree: a timestamp from a server that has drifted by a few milliseconds will
+make causality appear to run backwards in your logs.
+
+## What a composite price hides
+
+Platforms that quote one price per instrument usually build it from several
+sources: venues, liquidity providers, a reference feed. The composite is a
+policy, not a measurement. It has to decide which sources count, how to weight
+them, how to treat one that has gone quiet, and what to do when they disagree.
+
+That policy is invisible in the output. A smooth composite can hide one source
+that has been stale for a minute and another that has started printing outliers.
+The defence is to keep each source's contribution inspectable — which source
+set the bid, how old it was, how far the others were from it — so that when the
+composite moves, someone can say why.
+
+## The short version
+
+- Treat every price as *price, source, time* — never price alone.
+- Prefer a stale flag to a confident wrong number.
+- Recover from gaps; do not paper over them.
+- Conflate for people, not for risk.
+- Keep the raw message long enough to answer a dispute.
+
+None of this is visible when it works, which is exactly why it needs owning.
+The [execution note](/learn/markets/execution) picks up where the price ends
+and an order begins, and the [market making note](/learn/markets/market-making)
+covers what a dealer does with the price once it is trusted.
+
+---
+
+## Market making is inventory management
+
+Source: https://batiaev.com/learn/markets/market-making
+Topics: market making, hedging, pricing, inventory, volatility, risk systems
+
+Where a spread comes from, why a market maker skews rather than widens, the reservation price, adverse selection measured by markouts, and when to hedge rather than hold.
+
+A market maker quotes a price to buy and a price to sell, and earns the gap
+between them. Described like that it sounds like a toll booth. In practice the
+spread is the smaller part of the job. The larger part is the inventory that
+every fill leaves behind, and the uncomfortable fact that the clients most
+eager to trade with you are often the ones who know something you do not.
+
+## Where a spread comes from
+
+The classic decomposition has three parts, and each points at a different
+lever:
+
+| Component | What it pays for | What moves it |
+|---|---|---|
+| Order processing | Fees, infrastructure, people | Scale and automation |
+| Inventory | Carrying a position you did not choose | Volatility, position size, time to unwind |
+| Adverse selection | Trading against better-informed flow | Who the counterparty is, and how fast prices move after the fill |
+
+Ho and Stoll formalised the inventory part in 1981; Glosten and Milgrom the
+adverse-selection part in 1985. Neither is new. What changes in a real system
+is that all three are measured continuously, per instrument and per client
+segment, rather than assumed.
+
+## Skew before you widen
+
+When a market maker accumulates a long position the instinct is to widen both
+sides. That is usually the wrong move. Widening makes you less competitive on
+the side that would *reduce* your risk as well as on the side that would add
+to it.
+
+The better move is to **skew**: shift both quotes down, so your offer becomes
+more attractive — someone buys your inventory from you — and your bid less
+attractive, so fewer people sell you more. The spread can stay the same width
+while its centre moves away from the market mid.
+
+Avellaneda and Stoikov (2008) made this precise. Their **reservation price** —
+the price at which the market maker is indifferent to holding one more unit —
+is the mid adjusted for inventory:
+
+```
+r = s − q · γ · σ² · (T − t)
+```
+
+where `s` is the mid, `q` the signed inventory, `γ` risk aversion, `σ` the
+volatility and `T − t` the time left to carry the position. Quotes are then
+placed around `r`, not around `s`.
+
+A worked illustration, with round numbers rather than market ones: mid 100.00,
+long 10 units, `γ = 0.01`, `σ = 2` per square-root day, half a day left.
+The adjustment is `10 × 0.01 × 4 × 0.5 = 0.20`, so the reservation price is
+99.80 and both quotes slide twenty cents down. Double the position and the skew
+doubles. Double the volatility and it quadruples — which is the formula's way
+of saying that inventory in a fast market is much more expensive than the same
+inventory in a slow one.
+
+The same paper gives the optimal total spread:
+
+```
+δ = γ · σ² · (T − t) + (2 / γ) · ln(1 + γ / k)
+```
+
+where `k` measures how quickly the chance of a fill falls away with distance
+from the mid. The spread widens with volatility and with the time left to carry
+the position, and narrows as `k` rises — when competition for flow is fierce,
+quoting wide simply stops getting filled. Risk aversion is less obvious than it
+looks: it raises the first term and lowers the second, so a more cautious market
+maker skews harder but does not necessarily quote wider.
+
+## Adverse selection, measured
+
+You cannot see a counterparty's information. You can see what the market did
+after you traded with them. That is a **markout**: the move in the mid, from
+your side of the trade, at a set horizon after the fill.
+
+- Buy at 99.98, mid is 99.90 a second later: −8 ticks at one second.
+- The same at ten seconds and sixty seconds gives a curve.
+
+Average those curves by client segment, venue or order type, and the toxic flow
+identifies itself. Benign flow has markouts that hover around zero. Informed
+flow has markouts that fall steadily against you, and the horizon at which they
+stop falling tells you how fast the information was.
+
+Markouts are the single most useful number a dealing desk computes, because they
+turn an argument ("this client is too smart for us") into a measurement, and
+because they separate two problems that look the same in P&L: quoting too
+tight, and quoting the wrong people.
+
+## Hold, net or hedge
+
+Every fill leaves exposure, and there are three things to do with it:
+
+1. **Hold it** and let the skew work it off. Cheapest, if the market cooperates.
+2. **Net it** against opposing client flow. A dealer facing many clients often
+   finds that buyers and sellers offset each other for much of the day, and only
+   the residual needs managing.
+3. **Hedge it** externally — in the underlying, a future, or a correlated
+   instrument. This costs a spread and carries basis risk, but caps the loss.
+
+The decision is a limit structure, not a judgement call made trade by trade:
+position limits per instrument and per correlated group, a loss limit, and
+rules for when the residual is hedged automatically. A hedging algorithm then
+decides *how* — slicing the hedge, choosing venues and managing its own market
+impact — which is the problem the [execution note](/learn/markets/execution)
+covers.
+
+## Options make it two-dimensional
+
+An options market maker carries the same problem with more axes. The inventory
+is not a quantity but a set of Greeks: delta, which is hedged continuously in
+the underlying, and gamma and vega, which can only be reduced by trading other
+options. Skew then applies to the **volatility surface** rather than to a
+price: a book that is long vega lowers the implied volatility it quotes,
+across the strikes and expiries where it is long.
+
+The cost of carrying that gamma is exactly what the
+[dynamic hedging note](/learn/risk/dynamic-hedging) simulates: the premium
+collected for an option is the price of the hedging it is about to require.
+
+## What breaks in practice
+
+- **Stale inputs.** Quoting off a price that has stopped updating is the fastest
+  way to be picked off. Every quoting engine needs a staleness kill switch —
+  see the [market data note](/learn/markets/market-data).
+- **Correlated inventory.** Ten small positions in instruments that move
+  together are one large position. Limits set per instrument miss it.
+- **Feedback loops.** Your own hedging moves the market your quotes are built
+  on. A hedge that is too aggressive shows up as worse markouts on your own
+  next fills.
+- **Regime change.** Parameters fitted on a quiet month are wrong on the day it
+  stops being quiet, which is the day they matter.
+
+None of this needs exotic maths. It needs every number — spread, skew, markout,
+residual — to be visible to the people accountable for the book, live, with the
+age of the data beside it.
+
+---
+
+## Execution, from order to fill
+
+Source: https://batiaev.com/learn/markets/execution
+Topics: execution, latency, market data, hedging, risk systems, measurement
+
+Order types, smart order routing and liquidity aggregation, the latency budget, pre-trade risk checks, and how to measure what execution actually cost.
+
+"Buy 1,000" is an instruction. What the client receives is a set of fills at
+prices, times and venues, and the difference between the two is execution.
+Most of the work happens in the few milliseconds nobody sees, and the quality of
+it only becomes visible in aggregate — which is why it is measured badly so
+often.
+
+## Order types are risk choices
+
+Every order type trades certainty of execution against certainty of price.
+
+| Order | Guarantees | Risks |
+|---|---|---|
+| Market | It fills (if there is liquidity) | The price, in a thin or fast market |
+| Limit | The worst price | That it never fills |
+| Stop | That it triggers at a level | The fill price after triggering — a stop becomes a market order |
+| Stop-limit | Trigger and worst price | Triggering, then not filling, while the market runs away |
+| IOC / FOK | No resting order left behind | Partial or no fill |
+
+The useful framing for clients and for product teams alike: a market order buys
+certainty that you trade and pays for it in price; a limit order buys certainty
+of price and pays for it in the risk of missing the trade. A stop is not
+protection against gaps — when the market opens through it, the fill is wherever
+the market is.
+
+## Smart order routing
+
+When the same instrument trades in several places, an order has to decide
+where to go. A **smart order router** takes the parent order and the current
+state of each venue and produces child orders:
+
+1. Build the consolidated book from each venue's depth.
+2. Adjust each venue's prices for its fees, rebates and expected fill
+   probability — the headline price is not the price you get.
+3. Walk the book, taking the best effective prices until the order is filled
+   or the limit is reached.
+4. Send the child orders, ideally so that they arrive together, because the
+   first fill is a signal to anyone watching the other venues.
+5. Handle what comes back: partial fills, rejects, and quotes that had moved by
+   the time the order arrived.
+
+Step 4 is where latency stops being an engineering metric and becomes a cost.
+Orders that arrive at different venues a few milliseconds apart give
+faster participants time to adjust the quotes the router was relying on.
+
+## Liquidity aggregation
+
+A broker or dealer that hedges through several liquidity providers runs the
+same logic in a different setting. Each provider streams quotes, often with
+different sizes, different validity, and different rules about whether a
+request at that price will actually be honoured. **Last look** — a provider's
+right to reject a trade request within a short window after seeing it — means a
+quote is an offer to consider, not a commitment.
+
+The aggregator therefore keeps statistics, not just prices: per provider, the
+fill ratio, the reject ratio by market condition, how long the last look takes,
+and the markouts after the fill. A provider with the best headline price and a
+high reject rate in fast markets is often the most expensive one in the book.
+
+At Revolut the liquidity aggregation, smart order routing and hedging algorithms
+ran with a roundtrip under 60 milliseconds. The number matters less than the
+discipline behind it: knowing where each millisecond went.
+
+## The latency budget
+
+End-to-end latency is a sum, and each term has an owner:
+
+- market data in: venue → network → feed handler → book;
+- decision: risk checks, pricing, routing logic;
+- order out: gateway → network → venue;
+- acknowledgement and fill back, through the same path.
+
+Measuring only the total tells you there is a problem and nothing about where.
+Timestamping at each boundary — and keeping the clocks that write those
+timestamps in agreement — turns "the platform is slow" into "the risk check
+added 4 milliseconds after the last release", which is a problem someone can
+fix.
+
+Tail latency matters more than the average. A system that answers in 2
+milliseconds at the median and 400 at the 99.9th percentile will hurt clients
+precisely on the busy days, because the tail is where the volume is.
+
+## Pre-trade risk checks
+
+Every order passes through checks before it leaves: does the client have the
+margin, is the size inside limits, is the price within a band of the market, is
+this order a duplicate, is the instrument tradable right now. They are the
+cheapest insurance a platform buys, and they sit directly in the latency path,
+so two properties matter:
+
+- **They must be fast and deterministic** — no network calls on the hot path
+  that can stall.
+- **They must fail closed.** If a check cannot decide, the order does not go.
+  A risk check that times out and lets the order through is not a risk check.
+
+Fat-finger price bands deserve particular care: too tight and they reject
+legitimate orders on volatile days, too loose and they let through the error
+they exist to stop.
+
+## Measuring what it cost
+
+Execution quality is measured against a benchmark, and the choice of benchmark
+decides the answer.
+
+- **Arrival price.** The mid when the order was decided. The gap to the average
+  fill price is **implementation shortfall**: everything execution cost,
+  including the market moving while you worked the order.
+- **Spread capture.** Where inside the bid-offer the fill landed.
+- **VWAP.** Fill price against the volume-weighted average over the period.
+  Useful for large orders worked over time; flattering for small ones, which
+  are part of the volume they are measured against.
+- **Markouts.** The same post-trade measure a market maker uses, from the
+  client's side: did the price keep moving after the fill?
+
+Regulation in Europe frames all of this as best execution: firms must take all
+sufficient steps to obtain the best possible result for clients, considering
+price, costs, speed, likelihood of execution and settlement, size and nature.
+The practical consequence is that every one of the numbers above has to be
+computable after the fact, per order, with the market data that was true at the
+time — which takes us back to [market data](/learn/markets/market-data).
+
+## The short version
+
+- Pick order types for the risk you would rather carry.
+- Route on effective prices, not headline ones.
+- Score liquidity providers on fills and markouts, not quotes.
+- Budget latency per hop, and watch the tail.
+- Keep pre-trade checks fast, deterministic and closed on failure.
+- Measure against arrival price before anything that flatters you.
+
+---
+
+## The harness is most of the product
+
+Source: https://batiaev.com/learn/ai/harness
+Topics: agents, harness, verification, ai, product engineering
+
+A model is one component. The context it is given, the tools it may call, the permissions around them and the checks after them decide whether an agent is useful.
+
+When an agent does something useful, the model gets the credit. When it does
+something stupid, the model gets the blame. Both are mostly misattributed. The
+same model is excellent or useless depending on what it is shown, what it is
+allowed to do, and what happens to its output before anyone relies on it — and
+all three of those belong to the **harness**, not the model.
+
+A harness is everything wrapped around the model call: context assembly, tools,
+permissions, hooks, memory and verification. It is ordinary software, it is
+where most of the engineering effort goes, and it is where a team's taste and
+standards actually live.
+
+## The parts
+
+| Part | Question it answers | Fails as |
+|---|---|---|
+| Context | What does the model know right now? | Confident answers about the wrong version of the code |
+| Tools | What can it do? | Workarounds through whatever tool is available |
+| Permissions | What may it do without asking? | Either constant interruptions or an incident |
+| Hooks | What always happens around an action? | Rules that are only followed when remembered |
+| Memory | What carries over between sessions? | The same correction made every week |
+| Verification | How do we know it worked? | "Done" meaning "I wrote some code" |
+
+## Context is a budget, not a dump
+
+The cheapest way to improve an agent is to give it less, better context. A
+model reading forty files to find the three that matter is slower, more
+expensive and more likely to latch onto the wrong pattern than one that is
+handed the three.
+
+What works in practice is **layered, scoped context**:
+
+- A short brief at the root of each repository — what the system is for, the
+  hard rules, the commands that prove something works. On this site that is a
+  single `AGENTS.md`, with `CLAUDE.md` pointing at it so the two cannot drift.
+- Rules that attach by path. In the workspace I build SHIP in — eight
+  repositories: app, backend, CLI, browser extension, MCP server, website,
+  policies and infrastructure — each repository's conventions live in a rule
+  file that only loads when the agent touches files matching its glob. The
+  backend rules never cost tokens during a front-end change.
+- Skills for repeatable procedures — "create a database migration", "regenerate
+  the API client", "prepare a release" — written once, loaded on demand.
+
+The test for anything in the brief is whether it is recoverable from the code.
+Directory structure is; *why* a choice that looks wrong is deliberate is not.
+Briefs that describe the code go stale; briefs that record judgement stay
+useful.
+
+## Tools shape behaviour
+
+An agent uses the tools it has. Give it only a shell and it will edit files with
+`sed`, query databases by piping SQL strings and parse JSON with `grep`. Each
+works until it does not. Dedicated tools — edit a file by exact replacement,
+query with a typed interface, read a page as text — make the right action the
+easy one, and they make actions auditable because their arguments are
+structured.
+
+The same applies to the interfaces an agent reaches outside the machine. A
+typed MCP server with a narrow set of tools is a contract: what the agent can
+read, what it can write, and in what shape. That is a much smaller surface to
+reason about than "it has an API key".
+
+## Permissions follow reversibility
+
+Permission design gets easier once actions are sorted by how hard they are to
+undo:
+
+1. **Read anything in scope** — no prompt.
+2. **Edit the working tree** — no prompt, because version control is the undo.
+3. **Run commands that change local state** — allow-listed by pattern.
+4. **Anything outward-facing or irreversible** — pushing, deploying, sending a
+   message, deleting data, spending money — a human confirms, every time.
+
+The failure mode at one end is an agent that asks before every file read and
+gets switched to "allow everything" by Friday. At the other end it is an agent
+that force-pushes over a colleague's branch. Sorting by reversibility gives a
+policy people keep.
+
+## Hooks make rules unforgettable
+
+A rule in a prompt is followed when the model remembers it. A hook is followed
+every time. Anything that must always happen belongs in a hook:
+
+- A pre-tool hook in the SHIP workspace scans every write for secret-like
+  patterns and warns before the content lands on disk.
+- An editor hook reminds that a change to the database schema file needs a
+  migration revision — the mistake that is cheapest to catch at edit time and
+  most expensive in production.
+- Formatting and linting after edits, so the diff a reviewer sees is the
+  substance and not the whitespace.
+
+The pattern is the same as in any engineering system: move a check from
+"someone should remember" to "the system does it".
+
+## Verification is the product
+
+The hardest part of agentic work is not producing a change. It is knowing
+whether the change is right. A harness earns its keep by making verification
+cheap and non-negotiable:
+
+- a single command that runs the gate — on this site `npm run verify`, which
+  runs eight numeric suites and a render smoke test, around 330 checks;
+- tests that assert properties rather than snapshots, so the agent cannot pass
+  them by regenerating the expected output;
+- a real environment to look at — a dev server, a browser, a simulator — so
+  "it compiles" is not mistaken for "it works".
+
+An agent that can run the gate itself iterates until it passes. An agent that
+cannot will report success on the first attempt that looks plausible. The
+[agentic workflows note](/learn/ai/agentic-workflows) is about building that
+loop deliberately.
+
+## Why this is the product
+
+Two teams on the same model will get very different results, and the
+difference is almost entirely harness: what they wrote down, what they
+automated, what they refuse to let through. That is good news. Models change
+every few months; a well-built harness carries over, and it compounds — every
+correction written into a rule, a skill or a hook is one the team never makes
+again.
+
+---
+
+## Agentic workflows that hold up
+
+Source: https://batiaev.com/learn/ai/agentic-workflows
+Topics: agents, verification, evals, ai, product engineering
+
+Plan, act, verify — and why the verify step has to be something the model cannot talk its way past: tests, type-checks, property checks, and a human at the irreversible step.
+
+Every agentic workflow is a loop: decide what to do, do it, check whether it
+worked, repeat. The first two steps get the demos. The third decides whether
+the result can be trusted, and it is the one most often left to the model's own
+judgement — which is to say, skipped.
+
+The rule that makes these loops hold up is simple to state: **the check has to
+be something the model cannot talk its way past.**
+
+## Plan, act, verify
+
+**Plan** is where scope gets decided, and where most expensive mistakes are made
+cheaply. A plan written down before any change — which files, which approach,
+how success will be shown — gives a human one place to say "no, not like that"
+before an hour of work goes in the wrong direction. It also gives the agent
+something to check itself against later.
+
+**Act** should be small. A diff a reviewer can read in two minutes gets read; a
+diff that touches forty files gets approved. Small steps also make failure
+cheap: when step four breaks something, steps one to three are still good.
+
+**Verify** is a gate, not an opinion. Compare:
+
+| Weak check | Strong check |
+|---|---|
+| "The code looks correct" | The tests pass |
+| The tests the agent just wrote pass | Tests that existed before the change still pass |
+| Snapshot tests regenerated | Property tests: monotonicity, round-trips, known answers |
+| "It builds" | The page renders and the number on it is right |
+| The agent says it is done | A command exits zero |
+
+The strong column has one thing in common: the agent does not control the
+outcome. That is the point.
+
+## Property checks beat examples
+
+For anything that computes, the most robust gate is a set of properties rather
+than a list of expected outputs. This site's calculators are checked that way:
+
+- **Closed-form anchors.** Hedging an option at zero volatility must compound to
+  exactly `exp(rt)`.
+- **Round-trips.** Price at a volatility, invert the price, recover the
+  volatility to 1e-7.
+- **Monotonicity.** Every lever must pull the right way — more contribution,
+  more money.
+- **Statistical tolerance.** A Monte Carlo result is compared against its own
+  standard error, not a magic number.
+- **Hostile input.** An empty field, a crossed market, a quote below intrinsic.
+
+An agent can make an example test pass by changing the example. It cannot make
+"inverting the price recovers the volatility" pass without the maths being
+right. That asymmetry is what lets a loop run unattended for longer.
+
+## Humans at the irreversible step
+
+Autonomy should scale with reversibility, not with confidence. An agent can
+iterate on a working tree all afternoon because version control undoes
+anything. It should not push, deploy, send, delete or pay without a person
+saying yes — and that approval should be specific to the action, not a blanket
+"go ahead" that silently covers the next one.
+
+On this site the split is explicit: the agent can change anything in the source
+and run every check, but nothing is live until the static build is regenerated
+and committed, and that step is mine.
+
+## Sub-agents for separation, not speed
+
+Splitting work across agents is tempting for throughput. Its better use is
+**separation of concerns**:
+
+- a reviewer agent that sees only the diff and the brief, not the reasoning
+  that produced it, so it is not persuaded by the author's story;
+- a researcher that reads widely and returns a conclusion, so the main context
+  is not filled with forty files it will never need again;
+- specialists with narrow briefs — security, database migrations, compliance
+  language — whose instructions would be noise in every other task.
+
+Each spawn starts cold and re-derives context, so it is not free. Use it where
+independence is the value.
+
+## Evals: the regression suite for behaviour
+
+Code has tests; agent behaviour needs **evals** — a fixed set of tasks with a
+way of scoring the result, run whenever the prompt, the tools or the model
+change. Without them every change to the harness is a guess, and model upgrades
+become anxious events instead of routine ones.
+
+Good evals look like the work: real tasks from the backlog, real failure cases
+that were fixed once, graded on whether the outcome was correct rather than
+whether the transcript looked confident. A handful of honest evals beats a
+leaderboard of synthetic ones.
+
+## Cost and latency are design inputs
+
+Every loop iteration costs tokens and time. That shapes design:
+
+- give the agent the cheapest check first — the type-checker before the full
+  test suite, the unit test before the browser;
+- keep stable context stable, so it can be cached rather than re-sent;
+- stop loops that are not converging. Three failed attempts at the same fix
+  usually mean the plan is wrong, not the code.
+
+## What changes for the team
+
+The bottleneck moves. Writing the change gets cheap; specifying it and checking
+it do not. Teams that do well with agents write better briefs, invest in
+faster and stricter gates, and treat every recurring correction as a bug in the
+harness rather than in the model. The
+[harness note](/learn/ai/harness) covers where those corrections live, and the
+[product engineering note](/learn/ai/product-engineering) what it does to how a
+team is organised.
+
+---
+
+## Knowledge bases: typed beats retrieved
+
+Source: https://batiaev.com/learn/ai/knowledge-bases
+Topics: agents, knowledge, retrieval, mcp, provenance, ai
+
+Why retrieval over a pile of documents fails quietly, what hybrid search fixes, and why goals, decisions and artefacts work better as typed nodes with provenance.
+
+The usual way to give a model knowledge is to put the documents in a vector
+store and retrieve the closest chunks at question time. It demos well, and it
+fails quietly — not with an error, but with a fluent answer built from the wrong
+paragraph of the wrong version of the right document.
+
+That failure is structural, and fixing it is less about better retrieval than
+about deciding what the knowledge actually is.
+
+## How retrieval goes wrong
+
+A retrieval pipeline has four stages, and each loses something:
+
+| Stage | What it does | What it loses |
+|---|---|---|
+| Chunk | Split documents into passages | The sentence before, which said "this was rejected" |
+| Embed | Turn passages into vectors | Exact terms — ticker symbols, error codes, names |
+| Retrieve | Return the nearest passages | Anything phrased differently from the question |
+| Generate | Answer from what came back | The fact that what came back was incomplete |
+
+The last row is the dangerous one. The model cannot know what retrieval did not
+return, so it answers from what it has, confidently. A decision that was made in
+March and reversed in May is two documents; whichever chunk is closer to the
+question wins.
+
+## Hybrid search fixes recall
+
+Semantic search is good at meaning and bad at precise terms. Full-text search is
+the opposite. Running both and merging the results — then re-ranking the merged
+list — fixes most recall problems at modest cost. The AI retrieval stack I
+built at Nevis combined full-text and semantic search for exactly that reason:
+in wealth management the questions name specific funds, forms and account
+types, and an embedding alone will happily return a passage about a similar
+one.
+
+Hybrid search makes retrieval better. It does not make it *right*, because the
+underlying problem is not finding passages. It is that passages are the wrong
+unit for most of what an organisation needs to know.
+
+## Typed knowledge
+
+Ask what an engineering team actually needs an agent to know, and the answer is
+rarely "the paragraph that mentions X". It is:
+
+- what the team is trying to achieve — **goals**;
+- what was decided, by whom, and why — **decisions**;
+- what exists — **artefacts**: services, repositories, documents, pull requests;
+- how those relate — this decision serves that goal, this artefact implements
+  that decision.
+
+Represented as typed nodes with typed edges, those questions stop being
+retrieval problems. "What is the current decision on the auth provider?" is a
+lookup of a node of type *decision*, scoped to *auth*, that has not been
+superseded — not a similarity search over every message that mentions auth.
+
+This is the design behind SHIP: goals, decisions and artefacts as typed nodes
+instead of prose, which agents read and write through MCP.
+
+## Provenance and supersession
+
+Two properties make a knowledge base trustworthy enough for agents to act on.
+
+**Provenance.** Every node records who wrote it — which person or which agent —
+from which source, and when. An answer can then say where it came from, and a
+reviewer can discount a claim that came from an agent's inference rather than a
+human decision. In SHIP an agent's write is recorded as an agent observation and
+audit-logged; it does not silently become fact.
+
+**Supersession.** Knowledge changes. A decision that is replaced should not be
+deleted — the history of why it changed is often the most useful part — but it
+must be marked as superseded, with a link to what replaced it. Retrieval over
+documents has no equivalent: the old version and the new one are just two
+passages.
+
+## MCP is the boundary
+
+The Model Context Protocol gives agents a typed interface to a system: a list of
+tools, each with a schema. For a knowledge base that is the right boundary,
+because it makes the contract explicit:
+
+- **Reads** are broad: search, fetch a node, traverse its relations.
+- **Writes** are narrow and attributable: record an observation, propose a
+  status change, link two nodes — never "rewrite the graph".
+- **Some writes are not offered at all.** Where an agent writing a wrong value
+  is worse than no agent, the tool is read-only and the record is still entered
+  by a person. The capability you leave out is part of the design.
+
+The same interface serves every assistant the user already has. One knowledge
+base, reachable from whichever client a person prefers, beats a separate
+memory locked inside each.
+
+## When retrieval is still right
+
+Typed structure is not free: someone, or something, has to create the nodes.
+For large bodies of reference text — manuals, regulations, research — retrieval
+remains the right tool, ideally hybrid and with citations back to the source
+passage. The practical architecture is both: a typed core for the things the
+organisation decides and owns, and retrieval around it for the things it reads.
+
+## The short version
+
+- Retrieval finds passages; organisations run on decisions.
+- Hybrid search for recall, re-ranking for precision, citations for trust.
+- Type the knowledge that changes and matters: goals, decisions, artefacts.
+- Record provenance on every write and supersede rather than delete.
+- Make the agent interface narrow where mistakes are expensive.
+
+The [harness note](/learn/ai/harness) covers how this knowledge reaches a model
+as context, and the [agentic workflows note](/learn/ai/agentic-workflows) how to
+check what the model does with it.
+
+---
+
+## Product engineering when code is cheap
+
+Source: https://batiaev.com/learn/ai/product-engineering
+Topics: product engineering, verification, agents, ai, knowledge
+
+When an agent can write the diff, the scarce work moves to the spec, the verification and the taste encoded in rules — and the line between product and engineering moves with it.
+
+For most of the history of software, the expensive part was writing the code.
+Planning, process and team shape all grew around that constraint. Agents have
+not removed it, but they have moved it: a competent first draft of a change is
+now minutes away. What is still slow is knowing which change to make, and
+knowing whether the one you got is right.
+
+That shift changes what good product engineering looks like, and it changes it
+for product managers and engineering leaders as much as for engineers.
+
+## The new bottlenecks
+
+| Used to be scarce | Now scarce |
+|---|---|
+| Typing the code | Saying precisely what should change |
+| Knowing the syntax | Knowing which details decide whether it holds up |
+| Review of a colleague's diff | Review of a machine's diff, at volume |
+| Writing tests | Writing checks the author cannot game |
+| Documentation nobody reads | Briefs an agent reads on every task |
+
+Every row on the right is a judgement problem. None of them gets easier because
+the model got better at code.
+
+## The spec is the artefact
+
+When an agent implements, the spec stops being a ticket someone skims and
+becomes the input that determines the output. A good one is short and
+specific:
+
+- **What and why** — the user problem, in one paragraph.
+- **The shape of done** — what someone will see, and the check that proves it.
+- **Constraints** — what must not change, what must not be invented, which
+  existing pattern to follow.
+- **Open questions** — named, so they get answered rather than guessed.
+
+Writing that well is product work. It is also the cheapest point in the whole
+process to catch a wrong idea — the plan costs a minute to read; the
+implementation of the wrong plan costs a review cycle and a revert.
+
+## Taste becomes configuration
+
+Every team has standards that live in people's heads: how dense a table should
+be, which error messages are acceptable, why a figure is never shown without
+its source, when a number must say it was simulated. Agents do not absorb those
+by osmosis. They follow what is written down.
+
+So taste moves into files: a design system with named components and tokens, a
+brief per repository, rules that attach to the paths they govern, checks that
+fail the build when a raw colour sneaks past the tokens. This site is an
+example — its brief carries rules like *never fabricate market data* and
+*motion must compute something*, and every change, by a person or an agent,
+starts from them.
+
+The side effect is welcome: standards that are written down can be argued with,
+versioned and improved. Standards in people's heads mostly get re-litigated.
+
+## Verification scales the team
+
+If an agent can produce ten changes a day, the team needs to be able to trust
+ten changes a day. That is a verification problem, and it is solved the same
+way it always was, only with less tolerance for gaps:
+
+- fast, strict gates that run on every change;
+- property and invariant tests for anything that computes;
+- a real environment to look at, not just a green build;
+- humans reviewing intent and risk, not formatting.
+
+The [agentic workflows note](/learn/ai/agentic-workflows) goes into the gates.
+The organisational point is that investment in verification used to be a
+quality decision. It is now a capacity decision.
+
+## The product–engineering line moves
+
+When implementation is cheap, the person closest to the problem can often get
+much further on their own. Product managers prototype the change instead of
+describing it. Engineers spend more time on what to build and how to prove it,
+and less on transcription. Designers ship the component rather than the
+picture of it.
+
+That does not remove the roles. It removes the hand-offs between them that
+existed only because writing code was slow. What remains distinct is
+accountability: who decides what good is, and who answers for it when it is
+not.
+
+## Knowledge is infrastructure
+
+An agent is only as good as what it knows about the product, the codebase and
+the decisions behind both. A team that keeps its goals, decisions and artefacts
+somewhere structured — not scattered across chat threads and stale wiki pages —
+gives every agent and every new hire the same head start. That is the problem
+SHIP exists for, and the [knowledge bases note](/learn/ai/knowledge-bases)
+explains why typed structure beats retrieval for it.
+
+## What to do on Monday
+
+1. Write a one-page brief for your main repository: purpose, hard rules, the
+   command that proves a change works.
+2. Make that command fast enough that people — and agents — actually run it.
+3. Turn your three most frequent review comments into rules or checks.
+4. Require a written plan before any change larger than a single file.
+5. Keep irreversible steps — deploys, data changes, messages to customers —
+   behind a human, explicitly.
+
+None of it needs a new tool. All of it gets more valuable the more of the work
+is done by agents.
 
 ---
 

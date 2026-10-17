@@ -29,11 +29,11 @@ const StrategyPage = ({ slug }: { slug: string }) => {
 
   return (
     <LearnLayout slug={`strategies/${note.slug}`}>
-      <p className="border-border/60 bg-accent/30 text-foreground -mt-2 mb-6 rounded-lg border px-4 py-3 text-sm">
+      <p className="border-border bg-muted/50 text-foreground mb-6 rounded-lg border px-4 py-3 text-sm">
         <strong>The view:</strong> {note.view}
       </p>
 
-      <h2>Construction</h2>
+      <h2 id="construction">Construction</h2>
       <table>
         <thead>
           <tr>
@@ -62,17 +62,17 @@ const StrategyPage = ({ slug }: { slug: string }) => {
 
       <StrategyFigure presetId={preset.id} />
 
-      <h2>When it fits</h2>
+      <h2 id="when-it-fits">When it fits</h2>
       <p>{note.whenToUse}</p>
 
-      <h2>What goes wrong</h2>
+      <h2 id="what-goes-wrong">What goes wrong</h2>
       <ul>
         {note.risks.map((risk) => (
           <li key={risk}>{risk}</li>
         ))}
       </ul>
 
-      <h2>Try it properly</h2>
+      <h2 id="try-it-properly">Try it properly</h2>
       <p>
         The chart above is the real pricing model, limited to three sliders. To
         change strikes, add legs, switch to futures, or price it against your own

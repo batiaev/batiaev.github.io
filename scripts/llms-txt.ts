@@ -62,8 +62,9 @@ const summary = `# Anton Batiaev
 > Fintecy (read-only portfolio and P&L aggregation) and SHIP (a typed knowledge
 > graph for engineering teams).
 
-This site hosts a free knowledge base — options, derivatives risk and a
-reading list — plus a set of finance calculators. Everything runs client-side;
+This site hosts a free knowledge base — options, derivatives risk, market data,
+market making and execution, AI engineering (harnesses, agentic workflows,
+knowledge bases) and a reading list — plus a set of finance calculators. Everything runs client-side;
 there are no accounts and no tracking beyond analytics.
 
 ## Free tools

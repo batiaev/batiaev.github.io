@@ -1,0 +1,133 @@
+A price on a screen looks like a fact about now. It is a claim about the past,
+made by a venue, carried through several systems that each changed it a little,
+and displayed some milliseconds — or seconds — after the event it describes.
+Every system that prices, margins or executes against that number inherits
+those changes, whether or not anyone wrote them down.
+
+Market data is the least glamorous part of a trading platform and the one most
+likely to be quietly wrong. Pricing models get reviewed. Feed handlers mostly
+get noticed when they stop.
+
+## What actually arrives
+
+Venues publish at different depths, and the depth decides what you can know.
+
+| Level | What it carries | What it lets you answer |
+|---|---|---|
+| L1 | Best bid, best offer, last trade | Where is the market? |
+| L2 | Aggregated size at each price level | How much can I trade before the price moves? |
+| L3 | Every individual order, add / modify / cancel | Who is queued ahead of me, and is that size real? |
+
+Most retail-facing systems run on L1 and a few levels of L2. That is enough to
+show a price, and not enough to know what a large order will cost — which is
+why execution systems and display systems often subscribe to the same
+instrument at different depths.
+
+The other distinction that matters is **snapshot versus incremental**. A
+snapshot is the whole book; an incremental feed is a stream of changes to it.
+Incremental feeds are smaller and faster, and they carry a sequence number for
+a reason: apply one update out of order, or miss one, and every book you build
+afterwards is wrong in a way that looks perfectly plausible.
+
+## Normalisation is where meaning changes
+
+Each venue has its own symbology, tick sizes, lot sizes, price multipliers,
+trading calendars and conventions for what a "trade" is. A feed handler
+translates all of that into one internal model, and every translation is a
+decision someone made once and nobody revisits:
+
+- **Instrument identity.** The same economic thing can be several listings,
+  and one ticker can mean different things on different venues. Mapping errors
+  here do not crash anything; they price one instrument off another.
+- **Price scaling.** Pence versus pounds, quoted versus clean price, a futures
+  multiplier applied twice or not at all. A factor of 100 is easy to spot. A
+  factor of 1.0125 is not.
+- **Trade conditions.** Auction prints, off-book trades, late reports and
+  corrections all arrive as "trades". A last-price field that includes them is
+  measuring something different from one that does not.
+- **Calendars.** Half-days, holidays and session breaks decide whether a quiet
+  feed is a closed market or a broken connection.
+
+The useful habit is to keep the raw message alongside the normalised one for
+long enough to answer "what did the venue actually say?" When a client disputes
+a fill, that question arrives within the hour.
+
+## Gaps, recovery and the book you cannot trust
+
+Sequence numbers make gaps detectable; they do not make them harmless. When a
+gap appears the honest state of the book is *unknown*, and the system has to
+choose:
+
+1. **Stop and recover.** Mark the instrument stale, request a snapshot or
+   replay, rebuild, then resume. Correct, and briefly blind.
+2. **Carry on.** Keep applying updates to a book known to be missing some.
+   Fast, and wrong in a way that cannot be measured.
+
+Anything that prices or margins should take the first option and say so. The
+second is how a crossed book — best bid above best offer — ends up feeding a
+risk engine, which then reports a profit that does not exist.
+
+Crossed and locked markets are worth checking for explicitly. They are rare on
+a single healthy venue, common across venues for a few milliseconds, and almost
+always a sign of a stale side when they persist.
+
+## Conflation and staleness
+
+A busy instrument can update tens of thousands of times a second, and most
+consumers cannot use that. **Conflation** keeps the latest state and drops the
+intermediate ones: a screen redrawing at 4Hz needs the price as of now, not
+every price since the last frame.
+
+Conflation is right for display and dangerous for anything that needs the
+path — a stop that should have triggered at a price the conflated stream never
+showed, or a volume-weighted calculation computed over a sample instead of the
+trades.
+
+Staleness is the mirror problem: a price that has not changed may be a quiet
+market or a dead connection. The two look identical in the data. Good systems
+carry the time of the last update next to every price, and the age of that
+timestamp — not the price — is what a dealer looks at first when something
+seems off. A coloured "seconds since last update" next to a figure is one of
+the most useful pieces of UI in a dealing tool, because it answers the question
+before it is asked.
+
+## Timestamps, plural
+
+A single tick can carry several times:
+
+- when the venue matched or published it;
+- when it reached your network;
+- when your handler decoded it;
+- when your application acted on it.
+
+The gaps between them are your latency budget, measured. Keeping only the last
+one — usually the local receive time — throws away the ability to say whether
+a slow fill was the venue, the network or your own code. Clocks also need to
+agree: a timestamp from a server that has drifted by a few milliseconds will
+make causality appear to run backwards in your logs.
+
+## What a composite price hides
+
+Platforms that quote one price per instrument usually build it from several
+sources: venues, liquidity providers, a reference feed. The composite is a
+policy, not a measurement. It has to decide which sources count, how to weight
+them, how to treat one that has gone quiet, and what to do when they disagree.
+
+That policy is invisible in the output. A smooth composite can hide one source
+that has been stale for a minute and another that has started printing outliers.
+The defence is to keep each source's contribution inspectable — which source
+set the bid, how old it was, how far the others were from it — so that when the
+composite moves, someone can say why.
+
+## The short version
+
+- Treat every price as *price, source, time* — never price alone.
+- Prefer a stale flag to a confident wrong number.
+- Recover from gaps; do not paper over them.
+- Conflate for people, not for risk.
+- Keep the raw message long enough to answer a dispute.
+
+None of this is visible when it works, which is exactly why it needs owning.
+The [execution note](/learn/markets/execution) picks up where the price ends
+and an order begins, and the [market making note](/learn/markets/market-making)
+covers what a dealer does with the price once it is trusted.

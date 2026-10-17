@@ -101,10 +101,11 @@ npm run dev          # local dev server
 npm run verify       # the quality gate — run before saying anything works
 npm run lint
 npm run build        # dist/ only, gitignored
-npm run prodBuild    # sitemap + llms.txt + build + prerender → docs/  (deploys)
+npm run nav          # regenerate src/data/nav.generated.json (the shell's copy)
+npm run prodBuild    # sitemap + llms.txt + nav + build + prerender → docs/  (deploys)
 ```
 
-`npm run verify` runs seven numeric suites plus a render smoke test (~295
+`npm run verify` runs eight numeric suites plus a render smoke test (~330
 checks). Run it before claiming anything works.
 
 There is a standing baseline of lint and type noise: unused shadcn components
@@ -120,6 +121,9 @@ under `src/components/ui/`, plus three long-standing items in
 
 ```
 src/
+  components/shell/     AppShell (layout route), Sidebar, Breadcrumbs, ⌘K, theme
+  lib/nav.ts            The site map: sidebar, mobile sheet, ⌘K and breadcrumbs
+  lib/theme.ts          Light/dark/system and sidebar collapse (mirrors index.html)
   data/data.json        Nearly all site copy. Edit here, not in components.
   lib/
     options/            blackScholes, strategy, presets, impliedVol, smile, hedging
@@ -135,6 +139,33 @@ scripts/
   smoke-render.tsx      ~70 assertions over rendered HTML
   prerender.tsx         Static HTML per route
 ```
+
+### The shell
+
+The site renders as an application, after the dealing-tool design: a sticky
+sidebar on a tinted `--canvas`, a 48px header with breadcrumb, ⌘K search and
+theme menu, and each page inside an inset `bg-background` tile. `AppShell` is a
+layout route in `App.tsx`, so navigation swaps only the tile's contents;
+`prerender.tsx` and `smoke-render.tsx` wrap every page in the same shell.
+
+- Pages render content only — no header, footer or back link. `PageHero` is the
+  masthead; the breadcrumb is the way up.
+- The document keeps its single scroll. The tile is `overflow-clip` (clips the
+  rounded corners without becoming a scroll container), and the sidebar is
+  `sticky`, not a scroll container around the page.
+- Theme and sidebar collapse are set on `<html>` by the inline script in
+  `index.html` before first paint; `lib/theme.ts` mirrors it. Colours are
+  tokens — use `text-positive` / `text-negative` / `text-warning` for P&L,
+  never palette classes, or dark mode breaks.
+- One accent (`--primary`) for links, focus, active markers and the main chart
+  series. Default buttons are monochrome. Cards are hairline `surface`, not
+  shadows; hover changes the border, never the position.
+- The home page stays one page with anchors; the sidebar scroll-spies it.
+- The shell is on every route's first load, so it must not import
+  `data.json` or `learn/registry`. It reads `src/data/nav.generated.json`
+  (names, links, section and page titles) via `lib/nav.ts`; `npm run nav`
+  regenerates it and the smoke test fails when it is stale. ⌘K is lazy for the
+  same reason.
 
 ### The registry pattern
 
@@ -153,9 +184,10 @@ Seven places, and `npm run verify` will catch some but not all:
 4. `scripts/sitemap.ts`
 5. `scripts/prerender.tsx` — import, destructure, route entry
 6. `scripts/llms-txt.ts` — the `tools` array (hardcoded; easy to forget)
-7. `src/data/data.json` — `teaching.tools`, so it appears in the Toolkit grid
+7. `src/data/data.json` — `teaching.tools`, so it appears in the Toolkit grid,
+   the sidebar and ⌘K (add its icon to `TOOL_ICONS` in `src/lib/nav.ts`)
 
-Then `npm run sitemap && npm run llms`.
+Then `npm run sitemap && npm run llms && npm run nav`.
 
 ### Numeric work gets a verify script
 

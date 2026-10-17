@@ -7,6 +7,7 @@ import fs from 'node:fs'
 import { ALL_PAGES, learnPath, orphanedNotes, relatedPages, tagCounts } from '../src/learn/registry'
 import { structuredDataFor } from '../src/lib/structuredData'
 import { INDEX, missingFromIndex, search } from '../src/learn/searchIndex'
+import { serialiseNavData } from '../src/lib/buildNavData'
 
 const store = new Map<string, string>()
 
@@ -30,6 +31,8 @@ Object.assign(globalThis, {
     devicePixelRatio: 1,
   },
 })
+
+const { default: AppShell } = await import('../src/components/shell/AppShell')
 
 async function render(name: string, path: string) {
   const [
@@ -59,7 +62,9 @@ async function render(name: string, path: string) {
 
   const html = renderToStaticMarkup(
     <MemoryRouter initialEntries={[path]}>
-      <Page />
+      <AppShell>
+        <Page />
+      </AppShell>
     </MemoryRouter>,
   )
 
@@ -104,7 +109,9 @@ const { default: LearnRoute } = await import('../src/pages/learn/LearnRoute')
 
 const learnIndexHtml = renderToStaticMarkup(
   <MemoryRouter initialEntries={['/learn']}>
-    <LearnIndex />
+    <AppShell>
+      <LearnIndex />
+    </AppShell>
   </MemoryRouter>,
 )
 console.log(`PASS  Learn index rendered (${learnIndexHtml.length} chars)`)
@@ -112,9 +119,11 @@ console.log(`PASS  Learn index rendered (${learnIndexHtml.length} chars)`)
 const learnPages = ALL_PAGES.map((page) => {
   const html = renderToStaticMarkup(
     <MemoryRouter initialEntries={[learnPath(page.slug)]}>
-      <Routes>
-        <Route path="/learn/*" element={<LearnRoute />} />
-      </Routes>
+      <AppShell>
+        <Routes>
+          <Route path="/learn/*" element={<LearnRoute />} />
+        </Routes>
+      </AppShell>
     </MemoryRouter>,
   )
   return { page, html }
@@ -314,6 +323,36 @@ const expectations: [string, boolean][] = [
   ],
   ['nonsense returns nothing', search('zzzzqqq').length === 0],
   ['every term must match, not any', search('condor zzzzqqq').length === 0],
+
+  // --- Shell ---
+  // The sidebar reads a generated slice of the copy so the shell stays light.
+  // A stale slice would show a page in the sidebar that the build lacks.
+  [
+    'nav slice is regenerated (npm run nav)',
+    fs.readFileSync('src/data/nav.generated.json', 'utf8') === serialiseNavData(),
+  ],
+  [
+    'testimonials are on the home page, not only behind advisory',
+    homeHtml.includes('id="testimonials"') &&
+      data.testimonials.every((t) => homeHtml.includes(t.author)),
+  ],
+  [
+    'sidebar ends with testimonials, advisory, contact',
+    (() => {
+      const rail = homeHtml.slice(homeHtml.indexOf('aria-label="Site"'))
+      const order = ['href="/#testimonials"', 'href="/advisory"', 'href="/#contact"'].map((h) =>
+        rail.indexOf(h),
+      )
+      return order.every((at, i) => at > 0 && (i === 0 || at > order[i - 1])) &&
+        rail.indexOf('href="/tools/offer"') < order[0]
+    })(),
+  ],
+  [
+    'every learn page appears in the sidebar markup',
+    learnPages.every(({ page, html }) =>
+      html.includes(`href="${learnPath(page.slug)}"`),
+    ),
+  ],
 
   // --- Machine readability ---
   [

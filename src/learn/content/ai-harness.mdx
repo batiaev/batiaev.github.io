@@ -1,0 +1,119 @@
+When an agent does something useful, the model gets the credit. When it does
+something stupid, the model gets the blame. Both are mostly misattributed. The
+same model is excellent or useless depending on what it is shown, what it is
+allowed to do, and what happens to its output before anyone relies on it — and
+all three of those belong to the **harness**, not the model.
+
+A harness is everything wrapped around the model call: context assembly, tools,
+permissions, hooks, memory and verification. It is ordinary software, it is
+where most of the engineering effort goes, and it is where a team's taste and
+standards actually live.
+
+## The parts
+
+| Part | Question it answers | Fails as |
+|---|---|---|
+| Context | What does the model know right now? | Confident answers about the wrong version of the code |
+| Tools | What can it do? | Workarounds through whatever tool is available |
+| Permissions | What may it do without asking? | Either constant interruptions or an incident |
+| Hooks | What always happens around an action? | Rules that are only followed when remembered |
+| Memory | What carries over between sessions? | The same correction made every week |
+| Verification | How do we know it worked? | "Done" meaning "I wrote some code" |
+
+## Context is a budget, not a dump
+
+The cheapest way to improve an agent is to give it less, better context. A
+model reading forty files to find the three that matter is slower, more
+expensive and more likely to latch onto the wrong pattern than one that is
+handed the three.
+
+What works in practice is **layered, scoped context**:
+
+- A short brief at the root of each repository — what the system is for, the
+  hard rules, the commands that prove something works. On this site that is a
+  single `AGENTS.md`, with `CLAUDE.md` pointing at it so the two cannot drift.
+- Rules that attach by path. In the workspace I build SHIP in — eight
+  repositories: app, backend, CLI, browser extension, MCP server, website,
+  policies and infrastructure — each repository's conventions live in a rule
+  file that only loads when the agent touches files matching its glob. The
+  backend rules never cost tokens during a front-end change.
+- Skills for repeatable procedures — "create a database migration", "regenerate
+  the API client", "prepare a release" — written once, loaded on demand.
+
+The test for anything in the brief is whether it is recoverable from the code.
+Directory structure is; *why* a choice that looks wrong is deliberate is not.
+Briefs that describe the code go stale; briefs that record judgement stay
+useful.
+
+## Tools shape behaviour
+
+An agent uses the tools it has. Give it only a shell and it will edit files with
+`sed`, query databases by piping SQL strings and parse JSON with `grep`. Each
+works until it does not. Dedicated tools — edit a file by exact replacement,
+query with a typed interface, read a page as text — make the right action the
+easy one, and they make actions auditable because their arguments are
+structured.
+
+The same applies to the interfaces an agent reaches outside the machine. A
+typed MCP server with a narrow set of tools is a contract: what the agent can
+read, what it can write, and in what shape. That is a much smaller surface to
+reason about than "it has an API key".
+
+## Permissions follow reversibility
+
+Permission design gets easier once actions are sorted by how hard they are to
+undo:
+
+1. **Read anything in scope** — no prompt.
+2. **Edit the working tree** — no prompt, because version control is the undo.
+3. **Run commands that change local state** — allow-listed by pattern.
+4. **Anything outward-facing or irreversible** — pushing, deploying, sending a
+   message, deleting data, spending money — a human confirms, every time.
+
+The failure mode at one end is an agent that asks before every file read and
+gets switched to "allow everything" by Friday. At the other end it is an agent
+that force-pushes over a colleague's branch. Sorting by reversibility gives a
+policy people keep.
+
+## Hooks make rules unforgettable
+
+A rule in a prompt is followed when the model remembers it. A hook is followed
+every time. Anything that must always happen belongs in a hook:
+
+- A pre-tool hook in the SHIP workspace scans every write for secret-like
+  patterns and warns before the content lands on disk.
+- An editor hook reminds that a change to the database schema file needs a
+  migration revision — the mistake that is cheapest to catch at edit time and
+  most expensive in production.
+- Formatting and linting after edits, so the diff a reviewer sees is the
+  substance and not the whitespace.
+
+The pattern is the same as in any engineering system: move a check from
+"someone should remember" to "the system does it".
+
+## Verification is the product
+
+The hardest part of agentic work is not producing a change. It is knowing
+whether the change is right. A harness earns its keep by making verification
+cheap and non-negotiable:
+
+- a single command that runs the gate — on this site `npm run verify`, which
+  runs eight numeric suites and a render smoke test, around 330 checks;
+- tests that assert properties rather than snapshots, so the agent cannot pass
+  them by regenerating the expected output;
+- a real environment to look at — a dev server, a browser, a simulator — so
+  "it compiles" is not mistaken for "it works".
+
+An agent that can run the gate itself iterates until it passes. An agent that
+cannot will report success on the first attempt that looks plausible. The
+[agentic workflows note](/learn/ai/agentic-workflows) is about building that
+loop deliberately.
+
+## Why this is the product
+
+Two teams on the same model will get very different results, and the
+difference is almost entirely harness: what they wrote down, what they
+automated, what they refuse to let through. That is good news. Models change
+every few months; a well-built harness carries over, and it compounds — every
+correction written into a rule, a skill or a hook is one the team never makes
+again.

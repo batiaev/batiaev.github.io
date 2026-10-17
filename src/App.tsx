@@ -1,10 +1,11 @@
-import { Suspense, lazy } from "react";
+import { lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleTagManager } from "@/components/GoogleTagManager";
+import AppShell from "@/components/shell/AppShell";
 
 const Index = lazy(() => import("./pages/Index"));
 const Advisory = lazy(() => import("./pages/Advisory"));
@@ -18,12 +19,6 @@ const Hedging = lazy(() => import("./pages/Hedging"));
 const Smile = lazy(() => import("./pages/Smile"));
 const Retirement = lazy(() => import("./pages/Retirement"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-
-const LoadingFallback = () => (
-  <div className="flex min-h-screen items-center justify-center">
-    <div className="border-primary h-8 w-8 animate-spin rounded-full border-b-2" />
-  </div>
-);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,8 +37,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <GoogleTagManager />
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
+        {/* The shell is a layout route: it stays mounted across navigation and
+            holds its own Suspense boundary, so a lazy page swaps the tile's
+            contents instead of blanking the whole window. */}
+        <Routes>
+          <Route element={<AppShell />}>
             <Route path="/" element={<Index />} />
             <Route path="/advisory" element={<Advisory />} />
             <Route path="/tools" element={<Tools />} />
@@ -56,8 +54,8 @@ const App = () => (
             <Route path="/tools/smile" element={<Smile />} />
             <Route path="/tools/retirement" element={<Retirement />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

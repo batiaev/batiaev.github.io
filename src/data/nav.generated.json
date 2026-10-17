@@ -1,0 +1,241 @@
+{
+  "name": "Anton Batiaev",
+  "chip": "Fintech builder",
+  "social": [
+    {
+      "name": "linkedin",
+      "id": "linkedin.com/in/batiaev",
+      "link": "https://www.linkedin.com/in/batiaev/"
+    },
+    {
+      "name": "github",
+      "id": "@batiaev",
+      "link": "https://www.github.com/batiaev/"
+    },
+    {
+      "name": "telegram",
+      "id": "@batiaev_com",
+      "link": "https://t.me/batiaev_com"
+    },
+    {
+      "name": "calendar",
+      "id": "@batiaev",
+      "link": "https://calendly.com/batiaev/30min"
+    },
+    {
+      "name": "email",
+      "id": "anton@batiaev.com",
+      "link": "mailto:anton@batiaev.com"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Options P&L calculator",
+      "short": "Options P&L",
+      "href": "/tools/options-pnl",
+      "topic": "Derivatives"
+    },
+    {
+      "name": "Dynamic hedging simulator",
+      "short": "Hedging",
+      "href": "/tools/hedging",
+      "topic": "Derivatives"
+    },
+    {
+      "name": "Volatility smile",
+      "short": "Vol smile",
+      "href": "/tools/smile",
+      "topic": "Derivatives"
+    },
+    {
+      "name": "How much is enough?",
+      "short": "Retirement",
+      "href": "/tools/retirement",
+      "topic": "Personal finance"
+    },
+    {
+      "name": "UK take-home, four ways",
+      "short": "Take-home",
+      "href": "/tools/take-home",
+      "topic": "Personal finance"
+    },
+    {
+      "name": "Compensation comparison",
+      "short": "Offers",
+      "href": "/tools/offer",
+      "topic": "Personal finance"
+    }
+  ],
+  "sections": [
+    {
+      "id": "options",
+      "title": "Options",
+      "pages": [
+        {
+          "slug": "options/basics",
+          "title": "What an option actually is",
+          "group": "Concepts"
+        },
+        {
+          "slug": "options/greeks",
+          "title": "The Greeks, without the calculus",
+          "group": "Concepts"
+        },
+        {
+          "slug": "options/volatility",
+          "title": "Implied volatility is the price",
+          "group": "Concepts"
+        },
+        {
+          "slug": "strategies/long-call",
+          "title": "Long call",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/long-put",
+          "title": "Long put",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/covered-call",
+          "title": "Covered call",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/cash-secured-put",
+          "title": "Cash-secured put",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/bull-call-spread",
+          "title": "Bull call spread",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/bear-put-spread",
+          "title": "Bear put spread",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/long-straddle",
+          "title": "Long straddle",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/short-strangle",
+          "title": "Short strangle",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/iron-condor",
+          "title": "Iron condor",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/long-butterfly",
+          "title": "Long butterfly",
+          "group": "Strategies"
+        },
+        {
+          "slug": "strategies/collar",
+          "title": "Collar",
+          "group": "Strategies"
+        }
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "Risk",
+      "pages": [
+        {
+          "slug": "risk/span",
+          "title": "SPAN, and why your margin is not what you expected",
+          "group": null
+        },
+        {
+          "slug": "risk/var-and-es",
+          "title": "VAR, and what it does not tell you",
+          "group": null
+        },
+        {
+          "slug": "risk/dv01",
+          "title": "DV01 and the shape of rate risk",
+          "group": null
+        },
+        {
+          "slug": "risk/dynamic-hedging",
+          "title": "Dynamic hedging, and where the premium goes",
+          "group": null
+        }
+      ]
+    },
+    {
+      "id": "markets",
+      "title": "Markets",
+      "pages": [
+        {
+          "slug": "markets/market-data",
+          "title": "Market data is a claim about the past",
+          "group": null
+        },
+        {
+          "slug": "markets/market-making",
+          "title": "Market making is inventory management",
+          "group": null
+        },
+        {
+          "slug": "markets/execution",
+          "title": "Execution, from order to fill",
+          "group": null
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "AI engineering",
+      "pages": [
+        {
+          "slug": "ai/harness",
+          "title": "The harness is most of the product",
+          "group": null
+        },
+        {
+          "slug": "ai/agentic-workflows",
+          "title": "Agentic workflows that hold up",
+          "group": null
+        },
+        {
+          "slug": "ai/knowledge-bases",
+          "title": "Knowledge bases: typed beats retrieved",
+          "group": null
+        },
+        {
+          "slug": "ai/product-engineering",
+          "title": "Product engineering when code is cheap",
+          "group": null
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "title": "Library",
+      "pages": [
+        {
+          "slug": "library/books",
+          "title": "Books",
+          "group": null
+        },
+        {
+          "slug": "library/series",
+          "title": "TV series",
+          "group": null
+        },
+        {
+          "slug": "library/films",
+          "title": "Films",
+          "group": null
+        }
+      ]
+    }
+  ]
+}

@@ -78,9 +78,9 @@ const Stat = ({
     <dd
       className={`mt-0.5 font-medium tabular-nums ${
         tone === "good"
-          ? "text-emerald-600"
+          ? "text-positive"
           : tone === "bad"
-            ? "text-red-600"
+            ? "text-negative"
             : ""
       }`}
     >
@@ -221,7 +221,7 @@ const HedgeFigure = ({
   return (
     <figure
       ref={figureRef}
-      className="border-border/60 bg-background my-8 rounded-lg border p-4 sm:p-5"
+      className="border-border bg-background my-8 rounded-lg border p-4 sm:p-5"
     >
       {bare ? null : (
         <figcaption className="mb-4">

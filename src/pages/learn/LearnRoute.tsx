@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ContentPage from "@/pages/learn/ContentPage";
 import StrategyPage from "@/pages/learn/StrategyPage";
 import NotFound from "@/pages/NotFound";
-import { pageBySlug } from "@/learn/registry";
+import { noteBySlug, pageBySlug } from "@/learn/registry";
 
 /**
  * Resolves `/learn/*`. The registry decides what exists and which section a
@@ -17,7 +17,7 @@ const LearnRoute = () => {
   const page = pageBySlug(slug);
 
   if (!page) return <NotFound />;
-  if (page.section === "strategies") return <StrategyPage slug={slug} />;
+  if (noteBySlug(slug)) return <StrategyPage slug={slug} />;
   return <ContentPage slug={slug} />;
 };
 

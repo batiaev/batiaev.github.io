@@ -12,6 +12,12 @@ export interface LearnPage {
   /** Sentence used on index cards and as the meta description. */
   summary: string;
   section: string;
+  /**
+   * Sub-heading inside a section. Options holds both the concepts and the
+   * strategy pages — a strategy is an options strategy, so they belong under
+   * one heading — and this keeps the two apart within it.
+   */
+  group?: string;
   /** Drives "related pages" and widens what search will match. */
   tags: string[];
 }
@@ -225,6 +231,7 @@ const conceptPages: LearnPage[] = [
     summary:
       "Calls, puts, strike, expiry and the difference between intrinsic and extrinsic value — the vocabulary everything else assumes.",
     section: "options",
+    group: "Concepts",
   },
   {
     slug: "options/greeks",
@@ -233,6 +240,7 @@ const conceptPages: LearnPage[] = [
     summary:
       "Delta, gamma, vega and theta as four questions about the same position, and which one actually kills you.",
     section: "options",
+    group: "Concepts",
   },
   {
     slug: "options/volatility",
@@ -241,6 +249,7 @@ const conceptPages: LearnPage[] = [
     summary:
       "Why an option's quoted premium is really a volatility number, and what the smile is telling you.",
     section: "options",
+    group: "Concepts",
   },
 ];
 
@@ -248,7 +257,10 @@ const strategyPages: LearnPage[] = STRATEGY_NOTES.map((note) => ({
   slug: `strategies/${note.slug}`,
   title: note.title,
   summary: note.summary,
-  section: "strategies",
+  // Slugs keep their /learn/strategies/ prefix: published links, the sitemap
+  // and llms.txt all carry it. Only the grouping changed.
+  section: "options",
+  group: "Strategies",
   tags: note.tags,
 }));
 
@@ -284,6 +296,68 @@ const riskPages: LearnPage[] = [
     summary:
       "Sell an option, hedge it to expiry, and watch the premium leave through the hedge — why the price you collect is the price of the gamma you are short.",
     section: "risk",
+  },
+];
+
+const marketsPages: LearnPage[] = [
+  {
+    slug: "markets/market-data",
+    tags: ["market data", "latency", "risk systems", "measurement", "pricing"],
+    title: "Market data is a claim about the past",
+    summary:
+      "Ticks, books and the plumbing between an exchange and a price on screen: normalisation, conflation, gaps, staleness, and what a composite price quietly hides.",
+    section: "markets",
+  },
+  {
+    slug: "markets/market-making",
+    tags: ["market making", "hedging", "pricing", "inventory", "volatility", "risk systems"],
+    title: "Market making is inventory management",
+    summary:
+      "Where a spread comes from, why a market maker skews rather than widens, the reservation price, adverse selection measured by markouts, and when to hedge rather than hold.",
+    section: "markets",
+  },
+  {
+    slug: "markets/execution",
+    tags: ["execution", "latency", "market data", "hedging", "risk systems", "measurement"],
+    title: "Execution, from order to fill",
+    summary:
+      "Order types, smart order routing and liquidity aggregation, the latency budget, pre-trade risk checks, and how to measure what execution actually cost.",
+    section: "markets",
+  },
+];
+
+const aiPages: LearnPage[] = [
+  {
+    slug: "ai/harness",
+    tags: ["agents", "harness", "verification", "ai", "product engineering"],
+    title: "The harness is most of the product",
+    summary:
+      "A model is one component. The context it is given, the tools it may call, the permissions around them and the checks after them decide whether an agent is useful.",
+    section: "ai",
+  },
+  {
+    slug: "ai/agentic-workflows",
+    tags: ["agents", "verification", "evals", "ai", "product engineering"],
+    title: "Agentic workflows that hold up",
+    summary:
+      "Plan, act, verify — and why the verify step has to be something the model cannot talk its way past: tests, type-checks, property checks, and a human at the irreversible step.",
+    section: "ai",
+  },
+  {
+    slug: "ai/knowledge-bases",
+    tags: ["agents", "knowledge", "retrieval", "mcp", "provenance", "ai"],
+    title: "Knowledge bases: typed beats retrieved",
+    summary:
+      "Why retrieval over a pile of documents fails quietly, what hybrid search fixes, and why goals, decisions and artefacts work better as typed nodes with provenance.",
+    section: "ai",
+  },
+  {
+    slug: "ai/product-engineering",
+    tags: ["product engineering", "verification", "agents", "ai", "knowledge"],
+    title: "Product engineering when code is cheap",
+    summary:
+      "When an agent can write the diff, the scarce work moves to the spec, the verification and the taste encoded in rules — and the line between product and engineering moves with it.",
+    section: "ai",
   },
 ];
 
@@ -326,15 +400,9 @@ export const SECTIONS: LearnSection[] = [
   {
     id: "options",
     title: "Options",
-    blurb: "The concepts every strategy page assumes you already have.",
-    pages: conceptPages,
-  },
-  {
-    id: "strategies",
-    title: "Strategies",
     blurb:
-      "One page per structure, each with a live payoff chart you can edit and open in the calculator.",
-    pages: strategyPages,
+      "The concepts every strategy assumes, then one page per structure — each with a live payoff chart you can edit and open in the calculator.",
+    pages: [...conceptPages, ...strategyPages],
   },
   {
     id: "risk",
@@ -342,6 +410,20 @@ export const SECTIONS: LearnSection[] = [
     blurb:
       "How the positions above are margined and measured — the systems side, which is the part I actually built.",
     pages: riskPages,
+  },
+  {
+    id: "markets",
+    title: "Markets",
+    blurb:
+      "How prices arrive and how orders meet them — market data, market making and execution, from the side of the systems that run them.",
+    pages: marketsPages,
+  },
+  {
+    id: "ai",
+    title: "AI engineering",
+    blurb:
+      "Building with models and agents in production: the harness around the model, the workflows that keep it honest, and the knowledge it reads and writes.",
+    pages: aiPages,
   },
   {
     id: "library",
@@ -391,14 +473,19 @@ export function relatedPages(slug: string, limit = 3): LearnPage[] {
     .map((other) => ({
       other,
       score: other.tags.filter((tag) => page.tags.includes(tag)).length,
-      // A page from another section is more useful than a fifth near-identical
-      // strategy, so break ties towards cross-section links.
-      crossSection: other.section === page.section ? 0 : 1,
+      // A page from another section — or another group within Options — is
+      // more useful than a fifth near-identical strategy, so break ties
+      // towards cross-section links.
+      crossSection: bucket(other) === bucket(page) ? 0 : 1,
     }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score || b.crossSection - a.crossSection)
     .slice(0, limit)
     .map(({ other }) => other);
+}
+
+function bucket(page: LearnPage): string {
+  return page.group ? `${page.section}:${page.group}` : page.section;
 }
 
 /** Every tag in use, with how many pages carry it. */

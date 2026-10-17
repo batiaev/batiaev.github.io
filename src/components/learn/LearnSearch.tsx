@@ -59,7 +59,7 @@ const LearnSearch = ({ compact = false }: { compact?: boolean }) => {
   return (
     <div className="relative">
       <Search
-        className="text-muted-foreground pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
+        className="text-muted-foreground pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
         aria-hidden
       />
       <Input
@@ -73,7 +73,7 @@ const LearnSearch = ({ compact = false }: { compact?: boolean }) => {
         aria-expanded={hits.length > 0}
         role="combobox"
         aria-controls="learn-search-results"
-        className="h-10 pl-9 pr-8"
+        className="h-9 pl-9 pr-8 text-[13px] focus-visible:ring-1 focus-visible:ring-offset-0"
       />
       {query ? (
         <button
@@ -85,7 +85,7 @@ const LearnSearch = ({ compact = false }: { compact?: boolean }) => {
           <X className="h-4 w-4" aria-hidden />
         </button>
       ) : (
-        <kbd className="text-muted-foreground pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 text-xs sm:block">
+        <kbd className="kbd pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 sm:inline-flex">
           /
         </kbd>
       )}
@@ -94,7 +94,7 @@ const LearnSearch = ({ compact = false }: { compact?: boolean }) => {
         <div
           id="learn-search-results"
           role="listbox"
-          className="border-border bg-background absolute left-0 right-0 top-full z-30 mt-2 max-h-96 overflow-y-auto rounded-lg border shadow-elevated"
+          className="border-border bg-popover absolute left-0 right-0 top-full z-30 mt-1.5 max-h-96 overflow-y-auto rounded-lg border shadow-elevated"
         >
           {hits.length === 0 ? (
             <p className="text-muted-foreground p-4 text-sm">
@@ -110,11 +110,11 @@ const LearnSearch = ({ compact = false }: { compact?: boolean }) => {
                     onMouseEnter={() => setActive(index)}
                     role="option"
                     aria-selected={index === active}
-                    className={`block rounded px-3 py-2 ${
+                    className={`block rounded-md px-3 py-2 ${
                       index === active ? "bg-accent" : ""
                     }`}
                   >
-                    <span className="block text-sm font-medium">
+                    <span className="block text-[13px] font-medium">
                       {hit.page.title}
                     </span>
                     <span className="text-muted-foreground mt-0.5 block text-xs leading-relaxed">

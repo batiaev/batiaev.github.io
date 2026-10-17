@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { CalendarCheck2, FileText, Mic, PencilLine, Youtube, type LucideIcon } from 'lucide-react';
 import { revealOnScroll } from '@/lib/reveal';
-import { Card, CardContent } from '@/components/ui/card';
-import { CalendarCheck2, Mic, PencilLine, FileText, Youtube } from 'lucide-react';
-import data from "../data/data.json";
+import data from '../data/data.json';
 
 const tracks = [
   { id: 'all', label: 'All' },
@@ -11,152 +10,120 @@ const tracks = [
 ] as const;
 
 type TrackId = (typeof tracks)[number]['id'];
+type Talk = (typeof data.talks)[number];
 
+const LINKS: { key: keyof Talk; label: string; Icon: LucideIcon }[] = [
+  { key: 'youtube', label: 'Watch', Icon: Youtube },
+  { key: 'podcast', label: 'Listen', Icon: Mic },
+  { key: 'slides', label: 'Slides', Icon: FileText },
+  { key: 'blog', label: 'Article', Icon: PencilLine },
+  { key: 'post', label: 'Post', Icon: CalendarCheck2 },
+];
+
+/** "26 Oct 2021" and "25 MAR 2025" both arrive; show them one way. */
+const formatDate = (raw: string) =>
+  raw.replace(/\b([A-Z])([A-Z]{2})\b/g, (_, a: string, b: string) => a + b.toLowerCase());
+
+/**
+ * Talks as a list, newest first — a dozen items read faster as rows than as a
+ * wall of cards, and the format (watch, listen, slides) is what people scan for.
+ */
 const Talks = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [track, setTrack] = useState<TrackId>('all');
 
   const visibleTalks = useMemo(
-    () =>
-      track === 'all'
-        ? data.talks
-        : data.talks.filter((talk) => talk.track === track),
+    () => (track === 'all' ? data.talks : data.talks.filter((talk) => talk.track === track)),
     [track],
   );
 
   useEffect(() => revealOnScroll([sectionRef.current]), []);
 
   return (
-    <section id="talks" className="pb-16 pt-8 md:pb-24" ref={sectionRef}>
-      <div className="container mx-auto">
-        <div className="mb-10 text-center">
-          <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-            Talks, podcasts &amp; writing
-          </h3>
-          <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-base leading-relaxed">
-            Risk systems, cross-language architecture, and financial math on the
-            engineering side; team building and product on the leadership side.
-          </p>
+    <section id="talks" className="border-border scroll-mt-14 border-t" ref={sectionRef}>
+      <div className="container mx-auto py-12 sm:py-16">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="highlight-chip">On the record</div>
+            <h2 className="section-title">Talks, podcasts &amp; writing</h2>
+            <p className="section-subtitle !mb-0">
+              Risk systems, cross-language architecture, and financial math on the
+              engineering side; team building and product on the leadership side.
+            </p>
+          </div>
+
+          <div
+            className="border-border bg-muted/50 inline-flex shrink-0 self-start rounded-md border p-0.5 sm:self-auto"
+            role="group"
+            aria-label="Filter talks by track"
+          >
+            {tracks.map((option) => {
+              const active = option.id === track;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setTrack(option.id)}
+                  aria-pressed={active}
+                  className={`h-8 rounded-[5px] px-3 text-[13px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    active
+                      ? 'bg-background text-foreground shadow-[0_0_0_1px_hsl(var(--border)),0_1px_2px_hsl(var(--foreground)/0.06)]'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div
-          className="mb-10 flex flex-wrap justify-center gap-2"
-          role="group"
-          aria-label="Filter talks by track"
-        >
-          {tracks.map((option) => {
-            const active = option.id === track;
-            return (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setTrack(option.id)}
-                aria-pressed={active}
-                className={`min-h-11 rounded-full border px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  active
-                    ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-background text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {option.label}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ul className="border-border divide-border mt-8 divide-y overflow-hidden rounded-lg border">
           {visibleTalks.map((talk) => (
-            <Card
+            <li
               key={talk.name}
-              className="card-hover border-transparent shadow-subtle overflow-hidden"
+              className="hover:bg-accent/40 grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-4 gap-y-2 px-4 py-3.5 transition-colors sm:grid-cols-[2.75rem_minmax(0,1fr)_auto_6.5rem] sm:items-center sm:px-5"
             >
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                    <img
-                      src={talk.logo}
-                      alt=""
-                      width={96}
-                      height={96}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <a
-                        href={talk.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-primary link-hover"
-                    >
-                    <h3 className="text-lg font-semibold mb-1">{talk.name}</h3>
-                    </a>
-                    <p className="text-sm text-muted-foreground mb-3">{talk.desc}</p>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-                      <span>{talk.date}</span>
-                      {talk.blog && (
-                        <a
-                          href={talk.blog}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <PencilLine className="h-4 w-4" />
-                          <span>Read article</span>
-                        </a>
-                      )}
-                      {talk.post && (
-                        <a
-                          href={talk.post}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <CalendarCheck2 className="h-4 w-4" />
-                          <span>LinkedIn post</span>
-                        </a>
-                      )}
-                      {talk.podcast && (
-                        <a
-                          href={talk.podcast}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <Mic className="h-4 w-4" />
-                          <span>Listen</span>
-                        </a>
-                      )}
-                      {talk.slides && (
-                        <a
-                          href={talk.slides}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <FileText className="h-4 w-4" />
-                          <span>Slides</span>
-                        </a>
-                      )}
-                      {talk.youtube && (
-                        <a
-                          href={talk.youtube}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <Youtube className="h-4 w-4" />
-                          <span>Watch</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              <img
+                src={talk.logo}
+                alt=""
+                width={44}
+                height={44}
+                loading="lazy"
+                decoding="async"
+                className="border-border size-11 rounded-md border object-cover"
+              />
+              <div className="min-w-0">
+                <a
+                  href={talk.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[14px] font-medium tracking-tight underline-offset-4 hover:underline"
+                >
+                  {talk.name}
+                </a>
+                <p className="text-muted-foreground mt-0.5 text-[13px] leading-snug">{talk.desc}</p>
+              </div>
+              <div className="col-start-2 flex flex-wrap gap-1 sm:col-start-auto sm:justify-end">
+                {LINKS.filter(({ key }) => talk[key]).map(({ key, label, Icon }) => (
+                  <a
+                    key={key}
+                    href={String(talk[key])}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border-border text-muted-foreground hover:text-foreground hover:bg-background inline-flex h-7 items-center gap-1.5 rounded-md border px-2 text-xs transition-colors"
+                  >
+                    <Icon className="size-3.5" aria-hidden />
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <span className="text-muted-foreground col-start-2 font-mono text-[11px] tabular-nums sm:col-start-auto sm:text-right">
+                {formatDate(talk.date)}
+              </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
