@@ -1,0 +1,1 @@
+import{r as a}from"./ui-Bpy4M4ht.js";import{a3 as r,a4 as e}from"./CartesianChart-BacDiSuZ.js";var t=["axis"],o=a.forwardRef(((o,i)=>a.createElement(r,{chartName:"LineChart",defaultTooltipEventType:"axis",validateTooltipEventTypes:t,tooltipPayloadSearcher:e,categoricalChartProps:o,ref:i})));export{o as L};

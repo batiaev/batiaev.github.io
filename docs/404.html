@@ -3,6 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3f4f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <!--
+      Theme and sidebar state, applied before first paint so neither flashes.
+      Storage can throw (private windows, blocked site data); the defaults are
+      then the system theme and an open sidebar.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = "system";
+        try {
+          theme = localStorage.getItem("theme") || "system";
+          if (localStorage.getItem("sidebar") === "collapsed") root.setAttribute("data-sidebar", "collapsed");
+        } catch (e) {}
+        var dark = theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) root.classList.add("dark");
+        root.style.colorScheme = dark ? "dark" : "light";
+      })();
+    </script>
     <title>Anton Batiaev — Fintech founder & builder</title>
     <meta
       name="description"
@@ -10,7 +31,7 @@
     />
     <meta
       name="keywords"
-      content="Anton Batiaev, fintech founder, trading platforms, derivatives, options pricing, risk systems, SPAN margin, VAR, CTO, CPO, Capital.com, Revolut, Vega, Deutsche Bank, advisory"
+      content="Anton Batiaev, fintech founder, trading platforms, market making, market data, execution, derivatives, options pricing, risk systems, SPAN margin, VAR, AI engineering, agentic workflows, knowledge bases, CTO, CPO, Capital.com, Revolut, Vega, Deutsche Bank, advisory"
     />
     <meta name="author" content="Anton Batiaev" />
     <link rel="canonical" href="https://batiaev.com/" />
@@ -62,6 +83,8 @@
           "Derivatives and options pricing",
           "Trading platforms",
           "Risk systems",
+          "Market making and execution",
+          "AI engineering and agentic workflows",
           "Engineering leadership"
         ],
         "sameAs": [
@@ -80,18 +103,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
 
-    <style>
-      .font-display {
-        font-family: "SF Pro Display", Inter, system-ui, sans-serif;
-      }
-    </style>
 
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-ZQVRL217XS"></script>
-    <script type="module" crossorigin src="/assets/index-wy9yvPs2.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/ui-DdTWCHPi.js">
+    <script type="module" crossorigin src="/assets/index-oM-EUgAc.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/ui-Bpy4M4ht.js">
     <link rel="modulepreload" crossorigin href="/assets/utils-CwVuO2OU.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-BlHrGpCg.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-Dse4WQ41.css">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-l5UDPcde.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DkuWQ9xs.css">
   </head>
 
   <body>

@@ -136,6 +136,41 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://batiaev.com/learn/markets/market-data</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/markets/market-making</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/markets/execution</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/ai/harness</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/ai/agentic-workflows</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/ai/knowledge-bases</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://batiaev.com/learn/ai/product-engineering</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://batiaev.com/learn/library/books</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

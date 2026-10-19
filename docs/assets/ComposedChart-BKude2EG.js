@@ -1,0 +1,1 @@
+import{r as a}from"./ui-Bpy4M4ht.js";import{a3 as r,a4 as e}from"./CartesianChart-BacDiSuZ.js";var t=["axis"],o=a.forwardRef(((o,s)=>a.createElement(r,{chartName:"ComposedChart",defaultTooltipEventType:"axis",validateTooltipEventTypes:t,tooltipPayloadSearcher:e,categoricalChartProps:o,ref:s})));export{o as C};
